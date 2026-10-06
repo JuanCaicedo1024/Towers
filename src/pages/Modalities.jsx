@@ -1,19 +1,25 @@
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
-import BusinessCTA from '../sections/Modalities/BusinessCTA'
+import ClassExperience from '../sections/Modalities/ClassExperience'
+import ModalitiesClosing from '../sections/Modalities/ModalitiesClosing'
+import ModalitiesFaq from '../sections/Modalities/ModalitiesFaq'
 import ModalitiesHeader from '../sections/Modalities/ModalitiesHeader'
+import ModalitiesLocation from '../sections/Modalities/ModalitiesLocation'
+import ModalitiesMethodology from '../sections/Modalities/ModalitiesMethodology'
 import StudyOptions from '../sections/Modalities/StudyOptions'
 
 function Modalities() {
   return (
     <>
       <Navbar />
-      <main className="bg-white px-[6%] py-14 lg:px-[12%] lg:py-20">
-        <div className="mx-auto max-w-[1120px]">
-          <ModalitiesHeader />
-          <StudyOptions />
-          <BusinessCTA />
-        </div>
+      <main className="modalities-page">
+        <ModalitiesHeader />
+        <StudyOptions />
+        <ClassExperience />
+        <ModalitiesLocation />
+        <ModalitiesMethodology />
+        <ModalitiesFaq />
+        <ModalitiesClosing />
       </main>
       <Footer />
     </>
