@@ -1,4 +1,31 @@
+import { useEffect, useRef, useState } from 'react'
+
 function Modalities() {
+  const collageRef = useRef(null)
+  const [hasEntered, setHasEntered] = useState(false)
+
+  useEffect(() => {
+    const collage = collageRef.current
+
+    if (!collage || typeof IntersectionObserver === 'undefined') {
+      setHasEntered(true)
+      return undefined
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHasEntered(true)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.25 },
+    )
+
+    observer.observe(collage)
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <section className="bg-white px-[6%] py-16 text-[#17233a] lg:px-[12%] lg:py-20">
       <div className="mx-auto max-w-[1120px]">
@@ -18,12 +45,39 @@ function Modalities() {
             </button>
           </div>
 
-          <div className="overflow-hidden rounded-[2rem]" aria-label="Estudiantes practicando en una actividad del club">
-            <img
-              className="h-auto w-full object-contain transition duration-500 hover:scale-[1.02]"
-              src="/images/Modalities.png"
-              alt="Estudiantes de Towers practicando idiomas y participando en el Club Mundialista"
-            />
+          <div
+            ref={collageRef}
+            className={`modalities-collage ${hasEntered ? 'modalities-collage--visible' : ''}`}
+            aria-label="Estudiantes practicando idiomas y participando en el Club Mundialista"
+          >
+            <div className="modalities-collage__main">
+              <img
+                className="modalities-collage__image"
+                src="/images/hero.png"
+                alt="Estudiantes de Towers aprendiendo idiomas"
+              />
+              <span className="modalities-collage__scribble">Hello · Hallo · Hola</span>
+            </div>
+
+            <div className="modalities-collage__card modalities-collage__card--language">
+              <img
+                className="modalities-collage__image"
+                src="/images/Ingles.png"
+                alt="Bandera del Reino Unido"
+              />
+              <span className="modalities-collage__card-icon" aria-hidden="true">A</span>
+              <span>Aprende<br /><strong>sin fronteras</strong></span>
+            </div>
+
+            <div className="modalities-collage__card modalities-collage__card--club">
+              <img
+                className="modalities-collage__image"
+                src="/images/fondo.png"
+                alt="Actividad internacional del Club Mundialista"
+              />
+              <span className="modalities-collage__ball" aria-hidden="true">⚽</span>
+              <strong>Club<br />Mundialista</strong>
+            </div>
           </div>
         </div>
 

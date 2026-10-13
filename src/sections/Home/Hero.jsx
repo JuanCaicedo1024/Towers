@@ -31,8 +31,7 @@ function Hero() {
             <span>Online</span>
             <span className="text-[#183454]">·</span>
             <span>Grupos semipersonalizados</span>
-            <span className="text-[#183454]">·</span>
-            <span>Cúcuta</span>
+            
           </div>
         </div>
 
