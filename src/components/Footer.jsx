@@ -7,6 +7,7 @@ const quickLinks = [
   ['Cursos', '/idiomas'],
   ['Quienes Somos', '/nosotros'],
   ['Contacto', '/contacto'],
+  ['Acceso adm', '/login'],
 ]
 
 const socialLinks = [

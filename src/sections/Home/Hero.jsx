@@ -37,7 +37,7 @@ function Hero() {
 
         <div className="relative flex min-h-[430px] items-end justify-center self-stretch lg:min-h-[620px]">
           <img
-            className="relative z-10 h-auto w-[82%] max-w-[540px] object-contain object-bottom [mask-image:radial-gradient(ellipse_at_center,black_64%,transparent_100%)] lg:absolute lg:bottom-0 lg:right-[-4%] lg:w-[570px] lg:max-w-none"
+            className="relative z-10 h-auto w-[76%] max-w-[500px] object-contain object-bottom [mask-image:radial-gradient(ellipse_at_center,black_64%,transparent_100%)] lg:absolute lg:bottom-0 lg:right-[-2%] lg:w-[520px] lg:max-w-none"
             src="/images/hero.png"
             alt="Mujer aprendiendo idiomas con un globo terráqueo frente a la Estatua de la Libertad"
           />

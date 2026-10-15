@@ -69,7 +69,7 @@ function NavigationLink({ item, mobile = false, openMenu, onToggle, onNavigate }
   }
 
   return (
-    <div className="navbar__item relative z-20">
+    <div className="navbar__item navbar__item--menu relative z-20">
       <button
         aria-expanded={openMenu === item.path}
         className="flex items-center whitespace-nowrap rounded-full border-0 bg-transparent px-1.5 py-2 text-[13px] font-medium text-[#111827] transition-colors hover:text-[#E83E33] xl:px-2 xl:text-sm"
