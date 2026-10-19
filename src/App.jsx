@@ -12,9 +12,14 @@ import Methodology from './pages/Methodology'
 import Modalities from './pages/Modalities'
 import Membership from './pages/Membership'
 import Login from './pages/Login'
+import CampaignBuilder from './pages/CampaignBuilder'
+import CampaignLanding from './pages/CampaignLanding'
+import { AuthProvider } from './auth/AuthProvider'
+import RequireAuth from './components/RequireAuth'
 
 function App() {
   return (
+    <AuthProvider>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -29,9 +34,12 @@ function App() {
         <Route path="/prueba-de-nivel" element={<LevelTest />} />
         <Route path="/contacto" element={<Contact />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>} />
+        <Route path="/campaigns/new" element={<RequireAuth><CampaignBuilder /></RequireAuth>} />
+        <Route path="/campaigns/:slug" element={<CampaignLanding />} />
       </Routes>
     </BrowserRouter>
+    </AuthProvider>
   )
 }
 

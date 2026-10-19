@@ -11,7 +11,7 @@ function ModalitiesHeader() {
             <p className="mt-[18px] max-w-[680px] text-lg leading-[1.6] text-[#294d78]">Puedes estudiar presencialmente en nuestra sede en Cúcuta, online o vivir una combinación de ambas. El resultado es la misma experiencia Towers.</p>
           </div>
           <div className="relative min-h-[420px] overflow-hidden rounded-[2rem] shadow-[0_22px_42px_rgb(18_42_75_/_18%)]" aria-label="Clase de Towers">
-            <img src="/images/Modalities.png" alt="Estudiantes de Towers aprendiendo en comunidad" />
+            <img src="/images/Sinfoto.png" alt="Estudiantes de Towers aprendiendo en comunidad" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" aria-hidden="true" />
             <strong className="absolute bottom-10 left-[12%] text-[clamp(1.9rem,3vw,3.2rem)] font-bold italic leading-none tracking-[-0.04em] text-[#f13d35]">Clases con Laura Martínez</strong>
           </div>

@@ -5,11 +5,11 @@ import Navbar from '../components/Navbar'
 import FAQ from '../sections/Home/FAQ'
 
 const languagePrograms = {
-  ingles: { name: 'inglés', flag: '🇬🇧', intro: 'Programa de Inglés con enfoque de interacción: práctica guiada con profesores y aplicación del idioma en situaciones reales.', levels: 'Inicial · Básico · Intermedio · Avanzado', image: '/images/Ingles.png' },
-  frances: { name: 'francés', flag: '🇫🇷', intro: 'Aprende francés con práctica guiada, interacción y aplicación en situaciones cotidianas.', levels: 'Inicial · Básico · Intermedio', image: '/images/frances.png' },
-  portugues: { name: 'portugués', flag: '🇧🇷', intro: 'Comunícate en portugués con confianza a través de práctica guiada y situaciones de la vida real.', levels: 'Inicial · Básico · Intermedio', image: '/images/brazil.png' },
-  aleman: { name: 'alemán', flag: '🇩🇪', intro: 'Construye una base sólida en alemán con estructura, práctica guiada e interacción.', levels: 'Inicial · Básico · Intermedio', image: '/images/alemania.png' },
-  italiano: { name: 'italiano', flag: '🇮🇹', intro: 'Acércate al italiano a través de la práctica, la interacción y su cultura.', levels: 'Inicial · Básico', image: '/images/italia.png' },
+  ingles: { name: 'inglés', flag: '🇬🇧', intro: 'Programa de Inglés con enfoque de interacción: práctica guiada con profesores y aplicación del idioma en situaciones reales.', levels: 'Inicial · Básico · Intermedio · Avanzado', image: '/images/Sinfoto.png' },
+  frances: { name: 'francés', flag: '🇫🇷', intro: 'Aprende francés con práctica guiada, interacción y aplicación en situaciones cotidianas.', levels: 'Inicial · Básico · Intermedio', image: '/images/Sinfoto.png' },
+  portugues: { name: 'portugués', flag: '🇧🇷', intro: 'Comunícate en portugués con confianza a través de práctica guiada y situaciones de la vida real.', levels: 'Inicial · Básico · Intermedio', image: '/images/Sinfoto.png' },
+  aleman: { name: 'alemán', flag: '🇩🇪', intro: 'Construye una base sólida en alemán con estructura, práctica guiada e interacción.', levels: 'Inicial · Básico · Intermedio', image: '/images/Sinfoto.png' },
+  italiano: { name: 'italiano', flag: '🇮🇹', intro: 'Acércate al italiano a través de la práctica, la interacción y su cultura.', levels: 'Inicial · Básico', image: '/images/Sinfoto.png' },
 }
 
 const highlights = [

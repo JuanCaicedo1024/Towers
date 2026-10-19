@@ -1,13 +1,37 @@
 import { useState } from 'react'
 import { ArrowRight, Eye, EyeOff, LockKeyhole, Mail } from 'lucide-react'
+import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
+import { useAuth } from '../auth/useAuth'
 
 function Login() {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [error, setError] = useState('')
+  const { signIn, session, loading, configurationError } = useAuth()
+  const navigate = useNavigate()
+  const location = useLocation()
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault()
+    setError('')
+    setIsSubmitting(true)
+    const formData = new FormData(event.currentTarget)
+    try {
+      await signIn(String(formData.get('email')).trim(), String(formData.get('password')), formData.get('remember') === 'on')
+      navigate(location.state?.from || '/dashboard', { replace: true })
+    } catch (submitError) {
+      const message = submitError.message || ''
+      setError(/invalid login credentials/i.test(message)
+        ? 'El correo o la contraseña no son correctos.'
+        : message || 'No se pudo iniciar sesión. Revisa tus datos e inténtalo de nuevo.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
+
+  if (loading) return <main className="grid min-h-screen place-items-center text-sm text-[#627b9e]">Verificando acceso…</main>
+  if (session) return <Navigate to="/dashboard" replace />
 
   return (
     <>
@@ -30,6 +54,9 @@ function Login() {
             <span className="login-card__eyebrow">ACCESO PARA ADMINISTRATIVOS</span>
             <h2>Inicia sesión</h2>
             <p className="login-card__intro">Ingresa las credenciales que te entregó el equipo de Towers.</p>
+
+            {configurationError && <p className="mb-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-900" role="status">{configurationError}</p>}
+            {error && <p className="mb-4 rounded-lg bg-red-50 p-3 text-sm text-red-800" role="alert">{error}</p>}
 
             <form className="login-form" onSubmit={handleSubmit}>
               <label htmlFor="login-email">Correo electrónico</label>
@@ -56,7 +83,7 @@ function Login() {
               </div>
 
               <label className="login-remember"><input type="checkbox" name="remember" /> <span>Recordarme en este dispositivo</span></label>
-              <button className="login-submit" type="submit">Ingresar <ArrowRight size={18} /></button>
+              <button className="login-submit" type="submit" disabled={isSubmitting || Boolean(configurationError)}>{isSubmitting ? 'Ingresando…' : 'Ingresar'} <ArrowRight size={18} /></button>
             </form>
 
             <p className="login-signup">¿Aún no tienes credenciales? <a href="/contacto">Solicita tu acceso al equipo de Towers</a></p>

@@ -12,6 +12,26 @@ body {
   color: #627493;
 }
 
+.campaign-builder input,
+.campaign-builder select,
+.campaign-builder textarea {
+  border: 1px solid #dbe4ef;
+  border-radius: 0.5rem;
+  background: #fff;
+  color: #173a67;
+  font: inherit;
+  font-weight: 400;
+  outline: none;
+  padding: 0.75rem;
+  width: 100%;
+}
+
+.campaign-builder input:focus,
+.campaign-builder select:focus,
+.campaign-builder textarea:focus {
+  border-color: #ff443d;
+}
+
 #root {
   min-height: 100vh;
 }

@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 import { ModalitiesHeading } from './ModalitiesShared'
 
 const options = [
-  ['Presencial', '/images/Modalities.png', UsersRound],
-  ['Online', '/images/image.png', Monitor],
-  ['Híbrida', '/images/hero.png', Building2],
+  ['Presencial', '/images/Sinfoto.png', UsersRound],
+  ['Online', '/images/Sinfoto.png', Monitor],
+  ['Híbrida', '/images/Sinfoto.png', Building2],
 ]
 
 function StudyOptions() {

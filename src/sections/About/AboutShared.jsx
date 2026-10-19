@@ -1,7 +1,8 @@
 export function Placeholder({ className = '', label = 'Fotografía real requerida' }) {
   return (
-    <div className={`experience-placeholder ${className}`} aria-label="Espacio reservado para material audiovisual">
-      <span>{label}</span>
+    <div className={`experience-placeholder relative overflow-hidden ${className}`} aria-label="Espacio reservado para material audiovisual">
+      <img className="absolute inset-0 h-full w-full object-cover opacity-75" src="/images/Sinfoto.png" alt="" />
+      <span className="relative rounded bg-[#071026]/70 px-2 py-1 text-white">{label}</span>
     </div>
   )
 }

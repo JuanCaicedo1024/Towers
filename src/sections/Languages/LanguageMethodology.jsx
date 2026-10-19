@@ -55,7 +55,7 @@ function LanguageMethodology() {
       <div
         className="absolute inset-0 opacity-20"
         style={{
-          backgroundImage: "url('/images/fondo.png')",
+          backgroundImage: "url('/images/Sinfoto.png')",
           backgroundPosition: 'center',
           backgroundSize: 'cover',
           mixBlendMode: 'screen',
