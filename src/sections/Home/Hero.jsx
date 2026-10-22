@@ -1,16 +1,16 @@
 function Hero() {
   return (
-    <section className="relative overflow-hidden bg-white">
-      <div className="mx-auto grid min-h-[620px] max-w-[1440px] grid-cols-1 items-center gap-8 px-[6%] pb-16 pt-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-4 lg:px-[6%] lg:pb-0 lg:pt-0">
-        <div className="relative z-10 max-w-[620px]">
-          <h1 className="m-0 max-w-[590px] text-[clamp(2.8rem,5.3vw,5.4rem)] font-extrabold leading-[0.98] tracking-[-0.055em] text-[#101820]">
+    <section className="relative overflow-hidden bg-[#fff8f6] text-[#17233a]">
+      <div className="mx-auto grid min-h-[620px] w-[88%] max-w-[1440px] grid-cols-1 items-center gap-8 pb-16 pt-14 lg:w-[84%] xl:grid-cols-[1.1fr_0.9fr] xl:gap-4 xl:pb-0 xl:pt-0">
+        <div className="relative z-10 max-w-[780px]">
+          <h1 className="m-0 max-w-[780px] text-[clamp(2.8rem,4.5vw,5.8rem)] font-extrabold leading-[0.98] tracking-[-0.055em] text-[#101820]">
             Aprende un idioma
             <br />
             para usarlo donde
             <br />
             <span className="text-[#E83E33]">realmente importa.</span>
           </h1>
-          <p className="mt-6 max-w-[590px] text-base font-medium leading-[1.45] text-[#294d78] sm:text-lg">
+          <p className="mt-6 max-w-[760px] text-base font-medium leading-[1.45] text-[#294d78] sm:text-lg">
             Aprende inglés y otros idiomas a través de clases interactivas,
             profesores preparados y experiencias que llevan el idioma a
             situaciones reales.
@@ -35,9 +35,9 @@ function Hero() {
           </div>
         </div>
 
-        <div className="relative flex min-h-[430px] items-end justify-center self-stretch lg:min-h-[620px]">
+        <div className="relative flex min-h-[430px] items-end justify-center self-stretch xl:min-h-[720px]">
           <img
-            className="relative z-10 h-auto w-[76%] max-w-[500px] object-contain object-bottom [mask-image:radial-gradient(ellipse_at_center,black_64%,transparent_100%)] lg:absolute lg:bottom-0 lg:right-[-2%] lg:w-[520px] lg:max-w-none"
+            className="relative z-10 h-auto w-[76%] max-w-[500px] object-contain object-bottom [mask-image:radial-gradient(ellipse_at_center,black_64%,transparent_100%)] xl:absolute xl:bottom-0 xl:right-0 xl:w-full xl:max-w-none"
             src="/images/hero.png"
             alt="Mujer aprendiendo idiomas con un globo terráqueo frente a la Estatua de la Libertad"
           />

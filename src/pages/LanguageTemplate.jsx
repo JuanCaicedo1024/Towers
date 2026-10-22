@@ -74,6 +74,7 @@ const goals = [
   ["Estudiar", GraduationCap],
   ["Viajar", Plane],
   ["Comunicarte con confianza", MessageCircle],
+  ["Desarrollo personal", MessageCircle],
 ];
 const methodologySteps = [
   [
@@ -152,7 +153,7 @@ function LanguageTemplate() {
   return (
     <>
       <Navbar />
-      <main className="bg-[#f7f4f3] text-[#071026]">
+      <main className="language-template bg-[#f7f4f3] text-[#071026]">
         <section className="overflow-hidden px-[6%] py-14 lg:px-[10%] lg:py-20">
           <div className="mx-auto grid max-w-[1280px] items-center gap-12 lg:grid-cols-[0.92fr_1.08fr] lg:gap-16">
             <div className="max-w-[590px]">
@@ -245,36 +246,36 @@ function LanguageTemplate() {
             <p className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-white/80">
               LAS PERSONAS DETRÁS DE TU APRENDIZAJE
             </p>
-            <h2 className="mt-5 max-w-[1100px] text-4xl font-bold italic leading-[1.02] tracking-[-0.05em] text-[#101820] sm:text-5xl lg:text-6xl">
+            <h2 className="mt-5 max-w-[1100px] text-3xl font-bold italic leading-[1.02] tracking-[-0.05em] text-[#101820] sm:text-5xl lg:text-6xl">
               ¿Para qué quieres aprender un idioma?
             </h2>
-            <p className="mt-6 text-base font-medium leading-[1.45] text-[#294d78] sm:text-lg">
+            <p className="mt-6 max-w-[760px] text-base font-medium leading-7 text-[#294d78] sm:text-lg">
               Estas categorías te ayudan a orientar tu búsqueda.
             </p>
 
-            <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-6">
+            <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-12 sm:grid-cols-2 lg:mt-14 lg:grid-cols-3 lg:gap-5">
               {goals.map(([label, Icon]) => (
                 <div
-                  className={`group relative flex min-h-[158px] items-center gap-6 overflow-hidden rounded-[1.7rem] border-2 border-[#ead3cb] bg-white px-7 py-6 shadow-[0_8px_20px_rgb(23_35_58_/_8%)] transition duration-500 hover:-translate-y-2 hover:border-[#e83e33] hover:shadow-[0_18px_30px_rgb(232_62_51_/_18%)] ${label === "Viajar" ? "lg:col-start-2" : ""} lg:col-span-2`}
+                  className="group relative flex min-h-[104px] min-w-0 items-center gap-3 overflow-hidden rounded-2xl border-2 border-[#ead3cb] bg-white px-4 py-4 shadow-[0_8px_20px_rgb(23_35_58_/_8%)] transition duration-500 hover:-translate-y-1 hover:border-[#e83e33] hover:shadow-[0_18px_30px_rgb(232_62_51_/_18%)] sm:min-h-[112px] sm:gap-4 sm:px-5"
                   key={label}
                 >
                   <span
                     className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#fff0eb] via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                     aria-hidden="true"
                   />
-                  <span className="relative grid h-[76px] w-[76px] shrink-0 place-items-center rounded-[1.35rem] bg-[#fff0eb] text-[#8b2b20] transition duration-500 group-hover:rotate-6 group-hover:scale-110 group-hover:bg-[#f13d35] group-hover:text-white">
+                  <span className="relative grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-[#fff0eb] text-[#8b2b20] transition duration-500 group-hover:rotate-6 group-hover:scale-110 group-hover:bg-[#f13d35] group-hover:text-white sm:h-14 sm:w-14">
                     <Icon
-                      className="h-10 w-10 transition-transform duration-500 group-hover:scale-110"
+                      className="h-6 w-6 transition-transform duration-500 group-hover:scale-110 sm:h-7 sm:w-7"
                       strokeWidth={1.8}
                       aria-hidden="true"
                     />
                   </span>
-                  <span className="relative min-w-0 flex-1 text-xl font-bold leading-[1.15] text-[#071026] transition-colors duration-300 group-hover:text-[#e83e33] sm:text-2xl">
+                  <span className="relative min-w-0 flex-1 text-base font-medium leading-tight text-[#071026] transition-colors duration-300 group-hover:text-[#e83e33] sm:text-lg lg:text-base xl:text-lg">
                     {label}
                   </span>
-                  <span className="relative grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-[#fff0eb] text-[#8b2b20] transition duration-500 group-hover:translate-x-1 group-hover:bg-[#f13d35] group-hover:text-white">
+                  <span className="relative grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-[#fff0eb] text-[#8b2b20] transition duration-500 group-hover:translate-x-1 group-hover:bg-[#f13d35] group-hover:text-white">
                     <ArrowRight
-                      className="h-6 w-6 transition-transform duration-500 group-hover:translate-x-0.5"
+                      className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-0.5"
                       strokeWidth={2.2}
                       aria-hidden="true"
                     />
@@ -297,22 +298,22 @@ function LanguageTemplate() {
             <div className="mt-8 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-4 lg:grid lg:grid-cols-5 lg:overflow-visible lg:pb-0">
               {methodologySteps.map(([title, description, Icon], index) => (
                 <article
-                  className="flex min-h-[296px] min-w-[258px] snap-start flex-1 flex-col rounded-xl border border-[#d9dfe8] bg-white px-3.5 py-4 text-[#111827] shadow-[0_5px_8px_rgb(0_0_0_/_18%)] transition-transform duration-300 hover:-translate-y-1 sm:min-w-[270px] lg:min-h-0 lg:min-w-0 lg:aspect-[258/296]"
+                  className="flex min-h-[296px] min-w-[258px] snap-start flex-1 flex-col rounded-xl border border-[#d9dfe8] bg-white px-3.5 py-4 text-[#111827] shadow-[0_5px_8px_rgb(0_0_0_/_18%)] transition-transform duration-300 hover:-translate-y-1 sm:min-w-[270px] lg:min-h-[310px] lg:min-w-0"
                   key={title}
                 >
                   <span className="self-start text-left text-sm font-semibold text-[#9ca3af]">
                     {String(index + 1).padStart(2, "0")}
                   </span>
-                  <div className="flex flex-1 flex-col items-center justify-center text-center">
+                  <div className="flex min-w-0 flex-1 flex-col items-center justify-center text-center">
                     <Icon
-                      className="h-[112px] w-[112px] text-[#ff2d4d]"
+                      className="h-20 w-20 shrink-0 text-[#ff2d4d] lg:h-14 lg:w-14 xl:h-16 xl:w-16"
                       strokeWidth={1.8}
                       aria-hidden="true"
                     />
-                    <h3 className="mt-5 text-[27px] font-extrabold leading-none tracking-[-0.045em]">
+                    <h3 className="mt-4 w-full break-words text-xl font-extrabold leading-tight tracking-[-0.045em] sm:text-[22px] lg:text-lg xl:text-xl">
                       {title}
                     </h3>
-                    <p className="mt-3 text-lg leading-6 text-[#263244]">
+                    <p className="mt-2 w-full break-words text-sm leading-5 text-[#263244] lg:text-[13px] xl:text-sm">
                       {description}
                     </p>
                   </div>

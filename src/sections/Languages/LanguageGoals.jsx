@@ -46,11 +46,11 @@ function LanguageGoals() {
         <h2 className="mt-4 max-w-[1000px] text-4xl font-bold italic leading-[1.02] tracking-[-0.05em] sm:text-5xl lg:text-6xl">
           ¿Para qué quieres aprender un idioma?
         </h2>
-        <p className="mt-5 text-base text-[#405878] sm:text-lg">
+        <p className="mt-5 max-w-[760px] text-base leading-7 text-[#405878] sm:text-lg">
           Estas categorías te ayudan a orientar tu búsqueda.
         </p>
 
-        <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid gap-5 md:grid-cols-2 lg:mt-14 lg:grid-cols-3">
           {goals.map(({ label, icon: Icon }, index) => {
             const isSelected = selectedGoal === label
 

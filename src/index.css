@@ -2698,3 +2698,24 @@ body {
     @apply font-sans;
   }
 }
+
+/* A shared content rail keeps each page aligned while preserving its layout. */
+main:is(.home-page, .modalities-page, .experience-page, .methodology-page, .community-page, .membership-page, .language-template, .bg-white) section > .mx-auto {
+  width: 88%;
+  max-width: 1440px;
+  padding-inline: 0;
+}
+
+main:is(.experience-page, .methodology-page, .community-page, .membership-page, .modalities-page) :is(.experience-container, .methodology-container, .community-container, .membership-container, .modalities-container) {
+  width: 88%;
+  max-width: 1440px;
+  padding-inline: 0;
+}
+
+@media (min-width: 1024px) {
+  main:is(.home-page, .modalities-page, .experience-page, .methodology-page, .community-page, .membership-page, .language-template, .bg-white) section > .mx-auto,
+  main:is(.experience-page, .methodology-page, .community-page, .membership-page, .modalities-page) :is(.experience-container, .methodology-container, .community-container, .membership-container, .modalities-container) {
+    width: 84%;
+  }
+}
+
