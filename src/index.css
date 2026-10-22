@@ -36,6 +36,107 @@ body {
   min-height: 100vh;
 }
 
+.language-action {
+  position: relative;
+  overflow: hidden;
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 300ms ease, background-color 300ms ease, color 300ms ease;
+}
+
+.language-action::before {
+  background: linear-gradient(110deg, transparent 20%, rgb(255 255 255 / 35%) 50%, transparent 80%);
+  content: '';
+  inset: 0;
+  position: absolute;
+  transform: translateX(-120%);
+  transition: transform 550ms ease;
+}
+
+.language-action:hover {
+  box-shadow: 0 12px 24px rgb(8 36 74 / 24%);
+  transform: translateY(-3px) scale(1.015);
+}
+
+.language-action:hover::before {
+  transform: translateX(120%);
+}
+
+.language-action > * {
+  position: relative;
+  z-index: 1;
+}
+
+.language-modality-card {
+  animation: modality-card-enter 700ms var(--card-delay) both cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 400ms ease, border-color 400ms ease;
+}
+
+.language-modality-card::after {
+  background: linear-gradient(120deg, transparent 25%, rgb(255 255 255 / 45%) 50%, transparent 75%);
+  content: '';
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  transform: translateX(-120%);
+  transition: transform 700ms ease;
+  z-index: 40;
+}
+
+.language-modality-card:hover {
+  border-color: #fff;
+  box-shadow: 0 22px 40px rgb(0 0 0 / 32%);
+  transform: translateY(-10px) rotate(-1deg);
+}
+
+.language-modality-card:hover::after {
+  transform: translateX(120%);
+}
+
+@keyframes modality-card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(35px) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .language-action,
+  .language-action::before,
+  .language-modality-card,
+  .language-modality-card::after {
+    transition: none;
+    animation: none;
+  }
+
+  .language-modality-card {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes scroll-reveal-enter {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.scroll-reveal {
+  opacity: 0;
+}
+
+.scroll-reveal--visible {
+  animation: scroll-reveal-enter 700ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
 @keyframes language-goal-enter {
   from {
     opacity: 0;
@@ -78,6 +179,12 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .scroll-reveal {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
   .language-method-step--visible {
     animation: none;
     opacity: 1;

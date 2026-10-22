@@ -2,19 +2,19 @@ import { useState } from 'react'
 
 const slides = [
   {
-    image: '/images/Modalities.png',
+    image: '/images/Sinfoto.png',
     quote: 'Aprender acompañado hace que cada clase se convierta en una experiencia real.',
     author: 'Experiencia Towers',
     detail: 'Comunidad y práctica',
   },
   {
-    image: '/images/hero.png',
+    image: '/images/Sinfoto.png',
     quote: 'El mejor lugar para aprender y crecer es donde el idioma se usa de verdad.',
     author: 'Estudiantes Towers',
     detail: 'Idiomas y experiencias',
   },
   {
-    image: '/images/image.png',
+    image: '/images/Sinfoto.png',
     quote: 'Una sola experiencia, distintas formas de aprender y conectar con el mundo.',
     author: 'Comunidad Towers',
     detail: 'Clases para cada objetivo',

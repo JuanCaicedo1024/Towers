@@ -16,11 +16,13 @@ import CampaignBuilder from './pages/CampaignBuilder'
 import CampaignLanding from './pages/CampaignLanding'
 import { AuthProvider } from './auth/AuthProvider'
 import RequireAuth from './components/RequireAuth'
+import ScrollReveal from './components/ScrollReveal'
 
 function App() {
   return (
     <AuthProvider>
     <BrowserRouter>
+      <ScrollReveal />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/idiomas" element={<Languages />} />

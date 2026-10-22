@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import { ArrowRight, ChevronDown } from 'lucide-react'
 import {
   MobileNav,
   MobileNavHeader,
@@ -72,14 +73,18 @@ function NavigationLink({ item, mobile = false, openMenu, onToggle, onNavigate }
     <div className="navbar__item navbar__item--menu relative z-20">
       <button
         aria-expanded={openMenu === item.path}
-        className="flex items-center whitespace-nowrap rounded-full border-0 bg-transparent px-1.5 py-2 text-[13px] font-medium text-[#111827] transition-colors hover:text-[#E83E33] xl:px-2 xl:text-sm"
+        className="inline-flex items-center gap-1 whitespace-nowrap rounded-full border-0 bg-transparent px-1.5 py-2 text-[13px] font-medium text-[#111827] transition-colors hover:text-[#E83E33] xl:px-2 xl:text-sm"
         type="button"
         onClick={() => onToggle(item.path)}
       >
         {item.label}
-        <span className={`ml-2 text-lg leading-none transition-transform duration-200 ${openMenu === item.path ? 'rotate-180' : ''}`} aria-hidden="true">
-          ⌄
-        </span>
+        <ChevronDown
+          className={`h-4 w-4 shrink-0 transition-transform duration-200 ${
+            openMenu === item.path ? 'rotate-180' : ''
+          }`}
+          strokeWidth={2}
+          aria-hidden="true"
+        />
       </button>
 
       {!mobile && openMenu === item.path && (
@@ -111,7 +116,7 @@ function Navbar() {
 
   return (
     <ResizableNavbar className="top-0 px-[5%] lg:px-[8%]">
-      <NavBody className="max-w-[1440px] gap-0 px-1 xl:gap-1">
+      <NavBody className="max-w-[1440px] gap-0 px-3 sm:px-4 xl:gap-1">
         <Logo />
         <nav className="flex min-w-0 flex-1 items-center justify-center gap-0 xl:gap-1" aria-label="Navegación principal">
           {navigationItems.map((item) => (
@@ -126,10 +131,11 @@ function Navbar() {
         </nav>
         <NavbarButton
           as={NavLink}
-          className="shrink-0 rounded-2xl bg-[#E83E33] px-2 py-3 text-sm font-semibold text-white hover:bg-[#cf3028] xl:px-3"
+          className="mr-1 inline-flex h-10 min-w-[132px] shrink-0 items-center justify-center gap-2 rounded-xl bg-[#E83E33] px-4 text-sm font-semibold text-white shadow-[0_6px_14px_rgb(232_62_51_/_22%)] transition hover:-translate-y-0.5 hover:bg-[#cf3028] hover:shadow-[0_8px_18px_rgb(232_62_51_/_30%)] xl:mr-2 xl:min-w-[140px] xl:px-5"
           to="/contacto"
         >
-          Contactar <span aria-hidden="true" className="ml-3 text-xl leading-none">→</span>
+          Contactar
+          <ArrowRight className="h-4 w-4" strokeWidth={2.5} aria-hidden="true" />
         </NavbarButton>
       </NavBody>
 
@@ -174,11 +180,12 @@ function Navbar() {
           ))}
           <NavbarButton
             as={NavLink}
-            className="w-full rounded-xl bg-[#E83E33] text-white"
+            className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-[#E83E33] text-white shadow-[0_6px_14px_rgb(232_62_51_/_22%)] transition hover:bg-[#cf3028]"
             to="/contacto"
             onClick={closeMenus}
           >
             Contactar
+            <ArrowRight className="h-4 w-4" strokeWidth={2.5} aria-hidden="true" />
           </NavbarButton>
         </MobileNavMenu>
       </MobileNav>

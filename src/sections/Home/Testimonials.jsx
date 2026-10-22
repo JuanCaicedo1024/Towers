@@ -33,7 +33,7 @@ function Testimonials() {
     <section className="relative overflow-hidden bg-white px-[5%] pb-20 pt-14 text-white sm:pb-24 sm:pt-16 lg:px-[7%]">
       <div
         className="absolute inset-x-0 bottom-[90px] top-0 bg-cover bg-center"
-        style={{ backgroundImage: "url('')" }}
+        style={{ backgroundImage: "url('/images/Sinfoto.png')" }}
         aria-hidden="true"
       />
       <div

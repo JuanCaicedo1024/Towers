@@ -3,33 +3,33 @@ import { useState } from 'react'
 const questions = [
   {
     icon: 'ⓘ',
-    question: '¿Por qué elegir Towers para aprender idiomas?',
+    question: '¿Cómo sé qué nivel de idioma tengo?',
     answer:
-      'En Towers aprendes con interacción, práctica guiada y situaciones reales para usar el idioma con confianza.',
+      'Puedes comenzar con una prueba de nivel para identificar tu punto de partida y orientarte hacia el programa más adecuado. El proceso exacto de evaluación y entrega de resultados debe confirmarse con TOWERS.',
   },
   {
     icon: '♡',
-    question: '¿Qué incluye la experiencia Towers?',
+    question: '¿Qué idiomas puedo estudiar en TOWERS?',
     answer:
-      'Incluye clases, acompañamiento docente y actividades que te permiten seguir practicando fuera del salón.',
+      'Actualmente puedes encontrar programas de inglés, francés, portugués y alemán. Italiano aparece en la información interna, pero su disponibilidad debe confirmarse antes de elegirlo como parte de la oferta.',
   },
   {
     icon: '☷',
-    question: '¿Cómo funcionan los cursos?',
+    question: '¿Qué modalidades de estudio están disponibles?',
     answer:
-      'Comenzamos con tu nivel y objetivos para recomendarte el programa y la modalidad que mejor se adapten a ti.',
+      'TOWERS cuenta con opciones presencial, online e híbrida, además de programas empresariales. La disponibilidad puede variar según el idioma o programa, por lo que conviene consultar con un asesor.',
   },
   {
     icon: '♙',
-    question: '¿Quiénes son los profesores?',
+    question: '¿Cómo funciona la metodología de TOWERS?',
     answer:
-      'Nuestro equipo está formado por profesores preparados para acompañarte durante todo tu proceso de aprendizaje.',
+      'El enfoque se basa en la interacción y en el desarrollo de las cuatro habilidades: escucha, habla, lectura y escritura. Practicarás el idioma en diferentes situaciones, no solo teoría.',
   },
   {
     icon: '□',
-    question: '¿Cuándo puedo comenzar?',
+    question: '¿Cómo puedo matricularme?',
     answer:
-      'Escríbenos para conocer los horarios y próximos grupos disponibles.',
+      'Puedes iniciar el proceso hablando con un asesor por WhatsApp. El equipo te orientará sobre el programa, modalidad, disponibilidad y proceso de matrícula. El pago se gestiona posteriormente según las opciones disponibles.',
   },
 ]
 

@@ -53,7 +53,7 @@ function Modalities() {
             <div className="modalities-collage__main">
               <img
                 className="modalities-collage__image"
-                src="/images/hero.png"
+                src="/images/Sinfoto.png"
                 alt="Estudiantes de Towers aprendiendo idiomas"
               />
               <span className="modalities-collage__scribble">Hello · Hallo · Hola</span>
@@ -62,8 +62,8 @@ function Modalities() {
             <div className="modalities-collage__card modalities-collage__card--language">
               <img
                 className="modalities-collage__image"
-                src="/images/Ingles.png"
-                alt="Bandera del Reino Unido"
+                src="/images/Sinfoto.png"
+                alt="Estudiantes de Towers aprendiendo idiomas"
               />
               <span className="modalities-collage__card-icon" aria-hidden="true">A</span>
               <span>Aprende<br /><strong>sin fronteras</strong></span>
@@ -72,8 +72,8 @@ function Modalities() {
             <div className="modalities-collage__card modalities-collage__card--club">
               <img
                 className="modalities-collage__image"
-                src="/images/fondo.png"
-                alt="Actividad internacional del Club Mundialista"
+                src="/images/Sinfoto.png"
+                alt="Estudiantes participando en una actividad de comunidad"
               />
               <span className="modalities-collage__ball" aria-hidden="true">⚽</span>
               <strong>Club<br />Mundialista</strong>
