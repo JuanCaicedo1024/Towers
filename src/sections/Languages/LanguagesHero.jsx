@@ -1,3 +1,4 @@
+import AnimatedText from '@/components/ui/AnimatedText';
 import { ArrowRight, ChartNoAxesColumnIncreasing, Star, UsersRound } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
 
@@ -15,13 +16,9 @@ function LanguagesHero() {
           <p className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-[#f13d35]">
             IDIOMAS
           </p>
-          <h1 className="mt-4 text-4xl font-bold italic leading-[1.02] tracking-[-0.05em] sm:text-5xl lg:text-6xl">
-            ¿Qué idioma quieres
-            <br />
-            aprender?
-          </h1>
+          <h1 className="mt-4 text-4xl font-bold italic leading-[1.02] tracking-[-0.05em] sm:text-5xl lg:text-6xl"><AnimatedText per="line">{"¿Qué idioma quieres\naprender?"}</AnimatedText></h1>
           <p className="mt-6 max-w-[530px] text-base leading-[1.55] text-[#183454] sm:text-lg">
-            Towers ofrece distintas alternativas para aprender una segunda lengua mediante un enfoque de interacción: el idioma se practica y se aplica en situaciones reales.
+            <AnimatedText>Towers ofrece distintas alternativas para aprender una segunda lengua mediante un enfoque de interacción: el idioma se practica y se aplica en situaciones reales.</AnimatedText>
           </p>
           <NavLink
             className="mt-7 inline-flex w-full items-center justify-center rounded-xl bg-[#f13d35] px-6 py-4 text-base font-bold text-white shadow-[0_8px_18px_rgb(241_61_53_/_22%)] transition hover:-translate-y-0.5 hover:bg-[#d92f29] sm:max-w-[315px]"
@@ -51,11 +48,7 @@ function LanguagesHero() {
           />
           <div className="absolute inset-0 bg-gradient-to-tr from-[#193454]/25 via-transparent to-white/15" aria-hidden="true" />
           <p className="absolute left-8 top-8 max-w-[180px] text-2xl font-semibold italic leading-[1.05] text-white drop-shadow-md sm:left-12 sm:top-10 sm:text-3xl">
-            El mejor lugar
-            <br />
-            para aprender
-            <br />
-            y crecer
+            <AnimatedText per="line">{'El mejor lugar\npara aprender\ny crecer'}</AnimatedText>
           </p>
         </div>
       </div>

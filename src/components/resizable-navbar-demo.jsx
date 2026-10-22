@@ -1,4 +1,5 @@
 "use client";
+import AnimatedText from '@/components/ui/AnimatedText';
 import {
   Navbar,
   NavBody,
@@ -97,7 +98,7 @@ const DummyContent = () => {
   return (
     <div className="container mx-auto p-8 pt-24">
       <h1 className="mb-4 text-center text-3xl font-bold">
-        Check the navbar at the top of the container
+        <AnimatedText>Check the navbar at the top of the container</AnimatedText>
       </h1>
       <p className="mb-10 text-center text-sm text-zinc-500">
         For demo purpose we have kept the position as{" "}
@@ -182,7 +183,7 @@ const DummyContent = () => {
             key={box.id}
             className={`${box.width} ${box.height} ${box.bg} flex items-center justify-center rounded-lg p-4 shadow-sm`}
           >
-            <h2 className="text-xl font-medium">{box.title}</h2>
+            <h2 className="text-xl font-medium"><AnimatedText>{box.title}</AnimatedText></h2>
           </div>
         ))}
       </div>

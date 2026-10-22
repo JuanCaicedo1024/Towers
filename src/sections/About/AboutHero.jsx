@@ -1,3 +1,4 @@
+import AnimatedText from '@/components/ui/AnimatedText';
 import { Link } from 'react-router-dom'
 import { Eyebrow, Placeholder, SectionHeading } from './AboutShared'
 
@@ -9,8 +10,8 @@ function AboutHero() {
         <div className="experience-split">
           <div>
             <Eyebrow>Sobre Towers</Eyebrow>
-            <h1>Un lugar para aprender un idioma a través de la interacción.</h1>
-            <p>En TOWERS creemos que aprender un idioma es una experiencia que se construye con otras personas. Por eso creamos espacios para practicar, participar y avanzar acompañado.</p>
+            <h1><AnimatedText>Un lugar para aprender un idioma a través de la interacción.</AnimatedText></h1>
+            <p><AnimatedText>En TOWERS creemos que aprender un idioma es una experiencia que se construye con otras personas. Por eso creamos espacios para practicar, participar y avanzar acompañado.</AnimatedText></p>
             <div className="experience-actions">
               <Link className="experience-button experience-button--light" to="/idiomas">Conoce nuestros programas <span aria-hidden="true">→</span></Link>
               <Link className="experience-text-link" to="/contacto">Habla con un asesor</Link>

@@ -1,3 +1,4 @@
+import AnimatedText from '@/components/ui/AnimatedText';
 import { Link } from 'react-router-dom'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
@@ -42,17 +43,17 @@ function Community() {
             <div className="experience-split">
               <div>
                 <span className="experience-eyebrow">Comunidad Towers</span>
-                <h1>El idioma se practica mejor cuando también forma parte de tu vida.</h1>
+                <h1><AnimatedText>El idioma se practica mejor cuando también forma parte de tu vida.</AnimatedText></h1>
                 <p>
-                  TOWERS cuenta con espacios de comunidad y encuentro donde los estudiantes
+                  <AnimatedText>TOWERS cuenta con espacios de comunidad y encuentro donde los estudiantes
                   pueden compartir, conversar y seguir usando el idioma en un entorno diferente
-                  al de una clase tradicional.
+                  al de una clase tradicional.</AnimatedText>
                 </p>
                 <p>
-                  La idea es crear más oportunidades para interactuar, perder el miedo a
-                  participar y relacionar lo aprendido con conversaciones y situaciones más naturales.
+                  <AnimatedText>La idea es crear más oportunidades para interactuar, perder el miedo a
+                  participar y relacionar lo aprendido con conversaciones y situaciones más naturales.</AnimatedText>
                 </p>
-                <p>La comunidad funciona como una extensión de la metodología de interacción: la práctica no termina cuando termina la clase.</p>
+                <p><AnimatedText>La comunidad funciona como una extensión de la metodología de interacción: la práctica no termina cuando termina la clase.</AnimatedText></p>
               </div>
               <Placeholder className="experience-hero-placeholder" label="Fotografía real requerida: estudiantes en actividad, encuentro o espacio social de Towers" />
             </div>
@@ -62,7 +63,7 @@ function Community() {
         <section className="community-light">
           <div className="community-container">
             <Heading number="02" label="Qué aporta la comunidad" description="4 ejes centrales" />
-            <h2>Más oportunidades para usar lo que aprendes.</h2>
+            <h2><AnimatedText>Más oportunidades para usar lo que aprendes.</AnimatedText></h2>
             <div className="community-opportunities">
               {opportunities.map(([number, title, description]) => (
                 <article key={number}>
@@ -80,8 +81,8 @@ function Community() {
             <div>
               <Heading number="03" label="Cómo se vive" description="experiencias para compartir" />
               <span className="experience-eyebrow">Una experiencia más allá de la clase</span>
-              <h2>La comunidad se construye participando.</h2>
-              <p>Los espacios de comunidad pueden incluir encuentros, conversaciones, actividades y experiencias que permitan a los estudiantes relacionarse con el idioma de una manera más orgánica y cotidiana.</p>
+              <h2><AnimatedText>La comunidad se construye participando.</AnimatedText></h2>
+              <p><AnimatedText>Los espacios de comunidad pueden incluir encuentros, conversaciones, actividades y experiencias que permitan a los estudiantes relacionarse con el idioma de una manera más orgánica y cotidiana.</AnimatedText></p>
               <small>Imágenes de ejemplo, pendientes de ser reales.</small>
             </div>
             <div className="community-photo-grid">
@@ -94,8 +95,8 @@ function Community() {
           <div className="community-container">
             <Heading number="04" label="Conexión con la metodología" description="interacción en acción" />
             <span className="experience-eyebrow">Interacción en acción</span>
-            <h2>La metodología también continúa fuera de clase.</h2>
-            <p>El enfoque de TOWERS se basa en la interacción. Por eso, la comunidad no debe presentarse como un beneficio separado, sino como una extensión natural de la forma de aprender.</p>
+            <h2><AnimatedText>La metodología también continúa fuera de clase.</AnimatedText></h2>
+            <p><AnimatedText>El enfoque de TOWERS se basa en la interacción. Por eso, la comunidad no debe presentarse como un beneficio separado, sino como una extensión natural de la forma de aprender.</AnimatedText></p>
             <div className="community-step-card">
               <span className="experience-eyebrow">La extensión del aprendizaje</span>
               {['Clase', 'Práctica', 'Comunidad', 'Nuevas situaciones de interacción'].map((step, index) => (
@@ -109,7 +110,7 @@ function Community() {
         <section className="community-dark">
           <div className="community-container">
             <Heading number="05" label="Galería" description="momentos de comunidad" />
-            <h2>Momentos de la comunidad.</h2>
+            <h2><AnimatedText>Momentos de la comunidad.</AnimatedText></h2>
             <div className="community-moments">
               {moments.map((moment) => <Placeholder key={moment} label={`Foto ${moment}`} />)}
             </div>
@@ -120,7 +121,7 @@ function Community() {
         <section className="community-light">
           <div className="community-container">
             <Heading number="06" label="Testimonios" description="solo contenido real" />
-            <h2>Lo que viven los estudiantes.</h2>
+            <h2><AnimatedText>Lo que viven los estudiantes.</AnimatedText></h2>
             <div className="community-testimonials">
               {[1, 2, 3].map((item) => <article key={item}><p>Experiencia textual verificable.</p><span>Por validar: experiencia real</span></article>)}
             </div>
@@ -131,7 +132,7 @@ function Community() {
           <div className="community-container community-final-content">
             <Heading number="07" label="Cierre" description="el siguiente paso" />
             <span className="experience-eyebrow">Únete a la conversación</span>
-            <h2>Explora una experiencia donde el idioma también forma parte de la comunidad Towers.</h2>
+            <h2><AnimatedText>Explora una experiencia donde el idioma también forma parte de la comunidad Towers.</AnimatedText></h2>
             <div className="experience-actions">
               <Link className="experience-button experience-button--light" to="/idiomas">Conoce nuestros programas <span aria-hidden="true">→</span></Link>
               <Link className="experience-text-link" to="/contacto">Habla con un asesor</Link>

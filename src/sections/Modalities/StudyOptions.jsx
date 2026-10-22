@@ -1,3 +1,4 @@
+import AnimatedText from '@/components/ui/AnimatedText';
 import { Building2, Monitor, UsersRound } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { ModalitiesHeading } from './ModalitiesShared'
@@ -13,7 +14,7 @@ function StudyOptions() {
     <section className="bg-white text-[#17233a]">
       <div className="mx-auto max-w-[1240px] px-[6%] py-16 lg:py-20">
         
-        <h2 className="mt-8 text-4xl font-extrabold tracking-[-0.045em] text-[#171c20] sm:text-5xl lg:text-6xl">Cómo puedes estudiar</h2>
+        <h2 className="mt-8 text-4xl font-extrabold tracking-[-0.045em] text-[#171c20] sm:text-5xl lg:text-6xl"><AnimatedText>Cómo puedes estudiar</AnimatedText></h2>
         <div className="mt-8 grid gap-5 lg:grid-cols-3">
           {options.map(([title, image, Icon]) => (
             <article className="group relative overflow-visible rounded-xl border border-[#d9dfe8] bg-white shadow-[0_5px_8px_rgb(0_0_0_/_18%)] transition duration-300 hover:-translate-y-2 hover:shadow-[0_18px_30px_rgb(23_35_58_/_16%)]" key={title}>

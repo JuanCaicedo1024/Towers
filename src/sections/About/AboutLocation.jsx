@@ -1,3 +1,4 @@
+import AnimatedText from '@/components/ui/AnimatedText';
 import { Link } from 'react-router-dom'
 import { Eyebrow, Placeholder, SectionHeading } from './AboutShared'
 
@@ -8,7 +9,7 @@ function AboutLocation() {
         <div>
           <SectionHeading number="07" label="Towers en Bogotá" description="el lugar donde todo comenzó" />
           <Eyebrow>Towers hoy</Eyebrow>
-          <h2>Towers en Bogotá.</h2>
+          <h2><AnimatedText>Towers en Bogotá.</AnimatedText></h2>
           <p><strong>Km 4.6 vía Bogotá - La Calera</strong><br />La Floresta<br />Bogotá, Colombia</p>
           <div className="experience-actions">
             <Link className="experience-button experience-button--light" to="/contacto">Hablar con un asesor</Link>

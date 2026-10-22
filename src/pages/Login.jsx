@@ -1,3 +1,4 @@
+import AnimatedText from '@/components/ui/AnimatedText';
 import { useState } from 'react'
 import { ArrowRight, Eye, EyeOff, LockKeyhole, Mail } from 'lucide-react'
 import { Navigate, useLocation, useNavigate } from 'react-router-dom'
@@ -40,7 +41,7 @@ function Login() {
         <div className="login-shell">
           <section className="login-welcome" aria-label="Acceso administrativo de Towers">
             
-            <h1>Gestiona el aprendizaje desde un solo lugar.</h1>
+            <h1><AnimatedText>Gestiona el aprendizaje desde un solo lugar.</AnimatedText></h1>
             <p>Ingresa al portal de administración de Towers para continuar.</p>
             
             <div className="login-decoration login-decoration--one" />
@@ -52,7 +53,7 @@ function Login() {
               <img src="/images/Towers_logo.png" alt="Towers Centro activo de idiomas" />
             </a>
             <span className="login-card__eyebrow">ACCESO PARA ADMINISTRATIVOS</span>
-            <h2>Inicia sesión</h2>
+            <h2><AnimatedText>Inicia sesión</AnimatedText></h2>
             <p className="login-card__intro">Ingresa las credenciales que te entregó el equipo de Towers.</p>
 
             {configurationError && <p className="mb-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-900" role="status">{configurationError}</p>}

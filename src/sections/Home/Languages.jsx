@@ -1,3 +1,4 @@
+import AnimatedText from '@/components/ui/AnimatedText';
 const languages = [
   {
     name: "Inglés",
@@ -38,7 +39,7 @@ function Languages() {
       <div className="mx-auto max-w-[1120px]">
         <div className="mt-8">
           <h2 className="m-0 text-3xl font-semibold tracking-[-0.04em] text-[#071026] sm:text-4xl">
-            ¿Qué idioma quieres aprender?
+            <AnimatedText>{'\u00bfQu\u00e9 idioma quieres aprender?'}</AnimatedText>
           </h2>
 
           <div className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
@@ -78,5 +79,4 @@ function Languages() {
     </section>
   );
 }
-
 export default Languages;

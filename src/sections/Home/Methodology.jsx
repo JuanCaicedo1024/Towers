@@ -1,3 +1,5 @@
+import AnimatedText from '@/components/ui/AnimatedText';
+import { useEffect, useRef } from 'react'
 import {
   BookOpen,
   ChartNoAxesCombined,
@@ -40,6 +42,38 @@ const methodologySteps = [
 ]
 
 function Methodology() {
+  const sliderRef = useRef(null);
+
+  useEffect(() => {
+    const slider = sliderRef.current;
+    if (!slider) return undefined;
+
+    const timer = window.setInterval(() => {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const rect = slider.getBoundingClientRect();
+      const isVisible = rect.bottom > 0 && rect.top < window.innerHeight;
+      const isPaused = slider.matches(':hover') || slider.contains(document.activeElement);
+
+      if (prefersReducedMotion || document.visibilityState !== 'visible' || !isVisible || isPaused) return;
+
+      const card = slider.querySelector('[data-methodology-card]');
+      if (!card) return;
+
+      const gap = Number.parseFloat(getComputedStyle(slider).columnGap) || 0;
+      const maxScroll = slider.scrollWidth - slider.clientWidth;
+      if (maxScroll <= 0) return;
+
+      if (slider.scrollLeft >= maxScroll - 2) {
+        slider.scrollTo({ left: 0, behavior: 'smooth' });
+        return;
+      }
+
+      slider.scrollBy({ left: card.getBoundingClientRect().width + gap, behavior: 'smooth' });
+    }, 1000);
+
+    return () => window.clearInterval(timer);
+  }, []);
+
   return (
     <section
       className="relative overflow-hidden bg-white bg-no-repeat px-5 py-24 text-white sm:px-8 sm:py-28 lg:aspect-[2048/1080] lg:px-[3.55%] lg:py-0"
@@ -52,17 +86,25 @@ function Methodology() {
       <div className="relative z-10 mx-auto max-w-[1340px] lg:pt-[11.7%]">
         <div className="mx-auto max-w-[1340px]">
           <h2 className="m-0 text-4xl font-bold italic tracking-[-0.045em] sm:text-5xl lg:text-[3.85rem] lg:leading-[1.05]">
-            Así aprendes en Towers
+            <AnimatedText>{'As\u00ed aprendes en Towers'}</AnimatedText>
           </h2>
           <p className="mt-3 max-w-[760px] text-base leading-6 text-white/90 sm:text-lg">
-            Interacción, cuatro habilidades, grupos semipersonalizados y aplicación en situaciones cotidianas.
+            <AnimatedText>{'Interacci\u00f3n, cuatro habilidades, grupos semipersonalizados y aplicaci\u00f3n en situaciones cotidianas.'}</AnimatedText>
           </p>
         </div>
 
-        <div className="mt-8 flex snap-x snap-mandatory gap-2.5 overflow-x-auto pb-4 sm:gap-3 lg:mt-[3.05%] lg:grid lg:grid-cols-5 lg:overflow-visible lg:pb-0">
+        <div
+          aria-label={'Pasos de la metodolog\u00eda Towers'}
+          aria-roledescription="carrusel"
+          className="mt-8 flex snap-x snap-mandatory gap-2.5 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:gap-3 lg:mt-[3.05%] lg:max-w-[1100px]"
+          ref={sliderRef}
+          role="region"
+          tabIndex={0}
+        >
           {methodologySteps.map(({ number, title, description, icon: Icon }) => (
             <article
-              className="flex min-h-[296px] min-w-[258px] snap-start flex-1 flex-col rounded-xl border border-[#d9dfe8] bg-white px-3.5 py-4 text-center text-[#111827] shadow-[0_5px_8px_rgb(0_0_0_/_18%)] transition-transform duration-300 hover:-translate-y-1 sm:min-w-[270px] lg:min-h-0 lg:min-w-0 lg:aspect-[258/296]"
+              className="flex min-h-[296px] min-w-[258px] snap-start flex-1 flex-col rounded-xl border border-[#d9dfe8] bg-white px-3.5 py-4 text-center text-[#111827] shadow-[0_5px_8px_rgb(0_0_0_/_18%)] transition-transform duration-300 hover:-translate-y-1 sm:min-w-[270px] lg:min-h-0 lg:min-w-[270px] lg:aspect-[258/296]"
+              data-methodology-card
               key={number}
             >
               <span className="self-start text-left text-sm font-semibold text-[#9ca3af]">{number}</span>
@@ -85,7 +127,7 @@ function Methodology() {
             className="w-full rounded-xl bg-[#f33d34] px-5 py-3.5 text-xl font-bold text-white shadow-sm transition hover:bg-[#df3029] focus:outline-none focus:ring-4 focus:ring-white/30"
             type="button"
           >
-            Conocer nuestra metodología <span aria-hidden="true" className="ml-1">→</span>
+            {'Conocer nuestra metodolog\u00eda'} <span aria-hidden="true" className="ml-1">{'\u2192'}</span>
           </button>
         </div>
       </div>

@@ -1,3 +1,4 @@
+import AnimatedText from '@/components/ui/AnimatedText';
 import {
   ArrowRight,
   ArrowUpRight,
@@ -45,13 +46,9 @@ function Testimonials() {
         <div className="grid items-center gap-10 lg:grid-cols-[0.95fr_1fr] lg:gap-14">
           <div className="max-w-[700px]">
             
-            <h2 className="m-0 max-w-[620px] text-3xl font-bold italic leading-[1.02] tracking-[-0.045em] text-white sm:text-4xl lg:text-5xl">
-              Una sola experiencia,
-              <br />
-              distintas formas.
-            </h2>
+            <h2 className="m-0 max-w-[620px] text-3xl font-bold italic leading-[1.02] tracking-[-0.045em] text-white sm:text-4xl lg:text-5xl"><AnimatedText per="line">{"Una sola experiencia,\ndistintas formas."}</AnimatedText></h2>
             <p className="mt-5 max-w-[600px] text-base leading-[1.5] text-white/85 sm:text-lg">
-              Puedes estudiar presencialmente en la sede de Cúcuta, online en vivo desde donde estés, o combinando ambas. La metodología, los profesores y el enfoque de interacción se mantienen igual.
+              <AnimatedText>Puedes estudiar presencialmente en la sede de Cúcuta, online en vivo desde donde estés, o combinando ambas. La metodología, los profesores y el enfoque de interacción se mantienen igual.</AnimatedText>
             </p>
             <NavLink
               className="mt-6 inline-flex w-full items-center justify-center rounded-xl bg-[#f33d35] px-6 py-3.5 text-base font-bold text-white shadow-[0_10px_25px_rgb(0_0_0_/_15%)] transition hover:-translate-y-0.5 hover:bg-[#df3029] sm:max-w-[520px]"

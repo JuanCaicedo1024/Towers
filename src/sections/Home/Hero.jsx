@@ -1,19 +1,29 @@
+import AnimatedText from '@/components/ui/AnimatedText';
+import { TextEffect } from '../../../components/motion-primitives/text-effect';
+import { ScrollVelocityRow } from '@/components/ui/scroll-based-velocity';
+
 function Hero() {
   return (
     <section className="relative overflow-hidden bg-[#fff8f6] text-[#17233a]">
       <div className="mx-auto grid min-h-[620px] w-[88%] max-w-[1440px] grid-cols-1 items-center gap-8 pb-16 pt-14 lg:w-[84%] xl:grid-cols-[1.1fr_0.9fr] xl:gap-4 xl:pb-0 xl:pt-0">
         <div className="relative z-10 max-w-[780px]">
           <h1 className="m-0 max-w-[780px] text-[clamp(2.8rem,4.5vw,5.8rem)] font-extrabold leading-[0.98] tracking-[-0.055em] text-[#101820]">
-            Aprende un idioma
+            <TextEffect as="span" per="word" preset="fade-in-blur" className="inline">
+              Aprende un idioma
+            </TextEffect>
             <br />
-            para usarlo donde
+            <TextEffect as="span" per="word" preset="fade-in-blur" delay={0.25} className="inline">
+              para usarlo donde
+            </TextEffect>
             <br />
-            <span className="text-[#E83E33]">realmente importa.</span>
+            <TextEffect as="span" per="word" preset="fade-in-blur" delay={0.5} className="inline text-[#E83E33]">
+              realmente importa.
+            </TextEffect>
           </h1>
           <p className="mt-6 max-w-[760px] text-base font-medium leading-[1.45] text-[#294d78] sm:text-lg">
-            Aprende inglés y otros idiomas a través de clases interactivas,
+            <AnimatedText>Aprende inglés y otros idiomas a través de clases interactivas,
             profesores preparados y experiencias que llevan el idioma a
-            situaciones reales.
+            situaciones reales.</AnimatedText>
           </p>
           <div className="mt-6 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
             <button className="inline-flex min-w-[250px] items-center justify-between gap-6 rounded-xl bg-[#E83E33] px-7 py-4 text-sm font-semibold text-white shadow-[0_8px_18px_rgb(232_62_51_/_22%)] transition hover:-translate-y-0.5 hover:bg-[#cf3028] hover:shadow-[0_10px_22px_rgb(232_62_51_/_32%)]" type="button">
@@ -25,14 +35,20 @@ function Hero() {
               <span aria-hidden="true" className="grid h-5 w-5 place-items-center rounded-full bg-[#183454] text-sm text-white">+</span>
             </button>
           </div>
-          <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 font-mono text-[10px] font-bold uppercase tracking-[0.08em] text-[#C83A2F]">
-            <span>Presencial</span>
-            <span className="text-[#183454]">·</span>
-            <span>Online</span>
-            <span className="text-[#183454]">·</span>
-            <span>Grupos semipersonalizados</span>
-            
-          </div>
+          <ScrollVelocityRow
+            className="mt-5 w-[390px] max-w-full font-mono text-[10px] font-bold uppercase tracking-[0.08em] text-[#C83A2F]"
+            baseVelocity={2}
+          >
+            <div className="inline-flex items-center gap-x-5 pr-5">
+              <span>Presencial</span>
+              <span className="text-[#183454]">·</span>
+              <span>Online</span>
+              <span className="text-[#183454]">·</span>
+              <span>Grupos semipersonalizados</span>
+              <span className="text-[#183454]">·</span>
+              <span className="text-[#183454]">·</span>
+            </div>
+          </ScrollVelocityRow>
         </div>
 
         <div className="relative flex min-h-[430px] items-end justify-center self-stretch xl:min-h-[720px]">

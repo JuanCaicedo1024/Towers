@@ -1,3 +1,4 @@
+import AnimatedText from '@/components/ui/AnimatedText';
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Footer from '../components/Footer'
@@ -49,8 +50,8 @@ function Membership() {
             <div className="membership-hero-grid">
               <div>
                 <span className="membership-eyebrow">Membresía Towers</span>
-                <h1>Ser estudiante Towers puede darte más que una clase.</h1>
-                <p>La experiencia Towers también contempla beneficios asociados a la membresía, relacionados con el bienestar, la gastronomía, la educación y otros espacios donde puedes ampliar tu experiencia.</p>
+                <h1><AnimatedText>Ser estudiante Towers puede darte más que una clase.</AnimatedText></h1>
+                <p><AnimatedText>La experiencia Towers también contempla beneficios asociados a la membresía, relacionados con el bienestar, la gastronomía, la educación y otros espacios donde puedes ampliar tu experiencia.</AnimatedText></p>
                 <div className="membership-actions">
                   <Link className="membership-button membership-button--light" to="/contacto">Explorar beneficios <span aria-hidden="true">→</span></Link>
                   <Link className="membership-link" to="/contacto">Habla con un asesor</Link>
@@ -69,9 +70,9 @@ function Membership() {
             <div>
               <Heading number="02" label="Qué representa la membresía" description="más allá del programa" />
               <span className="membership-eyebrow">Más allá del programa</span>
-              <h2>Una experiencia pensada alrededor del estudiante.</h2>
-              <p>La membresía puede funcionar como una extensión de la relación entre el estudiante y TOWERS.</p>
-              <p>Además del aprendizaje del idioma, puede integrar beneficios, aliados, experiencias y oportunidades que complementen la vida del estudiante.</p>
+              <h2><AnimatedText>Una experiencia pensada alrededor del estudiante.</AnimatedText></h2>
+              <p><AnimatedText>La membresía puede funcionar como una extensión de la relación entre el estudiante y TOWERS.</AnimatedText></p>
+              <p><AnimatedText>Además del aprendizaje del idioma, puede integrar beneficios, aliados, experiencias y oportunidades que complementen la vida del estudiante.</AnimatedText></p>
             </div>
           </div>
         </section>
@@ -79,7 +80,7 @@ function Membership() {
         <section className="membership-dark">
           <div className="membership-container">
             <Heading number="03" label="Categorías de beneficios" description="clasificación de beneficios" />
-            <h2>Beneficios para diferentes momentos de tu día a día.</h2>
+            <h2><AnimatedText>Beneficios para diferentes momentos de tu día a día.</AnimatedText></h2>
             <div className="membership-category-cards">
               {categories.map(([category, description]) => <article key={category}><h3>{category}</h3><p>{description}</p></article>)}
             </div>
@@ -90,8 +91,8 @@ function Membership() {
         <section className="membership-light">
           <div className="membership-container">
             <Heading number="04" label="Listado de beneficios" description="sistema de filtro · placeholders hasta tener aliados" />
-            <h2>Descubre los beneficios disponibles.</h2>
-            <p>Los aliados, condiciones y vigencias se publican cuando Towers confirme el inventario.</p>
+            <h2><AnimatedText>Descubre los beneficios disponibles.</AnimatedText></h2>
+            <p><AnimatedText>Los aliados, condiciones y vigencias se publican cuando Towers confirme el inventario.</AnimatedText></p>
             <div className="membership-filters">
               {['Todos', ...categories.map(([category]) => category)].map((category) => (
                 <button className={activeCategory === category ? 'is-active' : ''} key={category} type="button" onClick={() => setActiveCategory(category)}>{category}</button>
@@ -116,8 +117,8 @@ function Membership() {
           <div className="membership-container membership-center">
             <Heading number="05" label="Por qué esto importa" description="una experiencia más completa" />
             <span className="membership-eyebrow">Una experiencia más completa</span>
-            <h2>Aprender, participar y formar parte.</h2>
-            <p>El valor de TOWERS no termina cuando acaba una clase. La combinación entre aprendizaje, comunidad y beneficios puede construir una experiencia más completa alrededor del estudiante.</p>
+            <h2><AnimatedText>Aprender, participar y formar parte.</AnimatedText></h2>
+            <p><AnimatedText>El valor de TOWERS no termina cuando acaba una clase. La combinación entre aprendizaje, comunidad y beneficios puede construir una experiencia más completa alrededor del estudiante.</AnimatedText></p>
             <div className="membership-diagram"><div><span>Aprendizaje</span><b>+</b><span>Comunidad</span><b>+</b><span>Membresía</span></div><b>=</b><strong>Experiencia Towers</strong><small>Representación conceptual — aún no es una promesa absoluta.</small></div>
           </div>
         </section>
@@ -125,7 +126,7 @@ function Membership() {
         <section className="membership-light">
           <div className="membership-container">
             <Heading number="06" label="Testimonios" description="solo contenido real" />
-            <h2>Así se vive desde dentro.</h2>
+            <h2><AnimatedText>Así se vive desde dentro.</AnimatedText></h2>
             <div className="membership-testimonials">
               {[1, 2, 3].map((item) => <article key={item}><Placeholder label="Foto historia real" /><p>Historia o testimonio textual verificable.</p><small>Por validar: testimonio real</small></article>)}
             </div>
@@ -136,8 +137,8 @@ function Membership() {
           <div className="membership-container membership-final-content">
             <Heading number="07" label="Cierre" description="el siguiente paso" />
             <span className="membership-eyebrow">Forma parte de la experiencia</span>
-            <h2>Tu experiencia en Towers puede ir más allá de aprender un idioma.</h2>
-            <p>Explora nuestros programas, conoce la comunidad y descubre cómo puede ser tu experiencia como estudiante.</p>
+            <h2><AnimatedText>Tu experiencia en Towers puede ir más allá de aprender un idioma.</AnimatedText></h2>
+            <p><AnimatedText>Explora nuestros programas, conoce la comunidad y descubre cómo puede ser tu experiencia como estudiante.</AnimatedText></p>
             <div className="membership-actions"><Link className="membership-button membership-button--light" to="/idiomas">Conoce nuestros programas <span aria-hidden="true">→</span></Link><Link className="membership-link" to="/contacto">Habla con un asesor</Link></div>
           </div>
         </section>

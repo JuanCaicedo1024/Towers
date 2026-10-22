@@ -1,3 +1,4 @@
+import AnimatedText from '@/components/ui/AnimatedText';
 import {
   ArrowRight,
   BarChart3,
@@ -68,10 +69,10 @@ function LanguageMethodology() {
           EL MÉTODO TOWERS
         </p>
         <h2 className="mt-4 text-4xl font-bold italic leading-[1.02] tracking-[-0.05em] sm:text-5xl lg:text-6xl">
-          Así aprendes en Towers
+          <AnimatedText>Así aprendes en Towers</AnimatedText>
         </h2>
         <p className="mt-5 max-w-[700px] text-base leading-[1.5] text-white/80 sm:text-lg">
-          Interacción, cuatro habilidades, grupos semipersonalizados y aplicación en situaciones cotidianas.
+          <AnimatedText>Interacción, cuatro habilidades, grupos semipersonalizados y aplicación en situaciones cotidianas.</AnimatedText>
         </p>
         <NavLink
           className="mt-7 flex w-full max-w-[600px] items-center justify-center rounded-xl bg-[#f33d35] px-6 py-4 text-base font-bold text-white shadow-[0_10px_22px_rgb(0_0_0_/_18%)] transition hover:-translate-y-1 hover:bg-[#df3029] sm:text-lg"

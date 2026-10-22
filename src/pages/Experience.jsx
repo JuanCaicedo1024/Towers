@@ -1,3 +1,4 @@
+import AnimatedText from '@/components/ui/AnimatedText';
 import { Link } from 'react-router-dom'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
@@ -40,11 +41,11 @@ function Experience() {
             <div className="experience-split">
               <div>
                 <Eyebrow>Experiencia Towers</Eyebrow>
-                <h1>Aprender un idioma también ocurre fuera del salón de clase.</h1>
+                <h1><AnimatedText>Aprender un idioma también ocurre fuera del salón de clase.</AnimatedText></h1>
                 <p>
-                  En TOWERS, la experiencia del estudiante no se limita al salón de clase.
+                  <AnimatedText>En TOWERS, la experiencia del estudiante no se limita al salón de clase.
                   La comunidad, las experiencias y la interacción hacen posible que el idioma
-                  también forme parte de tu vida y de tu día a día.
+                  también forme parte de tu vida y de tu día a día.</AnimatedText>
                 </p>
                 <div className="experience-actions">
                   <Link className="experience-button experience-button--light" to="/experiencia-towers/comunidad">
@@ -64,15 +65,15 @@ function Experience() {
             <div>
               <SectionHeading number="02" label="La comunidad" description="extensión de la metodología" />
               <Eyebrow>Comunidad Towers</Eyebrow>
-              <h2>El idioma se practica mejor cuando también forma parte de tu vida.</h2>
+              <h2><AnimatedText>El idioma se practica mejor cuando también forma parte de tu vida.</AnimatedText></h2>
               <p>
-                TOWERS cuenta con espacios de comunidad y encuentro donde los estudiantes
+                <AnimatedText>TOWERS cuenta con espacios de comunidad y encuentro donde los estudiantes
                 pueden compartir, conversar y seguir usando el idioma en un entorno diferente
-                al de una clase tradicional.
+                al de una clase tradicional.</AnimatedText>
               </p>
               <p>
-                La idea es crear más oportunidades para interactuar, perder el miedo a
-                participar y relacionar lo aprendido con conversaciones y situaciones más naturales.
+                <AnimatedText>La idea es crear más oportunidades para interactuar, perder el miedo a
+                participar y relacionar lo aprendido con conversaciones y situaciones más naturales.</AnimatedText>
               </p>
               <Link className="experience-small-button" to="/experiencia-towers/comunidad">Conocer la comunidad</Link>
             </div>
@@ -84,11 +85,11 @@ function Experience() {
             <div>
               <SectionHeading number="03" label="La membresía" description="beneficios y experiencias" dark />
               <Eyebrow>Membresía Towers</Eyebrow>
-              <h2>Ser estudiante Towers puede darte más que una clase.</h2>
+              <h2><AnimatedText>Ser estudiante Towers puede darte más que una clase.</AnimatedText></h2>
               <p>
-                La experiencia Towers también contempla beneficios asociados a la membresía:
+                <AnimatedText>La experiencia Towers también contempla beneficios asociados a la membresía:
                 espacios donde la comunidad se encuentra, disfruta y forma parte de una
-                experiencia más amplia de la institución.
+                experiencia más amplia de la institución.</AnimatedText>
               </p>
               <div className="experience-benefits">
                 {benefits.map((benefit) => <span key={benefit}>{benefit}</span>)}
@@ -103,8 +104,8 @@ function Experience() {
           <div className="experience-container">
             <SectionHeading number="04" label="Conexión con la metodología" description="interacción en acción" />
             <Eyebrow>Interacción en acción</Eyebrow>
-            <h2>La metodología también continúa fuera de clase.</h2>
-            <p>El enfoque de TOWERS se basa en la interacción. Por eso, la comunidad no debe presentarse como un beneficio separado, sino como una extensión natural de la forma de aprender.</p>
+            <h2><AnimatedText>La metodología también continúa fuera de clase.</AnimatedText></h2>
+            <p><AnimatedText>El enfoque de TOWERS se basa en la interacción. Por eso, la comunidad no debe presentarse como un beneficio separado, sino como una extensión natural de la forma de aprender.</AnimatedText></p>
             <div className="experience-step-card">
               <Eyebrow>La extensión del aprendizaje</Eyebrow>
               {learningSteps.map((step, index) => (
@@ -119,8 +120,8 @@ function Experience() {
           <div className="experience-container experience-centered">
             <SectionHeading number="05" label="¿Por qué esto importa?" description="una experiencia más completa" dark />
             <Eyebrow>Una experiencia más completa</Eyebrow>
-            <h2>Aprender, participar y formar parte.</h2>
-            <p>El valor de TOWERS no termina cuando acaba una clase. La comunidad transforma el tiempo de aprendizaje en una experiencia más completa alrededor del estudiante.</p>
+            <h2><AnimatedText>Aprender, participar y formar parte.</AnimatedText></h2>
+            <p><AnimatedText>El valor de TOWERS no termina cuando acaba una clase. La comunidad transforma el tiempo de aprendizaje en una experiencia más completa alrededor del estudiante.</AnimatedText></p>
             <div className="experience-diagram">
               <div><span>Aprendizaje</span><b>+</b><span>Comunidad</span><b>+</b><span>Membresía</span></div>
               <b>=</b>
@@ -133,7 +134,7 @@ function Experience() {
         <section className="experience-light">
           <div className="experience-container">
             <SectionHeading number="06" label="Historias reales" description="solo contenido verificable" />
-            <h2>Así se vive desde dentro.</h2>
+            <h2><AnimatedText>Así se vive desde dentro.</AnimatedText></h2>
             <div className="experience-story-grid">
               {stories.map((story) => (
                 <article className="experience-story-card" key={story}>
@@ -150,8 +151,8 @@ function Experience() {
           <div className="experience-container">
             <SectionHeading number="07" label="Cierre" description="el siguiente paso" dark />
             <Eyebrow>Forma parte de la experiencia</Eyebrow>
-            <h2>Tu experiencia en Towers puede ir más allá de aprender un idioma.</h2>
-            <p>Explora nuestros programas, conoce la comunidad y descubre cómo puede ser tu experiencia como estudiante.</p>
+            <h2><AnimatedText>Tu experiencia en Towers puede ir más allá de aprender un idioma.</AnimatedText></h2>
+            <p><AnimatedText>Explora nuestros programas, conoce la comunidad y descubre cómo puede ser tu experiencia como estudiante.</AnimatedText></p>
             <div className="experience-actions">
               <Link className="experience-button experience-button--light" to="/idiomas">Conoce nuestros programas <span aria-hidden="true">→</span></Link>
               <Link className="experience-text-link" to="/contacto">Habla con un asesor</Link>

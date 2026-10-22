@@ -1,3 +1,4 @@
+import AnimatedText from '@/components/ui/AnimatedText';
 import { ArrowRight, BriefcaseBusiness, GraduationCap, Plane, Sparkles, UserRound, UsersRound } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 
@@ -44,7 +45,7 @@ function LanguageGoals() {
           LAS PERSONAS DETRÁS DE TU APRENDIZAJE
         </p>
         <h2 className="mt-4 max-w-[1000px] text-4xl font-bold italic leading-[1.02] tracking-[-0.05em] sm:text-5xl lg:text-6xl">
-          ¿Para qué quieres aprender un idioma?
+          <AnimatedText>¿Para qué quieres aprender un idioma?</AnimatedText>
         </h2>
         <p className="mt-5 max-w-[760px] text-base leading-7 text-[#405878] sm:text-lg">
           Estas categorías te ayudan a orientar tu búsqueda.

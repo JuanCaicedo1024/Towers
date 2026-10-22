@@ -1,3 +1,4 @@
+import AnimatedText from '@/components/ui/AnimatedText';
 import { Link } from 'react-router-dom'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
@@ -57,12 +58,12 @@ function Methodology() {
             <div className="methodology-split">
               <div>
                 <SectionLabel dark="true">Metodología Towers</SectionLabel>
-                <h1>Aprender un idioma significa usarlo.</h1>
+                <h1><AnimatedText>Aprender un idioma significa usarlo.</AnimatedText></h1>
               <p>
-                En TOWERS, el aprendizaje parte de la interacción. No se trata
+                <AnimatedText>En TOWERS, el aprendizaje parte de la interacción. No se trata
                 únicamente de estudiar estructuras o memorizar contenidos, sino de
                 desarrollar la capacidad de comprender, comunicarte y utilizar el idioma
-                en diferentes situaciones.
+                en diferentes situaciones.</AnimatedText>
               </p>
                 <div className="methodology-hero-actions">
                   <Link className="methodology-button methodology-button--light" to="/prueba-de-nivel">
@@ -80,16 +81,16 @@ function Methodology() {
           <div className="methodology-container methodology-split">
             <div>
               <SectionLabel>02 · La clase Towers</SectionLabel>
-              <h2>La interacción está en el centro del aprendizaje.</h2>
+              <h2><AnimatedText>La interacción está en el centro del aprendizaje.</AnimatedText></h2>
               <p>
-                La documentación de Towers plantea un enfoque basado en la interacción
+                <AnimatedText>La documentación de Towers plantea un enfoque basado en la interacción
                 como herramienta para aprender. Aquí no vienes solamente a recibir
-                información: vienes a participar, practicar y relacionarte.
+                información: vienes a participar, practicar y relacionarte.</AnimatedText>
               </p>
             </div>
             <div className="methodology-card methodology-card--quote">
               <SectionLabel>Declaración de identidad</SectionLabel>
-              <h3>No solo aprender sobre el idioma. Aprender a usarlo.</h3>
+              <h3><AnimatedText>No solo aprender sobre el idioma. Aprender a usarlo.</AnimatedText></h3>
               {['Escuchar', 'Comprender', 'Responder', 'Interactuar'].map((item) => (
                 <div className="methodology-pill" key={item}>{item}</div>
               ))}
@@ -101,8 +102,8 @@ function Methodology() {
         <section className="methodology-dark">
           <div className="methodology-container">
             <SectionLabel dark="true">03 · Las cuatro habilidades</SectionLabel>
-            <h2>Cuatro habilidades que se conectan entre sí.</h2>
-            <p>Aprender un lenguaje requiere desarrollar diferentes capacidades de forma complementaria.</p>
+            <h2><AnimatedText>Cuatro habilidades que se conectan entre sí.</AnimatedText></h2>
+            <p><AnimatedText>Aprender un lenguaje requiere desarrollar diferentes capacidades de forma complementaria.</AnimatedText></p>
             <div className="methodology-skills">
               {skills.map(([number, title, description]) => (
                 <article className="methodology-skill" key={number}>
@@ -119,11 +120,11 @@ function Methodology() {
           <div className="methodology-container methodology-split">
             <div>
               <SectionLabel>04 · Cómo se ve una clase</SectionLabel>
-              <h2>Menos observar. Más participar.</h2>
+              <h2><AnimatedText>Menos observar. Más participar.</AnimatedText></h2>
               <p>
-                La clase debe permitir que el estudiante participe activamente en su
+                <AnimatedText>La clase debe permitir que el estudiante participe activamente en su
                 proceso. La interacción y el acompañamiento del docente hacen parte de
-                una experiencia que busca conectar el conocimiento con la vida real.
+                una experiencia que busca conectar el conocimiento con la vida real.</AnimatedText>
               </p>
             </div>
             <div className="methodology-card methodology-card--steps">
@@ -140,7 +141,7 @@ function Methodology() {
         <section className="methodology-dark">
           <div className="methodology-container">
             <SectionLabel dark="true">05 · El proceso de aprendizaje</SectionLabel>
-            <h2>Un proceso que avanza de comprender a utilizar.</h2>
+            <h2><AnimatedText>Un proceso que avanza de comprender a utilizar.</AnimatedText></h2>
             <div className="methodology-process">
               {process.map(([number, title, description]) => (
                 <article key={number}>
@@ -157,11 +158,11 @@ function Methodology() {
             <Placeholder />
             <div>
               <SectionLabel>06 · El contexto es importante</SectionLabel>
-              <h2>El idioma cobra sentido cuando aparece fuera del ejercicio.</h2>
+              <h2><AnimatedText>El idioma cobra sentido cuando aparece fuera del ejercicio.</AnimatedText></h2>
               <p>
-                La documentación de Towers señala que el uso de situaciones de la vida
+                <AnimatedText>La documentación de Towers señala que el uso de situaciones de la vida
                 cotidiana como punto de partida permite conectar el idioma con lo que
-                necesitas hacer en el mundo real.
+                necesitas hacer en el mundo real.</AnimatedText>
               </p>
               <div className="methodology-tags">
                 {['Dar una opinión', 'Hacer una solicitud', 'Dar consejo', 'Contar una anécdota', 'Un contexto académico', 'Una situación profesional'].map((tag) => (
@@ -175,8 +176,8 @@ function Methodology() {
         <section className="methodology-light methodology-light--border">
           <div className="methodology-container">
             <SectionLabel>07 · El papel del docente</SectionLabel>
-            <h2>La metodología también depende de quién guía la experiencia.</h2>
-            <p>Un docente Towers orienta, acompaña y genera oportunidades para que el estudiante participe y practique.</p>
+            <h2><AnimatedText>La metodología también depende de quién guía la experiencia.</AnimatedText></h2>
+            <p><AnimatedText>Un docente Towers orienta, acompaña y genera oportunidades para que el estudiante participe y practique.</AnimatedText></p>
             <div className="methodology-grid methodology-grid--three">
               {teachers.map(([title, eyebrow, description]) => (
                 <article className="methodology-card methodology-profile" key={title}>
@@ -193,8 +194,8 @@ function Methodology() {
         <section className="methodology-light">
           <div className="methodology-container">
             <SectionLabel>08 · Modalidades</SectionLabel>
-            <h2>Encuentra una forma de aprender que se adapte a tu contexto.</h2>
-            <p>La metodología se mantiene; cambia el lugar y la manera en que la vives.</p>
+            <h2><AnimatedText>Encuentra una forma de aprender que se adapte a tu contexto.</AnimatedText></h2>
+            <p><AnimatedText>La metodología se mantiene; cambia el lugar y la manera en que la vives.</AnimatedText></p>
             <div className="methodology-grid methodology-grid--three">
               {modalities.map(([title, description]) => (
                 <article className="methodology-card methodology-modality" key={title}>
@@ -211,8 +212,8 @@ function Methodology() {
         <section className="methodology-dark methodology-final">
           <div className="methodology-container">
             <SectionLabel dark="true">09 · El siguiente paso</SectionLabel>
-            <h2>La mejor forma de entender la metodología es vivirla.</h2>
-            <p>Elige tu idioma, conoce tu nivel y empieza a usarlo desde la primera clase.</p>
+            <h2><AnimatedText>La mejor forma de entender la metodología es vivirla.</AnimatedText></h2>
+            <p><AnimatedText>Elige tu idioma, conoce tu nivel y empieza a usarlo desde la primera clase.</AnimatedText></p>
             <div className="methodology-actions">
               <Link className="methodology-button methodology-button--accent" to="/prueba-de-nivel">Encuentra tu programa <span aria-hidden="true">→</span></Link>
               <Link className="methodology-button methodology-button--outline" to="/contacto">Habla con un asesor</Link>

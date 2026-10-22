@@ -1,3 +1,4 @@
+import AnimatedText from '@/components/ui/AnimatedText';
 import { useState } from 'react'
 
 const slides = [
@@ -36,7 +37,7 @@ function Experience() {
           LAS PERSONAS DETRÁS DE TU APRENDIZAJE
         </p>
         <h2 className="mt-4 text-4xl font-semibold leading-[1.05] tracking-[-0.05em] text-[#071026] sm:text-5xl">
-          Conoce quién va a acompañarte en tu aprendizaje
+          <AnimatedText>Conoce quién va a acompañarte en tu aprendizaje</AnimatedText>
         </h2>
 
         <div className="relative mt-8">
@@ -68,7 +69,7 @@ function Experience() {
             <div className="relative flex flex-col justify-center p-7 sm:p-12">
               <span className="absolute right-7 top-6 text-6xl leading-none text-[#E83E33]/30">“</span>
               <blockquote className="max-w-[600px] text-xl font-medium italic leading-[1.35] text-[#8f301d] sm:text-2xl">
-                {currentSlide.quote}
+                <AnimatedText>{currentSlide.quote}</AnimatedText>
               </blockquote>
               <div className="mt-8 border-t border-dashed border-[#b98d82] pt-5">
                 <strong className="block text-sm text-[#8f301d]">{currentSlide.author}</strong>

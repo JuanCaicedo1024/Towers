@@ -1,3 +1,4 @@
+import AnimatedText from '@/components/ui/AnimatedText';
 import { ModalitiesEyebrow } from './ModalitiesShared'
 
 function ModalitiesHeader() {
@@ -13,14 +14,14 @@ function ModalitiesHeader() {
         </ModalitiesEyebrow>
 
         <h1 className="mt-3 max-w-[540px] text-[clamp(2.2rem,2.8vw,3.5rem)] font-bold italic leading-[0.98] tracking-[-0.055em] text-[#171c20]">
-          Una sola experiencia de Towers, en distintas formas.
+          <AnimatedText>Una sola experiencia de Towers, en distintas formas.</AnimatedText>
         </h1>
 
         <p className="mt-5 max-w-[540px] text-[15px] leading-[1.8] text-[#49617d] sm:text-[17px]">
-          Puedes estudiar presencialmente en nuestra sede en Cúcuta,
+          <AnimatedText>Puedes estudiar presencialmente en nuestra sede en Cúcuta,
           online en vivo desde donde estés, o combinando ambas.
           La metodología, los profesores y el enfoque de interacción
-          se mantienen igual.
+          se mantienen igual.</AnimatedText>
         </p>
       </div>
 
@@ -37,9 +38,7 @@ function ModalitiesHeader() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent" />
 
         {/* Nombre de la profesora */}
-        <strong className="absolute bottom-8 left-5 right-5 text-center text-[clamp(1.3rem,2.2vw,2rem)] font-bold italic tracking-[-0.04em] text-white sm:bottom-10">
-          Clases con Laura Martínez
-        </strong>
+        <strong className="absolute bottom-8 left-5 right-5 text-center text-[clamp(1.3rem,2.2vw,2rem)] font-bold italic tracking-[-0.04em] text-white sm:bottom-10"><AnimatedText>Clases con Laura Martínez</AnimatedText></strong>
 
       </div>
     </div>

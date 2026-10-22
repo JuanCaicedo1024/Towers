@@ -1,3 +1,4 @@
+import AnimatedText from '@/components/ui/AnimatedText';
 import { Link } from 'react-router-dom'
 
 // Cambia las rutas de images para actualizar las fotos de cada sede.
@@ -55,7 +56,7 @@ function ModalitiesLocation() {
     <section className="bg-[#fff8f6] text-[#17233a]">
       <div className="mx-auto max-w-[1240px] px-[6%] py-16 lg:py-20">
         <h2 className="mx-auto max-w-[600px] text-center text-3xl font-extrabold italic leading-[1.05] tracking-[-0.045em] text-[#171c20] sm:text-4xl">
-          El idioma no termina cuando termina la clase.
+          <AnimatedText>El idioma no termina cuando termina la clase.</AnimatedText>
         </h2>
 
         <div className="mt-10 grid gap-12 sm:mt-12 sm:gap-16">

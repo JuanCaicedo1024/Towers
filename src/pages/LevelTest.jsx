@@ -1,3 +1,4 @@
+import AnimatedText from '@/components/ui/AnimatedText';
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 
@@ -6,7 +7,7 @@ function LevelTest() {
     <>
       <Navbar />
       <main className="page">
-        <h1>Prueba de nivel</h1>
+        <h1><AnimatedText>Prueba de nivel</AnimatedText></h1>
       </main>
       <Footer />
     </>

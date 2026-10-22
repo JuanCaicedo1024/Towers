@@ -1,3 +1,4 @@
+import AnimatedText from '@/components/ui/AnimatedText';
 import { useEffect, useRef, useState } from 'react'
 
 function Modalities() {
@@ -34,10 +35,10 @@ function Modalities() {
         <div className="mt-7 grid items-center gap-10 border-b border-dashed border-[#d5deea] pb-7 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
           <div className="max-w-[400px]">
             <h2 className="m-0 text-3xl font-semibold leading-[1.05] tracking-[-0.04em] text-[#071026] sm:text-4xl">
-              El idioma no termina cuando termina la clase.
+              <AnimatedText>El idioma no termina cuando termina la clase.</AnimatedText>
             </h2>
             <p className="mt-4 text-base leading-[1.55] text-[#71809a]">
-              Comunidad y actividades reales de interacción, conversación y ocio donde el idioma se practica fuera del salón.
+              <AnimatedText>Comunidad y actividades reales de interacción, conversación y ocio donde el idioma se practica fuera del salón.</AnimatedText>
             </p>
             <button className="mt-6 inline-flex min-w-[270px] items-center justify-between gap-5 rounded-xl bg-[#E83E33] px-6 py-4 text-sm font-semibold text-white shadow-[0_8px_18px_rgb(232_62_51_/_22%)] transition hover:-translate-y-0.5 hover:bg-[#cf3028] hover:shadow-[0_10px_22px_rgb(232_62_51_/_32%)]" type="button">
               Conocer la experiencia Towers

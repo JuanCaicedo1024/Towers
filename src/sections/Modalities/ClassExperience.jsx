@@ -1,3 +1,4 @@
+import AnimatedText from '@/components/ui/AnimatedText';
 import { ArrowRight, BookOpen, ChartNoAxesCombined, MessagesSquare, Mic, Trophy } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
@@ -14,7 +15,7 @@ function ClassExperience() {
     <section className="bg-white text-[#17233a]">
       <div className="mx-auto max-w-[1240px] px-[6%] py-16 lg:py-20">
         <h2 className="text-4xl font-extrabold tracking-[-0.045em] text-[#171c20] sm:text-5xl">
-          Cómo es una clase en Towers
+          <AnimatedText>Cómo es una clase en Towers</AnimatedText>
         </h2>
         <div className="mt-8 grid gap-2 md:grid-cols-5">
           {steps.map(([title, description, Icon], index) => (

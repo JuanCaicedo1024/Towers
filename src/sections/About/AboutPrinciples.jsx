@@ -1,3 +1,4 @@
+import AnimatedText from '@/components/ui/AnimatedText';
 import { Eyebrow, SectionHeading } from './AboutShared'
 
 const principles = [
@@ -15,7 +16,7 @@ function AboutPrinciples() {
       <div className="experience-container">
         <SectionHeading number="06" label="Lo que nos guía" description="valores institucionales adaptados para vivir" />
         <Eyebrow>Nuestros principios</Eyebrow>
-        <h2>Principios que orientan cómo enseñamos y cómo acompañamos.</h2>
+        <h2><AnimatedText>Principios que orientan cómo enseñamos y cómo acompañamos.</AnimatedText></h2>
         <div className="about-principles">
           {principles.map(([number, title, description]) => (
             <article key={number}><strong>{number}</strong><div><h3>{title}</h3><p>{description}</p></div></article>

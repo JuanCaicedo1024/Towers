@@ -1,3 +1,4 @@
+import AnimatedText from '@/components/ui/AnimatedText';
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
 import { useEffect, useRef } from 'react'
@@ -80,7 +81,7 @@ function LanguageSlider() {
               ENCUENTRA LO QUE QUIERES APRENDER
             </p>
             <h2 className="mt-3 text-4xl font-bold italic leading-none tracking-[-0.05em] sm:text-5xl lg:text-6xl">
-              Elige tu idioma
+              <AnimatedText>Elige tu idioma</AnimatedText>
             </h2>
             <p className="mt-5 text-base text-[#405878] sm:text-lg">
               Todos los programas comparten el mismo enfoque de interacción.

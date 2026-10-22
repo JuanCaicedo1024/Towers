@@ -1,3 +1,4 @@
+import AnimatedText from '@/components/ui/AnimatedText';
 import {
   ArrowRight,
   BookOpen,
@@ -133,7 +134,7 @@ function LanguageTemplate() {
         <main className="grid min-h-[60vh] place-items-center px-6 text-center">
           <div>
             <h1 className="text-4xl font-semibold text-[#071026]">
-              Idioma no encontrado
+              <AnimatedText>Idioma no encontrado</AnimatedText>
             </h1>
             <NavLink
               className="mt-6 inline-flex rounded-xl bg-[#e83e33] px-5 py-3 font-semibold text-white"
@@ -161,11 +162,7 @@ function LanguageTemplate() {
                 IDIOMAS
               </p>
               <h1 className="mt-4 text-4xl font-bold italic leading-[1.02] tracking-[-0.05em] sm:text-5xl lg:text-6xl">
-                Aprende {program.name} para
-                <br />
-                usarlo donde realmente
-                <br />
-                importa.
+                <AnimatedText per="line">{`Aprende ${program.name} para\nusarlo donde realmente\nimporta.`}</AnimatedText>
               </h1>
               <p className="mt-6 max-w-[530px] text-base leading-[1.55] text-[#183454] sm:text-lg">
                 {program.intro}
@@ -247,7 +244,7 @@ function LanguageTemplate() {
               LAS PERSONAS DETRÁS DE TU APRENDIZAJE
             </p>
             <h2 className="mt-5 max-w-[1100px] text-3xl font-bold italic leading-[1.02] tracking-[-0.05em] text-[#101820] sm:text-5xl lg:text-6xl">
-              ¿Para qué quieres aprender un idioma?
+              <AnimatedText>¿Para qué quieres aprender un idioma?</AnimatedText>
             </h2>
             <p className="mt-6 max-w-[760px] text-base font-medium leading-7 text-[#294d78] sm:text-lg">
               Estas categorías te ayudan a orientar tu búsqueda.
@@ -288,11 +285,11 @@ function LanguageTemplate() {
         <section className="bg-[#f7f4f3] px-[6%] py-14 lg:px-[3.55%] lg:py-20">
           <div className="mx-auto max-w-[1340px]">
             <h2 className="text-4xl font-bold italic leading-[1.05] tracking-[-0.045em] text-[#101820] sm:text-5xl lg:text-6xl">
-              Así aprendes en Towers
+              <AnimatedText>Así aprendes en Towers</AnimatedText>
             </h2>
             <p className="mt-3 max-w-[760px] text-base leading-6 text-[#183454] sm:text-lg">
-              Interacción, cuatro habilidades, grupos semipersonalizados y
-              aplicación en situaciones cotidianas.
+              <AnimatedText>Interacción, cuatro habilidades, grupos semipersonalizados y
+              aplicación en situaciones cotidianas.</AnimatedText>
             </p>
 
             <div className="mt-8 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-4 lg:grid lg:grid-cols-5 lg:overflow-visible lg:pb-0">
@@ -336,7 +333,7 @@ function LanguageTemplate() {
             MODALIDADES
           </p>
           <h2 className="mt-5 text-4xl font-bold italic leading-[1.05] tracking-[-0.045em] text-[#101820] sm:text-5xl lg:text-6xl">
-            Cómo puedes estudiar
+            <AnimatedText>Cómo puedes estudiar</AnimatedText>
           </h2>
 
           <div className="mt-8 grid gap-5 lg:grid-cols-3">
@@ -394,7 +391,7 @@ function LanguageTemplate() {
               LAS PERSONAS DETRÁS DE TU APRENDIZAJE
             </p>
             <h2 className="mt-5 max-w-[1100px] text-4xl font-bold italic leading-[1.02] tracking-[-0.05em] text-[#101820] sm:text-5xl lg:text-6xl">
-              Conoce quién va a acompañar tu aprendizaje
+              <AnimatedText>Conoce quién va a acompañar tu aprendizaje</AnimatedText>
             </h2>
 
             <div className="mt-10 grid gap-6 md:grid-cols-3">
@@ -458,7 +455,7 @@ function LanguageTemplate() {
                 IDIOMAS
               </p>
               <h2 className="mt-5 text-5xl font-bold italic leading-[1.02] tracking-[-0.05em] text-[#101820] sm:text-6xl">
-                La práctica continúa fuera del salón
+                <AnimatedText>La práctica continúa fuera del salón</AnimatedText>
               </h2>
               <p className="mt-7 max-w-[500px] text-lg leading-7 text-[#294d78]">
                 Club y comunidad, actividades e interacción entre estudiantes.
