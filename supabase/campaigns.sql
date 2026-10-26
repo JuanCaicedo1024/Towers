@@ -1,4 +1,10 @@
--- Ejecutar una vez en el SQL Editor del proyecto Supabase.
+-- MicroLandings Towers. Pegar y ejecutar completo en Supabase > SQL Editor > New query.
+-- El contenido editorial vive en campaigns.content (JSONB), por lo que nuevos campos
+-- visuales no requieren agregar columnas ni alterar la API actual.
+-- Claves usadas por el editor: eyebrow, headline, supporting, image, imageAlt,
+-- imageCaption, level, duration, modality, schedule, benefits[], outcomes[],
+-- methodology, curriculum[{title,description}], faqs[{question,answer}], cta,
+-- destination, destinationUrl, whatsappMessage y ctaHeadline.
 create table if not exists public.campaign_admins (
   user_id uuid primary key references auth.users (id) on delete cascade,
   created_at timestamptz not null default now()
@@ -34,6 +40,11 @@ create table if not exists public.campaigns (
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
+
+-- Asegura los valores por defecto en proyectos donde la tabla ya existía.
+alter table public.campaigns
+  alter column content set default '{}'::jsonb,
+  alter column content set not null;
 
 create index if not exists campaigns_owner_created_idx
   on public.campaigns (owner_id, created_at desc);

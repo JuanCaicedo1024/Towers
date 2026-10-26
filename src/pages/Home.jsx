@@ -6,6 +6,7 @@ import Hero from "../sections/Home/Hero";
 import Languages from "../sections/Home/Languages";
 import Methodology from "../sections/Home/Methodology";
 import Modalities from "../sections/Home/Modalities";
+import BusinessPartners from "../sections/Home/BusinessPartners";
 import Testimonials from "../sections/Home/Testimonials";
 
 function Home() {
@@ -16,11 +17,10 @@ function Home() {
         <Hero />
         <Languages />
         <Methodology />
-        
-        
         <Modalities />
         <Testimonials />
         <Experience />
+        <BusinessPartners />
         <FAQ />
       </main>
       <Footer />

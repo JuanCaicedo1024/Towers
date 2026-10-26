@@ -1,4 +1,5 @@
 import AnimatedText from '@/components/ui/AnimatedText';
+import { useEffect } from "react";
 import {
   ArrowRight,
   BookOpen,
@@ -127,6 +128,10 @@ function LanguageTemplate() {
   const { language } = useParams();
   const program = languagePrograms[language?.toLowerCase()];
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [language]);
+
   if (!program)
     return (
       <>
@@ -154,7 +159,10 @@ function LanguageTemplate() {
   return (
     <>
       <Navbar />
-      <main className="language-template bg-[#f7f4f3] text-[#071026]">
+      <main
+        className="language-template language-template--enter bg-[#f7f4f3] text-[#071026]"
+        key={program.name}
+      >
         <section className="overflow-hidden px-[6%] py-14 lg:px-[10%] lg:py-20">
           <div className="mx-auto grid max-w-[1280px] items-center gap-12 lg:grid-cols-[0.92fr_1.08fr] lg:gap-16">
             <div className="max-w-[590px]">
@@ -270,9 +278,9 @@ function LanguageTemplate() {
                   <span className="relative min-w-0 flex-1 text-base font-medium leading-tight text-[#071026] transition-colors duration-300 group-hover:text-[#e83e33] sm:text-lg lg:text-base xl:text-lg">
                     {label}
                   </span>
-                  <span className="relative grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-[#fff0eb] text-[#8b2b20] transition duration-500 group-hover:translate-x-1 group-hover:bg-[#f13d35] group-hover:text-white">
+                  <span className="relative grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-[#fff0eb] text-[#8b2b20] transition duration-500 group-hover:bg-[#f13d35] group-hover:text-white">
                     <ArrowRight
-                      className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-0.5"
+                      className="h-4 w-4 transition-transform duration-500 group-hover:-rotate-45"
                       strokeWidth={2.2}
                       aria-hidden="true"
                     />
