@@ -1,6 +1,7 @@
 import AnimatedText from '@/components/ui/AnimatedText';
 import { TextEffect } from '../../../components/motion-primitives/text-effect';
 import { ScrollVelocityRow } from '@/components/ui/scroll-based-velocity';
+import { Link } from 'react-router-dom';
 
 function Hero() {
   return (
@@ -30,10 +31,10 @@ function Hero() {
               Encuentra tu programa
               <span aria-hidden="true" className="text-xl leading-none">→</span>
             </button>
-            <button className="inline-flex min-w-[250px] items-center justify-center gap-3 rounded-xl border border-[#9eabb9] bg-[#edf1f5] px-7 py-4 text-sm font-semibold text-[#183454] shadow-sm transition hover:-translate-y-0.5 hover:bg-white hover:shadow-md" type="button">
-              Conoce más
+            <Link className="inline-flex min-w-[250px] items-center justify-center gap-3 rounded-xl border border-[#9eabb9] bg-[#edf1f5] px-7 py-4 text-sm font-semibold text-[#183454] shadow-sm transition hover:-translate-y-0.5 hover:bg-white hover:shadow-md" to="/clase-introductoria">
+              Regístrate para tu clase gratuita
               <span aria-hidden="true" className="grid h-5 w-5 place-items-center rounded-full bg-[#183454] text-sm text-white">+</span>
-            </button>
+            </Link>
           </div>
           <ScrollVelocityRow
             className="mt-5 w-[390px] max-w-full font-mono text-[10px] font-bold uppercase tracking-[0.08em] text-[#C83A2F]"

@@ -15,6 +15,7 @@ import Login from './pages/Login'
 import CampaignBuilder from './pages/CampaignBuilder'
 import CampaignLanding from './pages/CampaignLanding'
 import FreeClass from './pages/FreeClass'
+import FreeClassIntro from './pages/FreeClassIntro'
 import { AuthProvider } from './auth/AuthProvider'
 import RequireAuth from './components/RequireAuth'
 import ScrollReveal from './components/ScrollReveal'
@@ -37,6 +38,7 @@ function App() {
         <Route path="/prueba-de-nivel" element={<LevelTest />} />
         <Route path="/contacto" element={<Contact />} />
         <Route path="/clase-gratis" element={<FreeClass />} />
+        <Route path="/clase-introductoria" element={<FreeClassIntro />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>} />
         <Route path="/campaigns/new" element={<RequireAuth><CampaignBuilder /></RequireAuth>} />
