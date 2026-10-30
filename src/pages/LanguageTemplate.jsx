@@ -29,7 +29,8 @@ const languagePrograms = {
     intro:
       "Programa de Inglés con enfoque de interacción: práctica guiada con profesores y aplicación del idioma en situaciones reales.",
     levels: "Inicial · Básico · Intermedio · Avanzado",
-    image: "/images/Sinfoto.png",
+    image: "/images/PAGINA-WEB-ig.jpg.jpeg",
+    flagImage: "/images/Ingles.png",
   },
   frances: {
     name: "francés",
@@ -37,7 +38,8 @@ const languagePrograms = {
     intro:
       "Aprende francés con práctica guiada, interacción y aplicación en situaciones cotidianas.",
     levels: "Inicial · Básico · Intermedio",
-    image: "/images/Sinfoto.png",
+    image: "/images/PAGINA-WEB-fr.jpg.jpeg",
+    flagImage: "/images/frances.png",
   },
   portugues: {
     name: "portugués",
@@ -45,7 +47,8 @@ const languagePrograms = {
     intro:
       "Comunícate en portugués con confianza a través de práctica guiada y situaciones de la vida real.",
     levels: "Inicial · Básico · Intermedio",
-    image: "/images/Sinfoto.png",
+    image: "/images/PAGINA-WEB-prt.jpg.jpeg",
+    flagImage: "/images/brazil.png",
   },
   aleman: {
     name: "alemán",
@@ -53,7 +56,8 @@ const languagePrograms = {
     intro:
       "Construye una base sólida en alemán con estructura, práctica guiada e interacción.",
     levels: "Inicial · Básico · Intermedio",
-    image: "/images/Sinfoto.png",
+    image: "/images/PAGINA-WEB-al.jpg.jpeg",
+    flagImage: "/images/alemania.png",
   },
   italiano: {
     name: "italiano",
@@ -61,7 +65,8 @@ const languagePrograms = {
     intro:
       "Acércate al italiano a través de la práctica, la interacción y su cultura.",
     levels: "Inicial · Básico",
-    image: "/images/Sinfoto.png",
+    image: "/images/PAGINA-WEB-it.jpg.jpeg",
+    flagImage: "/images/italia.png",
   },
 };
 
@@ -214,24 +219,20 @@ function LanguageTemplate() {
               </div>
             </div>
 
-            <div className="relative min-h-[360px] overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#183454] via-[#315d87] to-[#f13d35] sm:min-h-[470px] lg:min-h-[560px]">
-              <div
-                className="absolute inset-0 opacity-20"
-                style={{
-                  backgroundImage:
-                    "radial-gradient(circle at 20% 20%, white 0 2px, transparent 3px), radial-gradient(circle at 80% 70%, white 0 2px, transparent 3px)",
-                  backgroundSize: "34px 34px, 48px 48px",
-                }}
-                aria-hidden="true"
+            <div className="relative min-h-[360px] overflow-hidden rounded-[2rem] sm:min-h-[470px] lg:min-h-[560px]">
+              <img
+                src={program.image}
+                alt={`Programa de ${program.name}`}
+                className="absolute inset-0 h-full w-full rounded-[2rem] object-cover"
               />
               <div className="absolute bottom-6 right-5 flex flex-row items-center gap-3 rounded-[8px] bg-white px-4 py-3 text-[#101820] shadow-[0_6px_16px_rgb(0_0_0_/_16%)] sm:bottom-8 sm:right-8">
                 <span
                   className="grid h-12 w-12 shrink-0 place-items-center rounded-full border border-[#e6e9ed] bg-[#fff9f7] text-3xl leading-none"
                   aria-label={`Bandera de ${program.name}`}
                 >
-                  {program.image ? (
+                  {program.flagImage ? (
                     <img
-                      src={program.image}
+                      src={program.flagImage}
                       alt={`Bandera de ${program.name}`}
                       className="h-full w-full object-cover"
                     />
