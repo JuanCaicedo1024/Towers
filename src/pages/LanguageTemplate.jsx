@@ -21,6 +21,8 @@ import { NavLink, useParams } from "react-router-dom";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import FAQ from "../sections/Home/FAQ";
+import TeacherCard from "../components/TeacherCard";
+import { getTeachersByLanguage } from "../data/teachers";
 
 const languagePrograms = {
   ingles: {
@@ -111,24 +113,6 @@ const modalities = [
   ["Online", Monitor],
   ["Híbrida", Building2],
 ];
-const teachers = [
-  [
-    "Salman Khan",
-    "Founder and CEO of Khan Academy",
-    "Salman Amin Khan, referente internacional en educación y aprendizaje accesible.",
-  ],
-  [
-    "Carlos Hernández",
-    "Docente de Inglés",
-    "Enseñanza de inglés para niños, adolescentes y adultos de diferentes niveles.",
-  ],
-  [
-    "Ricardo Suarez Blanco",
-    "Docente de Inglés",
-    "Docente de lenguas extranjeras enfocado en desarrollar habilidades comunicativas.",
-  ],
-];
-
 function LanguageTemplate() {
   const { language } = useParams();
   const program = languagePrograms[language?.toLowerCase()];
@@ -160,6 +144,7 @@ function LanguageTemplate() {
 
   const whatsappMessage = `Hola, quiero información sobre el curso de ${program.name}.`;
   const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(whatsappMessage)}`;
+  const languageTeachers = getTeachersByLanguage(language?.toLowerCase());
 
   return (
     <>
@@ -403,57 +388,12 @@ function LanguageTemplate() {
               <AnimatedText>Conoce quién va a acompañar tu aprendizaje</AnimatedText>
             </h2>
 
-            <div className="mt-10 grid gap-6 md:grid-cols-3">
-              {teachers.map(([name, role, description]) => (
-                <article
-                  className="group relative overflow-hidden rounded-[1.5rem] border border-[#d9dfe8] bg-white shadow-[0_10px_24px_rgb(23_35_58_/_10%)] transition duration-500 hover:-translate-y-2 hover:shadow-[0_20px_34px_rgb(23_35_58_/_18%)]"
-                  key={name}
-                >
-                  <div className="relative flex h-[220px] items-end overflow-hidden bg-gradient-to-br from-[#183454] via-[#315d87] to-[#f13d35] p-6">
-                    <div
-                      className="absolute -right-8 -top-10 h-44 w-44 rounded-full border-[24px] border-white/15 transition duration-500 group-hover:scale-125"
-                      aria-hidden="true"
-                    />
-                    <div
-                      className="absolute -bottom-20 -left-10 h-48 w-48 rounded-full border-[26px] border-white/10 transition duration-500 group-hover:scale-110"
-                      aria-hidden="true"
-                    />
-                    <div className="relative flex h-24 w-24 items-center justify-center rounded-full bg-white/15 text-4xl font-bold text-white backdrop-blur-sm">
-                      {name.charAt(0)}
-                    </div>
-                    <span
-                      className="absolute bottom-4 right-4 grid h-14 w-14 place-items-center rounded-full border-4 border-white bg-white text-3xl leading-none shadow-md"
-                      aria-label={`Bandera de ${program.name}`}
-                    >
-                      {program.flag}
-                    </span>
-                    <span className="absolute left-5 top-5 rounded-full bg-white/90 px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.12em] text-[#e83e33] backdrop-blur-sm">
-                      Towers team
-                    </span>
-                  </div>
-                  <div className="relative p-6">
-                    <h3 className="text-2xl font-extrabold tracking-[-0.04em] text-[#071026]">
-                      {name}
-                    </h3>
-                    <p className="mt-1 text-sm font-semibold text-[#e83e33]">
-                      {role}
-                    </p>
-                    <p className="mt-4 min-h-[72px] text-base leading-6 text-[#4b5563]">
-                      {description}
-                    </p>
-                    <NavLink
-                      className="language-action mt-5 flex items-center justify-between rounded-xl bg-[#08244a] px-5 py-3 text-base font-bold text-white"
-                      to="/contacto"
-                    >
-                      <span>Conocer perfil</span>
-                      <ArrowRight
-                        className="h-5 w-5 transition-transform group-hover:translate-x-1"
-                        aria-hidden="true"
-                      />
-                    </NavLink>
-                  </div>
-                </article>
-              ))}
+            <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {languageTeachers.length > 0 ? languageTeachers.map((teacher) => (
+                <TeacherCard key={teacher.id} teacher={teacher} />
+              )) : (
+                <p className="text-base leading-7 text-[#294d78]">Pronto compartiremos los perfiles de docentes de {program.name}.</p>
+              )}
             </div>
           </div>
         </section>

@@ -16,6 +16,7 @@ import CampaignBuilder from './pages/CampaignBuilder'
 import CampaignLanding from './pages/CampaignLanding'
 import FreeClass from './pages/FreeClass'
 import FreeClassIntro from './pages/FreeClassIntro'
+import TeacherTemplate from './pages/TeacherTemplate'
 import { AuthProvider } from './auth/AuthProvider'
 import RequireAuth from './components/RequireAuth'
 import ScrollReveal from './components/ScrollReveal'
@@ -29,6 +30,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/idiomas" element={<Languages />} />
         <Route path="/idiomas/:language" element={<LanguageTemplate />} />
+        <Route path="/docentes/:id" element={<TeacherTemplate />} />
         <Route path="/modalidades" element={<Modalities />} />
         <Route path="/metodologia" element={<Methodology />} />
         <Route path="/experiencia-towers" element={<Experience />} />
