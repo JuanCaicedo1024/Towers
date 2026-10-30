@@ -36,7 +36,7 @@ const cities = [
 
 function LocationCard({ address, images, city }) {
   return (
-    <article className="group min-w-0 transition-transform duration-300 ease-out hover:-translate-y-1 motion-reduce:transform-none">
+    <article className="modalities-location-card group min-w-0 text-center transition-transform duration-300 ease-out hover:-translate-y-1 motion-reduce:transform-none">
       <div className="text-center">
         <p className="mt-0.5 text-xs font-semibold text-[#294d78]">
           Centro Activo de Idiomas TOWERS
@@ -71,7 +71,7 @@ function LocationCard({ address, images, city }) {
 
 function ModalitiesLocation() {
   return (
-    <section className="bg-[#fff8f6] text-[#17233a]">
+    <section className="modalities-location bg-white text-black">
       <div className="mx-auto max-w-[1240px] px-[6%] py-16 lg:py-20">
         <h2 className="mx-auto max-w-[600px] text-center text-3xl font-extrabold italic leading-[1.05] tracking-[-0.045em] text-[#171c20] sm:text-4xl">
           <AnimatedText>El idioma no termina cuando termina la clase.</AnimatedText>
