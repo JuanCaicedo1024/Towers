@@ -1,5 +1,5 @@
 import AnimatedText from '@/components/ui/AnimatedText';
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const slides = [
   {
@@ -25,6 +25,14 @@ const slides = [
 function Experience() {
   const [activeSlide, setActiveSlide] = useState(0)
   const currentSlide = slides[activeSlide]
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveSlide((current) => (current + 1) % slides.length)
+    }, 5000)
+
+    return () => window.clearInterval(timer)
+  }, [])
 
   const changeSlide = (direction) => {
     setActiveSlide((current) => (current + direction + slides.length) % slides.length)
@@ -58,15 +66,19 @@ function Experience() {
             ›
           </button>
 
-          <div className="grid overflow-hidden rounded-lg border border-[#d5a99d] bg-[#fff0ec] shadow-[0_8px_20px_rgb(23_35_58_/_12%)] md:grid-cols-[0.8fr_1.2fr]">
+          <div
+            className="group grid overflow-hidden rounded-[1.5rem] border border-[#d5a99d] bg-[#fff0ec] shadow-[0_12px_28px_rgb(23_35_58_/_14%)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgb(232_62_51_/_18%)] md:grid-cols-[0.8fr_1.2fr]"
+            aria-live="polite"
+          >
             <div className="h-[260px] overflow-hidden md:h-[350px]">
               <img
-                className="h-full w-full object-cover object-center transition duration-500"
+                className="h-full w-full object-cover object-center transition duration-700 group-hover:scale-105"
                 src={currentSlide.image}
                 alt={currentSlide.author}
               />
             </div>
-            <div className="relative flex flex-col justify-center p-7 sm:p-12">
+            <div className="relative flex flex-col justify-center overflow-hidden p-7 sm:p-12">
+              <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-[#f13d35] via-[#e9a614] to-[#f13d35]" />
               <span className="absolute right-7 top-6 text-6xl leading-none text-[#E83E33]/30">“</span>
               <blockquote className="max-w-[600px] text-xl font-medium italic leading-[1.35] text-[#8f301d] sm:text-2xl">
                 <AnimatedText>{currentSlide.quote}</AnimatedText>
@@ -98,12 +110,12 @@ function Experience() {
           <div className="mt-7 grid grid-cols-3 gap-3 sm:gap-6">
             {slides.map((slide, index) => (
               <button
-                className={`h-[125px] overflow-hidden rounded-[1.5rem] border-4 bg-[#f4f7fb] transition duration-300 sm:h-[190px] ${
+                className={`h-[125px] overflow-hidden rounded-[1.5rem] border-4 bg-[#f4f7fb] transition duration-500 hover:-translate-y-1 hover:shadow-[0_10px_22px_rgb(232_62_51_/_18%)] sm:h-[190px] ${
                   index === activeSlide
-                    ? 'border-[#E83E33] shadow-[0_8px_18px_rgb(232_62_51_/_20%)]'
+                    ? 'scale-[1.03] border-[#E83E33] shadow-[0_8px_18px_rgb(232_62_51_/_20%)]'
                     : 'border-white hover:border-[#d5a99d]'
                 }`}
-                key={slide.image}
+                key={slide.author}
                 type="button"
                 aria-label={`Seleccionar ${slide.author}`}
                 onClick={() => setActiveSlide(index)}
