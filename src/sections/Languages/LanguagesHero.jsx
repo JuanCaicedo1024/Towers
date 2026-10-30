@@ -30,8 +30,8 @@ function LanguagesHero() {
 
           <div className="mt-6 grid gap-2 sm:grid-cols-3">
             {highlights.map(({ label, icon: Icon }) => (
-              <div className="flex min-h-[62px] items-center gap-2 rounded-xl bg-white px-3 py-2 shadow-[0_5px_15px_rgb(23_35_58_/_8%)]" key={label}>
-                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-[#fff0eb] text-[#8c281f]">
+              <div className="group flex min-h-[62px] items-center gap-2 rounded-xl bg-white px-3 py-2 shadow-[0_5px_15px_rgb(23_35_58_/_8%)] transition duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_12px_22px_rgb(23_35_58_/_14%)] motion-reduce:transform-none" key={label}>
+                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-[#fff0eb] text-[#8c281f] transition duration-300 group-hover:rotate-6 group-hover:scale-110">
                   <Icon className="h-5 w-5" strokeWidth={1.8} aria-hidden="true" />
                 </span>
                 <span className="text-[11px] leading-[1.25] text-[#71809a]">{label}</span>

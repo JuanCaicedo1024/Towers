@@ -54,22 +54,24 @@ function LanguageGoals() {
         <div className="mt-12 grid gap-5 md:grid-cols-2 lg:mt-14 lg:grid-cols-3">
           {goals.map(({ label, icon: Icon }, index) => {
             const isSelected = selectedGoal === label
+            const isFeatured = index === 0
 
             return (
               <button
-                className={`language-goal-card group flex min-h-[132px] items-center gap-5 rounded-[1.7rem] border-2 bg-white p-5 text-left shadow-[0_8px_20px_rgb(23_35_58_/_8%)] transition duration-300 hover:-translate-y-2 hover:border-[#e83e33] hover:shadow-[0_16px_28px_rgb(23_35_58_/_14%)] ${isVisible ? 'language-goal-card--visible' : ''} ${isSelected ? 'border-[#e83e33] ring-4 ring-[#fce0da]' : 'border-[#ead3cb]'}`}
+                aria-pressed={isSelected}
+                className={`language-goal-card group flex min-h-[132px] items-center gap-5 rounded-[1.7rem] border-2 p-5 text-left shadow-[0_8px_20px_rgb(23_35_58_/_8%)] transition duration-300 hover:-translate-y-2 hover:scale-[1.02] hover:border-[#e83e33] hover:shadow-[0_16px_28px_rgb(23_35_58_/_14%)] active:scale-[0.99] motion-reduce:transform-none ${isVisible ? 'language-goal-card--visible' : ''} ${isSelected ? 'border-[#e83e33] ring-4 ring-[#fce0da]' : isFeatured ? 'border-[#e83e33] bg-[#fff4ef]' : 'border-[#ead3cb] bg-white'}`}
                 key={label}
                 style={{ '--goal-delay': `${index * 90}ms` }}
                 type="button"
                 onClick={() => setSelectedGoal(isSelected ? null : label)}
               >
-                <span className="grid h-[76px] w-[76px] shrink-0 place-items-center rounded-[1.35rem] bg-[#fff0eb] text-[#8b2b20] transition duration-300 group-hover:rotate-6 group-hover:scale-110">
+                <span className={`grid h-[76px] w-[76px] shrink-0 place-items-center rounded-[1.35rem] text-[#8b2b20] transition duration-300 group-hover:rotate-6 group-hover:scale-110 ${isFeatured ? 'bg-[#fce0da]' : 'bg-[#fff0eb]'}`}>
                   <Icon className="h-10 w-10" strokeWidth={1.8} aria-hidden="true" />
                 </span>
-                <span className="min-w-0 flex-1 text-xl font-bold leading-tight sm:text-2xl">
+                <span className={`min-w-0 flex-1 text-base font-bold leading-tight sm:text-lg ${isFeatured ? 'text-[#8b2b20]' : 'text-[#071026]'}`}>
                   {label}
                 </span>
-                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-[#fff0eb] text-[#8b2b20] transition duration-300 group-hover:translate-x-1 group-hover:bg-[#e83e33] group-hover:text-white">
+                <span className="ml-auto grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-[#fff0eb] text-[#8b2b20] transition duration-300 group-hover:translate-x-1 group-hover:bg-[#e83e33] group-hover:text-white">
                   {isSelected ? <Sparkles className="h-5 w-5" aria-hidden="true" /> : <ArrowRight className="h-5 w-5" aria-hidden="true" />}
                 </span>
               </button>

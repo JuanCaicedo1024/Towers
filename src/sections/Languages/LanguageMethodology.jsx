@@ -85,14 +85,14 @@ function LanguageMethodology() {
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {steps.map(({ title, description, icon: Icon }, index) => (
             <article
-              className={`language-method-step ${isVisible ? 'language-method-step--visible' : ''}`}
+              className={`language-method-step group flex flex-col items-center text-center ${isVisible ? 'language-method-step--visible' : ''}`}
               key={title}
               style={{ '--method-delay': `${index * 100}ms` }}
             >
               <span className="text-xs font-bold text-[#98a1ad]">
                 {String(index + 1).padStart(2, '0')}
               </span>
-              <Icon className="mt-6 h-20 w-20 text-[#f5364b] transition duration-500 group-hover:scale-110" strokeWidth={1.4} aria-hidden="true" />
+              <Icon className="mx-auto mt-6 h-20 w-20 text-[#f5364b] transition duration-500 group-hover:scale-110" strokeWidth={1.4} aria-hidden="true" />
               <h3 className="mt-6 text-xl font-bold text-[#071026]">{title}</h3>
               <p className="mt-2 text-sm leading-[1.35] text-[#526174]">{description}</p>
             </article>

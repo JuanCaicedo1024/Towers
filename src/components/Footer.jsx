@@ -1,4 +1,3 @@
-import AnimatedText from '@/components/ui/AnimatedText';
 import { Mail, MapPin, Phone } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
@@ -56,7 +55,7 @@ function Footer() {
           </div>
 
           <div>
-            <h2 className="m-0 text-3xl font-semibold text-[#1d3f29]"><AnimatedText>Enlaces Rápidos</AnimatedText></h2>
+            <h2 className="m-0 text-3xl font-semibold text-[#1d3f29]">Enlaces Rápidos</h2>
             <nav className="mt-8 grid gap-5" aria-label="Enlaces rápidos">
               {quickLinks.map(([label, path]) => (
                 <Link
@@ -72,7 +71,9 @@ function Footer() {
           </div>
 
           <div>
-            <h2 className="m-0 max-w-[220px] text-3xl font-semibold leading-[1.05] text-[#1d3f29]"><AnimatedText per="line">{"Necesitas\nAyuda?"}</AnimatedText></h2>
+            <h2 className="m-0 max-w-[220px] text-3xl font-semibold leading-[1.05] text-[#1d3f29]">
+              Necesitas<br />Ayuda?
+            </h2>
             <div className="mt-8 grid gap-7">
               <ContactDetail icon={Phone} lines={['+01 234 567 890', '+09 999 999 999']} />
               <ContactDetail icon={Mail} lines={['mailinfo000@tours.com', 'support24@tours.com']} />
@@ -85,10 +86,7 @@ function Footer() {
       <div className="bg-[linear-gradient(110deg,#08274f,#3e203d_48%,#b52322)] px-[6%] py-6 text-white lg:px-[6.5%]">
         <div className="mx-auto flex max-w-[1440px] flex-col justify-between gap-5 sm:flex-row sm:items-center">
           <p className="m-0 text-lg">Copyright 2026&nbsp; . Appendix All Rights Reserved.</p>
-          <div className="flex flex-wrap items-center gap-5">
-            <span className="text-lg">Aceptamos</span>
-            <img className="h-auto w-[310px] max-w-full object-contain" src="/images/metodosPago.png" alt="Métodos de pago aceptados" />
-          </div>
+          <span className="text-lg">Aceptamos</span>
         </div>
       </div>
     </footer>
