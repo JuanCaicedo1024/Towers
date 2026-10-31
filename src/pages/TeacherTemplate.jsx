@@ -1,43 +1,10 @@
 import AnimatedText from '@/components/ui/AnimatedText'
-import { ArrowRight, AudioLines, BookOpen, FileText, Globe2, MessageCircle, Star } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { useEffect } from 'react'
 import { NavLink, useParams } from 'react-router-dom'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 import { getTeacherById } from '../data/teachers'
-
-const teachingSkills = [
-  {
-    title: 'Conversación',
-    description: 'Desarrollo progresivo de la capacidad de expresarse y participar en diferentes situaciones.',
-    Icon: MessageCircle,
-  },
-  {
-    title: 'Comprensión auditiva',
-    description: 'Trabajo orientado a comprender mensajes, conversaciones e información oral.',
-    Icon: Star,
-  },
-  {
-    title: 'Comunicación profesional',
-    description: 'Práctica del idioma aplicada a situaciones relacionadas con contextos laborales.',
-    Icon: BookOpen,
-  },
-  {
-    title: 'Pronunciación',
-    description: 'Acompañamiento para mejorar claridad, comprensión y seguridad al expresarse.',
-    Icon: AudioLines,
-  },
-  {
-    title: 'Vocabulario en contexto',
-    description: 'Aprender vocabulario relacionado con situaciones y objetivos concretos.',
-    Icon: FileText,
-  },
-  {
-    title: 'Confianza al hablar',
-    description: 'Generar más oportunidades de participación y práctica durante el proceso.',
-    Icon: Globe2,
-  },
-]
 
 function TeacherTemplate() {
   const { id } = useParams()
@@ -74,7 +41,7 @@ function TeacherTemplate() {
               </h1>
               <p className="teacher-profile-hero__details mt-2 text-sm font-bold text-[#f13d35]">
                 <AnimatedText delay={0.15}>
-                  {`Docente de ${teacher.languageName} · ${teacher.location} · ${teacher.modality.join(' · ')}`}
+                  {[teacher.role, teacher.specialty, teacher.location, ...(teacher.modality ?? [])].filter(Boolean).join(' · ')}
                 </AnimatedText>
               </p>
               <p className="mt-5 max-w-[590px] text-base leading-[1.6] text-black sm:text-lg">
@@ -102,12 +69,11 @@ function TeacherTemplate() {
               <h2 className="mt-1 max-w-[700px] text-4xl font-extrabold italic leading-[1.02] tracking-[-0.05em] text-black sm:text-5xl lg:text-6xl">
                 <AnimatedText per="line">Enseñar un idioma también significa crear espacios para utilizarlo.</AnimatedText>
               </h2>
-              <p className="mt-4 text-base leading-7 text-black sm:text-lg">
-                {teacher.biography}
-              </p>
-              <p className="mt-2 text-base leading-7 text-black sm:text-lg">
-                En sus clases, la participación tiene un papel central: preguntar, escuchar, responder y volver a intentar forman parte natural del aprendizaje.
-              </p>
+              <div className="mt-4 space-y-4 text-base leading-7 text-black sm:text-lg">
+                {(teacher.extendedBiography ?? [teacher.biography]).map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
               <NavLink
                 className="language-action mt-5 inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-xl bg-[#f13d35] px-6 py-4 text-base font-bold text-white shadow-[0_8px_18px_rgb(241_61_53_/_22%)] sm:w-auto"
                 to="/experiencia-towers"
@@ -132,52 +98,76 @@ function TeacherTemplate() {
         <section className="bg-white px-[6%] py-14 lg:px-[10%] lg:py-20">
           <div className="mx-auto max-w-[920px]">
             <p className="text-center font-mono text-xs font-extrabold uppercase tracking-[0.12em] text-[#f13d35]">
-              FORMACIÓN
+              FORMACIÓN Y CERTIFICACIONES
             </p>
             <h2 className="mt-2 text-center text-4xl font-extrabold leading-[1.05] tracking-[-0.045em] text-black sm:text-5xl">
-              Preparación académica para enseñar.
+              Preparación académica y profesional.
             </h2>
-            <ol className="mx-auto mt-12 max-w-[760px] space-y-10 border-l-2 border-[#d1d5db] pl-7 text-left sm:pl-10">
-              {teacher.certifications.map((certification, index) => (
-                <li className="relative" key={certification}>
-                  <span
-                    className="absolute -left-[2.18rem] top-1 h-4 w-4 rounded-full border-[3px] border-[#294d78] bg-white sm:-left-[2.93rem]"
-                    aria-hidden="true"
-                  />
-                  <p className="font-mono text-sm font-extrabold text-[#f13d35]">
-                    {String(index + 1).padStart(2, '0')}
-                  </p>
-                  <p className="mt-2 text-lg leading-7 text-black sm:text-xl">
-                    {certification}
-                  </p>
-                </li>
-              ))}
-            </ol>
+            <div className="mx-auto mt-10 grid max-w-[1000px] gap-10 md:grid-cols-2">
+              <div>
+                <h3 className="text-xl font-bold text-[#17233a]">Formación académica</h3>
+                <ul className="mt-4 space-y-3">
+                  {teacher.education.map((item) => (
+                    <li className="border-l-2 border-[#294d78] pl-4 text-base leading-7 text-black" key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+              {teacher.certifications.length > 0 && (
+                <div>
+                  <h3 className="text-xl font-bold text-[#17233a]">Certificaciones y cursos</h3>
+                  <ul className="mt-4 space-y-3">
+                    {teacher.certifications.map((item) => (
+                      <li className="border-l-2 border-[#f13d35] pl-4 text-base leading-7 text-black" key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+            {teacher.networks.length > 0 && (
+              <div className="mx-auto mt-10 max-w-[1000px]">
+                <h3 className="text-xl font-bold text-[#17233a]">Redes profesionales</h3>
+                <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-2">
+                  {teacher.networks.map(({ label, value, url }) => (
+                    <li key={`${label}-${value}`}>
+                      {url ? (
+                        <a className="font-semibold text-[#294d78] underline" href={url} target="_blank" rel="noreferrer">
+                          {label}: {value}
+                        </a>
+                      ) : (
+                        <span className="text-[#294d78]">{label}: {value}</span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         </section>
 
         <section className="bg-[#f7f7f7] px-[6%] py-14 lg:px-[8%] lg:py-20">
           <div className="mx-auto max-w-[1440px]">
-            
+            <p className="text-center font-mono text-xs font-extrabold uppercase tracking-[0.12em] text-[#f13d35]">
+              TRAYECTORIA
+            </p>
+            <h2 className="mx-auto mt-2 max-w-[850px] text-center text-3xl font-extrabold italic leading-[1.02] tracking-[-0.05em] text-black sm:text-4xl lg:text-5xl">
+              Experiencia profesional y docente.
+            </h2>
             <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-              {teachingSkills.map(({ title, description, Icon }, index) => (
+              {teacher.experience.map((item, index) => (
                 <article
                   className="teacher-skill-card rounded-2xl bg-white p-6 shadow-[0_8px_20px_rgb(0_0_0_/_7%)]"
-                  key={title}
+                  key={`${item.title}-${item.organization}-${item.period}`}
                   style={{ animationDelay: `${index * 70}ms` }}
                 >
                   <div className="flex items-start justify-between gap-4">
                     <span className="font-mono text-xl font-extrabold text-[#9ca3af]">
                       {String(index + 1).padStart(2, '0')}
                     </span>
-                    <Icon className="h-8 w-8 text-[#f13d35]" aria-hidden="true" />
+                    {item.period && <span className="font-mono text-xs font-bold uppercase text-[#f13d35]">{item.period}</span>}
                   </div>
-                  <h3 className="mt-5 text-xl font-semibold uppercase tracking-[-0.035em] text-black">
-                    {title}
-                  </h3>
-                  <p className="mt-3 text-base leading-6 text-black">
-                    {description}
-                  </p>
+                  <h3 className="mt-5 text-xl font-semibold tracking-[-0.035em] text-black">{item.title}</h3>
+                  <p className="mt-1 text-sm font-semibold text-[#294d78]">{item.organization}</p>
+                  <p className="mt-3 text-base leading-6 text-black">{item.description}</p>
                 </article>
               ))}
             </div>
