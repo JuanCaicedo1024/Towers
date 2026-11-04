@@ -54,9 +54,9 @@ function LanguageMethodology() {
         aria-hidden="true"
       />
       <div
-        className="absolute inset-0 opacity-20"
+        className="absolute inset-0 opacity-400"
         style={{
-          backgroundImage: "url('/images/Sinfoto.png')",
+          backgroundImage: "url('/images/Towers_bg.jpg')",
           backgroundPosition: 'center',
           backgroundSize: 'cover',
           mixBlendMode: 'screen',

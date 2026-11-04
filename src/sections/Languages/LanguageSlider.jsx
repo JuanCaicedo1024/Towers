@@ -7,37 +7,37 @@ const languageCards = [
   {
     name: 'Inglés',
     slug: 'ingles',
-    image: '/images/Sinfoto.png',
+    backgroundImage: '/images/Ingles_bg.jpg',
+    flag: '/images/Ingles.png',
     description: 'Aprende a comunicarte con seguridad en situaciones reales.',
-    flag: '🇬🇧',
   },
   {
     name: 'Francés',
     slug: 'frances',
-    image: '/images/Sinfoto.png',
+    backgroundImage: '/images/Frances_bg.jpg',
+    flag: '/images/frances.png',
     description: 'Descubre el francés desde la conversación y el uso cotidiano.',
-    flag: '🇫🇷',
   },
   {
     name: 'Portugués',
     slug: 'portugues',
-    image: '/images/Sinfoto.png',
+    backgroundImage: '/images/Brazil_bg.jpg',
+    flag: '/images/brazil.png',
     description: 'Fortalece tu comprensión y conversación de forma práctica.',
-    flag: '🇧🇷',
   },
   {
     name: 'Alemán',
     slug: 'aleman',
-    image: '/images/Sinfoto.png',
+    backgroundImage: '/images/Alemania_bg.jpg',
+    flag: '/images/alemania.png',
     description: 'Construye una base sólida con práctica guiada.',
-    flag: '🇩🇪',
   },
   {
     name: 'Italiano',
     slug: 'italiano',
-    image: '/images/Sinfoto.png',
+    backgroundImage: '/images/Italia_bg.jpg',
+    flag: '/images/italia.png',
     description: 'Aprende italiano conectando idioma, cultura y práctica.',
-    flag: '🇮🇹',
   },
 ]
 
@@ -121,12 +121,21 @@ function LanguageSlider() {
               key={language.slug}
             >
               <div className="relative h-[235px] overflow-visible rounded-t-2xl bg-[#eef2f5]">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgb(255_255_255_/_85%)_0_2px,transparent_2px_100%)] bg-[length:22px_22px] transition-transform duration-500 group-hover:scale-110" aria-hidden="true" />
+                <img
+                  className="absolute inset-0 h-full w-full rounded-t-2xl object-cover transition-transform duration-500 group-hover:scale-105"
+                  src={language.backgroundImage}
+                  alt=""
+                  aria-hidden="true"
+                />
+                <div
+                  className="absolute inset-0 rounded-t-2xl bg-gradient-to-t from-[#071026]/35 via-transparent to-white/10"
+                  aria-hidden="true"
+                />
                 <span className="absolute bottom-[-28px] left-5 z-20 grid h-20 w-20 place-items-center overflow-hidden rounded-full border-4 border-white bg-white p-2 shadow-[0_5px_12px_rgb(23_35_58_/_20%)] transition duration-300 group-hover:rotate-3 group-hover:scale-110">
                   <img
                     className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-110"
-                    src={language.image}
-                    alt={`Logo del idioma ${language.name}`}
+                    src={language.flag}
+                    alt={`Bandera de ${language.name}`}
                   />
                 </span>
               </div>
