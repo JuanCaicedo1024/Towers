@@ -36,9 +36,9 @@ function Footer() {
               />
             </div>
             <p className="mt-9 max-w-[440px] text-lg leading-[1.65]">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
-              ultrices enim est, a volutpat libero tincidunt sit amet. Etiam
-              feugiat lobortis sollicitudin.
+              Centro educativo y cultural dedicado a la enseñanza de idiomas
+              como inglés, francés, alemán y portugués, mediante experiencias
+              de aprendizaje interactivas y personalizadas.
             </p>
             <div className="mt-7 flex gap-3">
               {socialLinks.map(({ label, href, Icon }) => (
@@ -73,13 +73,36 @@ function Footer() {
           </div>
 
           <div>
-            <h2 className="m-0 max-w-[220px] text-3xl font-semibold leading-[1.05] text-[#1d3f29]">
-              Necesitas<br />Ayuda?
+            <h2 className="m-0 text-3xl font-semibold leading-[1.05] text-[#1d3f29]">
+              Contáctanos
             </h2>
             <div className="mt-8 grid gap-7">
-              <ContactDetail icon={Phone} lines={['+01 234 567 890', '+09 999 999 999']} />
-              <ContactDetail icon={Mail} lines={['mailinfo000@tours.com', 'support24@tours.com']} />
-              <ContactDetail icon={MapPin} lines={['789 Inner Lane, Holy park,', 'California, USA']} />
+              <ContactDetail
+                icon={Phone}
+                title="Teléfono"
+                lines={[{ value: '+57 301 349 0020', href: 'tel:+573013490020' }]}
+              />
+              <ContactDetail
+                icon={Mail}
+                title="Correo"
+                lines={[
+                  { value: 'info@towers.edu.co', href: 'mailto:info@towers.edu.co' },
+                  {
+                    label: 'Atención académica:',
+                    value: 'academico@towers.edu.co',
+                    href: 'mailto:academico@towers.edu.co',
+                  },
+                ]}
+              />
+              <ContactDetail
+                icon={MapPin}
+                title="Nuestras sedes"
+                lines={[
+                  { value: 'Cúcuta – La Playa' },
+                  { value: 'Bogotá – Usaquén' },
+                  { value: 'Bogotá – Kennedy' },
+                ]}
+              />
             </div>
           </div>
         </div>
@@ -95,15 +118,21 @@ function Footer() {
   )
 }
 
-function ContactDetail({ icon: Icon, lines }) {
+function ContactDetail({ icon: Icon, title, lines }) {
   return (
     <div className="flex items-start gap-5">
       <span className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-[#c4cedb] text-[#173253]">
         <Icon size={24} strokeWidth={2} />
       </span>
-      <div className="grid gap-2 pt-1 text-lg leading-[1.35]">
-        {lines.map((line) => (
-          <span key={line}>{line}</span>
+      <div className="grid gap-2 pt-1 text-sm leading-[1.4]">
+        <h3 className="m-0 font-semibold text-[#1d3f29]">{title}</h3>
+        {lines.map(({ label, value, href }) => (
+          <span key={value}>
+            {label && `${label} `}
+            {href ? (
+              <a className="hover:text-[#E83E33]" href={href}>{value}</a>
+            ) : value}
+          </span>
         ))}
       </div>
     </div>
