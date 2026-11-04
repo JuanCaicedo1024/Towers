@@ -1,4 +1,5 @@
 import { Mail, MapPin, Phone } from 'lucide-react'
+import { IconBrandFacebook, IconBrandInstagram, IconBrandTiktok } from '@tabler/icons-react'
 import { Link } from 'react-router-dom'
 
 const quickLinks = [
@@ -11,10 +12,9 @@ const quickLinks = [
 ]
 
 const socialLinks = [
-  { label: 'Facebook', href: '#facebook', mark: 'f' },
-  { label: 'LinkedIn', href: '#linkedin', mark: 'in' },
-  { label: 'WhatsApp', href: '#whatsapp', mark: '◔' },
-  { label: 'Instagram', href: '#instagram', mark: '◎' },
+  { label: 'Facebook', href: 'https://www.facebook.com/towersidiomas', Icon: IconBrandFacebook },
+  { label: 'Instagram', href: 'https://www.instagram.com/towersidiomas/', Icon: IconBrandInstagram },
+  { label: 'TikTok', href: 'https://www.tiktok.com/@towersidiomas', Icon: IconBrandTiktok },
 ]
 
 function Footer() {
@@ -41,14 +41,16 @@ function Footer() {
               feugiat lobortis sollicitudin.
             </p>
             <div className="mt-7 flex gap-3">
-              {socialLinks.map(({ label, href, mark }) => (
+              {socialLinks.map(({ label, href, Icon }) => (
                 <a
                   className="grid h-11 w-11 place-items-center rounded-full bg-[#c4cedb] text-[#173253] transition hover:-translate-y-1 hover:bg-[#E83E33] hover:text-white"
                   href={href}
                   key={label}
                   aria-label={label}
+                  target="_blank"
+                  rel="noreferrer"
                 >
-                  <span className="font-bold">{mark}</span>
+                  <Icon size={22} stroke={2} aria-hidden="true" />
                 </a>
               ))}
             </div>

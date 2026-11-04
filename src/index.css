@@ -2214,29 +2214,38 @@ html,
   color: #17233a;
 }
 
-.about-page :is(.experience-dark, .experience-light, .modalities-location) {
+.about-page :is(.experience-dark, .experience-light),
+.modalities-location {
   background: #fff;
   color: #000;
 }
 
-.about-page :is(.experience-dark, .experience-light, .modalities-location) :is(h1, h2, h3, p, span, strong, small) {
+.about-page :is(.experience-dark, .experience-light) :is(h1, h2, h3, p, span, strong, small),
+.modalities-location :is(h1, h2, h3, p, span, strong, small) {
   color: #000;
 }
 
-.about-page .modalities-location h2 {
+.modalities-location h2 {
   margin-left: auto;
   margin-right: auto;
   text-align: center !important;
 }
 
-.about-page .modalities-location-card > div:first-child {
+.modalities-location-card > div:first-child {
   text-align: center;
 }
 
-.about-page .modalities-location-card > div:first-child p {
+.modalities-location-card > div:first-child p {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
+}
+
+.modalities-location .modalities-location-card p {
+  color: #294d78;
+  line-height: 1.25rem;
+  margin: 2px 0 0;
+  max-width: none;
 }
 
 .experience-dark {

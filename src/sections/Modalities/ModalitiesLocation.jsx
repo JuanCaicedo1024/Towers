@@ -7,8 +7,10 @@ const cities = [
     sedes: [
       {
         id: 'cucuta',
-        address: 'Av. 0 #16-90 La Playa, Cúcuta, Norte de Santander, Colombia.',
-        images: ['/images/Sinfoto.png'],
+        name: 'Towers La Playa',
+        address: 'Av. 0 #16 90, la playa, Cúcuta, Norte de Santander',
+        phones: [{ label: 'Cel.', number: '324 275 5119' }],
+        images: ['/images/Cucuta_sede.jpg'],
       },
     ],
   },
@@ -16,32 +18,57 @@ const cities = [
     city: 'Bogotá',
     sedes: [
       {
-        id: 'bogota-la-floresta',
-        address: 'Km 4.6 vía Bogotá - La Calera, La Floresta, Bogotá, Colombia.',
-        images: ['/images/Sinfoto.png'],
+        id: 'bogota-usaquen',
+        name: 'Towers Usaquén',
+        address: 'Cl. 161 #21-92, Usaquén, Bogotá, Cundinamarca',
+        phones: [
+          { label: 'Tel.', number: '(601) 432 3390' },
+          { label: 'Cel.', number: '301 349 0020' },
+        ],
+        images: ['/images/usaquen_sede.jpeg'],
       },
       {
-        id: 'bogota-2',
-        address: 'DIRECCIÓN SEDE 2, Bogotá, Colombia.',
-        images: ['/images/Sinfoto.png'],
+        id: 'bogota-kennedy',
+        name: 'Towers Kennedy',
+        address: 'Ac. 26 Sur #71D-77, Kennedy, Bogotá',
+        phones: [
+          { label: 'Tel.', number: '(601) 529 4993' },
+          { label: 'Cel.', number: '314 235 5540' },
+        ],
+        images: ['/images/kennedy_sede.jpeg'],
       },
       {
-        id: 'bogota-3',
-        address: 'DIRECCIÓN SEDE 3, Bogotá, Colombia.',
-        images: ['/images/Sinfoto.png'],
+        id: 'bogota-engativa-titan-plaza',
+        name: 'Towers Engativá Titán Plaza',
+        address: 'Av Cl 80 #70F - 65, Bogotá',
+        phones: [],
+        images: ['/images/Engativa_Sede.jpg'],
       },
     ],
   },
 ]
 
-function LocationCard({ address, images, city }) {
+function LocationCard({ address, images, city, name, phones }) {
   return (
-    <article className="modalities-location-card group min-w-0 text-center transition-transform duration-300 ease-out hover:-translate-y-1 motion-reduce:transform-none">
-      <div className="text-center">
-        <p className="mt-0.5 text-xs font-semibold text-[#294d78]">
-          Centro Activo de Idiomas TOWERS
+    <article className="modalities-location-card group flex min-w-0 flex-col text-center transition-transform duration-300 ease-out hover:-translate-y-1 motion-reduce:transform-none">
+      <div className="flex-1 text-center">
+        <p className="mt-0.5 text-sm font-bold text-[#294d78]">
+          {name}
         </p>
         <p className="mt-0.5 text-xs leading-5 text-[#294d78]">{address}</p>
+        {phones.length > 0 && (
+          <div className="mt-2 grid gap-1">
+            {phones.map(({ label, number }) => (
+              <a
+                className="text-xs leading-5 text-[#294d78] hover:text-[#f13d35]"
+                href={`tel:${number.replace(/[^\d+]/g, '')}`}
+                key={label}
+              >
+                {label} {number}
+              </a>
+            ))}
+          </div>
+        )}
       </div>
 
       <div className="mt-5">
