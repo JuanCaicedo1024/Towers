@@ -39,7 +39,7 @@ const navigationItems = [
     ],
   },
   { label: 'Nosotros', path: '/nosotros' },
-  { label: 'Prueba de nivel', path: '/prueba-de-nivel' },
+  { label: 'Prueba de nivel', path: '/prueba-de-nivel', href: 'https://towers.edu.co/test' },
 ]
 
 function Logo() {
@@ -56,6 +56,18 @@ function Logo() {
 
 function NavigationLink({ item, mobile = false, openMenu, onToggle, onNavigate }) {
   if (!item.submenu) {
+    if (item.href) {
+      return (
+        <a
+          className="relative z-20 whitespace-nowrap rounded-full px-1.5 py-2 text-[13px] font-medium text-[#111827] transition-colors hover:text-[#E83E33] xl:px-2 xl:text-sm"
+          href={item.href}
+          onClick={onNavigate}
+        >
+          {item.label}
+        </a>
+      )
+    }
+
     return (
       <NavLink
         className={({ isActive }) =>
