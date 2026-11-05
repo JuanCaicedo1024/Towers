@@ -156,6 +156,13 @@ export async function saveCampaign(campaign, accessToken) {
   return rows[0]
 }
 
+export async function deleteCampaign(id, accessToken) {
+  await restRequest(`campaigns?id=eq.${encodeURIComponent(id)}`, {
+    method: 'DELETE',
+    token: accessToken,
+  })
+}
+
 export async function getPublishedCampaign(slug) {
   const query = new URLSearchParams({ slug: `eq.${slug}`, status: 'eq.published', select: 'id,slug,name,channel,status,content,created_at,updated_at' })
   const rows = await restRequest(`campaigns?${query.toString()}`)

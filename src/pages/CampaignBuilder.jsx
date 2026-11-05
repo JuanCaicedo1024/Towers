@@ -18,7 +18,9 @@ import {
 } from "lucide-react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../auth/useAuth";
-import { getCampaignById, saveCampaign } from "../lib/supabase";
+import { getCampaignById, listCampaigns, saveCampaign } from "../lib/supabase";
+
+const MAX_CAMPAIGNS = 3;
 
 const images = [
   "/images/hero.png",
@@ -186,6 +188,18 @@ function CampaignBuilder() {
   async function handleSave(status) {
     setError("");
     setNotice("");
+    if (!campaignId) {
+      try {
+        const campaigns = await listCampaigns(session.access_token);
+        if (campaigns.length >= MAX_CAMPAIGNS) {
+          setError("Ya alcanzaste el límite de 3 micro-landings. Borra una antes de crear otra.");
+          return;
+        }
+      } catch (loadError) {
+        setError(loadError.message || "No pudimos verificar cuántas micro-landings tienes.");
+        return;
+      }
+    }
     if (form.name.trim().length < 2)
       return setError("Escribe un nombre para la campaña.");
     if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(form.slug))

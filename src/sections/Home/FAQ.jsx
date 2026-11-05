@@ -33,8 +33,14 @@ const questions = [
   },
 ]
 
-function FAQ() {
+function FAQ({
+  items = questions,
+  variant = 'default',
+  eyebrow,
+  title,
+}) {
   const [openQuestion, setOpenQuestion] = useState(0)
+  const isCampaign = variant === 'campaign'
 
   const toggleQuestion = (index) => {
     setOpenQuestion((currentQuestion) =>
@@ -43,35 +49,78 @@ function FAQ() {
   }
 
   return (
-    <section className="bg-white px-[6%] py-16 text-[#17233a] lg:px-[12%] lg:py-20">
-      <div className="mx-auto max-w-[1120px]">
-        
+    <section
+      className={
+        isCampaign
+          ? 'campaign-landing-section scroll-mt-14 bg-[#fff8f6] px-[6%] py-16 text-[#17233a] lg:py-24'
+          : 'bg-white px-[6%] py-16 text-[#17233a] lg:px-[12%] lg:py-20'
+      }
+      id={isCampaign ? 'dudas' : undefined}
+    >
+      <div className={`mx-auto ${isCampaign ? 'max-w-[900px]' : 'max-w-[1120px]'}`}>
+        {(eyebrow || title) && (
+          <div>
+            {eyebrow && (
+              <p className="font-mono text-[10px] font-bold uppercase tracking-[.15em] text-[#e83e33]">
+                {eyebrow}
+              </p>
+            )}
+            {title && (
+              <h2 className="mt-3 text-3xl font-extrabold tracking-[-.045em] text-[#101820] sm:text-4xl">
+                {title}
+              </h2>
+            )}
+          </div>
+        )}
 
-        <div className="mt-8 overflow-hidden rounded-[1.5rem] border border-[#b9c6d6] bg-white px-6 shadow-[0_8px_20px_rgb(23_35_58_/_8%)] sm:px-10">
-          {questions.map((item, index) => {
+        <div
+          className={
+            isCampaign
+              ? 'mt-8 grid gap-3'
+              : 'mt-8 overflow-hidden rounded-[1.5rem] border border-[#b9c6d6] bg-white px-6 shadow-[0_8px_20px_rgb(23_35_58_/_8%)] sm:px-10'
+          }
+        >
+          {items.map((item, index) => {
             const isOpen = openQuestion === index
 
             return (
               <div
-                className={`border-b border-[#dce3ed] last:border-b-0 ${
-                  isOpen ? 'text-[#8f301d]' : 'text-[#71809a]'
-                }`}
+                className={
+                  isCampaign
+                    ? 'campaign-faq rounded-2xl border border-[#eadeda] bg-white px-5 shadow-[0_6px_18px_rgb(8_36_74_/_3%)]'
+                    : `border-b border-[#dce3ed] last:border-b-0 ${
+                        isOpen ? 'text-[#8f301d]' : 'text-[#71809a]'
+                      }`
+                }
                 key={item.question}
               >
                 <button
                   aria-expanded={isOpen}
-                  className="flex w-full items-center gap-5 py-6 text-left transition-colors hover:text-[#E83E33]"
+                  className={`flex w-full items-center gap-5 py-6 text-left transition-colors hover:text-[#E83E33] ${
+                    isCampaign ? 'font-bold text-[#183454]' : ''
+                  }`}
                   type="button"
                   onClick={() => toggleQuestion(index)}
                 >
-                  <span className="w-8 shrink-0 text-3xl leading-none" aria-hidden="true">
-                    {item.icon}
-                  </span>
-                  <span className="flex-1 text-lg font-semibold sm:text-2xl">
+                  {!isCampaign && item.icon && (
+                    <span className="w-8 shrink-0 text-3xl leading-none" aria-hidden="true">
+                      {item.icon}
+                    </span>
+                  )}
+                  <span className={`flex-1 ${isCampaign ? 'text-sm' : 'text-lg font-semibold sm:text-2xl'}`}>
                     {item.question}
                   </span>
-                  <span className="w-8 shrink-0 text-center text-3xl font-light leading-none">
-                    {isOpen ? '−' : '+'}
+                  <span
+                    className={
+                      isCampaign
+                        ? `grid h-7 w-7 shrink-0 place-items-center rounded-full bg-[#fff1ef] text-xl leading-none text-[#e83e33] transition ${
+                            isOpen ? 'rotate-45' : ''
+                          }`
+                        : 'w-8 shrink-0 text-center text-3xl font-light leading-none'
+                    }
+                    aria-hidden="true"
+                  >
+                    {isCampaign ? '+' : isOpen ? '−' : '+'}
                   </span>
                 </button>
 
@@ -82,7 +131,13 @@ function FAQ() {
                       : 'grid-rows-[0fr] opacity-0'
                   }`}
                 >
-                  <div className="min-h-0 overflow-hidden pl-[3.25rem] pr-10 text-base leading-[1.6] text-[#71809a]">
+                  <div
+                    className={`min-h-0 overflow-hidden ${
+                      isCampaign
+                        ? 'text-sm leading-7 text-[#627493]'
+                        : 'pl-[3.25rem] pr-10 text-base leading-[1.6] text-[#71809a]'
+                    }`}
+                  >
                     {item.answer}
                   </div>
                 </div>
