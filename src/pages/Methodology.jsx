@@ -51,7 +51,7 @@ function Methodology() {
           <div className="methodology-container">
             
             <div className="methodology-split">
-              <div>
+              <div className="methodology-hero-copy">
                 <SectionLabel dark="true">Metodología Towers</SectionLabel>
                 <h1 className="m-0 max-w-[680px] text-[clamp(2.6rem,5.5vw,5.3rem)] leading-[1.02] tracking-[-0.045em] text-[#101820]">
                   <AnimatedText per="line">Aprender un idioma</AnimatedText>
@@ -76,149 +76,7 @@ function Methodology() {
           </div>
         </section>
 
-        <section className="methodology-light">
-          <div className="methodology-container methodology-split">
-            <div>
-              <SectionLabel>02 · La clase Towers</SectionLabel>
-              <h2><AnimatedText>La interacción está en el centro del aprendizaje.</AnimatedText></h2>
-              <p>
-                <AnimatedText>La documentación de Towers plantea un enfoque basado en la interacción
-                como herramienta para aprender. Aquí no vienes solamente a recibir
-                información: vienes a participar, practicar y relacionarte.</AnimatedText>
-              </p>
-            </div>
-            <div className="methodology-card methodology-card--quote">
-              <SectionLabel>Declaración de identidad</SectionLabel>
-              <h3><AnimatedText>No solo aprender sobre el idioma. Aprender a usarlo.</AnimatedText></h3>
-              {['Escuchar', 'Comprender', 'Responder', 'Interactuar'].map((item) => (
-                <div className="methodology-pill" key={item}>{item}</div>
-              ))}
-              <small>Las cuatro habilidades forman parte de una misma experiencia.</small>
-            </div>
-          </div>
-        </section>
-
-        <section className="methodology-dark">
-          <div className="methodology-container">
-            <SectionLabel dark="true">03 · Las cuatro habilidades</SectionLabel>
-            <h2><AnimatedText>Cuatro habilidades que se conectan entre sí.</AnimatedText></h2>
-            <p><AnimatedText>Aprender un lenguaje requiere desarrollar diferentes capacidades de forma complementaria.</AnimatedText></p>
-            <div className="methodology-skills">
-              {skills.map(([number, title, description]) => (
-                <article className="methodology-skill" key={number}>
-                  <span>{number}</span>
-                  <h3>{title}</h3>
-                  <p>{description}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="methodology-light">
-          <div className="methodology-container methodology-split">
-            <div>
-              <SectionLabel>04 · Cómo se ve una clase</SectionLabel>
-              <h2><AnimatedText>Menos observar. Más participar.</AnimatedText></h2>
-              <p>
-                <AnimatedText>La clase debe permitir que el estudiante participe activamente en su
-                proceso. La interacción y el acompañamiento del docente hacen parte de
-                una experiencia que busca conectar el conocimiento con la vida real.</AnimatedText>
-              </p>
-            </div>
-            <div className="methodology-card methodology-card--steps">
-              <SectionLabel>La experiencia en clase</SectionLabel>
-              {['Comprender', 'Participar', 'Practicar', 'Aplicar', 'Recibir acompañamiento'].map((item, index) => (
-                <div className="methodology-numbered-pill" key={item}>
-                  <span>0{index + 1}</span>{item}
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="methodology-dark">
-          <div className="methodology-container">
-            <SectionLabel dark="true">05 · El proceso de aprendizaje</SectionLabel>
-            <h2><AnimatedText>Un proceso que avanza de comprender a utilizar.</AnimatedText></h2>
-            <div className="methodology-process">
-              {process.map(([number, title, description]) => (
-                <article key={number}>
-                  <strong>{number}</strong>
-                  <div><span>{title}</span><p>{description}</p></div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="methodology-light">
-          <div className="methodology-container methodology-split methodology-split--media">
-            <Placeholder />
-            <div>
-              <SectionLabel>06 · El contexto es importante</SectionLabel>
-              <h2><AnimatedText>El idioma cobra sentido cuando aparece fuera del ejercicio.</AnimatedText></h2>
-              <p>
-                <AnimatedText>La documentación de Towers señala que el uso de situaciones de la vida
-                cotidiana como punto de partida permite conectar el idioma con lo que
-                necesitas hacer en el mundo real.</AnimatedText>
-              </p>
-              <div className="methodology-tags">
-                {['Dar una opinión', 'Hacer una solicitud', 'Dar consejo', 'Contar una anécdota', 'Un contexto académico', 'Una situación profesional'].map((tag) => (
-                  <span key={tag}>{tag}</span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="methodology-light methodology-light--border">
-          <div className="methodology-container">
-            <SectionLabel>07 · El papel del docente</SectionLabel>
-            <h2><AnimatedText>La metodología también depende de quién guía la experiencia.</AnimatedText></h2>
-            <p><AnimatedText>Un docente Towers orienta, acompaña y genera oportunidades para que el estudiante participe y practique.</AnimatedText></p>
-            <div className="methodology-grid methodology-grid--three">
-              {teachers.map(([title, eyebrow, description]) => (
-                <article className="methodology-card methodology-profile" key={title}>
-                  <Placeholder />
-                  <h3>{title}</h3>
-                  <strong>{eyebrow}</strong>
-                  <p>{description}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="methodology-light">
-          <div className="methodology-container">
-            <SectionLabel>08 · Modalidades</SectionLabel>
-            <h2><AnimatedText>Encuentra una forma de aprender que se adapte a tu contexto.</AnimatedText></h2>
-            <p><AnimatedText>La metodología se mantiene; cambia el lugar y la manera en que la vives.</AnimatedText></p>
-            <div className="methodology-grid methodology-grid--three">
-              {modalities.map(([title, description]) => (
-                <article className="methodology-card methodology-modality" key={title}>
-                  <Placeholder />
-                  <h3>{title}</h3>
-                  <p>{description}</p>
-                  <Link to="/modalidades">Ver modalidades <span aria-hidden="true">→</span></Link>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="methodology-dark methodology-final">
-          <div className="methodology-container">
-            <SectionLabel dark="true">09 · El siguiente paso</SectionLabel>
-            <h2><AnimatedText>La mejor forma de entender la metodología es vivirla.</AnimatedText></h2>
-            <p><AnimatedText>Elige tu idioma, conoce tu nivel y empieza a usarlo desde la primera clase.</AnimatedText></p>
-            <div className="methodology-actions">
-              <Link className="methodology-button methodology-button--accent" to="/prueba-de-nivel">Encuentra tu programa <span aria-hidden="true">→</span></Link>
-              <Link className="methodology-button methodology-button--outline" to="/contacto">Habla con un asesor</Link>
-            </div>
-          </div>
-        </section>
+        
       </main>
       <Footer />
     </>

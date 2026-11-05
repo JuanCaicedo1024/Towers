@@ -12,6 +12,60 @@ body {
   color: #627493;
 }
 
+.site-footer__column {
+  animation: footer-column-in 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.site-footer__column:nth-child(2) {
+  animation-delay: 100ms;
+}
+
+.site-footer__column:nth-child(3) {
+  animation-delay: 200ms;
+}
+
+.site-footer__social,
+.site-footer__contact-icon {
+  transition: transform 220ms ease, background-color 220ms ease, box-shadow 220ms ease;
+}
+
+.site-footer__social:hover {
+  box-shadow: 0 8px 18px rgb(232 62 51 / 25%);
+  transform: translateY(-4px) scale(1.08);
+}
+
+.site-footer__contact-icon {
+  transition: transform 250ms ease;
+}
+
+.site-footer__column:hover .site-footer__contact-icon {
+  transform: rotate(-8deg) scale(1.06);
+}
+
+.site-footer__bottom {
+  animation: footer-bottom-in 700ms 180ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes footer-column-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes footer-bottom-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 /* Contact lead form */
 .contact-page {
   overflow: hidden;
@@ -966,6 +1020,16 @@ html,
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .site-footer__column,
+  .site-footer__bottom {
+    animation: none;
+  }
+
+  .site-footer__social,
+  .site-footer__contact-icon {
+    transition: none;
+  }
+
   .contact-intro,
   .contact-form {
     animation: none;
@@ -1100,6 +1164,12 @@ html,
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .methodology-hero-copy,
+  .methodology-hero-image {
+    animation: none;
+    transition: none;
+  }
+
   .scroll-reveal {
     animation: none;
     opacity: 1;
@@ -1897,6 +1967,41 @@ html,
 
 .methodology-hero .methodology-container {
   min-height: 540px;
+}
+
+.methodology-hero-copy {
+  animation: methodology-copy-in 750ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.methodology-hero-image {
+  animation: methodology-image-in 900ms 120ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.methodology-hero-image:hover {
+  transform: scale(1.025);
+}
+
+@keyframes methodology-copy-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes methodology-image-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .methodology-section-heading {
