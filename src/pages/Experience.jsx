@@ -1,30 +1,48 @@
 import AnimatedText from '@/components/ui/AnimatedText';
-import { Link } from 'react-router-dom'
+import {
+  AudioLines,
+  BookOpen,
+  FileText,
+  Globe,
+  MessageCircle,
+  Play,
+  Star,
+} from 'lucide-react'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 
-const benefits = ['Bienestar', 'Gastronomía', 'Educación', 'Experiencias', 'Comunidad', 'Otros']
-const learningSteps = ['Clase', 'Práctica', 'Comunidad', 'Nuevas situaciones de interacción']
-const stories = ['Historia o testimonio textual verificable.', 'Una experiencia que vale la pena compartir.', 'Lo que pasa cuando el idioma se vuelve parte de tu vida.']
-
-function Placeholder({ className = '', label = 'Fotografía real requerida' }) {
-  return (
-    <div className={`experience-placeholder ${className}`} aria-label="Espacio reservado para material audiovisual">
-      <span>{label}</span>
-    </div>
-  )
-}
-
-function SectionHeading({ number, label, description, dark = false }) {
-  return (
-    <div className={`experience-section-heading ${dark ? 'experience-section-heading--dark' : ''}`}>
-      <span className="experience-section-number">{number}</span>
-      <span>{label}</span>
-      <span aria-hidden="true">—</span>
-      <span>{description}</span>
-    </div>
-  )
-}
+const experienceSkills = [
+  {
+    title: 'Conversación',
+    description: 'Desarrollo progresivo de la capacidad de expresarse y participar en diferentes situaciones.',
+    icon: MessageCircle,
+  },
+  {
+    title: 'Comprensión auditiva',
+    description: 'Trabajo orientado a comprender mensajes, conversaciones e información oral.',
+    icon: Star,
+  },
+  {
+    title: 'Comunicación profesional',
+    description: 'Práctica del idioma aplicada a situaciones relacionadas con contextos laborales.',
+    icon: BookOpen,
+  },
+  {
+    title: 'Pronunciación',
+    description: 'Acompañamiento para mejorar claridad, comprensión y seguridad al expresarse.',
+    icon: AudioLines,
+  },
+  {
+    title: 'Vocabulario en contexto',
+    description: 'Aprender vocabulario relacionado con situaciones y objetivos concretos.',
+    icon: FileText,
+  },
+  {
+    title: 'Confianza al hablar',
+    description: 'Generar más oportunidades de participación y práctica durante el proceso.',
+    icon: Globe,
+  },
+]
 
 function Eyebrow({ children }) {
   return <span className="experience-eyebrow">{children}</span>
@@ -37,33 +55,37 @@ function Experience() {
       <main className="experience-page">
         <section className="experience-dark experience-hero">
           <div className="experience-container">
-            <SectionHeading number="01" label="HERO" description="experiencia completa del estudiante" dark />
-            <div className="experience-split">
-              <div>
+            <div className="experience-split experience-feature experience-feature--hero">
+              <div className="experience-feature__copy">
                 <Eyebrow>Experiencia Towers</Eyebrow>
-                <h1><AnimatedText>Aprender un idioma también ocurre fuera del salón de clase.</AnimatedText></h1>
+                <h1><AnimatedText>Aprender un idioma significa usarlo.</AnimatedText></h1>
                 <p>
-                  <AnimatedText>En TOWERS, la experiencia del estudiante no se limita al salón de clase.
-                  La comunidad, las experiencias y la interacción hacen posible que el idioma
-                  también forme parte de tu vida y de tu día a día.</AnimatedText>
+                  <AnimatedText>En TOWERS, el aprendizaje parte de la interacción. No se trata únicamente de estudiar estructuras o memorizar contenidos, sino de desarrollar la capacidad de comprender, comunicarte y utilizar el idioma en diferentes situaciones.</AnimatedText>
                 </p>
-                <div className="experience-actions">
-                  <Link className="experience-button experience-button--light" to="/experiencia-towers/comunidad">
-                    Conoce nuestra comunidad <span aria-hidden="true">→</span>
-                  </Link>
-                  <Link className="experience-text-link" to="/contacto">Habla con un asesor</Link>
-                </div>
               </div>
-              <Placeholder className="experience-hero-placeholder" label="Fotografía real requerida: estudiantes participando en actividad, encuentro o espacio social de Towers" />
+              <div className="experience-feature__visual experience-feature__visual--hero">
+                <img
+                  src="/images/TOWERS/TOWERS/fotos/DSC06700.jpg.jpeg"
+                  alt="Estudiantes de Towers practicando inglés en clase"
+                  fetchPriority="high"
+                />
+                <span className="experience-feature__shade" aria-hidden="true" />
+              </div>
             </div>
           </div>
         </section>
 
         <section className="experience-light">
-          <div className="experience-container experience-split">
-            <Placeholder label="Fotografía real · comunidad Towers · encuentro entre estudiantes" />
-            <div>
-              <SectionHeading number="02" label="La comunidad" description="extensión de la metodología" />
+          <div className="experience-container experience-split experience-feature experience-feature--community">
+            <div className="experience-feature__visual experience-feature__visual--community">
+              <img
+                src="/images/TOWERS/TOWERS/fotos/DSC06683.jpg.jpeg"
+                alt="Estudiantes compartiendo y practicando en comunidad"
+                loading="lazy"
+              />
+              <span className="experience-feature__shade" aria-hidden="true" />
+            </div>
+            <div className="experience-feature__copy">
               <Eyebrow>Comunidad Towers</Eyebrow>
               <h2><AnimatedText>El idioma se practica mejor cuando también forma parte de tu vida.</AnimatedText></h2>
               <p>
@@ -75,90 +97,80 @@ function Experience() {
                 <AnimatedText>La idea es crear más oportunidades para interactuar, perder el miedo a
                 participar y relacionar lo aprendido con conversaciones y situaciones más naturales.</AnimatedText>
               </p>
-              <Link className="experience-small-button" to="/experiencia-towers/comunidad">Conocer la comunidad</Link>
             </div>
           </div>
         </section>
 
-        <section className="experience-dark">
-          <div className="experience-container experience-split">
-            <div>
-              <SectionHeading number="03" label="La membresía" description="beneficios y experiencias" dark />
-              <Eyebrow>Membresía Towers</Eyebrow>
-              <h2><AnimatedText>Ser estudiante Towers puede darte más que una clase.</AnimatedText></h2>
+        <section className="methodology-intro experience-intro">
+          <div className="methodology-intro__container">
+            <div className="methodology-intro__copy">
+              <Eyebrow>Modalidades</Eyebrow>
+              <h2 className="methodology-intro__title">
+                <AnimatedText>Clase introductoria</AnimatedText>
+              </h2>
               <p>
-                <AnimatedText>La experiencia Towers también contempla beneficios asociados a la membresía:
-                espacios donde la comunidad se encuentra, disfruta y forma parte de una
-                experiencia más amplia de la institución.</AnimatedText>
+                <AnimatedText>Conoce una experiencia de aprendizaje basada en práctica e interacción.</AnimatedText>
               </p>
-              <div className="experience-benefits">
-                {benefits.map((benefit) => <span key={benefit}>{benefit}</span>)}
+            </div>
+            <div
+              className="methodology-intro__video"
+              role="img"
+              aria-label="Vista previa de una clase de idiomas de Towers"
+            >
+              <img src="/images/TOWERS/TOWERS/fotos/DSC06726.jpg.jpeg" alt="" loading="lazy" />
+              <div className="methodology-intro__video-veil" aria-hidden="true" />
+              <span className="methodology-intro__play" aria-hidden="true">
+                <Play fill="currentColor" size={30} />
+              </span>
+              <div className="methodology-intro__controls" aria-hidden="true">
+                <span className="methodology-intro__progress"><span /></span>
+                <span>5:23</span>
+                <span className="methodology-intro__duration">15:45</span>
               </div>
-              <Link className="experience-small-button experience-small-button--light" to="/experiencia-towers/membresia">Explorar beneficios</Link>
-            </div>
-            <Placeholder className="experience-membership-placeholder" label="Fotografía real · experiencia de estudiante Towers" />
-          </div>
-        </section>
-
-        <section className="experience-light">
-          <div className="experience-container">
-            <SectionHeading number="04" label="Conexión con la metodología" description="interacción en acción" />
-            <Eyebrow>Interacción en acción</Eyebrow>
-            <h2><AnimatedText>La metodología también continúa fuera de clase.</AnimatedText></h2>
-            <p><AnimatedText>El enfoque de TOWERS se basa en la interacción. Por eso, la comunidad no debe presentarse como un beneficio separado, sino como una extensión natural de la forma de aprender.</AnimatedText></p>
-            <div className="experience-step-card">
-              <Eyebrow>La extensión del aprendizaje</Eyebrow>
-              {learningSteps.map((step, index) => (
-                <div className="experience-step" key={step}><span>0{index + 1}</span><strong>{step}</strong></div>
-              ))}
-              <Link className="experience-small-button" to="/metodologia">Conoce nuestra metodología</Link>
             </div>
           </div>
         </section>
 
-        <section className="experience-dark">
-          <div className="experience-container experience-centered">
-            <SectionHeading number="05" label="¿Por qué esto importa?" description="una experiencia más completa" dark />
-            <Eyebrow>Una experiencia más completa</Eyebrow>
-            <h2><AnimatedText>Aprender, participar y formar parte.</AnimatedText></h2>
-            <p><AnimatedText>El valor de TOWERS no termina cuando acaba una clase. La comunidad transforma el tiempo de aprendizaje en una experiencia más completa alrededor del estudiante.</AnimatedText></p>
-            <div className="experience-diagram">
-              <div><span>Aprendizaje</span><b>+</b><span>Comunidad</span><b>+</b><span>Membresía</span></div>
-              <b>=</b>
-              <strong>Experiencia Towers</strong>
-              <small>Representación conceptual — una experiencia completa.</small>
-            </div>
-          </div>
-        </section>
-
-        <section className="experience-light">
-          <div className="experience-container">
-            <SectionHeading number="06" label="Historias reales" description="solo contenido verificable" />
-            <h2><AnimatedText>Así se vive desde dentro.</AnimatedText></h2>
-            <div className="experience-story-grid">
-              {stories.map((story) => (
-                <article className="experience-story-card" key={story}>
-                  <Placeholder label="Foto / historia real" />
-                  <p>{story}</p>
-                  <span>Por agregar testimonio verificable</span>
+        <section className="methodology-learning experience-skills" aria-labelledby="experience-skills-title">
+          <div className="methodology-learning__container">
+            <header className="methodology-learning__header">
+              <p className="methodology-learning__eyebrow">Competencias</p>
+              <h2 id="experience-skills-title">
+                El idioma cobra sentido cuando aparece fuera del ejercicio.
+              </h2>
+              <div className="methodology-learning__copy">
+                <p className="methodology-learning__lead">
+                  La documentación de TOWERS señala el uso de situaciones de la vida cotidiana como parte de su enfoque.
+                </p>
+                <p className="methodology-learning__description">
+                  El objetivo es que el estudiante pueda relacionar lo aprendido con contextos en los que necesita comprender, responder o comunicarse.
+                </p>
+              </div>
+            </header>
+            <div className="methodology-learning__grid">
+              {experienceSkills.map(({ title, description, icon: Icon }, index) => (
+                <article className="methodology-learning__card" key={title}>
+                  <div className="methodology-learning__meta">
+                    <span className="methodology-learning__number">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <span className="methodology-learning__icon-wrap">
+                      <Icon
+                        className="methodology-learning__icon"
+                        size={28}
+                        strokeWidth={2.2}
+                        aria-hidden="true"
+                      />
+                    </span>
+                  </div>
+                  <h3>{title}</h3>
+                  <p>{description}</p>
                 </article>
               ))}
             </div>
           </div>
         </section>
 
-        <section className="experience-dark experience-final">
-          <div className="experience-container">
-            <SectionHeading number="07" label="Cierre" description="el siguiente paso" dark />
-            <Eyebrow>Forma parte de la experiencia</Eyebrow>
-            <h2><AnimatedText>Tu experiencia en Towers puede ir más allá de aprender un idioma.</AnimatedText></h2>
-            <p><AnimatedText>Explora nuestros programas, conoce la comunidad y descubre cómo puede ser tu experiencia como estudiante.</AnimatedText></p>
-            <div className="experience-actions">
-              <Link className="experience-button experience-button--light" to="/idiomas">Conoce nuestros programas <span aria-hidden="true">→</span></Link>
-              <Link className="experience-text-link" to="/contacto">Habla con un asesor</Link>
-            </div>
-          </div>
-        </section>
       </main>
       <Footer />
     </>

@@ -1,5 +1,4 @@
 import AnimatedText from '@/components/ui/AnimatedText';
-import { Link } from 'react-router-dom'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 
@@ -10,16 +9,19 @@ const opportunities = [
   ['04', 'Ganar confianza', 'Tener más palabras para expresarte y participar fuera del contexto tradicional de clase.'],
 ]
 
-const communityPhotos = ['Encuentro', 'Conversación', 'Actividad', 'Comunidad']
-const moments = ['Comunidad 1', 'Comunidad 2', 'Comunidad 3', 'Comunidad 4']
+const communityPhotos = [
+  ['DSC06718.jpg.jpeg', 'Estudiantes participando en una clase de inglés'],
+  ['DSC06720.jpg.jpeg', 'Estudiantes compartiendo una actividad de aprendizaje'],
+  ['DSC06733.jpg.jpeg', 'Grupo practicando inglés en el aula'],
+  ['DSC06802.jpg.jpeg', 'Estudiantes conversando durante la clase'],
+]
 
-function Placeholder({ label, className = '' }) {
-  return (
-    <div className={`experience-placeholder ${className}`} aria-label={label}>
-      <span>{label}</span>
-    </div>
-  )
-}
+const communityMoments = [
+  ['DSC06667.jpg.jpeg', 'Estudiantes practicando juntos en el aula'],
+  ['DSC06683.jpg.jpeg', 'Grupo de estudiantes compartiendo una clase'],
+  ['DSC06726.jpg.jpeg', 'Estudiantes participando en una actividad'],
+  ['DSC06730.jpg.jpeg', 'Estudiante compartiendo un momento de aprendizaje'],
+]
 
 function Heading({ number, label, description }) {
   return (
@@ -39,106 +41,74 @@ function Community() {
       <main className="community-page">
         <section className="community-dark community-hero">
           <div className="community-container">
-            <Heading number="01" label="HERO" description="experiencia Towers fuera del salón" />
-            <div className="experience-split">
-              <div>
-                <span className="experience-eyebrow">Comunidad Towers</span>
-                <h1><AnimatedText>El idioma se practica mejor cuando también forma parte de tu vida.</AnimatedText></h1>
+            <div className="experience-split community-hero__split">
+              <div className="community-hero__copy">
+                <span className="experience-eyebrow">Modalidades</span>
+                <h1><AnimatedText>Aprender un idioma significa usarlo.</AnimatedText></h1>
                 <p>
-                  <AnimatedText>TOWERS cuenta con espacios de comunidad y encuentro donde los estudiantes
-                  pueden compartir, conversar y seguir usando el idioma en un entorno diferente
-                  al de una clase tradicional.</AnimatedText>
+                  <AnimatedText>En TOWERS, el aprendizaje parte de la interacción. No se trata únicamente de estudiar estructuras o memorizar contenidos, sino de desarrollar la capacidad de comprender, comunicarte y utilizar el idioma en diferentes situaciones.</AnimatedText>
                 </p>
-                <p>
-                  <AnimatedText>La idea es crear más oportunidades para interactuar, perder el miedo a
-                  participar y relacionar lo aprendido con conversaciones y situaciones más naturales.</AnimatedText>
-                </p>
-                <p><AnimatedText>La comunidad funciona como una extensión de la metodología de interacción: la práctica no termina cuando termina la clase.</AnimatedText></p>
               </div>
-              <Placeholder className="experience-hero-placeholder" label="Fotografía real requerida: estudiantes en actividad, encuentro o espacio social de Towers" />
+              <div className="community-hero__image">
+                <img
+                  src="/images/TOWERS/TOWERS/fotos/DSC06803.jpg.jpeg"
+                  alt="Docente y estudiantes participando en una clase de Towers"
+                  fetchPriority="high"
+                />
+                <span aria-hidden="true" />
+              </div>
             </div>
           </div>
         </section>
 
-        <section className="community-light">
-          <div className="community-container">
-            <Heading number="02" label="Qué aporta la comunidad" description="4 ejes centrales" />
-            <h2><AnimatedText>Más oportunidades para usar lo que aprendes.</AnimatedText></h2>
-            <div className="community-opportunities">
-              {opportunities.map(([number, title, description]) => (
-                <article key={number}>
-                  <strong>{number}</strong>
-                  <div><h3>{title}</h3><p>{description}</p></div>
-                </article>
-              ))}
-            </div>
-            <small className="community-note">Estos espacios pueden generar oportunidades y permitir practicar. No se garantizan resultados.</small>
-          </div>
-        </section>
-
-        <section className="community-dark">
+        <section className="community-dark community-gallery">
           <div className="community-container community-split">
-            <div>
-              <Heading number="03" label="Cómo se vive" description="experiencias para compartir" />
-              <span className="experience-eyebrow">Una experiencia más allá de la clase</span>
+            <div className="community-gallery__copy">
+              <span className="experience-eyebrow">Modalidades</span>
               <h2><AnimatedText>La comunidad se construye participando.</AnimatedText></h2>
-              <p><AnimatedText>Los espacios de comunidad pueden incluir encuentros, conversaciones, actividades y experiencias que permitan a los estudiantes relacionarse con el idioma de una manera más orgánica y cotidiana.</AnimatedText></p>
-              <small>Imágenes de ejemplo, pendientes de ser reales.</small>
+              <p>
+                <AnimatedText>Los espacios de comunidad pueden incluir encuentros, conversaciones, actividades y experiencias que permitan a los estudiantes relacionarse con el idioma de una manera más orgánica y cotidiana.</AnimatedText>
+              </p>
             </div>
-            <div className="community-photo-grid">
-              {communityPhotos.map((photo) => <div key={photo}><Placeholder label={`Foto ${photo}`} /><span>{photo}</span></div>)}
-            </div>
-          </div>
-        </section>
-
-        <section className="community-light">
-          <div className="community-container">
-            <Heading number="04" label="Conexión con la metodología" description="interacción en acción" />
-            <span className="experience-eyebrow">Interacción en acción</span>
-            <h2><AnimatedText>La metodología también continúa fuera de clase.</AnimatedText></h2>
-            <p><AnimatedText>El enfoque de TOWERS se basa en la interacción. Por eso, la comunidad no debe presentarse como un beneficio separado, sino como una extensión natural de la forma de aprender.</AnimatedText></p>
-            <div className="community-step-card">
-              <span className="experience-eyebrow">La extensión del aprendizaje</span>
-              {['Clase', 'Práctica', 'Comunidad', 'Nuevas situaciones de interacción'].map((step, index) => (
-                <div className="experience-step" key={step}><span>0{index + 1}</span><strong>{step}</strong></div>
+            <div className="community-photo-grid" aria-label="Momentos de la comunidad Towers">
+              {communityPhotos.map(([image, alt], index) => (
+                <div className="community-photo-grid__item" key={image} style={{ '--photo-index': index }}>
+                  <img
+                    src={`/images/TOWERS/TOWERS/fotos/${image}`}
+                    alt={alt}
+                    loading="lazy"
+                  />
+                  <span aria-hidden="true" />
+                </div>
               ))}
-              <Link className="experience-small-button" to="/metodologia">Conoce nuestra metodología</Link>
             </div>
           </div>
         </section>
 
-        <section className="community-dark">
+
+        <section className="community-light community-moments" aria-labelledby="community-moments-title">
           <div className="community-container">
-            <Heading number="05" label="Galería" description="momentos de comunidad" />
-            <h2><AnimatedText>Momentos de la comunidad.</AnimatedText></h2>
-            <div className="community-moments">
-              {moments.map((moment) => <Placeholder key={moment} label={`Foto ${moment}`} />)}
+            <h2 id="community-moments-title" className="community-moments__title">
+              <AnimatedText>Momentos de la comunidad.</AnimatedText>
+            </h2>
+            <div className="community-moments__featured">
+              <img
+                src="/images/TOWERS/TOWERS/fotos/DSC06700.jpg.jpeg"
+                alt="Docente y estudiantes compartiendo una clase de inglés"
+                loading="lazy"
+              />
+              <span aria-hidden="true" />
             </div>
-            <small>Fotografías reales requeridas de Towers.</small>
+            <div className="community-moments__grid" aria-label="Más momentos de la comunidad Towers">
+              {communityMoments.map(([image, alt], index) => (
+                <div className="community-moments__photo" key={image} style={{ '--moment-index': index }}>
+                  <img src={`/images/TOWERS/TOWERS/fotos/${image}`} alt={alt} loading="lazy" />
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
-        <section className="community-light">
-          <div className="community-container">
-            <Heading number="06" label="Testimonios" description="solo contenido real" />
-            <h2><AnimatedText>Lo que viven los estudiantes.</AnimatedText></h2>
-            <div className="community-testimonials">
-              {[1, 2, 3].map((item) => <article key={item}><p>Experiencia textual verificable.</p><span>Por validar: experiencia real</span></article>)}
-            </div>
-          </div>
-        </section>
-
-        <section className="community-dark community-final">
-          <div className="community-container community-final-content">
-            <Heading number="07" label="Cierre" description="el siguiente paso" />
-            <span className="experience-eyebrow">Únete a la conversación</span>
-            <h2><AnimatedText>Explora una experiencia donde el idioma también forma parte de la comunidad Towers.</AnimatedText></h2>
-            <div className="experience-actions">
-              <Link className="experience-button experience-button--light" to="/idiomas">Conoce nuestros programas <span aria-hidden="true">→</span></Link>
-              <Link className="experience-text-link" to="/contacto">Habla con un asesor</Link>
-            </div>
-          </div>
-        </section>
       </main>
       <Footer />
     </>
