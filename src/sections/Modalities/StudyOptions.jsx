@@ -1,12 +1,11 @@
 import AnimatedText from '@/components/ui/AnimatedText';
 import { Building2, Monitor, UsersRound } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { ModalitiesHeading } from './ModalitiesShared'
 
 const options = [
-  ['Presencial', '/images/Sinfoto.png', UsersRound],
-  ['Online', '/images/Sinfoto.png', Monitor],
-  ['Híbrida', '/images/Sinfoto.png', Building2],
+  ['Presencial', '/images/Presencial.jpg', UsersRound],
+  ['Virtual', '/images/Virtual.jpg', Monitor],
+  ['Híbrida', '/images/Hibrida.jpg', Building2],
 ]
 
 function StudyOptions() {

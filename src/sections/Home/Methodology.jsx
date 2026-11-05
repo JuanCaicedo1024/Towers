@@ -69,7 +69,7 @@ function Methodology() {
       }
 
       slider.scrollBy({ left: card.getBoundingClientRect().width + gap, behavior: 'smooth' });
-    }, 1000);
+    }, 3000);
 
     return () => window.clearInterval(timer);
   }, []);

@@ -49,30 +49,29 @@ function Methodology() {
       <main className="methodology-page">
         <section className="methodology-dark methodology-hero">
           <div className="methodology-container">
-            <div className="methodology-section-heading">
-              <span className="methodology-section-number">01</span>
-              <span>HERO</span>
-              <span aria-hidden="true">—</span>
-              <span>¿Cómo se aprende en Towers y por qué confiar?</span>
-            </div>
+            
             <div className="methodology-split">
               <div>
                 <SectionLabel dark="true">Metodología Towers</SectionLabel>
-                <h1><AnimatedText>Aprender un idioma significa usarlo.</AnimatedText></h1>
+                <h1 className="m-0 max-w-[680px] text-[clamp(2.6rem,5.5vw,5.3rem)] leading-[1.02] tracking-[-0.045em] text-[#101820]">
+                  <AnimatedText per="line">Aprender un idioma</AnimatedText>
+                  <span className="text-[#f13d35]">
+                    <AnimatedText per="line">significa usarlo.</AnimatedText>
+                  </span>
+                </h1>
               <p>
                 <AnimatedText>En TOWERS, el aprendizaje parte de la interacción. No se trata
                 únicamente de estudiar estructuras o memorizar contenidos, sino de
                 desarrollar la capacidad de comprender, comunicarte y utilizar el idioma
                 en diferentes situaciones.</AnimatedText>
               </p>
-                <div className="methodology-hero-actions">
-                  <Link className="methodology-button methodology-button--light" to="/prueba-de-nivel">
-                    Encuentra tu programa <span aria-hidden="true">→</span>
-                  </Link>
-                  <Link className="methodology-text-link" to="/prueba-de-nivel">Haz tu prueba de nivel</Link>
-                </div>
+                
               </div>
-              <Placeholder className="methodology-hero-placeholder" />
+              <img
+                className="methodology-hero-image"
+                src="/images/Presencial.jpg"
+                alt="Docente impartiendo una clase presencial a sus estudiantes"
+              />
             </div>
           </div>
         </section>

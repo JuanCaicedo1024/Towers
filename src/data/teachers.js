@@ -317,9 +317,40 @@ const teachers = [
   },
 ]
 
+const crossLanguageDisplayMap = {
+  'lizeth-bridgette-ospina-rojas': ['frances', 'portugues', 'aleman', 'italiano'],
+  'carlos-david-hernandez-franco': ['frances', 'portugues', 'aleman', 'italiano'],
+  'deibi-yaneth-mesa-manrique': ['frances', 'portugues', 'aleman', 'italiano'],
+  'sharon-alejandra-arias-cepeda': ['frances', 'portugues', 'aleman', 'italiano'],
+  'thomas-silva-gomes': ['ingles', 'frances', 'aleman', 'italiano'],
+  'angela-sanchez': ['frances', 'portugues', 'aleman', 'italiano'],
+  'ricardo-suarez-blanco': ['frances', 'portugues', 'aleman', 'italiano'],
+}
+
+const getTeacherVisibleLanguages = (teacher) => {
+  const configured = Array.isArray(teacher.visibleLanguages)
+    ? teacher.visibleLanguages
+    : []
+
+  return [...new Set([...configured, ...(crossLanguageDisplayMap[teacher.id] || [])])]
+}
+
 export default teachers
 
 export const getTeacherById = (id) => teachers.find((teacher) => teacher.id === id)
 
-export const getTeachersByLanguage = (language) =>
-  teachers.filter((teacher) => teacher.language === language)
+export const getTeachersByLanguage = (language) => {
+  const normalizedLanguage = language?.toLowerCase()
+
+  if (!normalizedLanguage) {
+    return []
+  }
+
+  return teachers.filter((teacher) => {
+    const visibleLanguages = [teacher.language, ...getTeacherVisibleLanguages(teacher)]
+
+    return visibleLanguages
+      .map((option) => option?.toLowerCase())
+      .includes(normalizedLanguage)
+  })
+}

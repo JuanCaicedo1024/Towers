@@ -1,31 +1,38 @@
 import AnimatedText from '@/components/ui/AnimatedText';
+import { NavLink } from 'react-router-dom';
+
 const languages = [
   {
     name: "Inglés",
+    slug: "ingles",
     image: "/images/Ingles.png",
     description: "Programa principal. Niveles desde inicial hasta avanzado.",
     modalities: "PRESENCIAL · ONLINE",
   },
   {
     name: "Francés",
+    slug: "frances",
     image: "/images/frances.png",
     description: "Enfoque conversacional y uso cotidiano.",
     modalities: "PRESENCIAL · ONLINE",
   },
   {
     name: "Portugués",
+    slug: "portugues",
     image: "/images/brazil.png",
     description: "Comprensión y conversación aplicada.",
     modalities: "PRESENCIAL",
   },
   {
     name: "Alemán",
+    slug: "aleman",
     image: "/images/alemania.png",
     description: "Base estructural + práctica guiada.",
     modalities: "PRESENCIAL",
   },
   {
     name: "Italiano",
+    slug: "italiano",
     image: "/images/italia.png",
     description: "Base estructural y práctica aplicada.",
     modalities: "MODALIDADES POR CONFIRMAR",
@@ -60,12 +67,12 @@ function Languages() {
                 <p className="min-h-[70px] text-base leading-[1.35] text-[#17233a]">
                   {language.description}
                 </p>
-                <button
-                  className="mt-auto rounded-xl border border-[#183454] bg-transparent px-3 py-3 text-sm font-bold text-[#183454] shadow-sm transition hover:bg-[#183454] hover:text-white hover:shadow"
-                  type="button"
+                <NavLink
+                  className="mt-auto rounded-xl border border-[#183454] bg-transparent px-3 py-3 text-center text-sm font-bold text-[#183454] shadow-sm transition hover:bg-[#183454] hover:text-white hover:shadow"
+                  to={`/idiomas/${language.slug}`}
                 >
                   Ver programa
-                </button>
+                </NavLink>
               </article>
             ))}
           </div>

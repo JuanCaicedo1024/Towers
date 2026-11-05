@@ -1934,6 +1934,13 @@ html,
   min-height: 486px;
 }
 
+.methodology-hero-image {
+  border-radius: 2rem;
+  height: 486px;
+  object-fit: cover;
+  width: 100%;
+}
+
 .methodology-hero-actions {
   align-items: center;
   display: flex;
@@ -1958,17 +1965,11 @@ html,
   text-transform: uppercase;
 }
 
-.methodology-page h1,
 .methodology-page h2 {
   letter-spacing: -.045em;
   line-height: 1.02;
   margin: 0;
   max-width: 680px;
-}
-
-.methodology-page h1 {
-  color: #1a3157;
-  font-size: clamp(2.6rem, 5.5vw, 5.3rem);
 }
 
 .methodology-page h2 {
@@ -3639,6 +3640,10 @@ html,
 
   .methodology-hero-placeholder {
     min-height: 300px;
+  }
+
+  .methodology-hero-image {
+    height: 300px;
   }
 
   .methodology-skills,

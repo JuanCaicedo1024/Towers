@@ -37,7 +37,7 @@ function ClassExperience() {
         <div className="mt-8 overflow-hidden rounded-[1.5rem]">
           <img
             className="h-[320px] w-full object-cover object-center sm:h-[420px] lg:h-[500px]"
-            src="/images/Sinfoto.png"
+            src="/images/clara.jpg"
             alt="Clase de idiomas en Towers"
           />
         </div>

@@ -109,9 +109,36 @@ const methodologySteps = [
   ],
 ];
 const modalities = [
-  ["Presencial", UsersRound],
-  ["Online", Monitor],
-  ["Híbrida", Building2],
+  [
+    "Presencial",
+    "/images/Presencial.jpg",
+    UsersRound,
+    "Asiste a clases en una sede, practica en persona con tu docente y comparte el proceso con otros estudiantes.",
+  ],
+  [
+    "Virtual",
+    "/images/Virtual.jpg",
+    Monitor,
+    "Conéctate a clases en vivo desde donde estés e interactúa con tu docente y compañeros en línea.",
+  ],
+  [
+    "Híbrida",
+    "/images/Hibrida.jpg",
+    Building2,
+    "Combina clases presenciales y virtuales para adaptar tu aprendizaje a tus horarios y necesidades.",
+  ],
+];
+const communityVideos = [
+  {
+    title: "Comunidad que te impulsa",
+    url: "https://www.instagram.com/reel/DOMrOXNAlQF/",
+    embedUrl: "https://www.instagram.com/reel/DOMrOXNAlQF/embed",
+  },
+  {
+    title: "Actividades en la vida real",
+    url: "https://www.instagram.com/reel/DexwLDIuTBz/",
+    embedUrl: "https://www.instagram.com/reel/DexwLDIuTBz/embed",
+  },
 ];
 function LanguageTemplate() {
   const { language } = useParams();
@@ -286,10 +313,10 @@ function LanguageTemplate() {
               aplicación en situaciones cotidianas.</AnimatedText>
             </p>
 
-            <div className="mt-8 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-4 lg:grid lg:grid-cols-5 lg:overflow-visible lg:pb-0">
+            <div className="mt-8 grid snap-x snap-mandatory gap-3 overflow-x-auto pb-4 sm:grid-cols-2 lg:grid-cols-5 lg:justify-items-center lg:overflow-visible lg:pb-0">
               {methodologySteps.map(([title, description, Icon], index) => (
                 <article
-                  className="flex min-h-[296px] min-w-[258px] snap-start flex-1 flex-col rounded-xl border border-[#d9dfe8] bg-white px-3.5 py-4 text-[#111827] shadow-[0_5px_8px_rgb(0_0_0_/_18%)] transition-transform duration-300 hover:-translate-y-1 sm:min-w-[270px] lg:min-h-[310px] lg:min-w-0"
+                  className="flex min-h-[296px] w-full max-w-[258px] snap-start flex-col rounded-xl border border-[#d9dfe8] bg-white px-3.5 py-4 text-[#111827] shadow-[0_5px_8px_rgb(0_0_0_/_18%)] transition-transform duration-300 hover:-translate-y-1 sm:max-w-[270px] lg:max-w-[230px] lg:min-h-[310px]"
                   key={title}
                 >
                   <span className="self-start text-left text-sm font-semibold text-[#9ca3af]">
@@ -313,7 +340,7 @@ function LanguageTemplate() {
             </div>
 
             <NavLink
-              className="language-action mx-auto mt-5 flex max-w-[785px] items-center justify-center rounded-xl bg-[#f33d34] px-5 py-3.5 text-xl font-bold text-white shadow-sm"
+              className="language-action mx-auto mt-5 flex w-full max-w-[785px] items-center justify-center rounded-xl bg-[#f33d34] px-5 py-3.5 text-xl font-bold text-white shadow-sm"
               to="/metodologia"
             >
               Conocer nuestra metodología
@@ -331,7 +358,7 @@ function LanguageTemplate() {
           </h2>
 
           <div className="mt-8 grid gap-5 lg:grid-cols-3">
-            {modalities.map(([title, Icon], index) => (
+            {modalities.map(([title, image, Icon, description], index) => (
               <article
                 className="language-modality-card group overflow-hidden rounded-xl border border-white/40 bg-white/95 shadow-[0_10px_25px_rgb(0_0_0_/_22%)]"
                 style={{ "--card-delay": `${index * 120}ms` }}
@@ -340,20 +367,9 @@ function LanguageTemplate() {
                 <div className="relative flex h-[180px] items-center justify-center overflow-hidden bg-[#183454]">
                   <img
                     className="absolute inset-0 z-0 h-full w-full object-cover opacity-75"
-                    src="/images/Sinfoto.png"
+                    src={image}
                     alt=""
                   />
-                  <div
-                    className="absolute inset-0 bg-gradient-to-br from-[#183454]/85 to-[#f13d35]/75"
-                    aria-hidden="true"
-                  />
-                  <span className="relative z-20 grid h-24 w-24 place-items-center rounded-full border border-white/60 bg-white/20 text-white shadow-[0_10px_25px_rgb(0_0_0_/_20%)] backdrop-blur-sm">
-                    <Icon
-                      className="h-14 w-14"
-                      strokeWidth={1.5}
-                      aria-hidden="true"
-                    />
-                  </span>
                   <span className="absolute bottom-0 left-7 z-30 grid h-[82px] w-[102px] translate-y-0 place-items-center rounded-t-2xl bg-white text-[#f13d35] shadow-[0_-5px_15px_rgb(0_0_0_/_12%)]">
                     <Icon
                       className="h-11 w-11"
@@ -365,7 +381,7 @@ function LanguageTemplate() {
                 <div className="px-7 pb-6 pt-12">
                   <h3 className="text-2xl font-bold text-[#071026]">{title}</h3>
                   <p className="mt-4 min-h-[58px] text-base leading-6 text-[#4b5563]">
-                    Salman Amin Khan, fundador y CEO de Khan Academy.
+                    {description}
                   </p>
                   <NavLink
                     className="mt-5 flex items-center justify-center rounded-xl bg-[#08244a] px-5 py-3 text-lg font-bold text-white"
@@ -418,33 +434,31 @@ function LanguageTemplate() {
               </NavLink>
             </div>
 
-            <div className="grid gap-5 sm:grid-cols-2">
-              {["Comunidad que te impulsa", "Actividades en la vida real"].map(
-                (title, index) => (
-                  <NavLink
-                    className={`group relative min-h-[390px] overflow-hidden rounded-[2rem] ${index === 0 ? "bg-[#183454]" : "bg-[#f13d35]"}`}
-                    key={title}
-                    to="/experiencia-towers"
+            <div className="grid items-start gap-5 sm:grid-cols-2">
+              {communityVideos.map(({ title, url, embedUrl }) => (
+                <article className="min-w-0 overflow-hidden rounded-[1.5rem] bg-white p-3 shadow-[0_12px_30px_rgb(23_35_58_/_12%)]" key={url}>
+                  <h3 className="mb-3 px-2 text-xl font-bold text-[#071026]">
+                    {title}
+                  </h3>
+                  <iframe
+                    className="h-[540px] w-full rounded-xl bg-[#f7f4f3]"
+                    src={embedUrl}
+                    title={`Video de Instagram: ${title}`}
+                    loading="lazy"
+                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                    allowFullScreen
+                    referrerPolicy="strict-origin-when-cross-origin"
+                  />
+                  <a
+                    className="mt-3 block text-center text-sm font-semibold text-[#183454] underline-offset-4 hover:text-[#f13d35] hover:underline"
+                    href={url}
+                    target="_blank"
+                    rel="noreferrer"
                   >
-                    <div
-                      className="absolute -right-12 -top-12 h-64 w-64 rounded-full border-[34px] border-white/15 transition duration-500 group-hover:scale-125"
-                      aria-hidden="true"
-                    />
-                    <div
-                      className="absolute -bottom-24 -left-12 h-72 w-72 rounded-full border-[42px] border-white/10 transition duration-500 group-hover:rotate-12 group-hover:scale-110"
-                      aria-hidden="true"
-                    />
-                    <span className="absolute left-1/2 top-1/2 grid h-20 w-20 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-[#f13d35]/90 text-white shadow-lg transition duration-300 group-hover:scale-110 group-hover:bg-[#f13d35]">
-                      <span className="ml-1 text-3xl" aria-hidden="true">
-                        ▶
-                      </span>
-                    </span>
-                    <span className="absolute bottom-7 left-6 right-6 text-3xl font-bold italic leading-[1.05] text-white sm:text-4xl">
-                      {title}
-                    </span>
-                  </NavLink>
-                ),
-              )}
+                    Ver en Instagram
+                  </a>
+                </article>
+              ))}
             </div>
           </div>
         </section>
