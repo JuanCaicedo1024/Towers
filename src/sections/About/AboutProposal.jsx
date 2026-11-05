@@ -19,7 +19,9 @@ function AboutProposal() {
           <h2><AnimatedText>La interacción está en el centro de nuestra propuesta.</AnimatedText></h2>
           <p><AnimatedText>La filosofía de TOWERS parte de que aprender un idioma cobra sentido cuando puedes usarlo para comunicarte, resolver situaciones y compartir con otros.</AnimatedText></p>
           <p><AnimatedText>Por eso el aprendizaje incluye escuchar, hablar, leer y escribir en contextos reales, acompañados por docentes que orientan el proceso.</AnimatedText></p>
-          <Link className="experience-button experience-button--orange" to="/metodologia">Conoce nuestra metodología <span aria-hidden="true">→</span></Link>
+          <div className="experience-actions">
+            <Link className="experience-button experience-button--orange" to="/metodologia">Conoce nuestra metodología <span aria-hidden="true">→</span></Link>
+          </div>
         </div>
         <div className="methodology-card methodology-card--quote about-proposal-card">
           <Eyebrow>Declaración conceptual</Eyebrow>

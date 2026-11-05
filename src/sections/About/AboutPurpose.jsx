@@ -1,13 +1,12 @@
 import AnimatedText from '@/components/ui/AnimatedText';
 import { Link } from 'react-router-dom'
-import { Eyebrow, SectionHeading } from './AboutShared'
 
 function AboutPurpose() {
   return (
     <section className="experience-light">
       <div className="experience-container experience-split about-purpose-split">
         <div className="about-purpose-image">
-          <img src="/images/Sinfoto.png" alt="Aprendizaje en acción en Towers" />
+          <img src="/images/TOWERS/TOWERS/fotos/DSC06675.jpg.jpeg" alt="Docente acompañando a una estudiante durante su aprendizaje" />
         </div>
         <div className="about-purpose-copy">
      

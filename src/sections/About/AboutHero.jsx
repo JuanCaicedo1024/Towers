@@ -1,6 +1,5 @@
 import AnimatedText from '@/components/ui/AnimatedText';
 import { Link } from 'react-router-dom'
-import { Eyebrow, SectionHeading } from './AboutShared'
 
 function AboutHero() {
   return (
@@ -18,7 +17,7 @@ function AboutHero() {
             </div>
           </div>
           <div className="about-hero-image">
-            <img src="/images/Sinfoto.png" alt="Espacio de aprendizaje Towers" />
+            <img src="/images/TOWERS/TOWERS/fotos/DSC06670.jpg.jpeg" alt="Estudiante de Towers practicando en clase" />
           </div>
         </div>
       </div>

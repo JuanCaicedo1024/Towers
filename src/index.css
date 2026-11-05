@@ -2579,6 +2579,10 @@ html,
   padding: 16px 30px;
 }
 
+.about-page .experience-button--orange span {
+  color: #fff;
+}
+
 .experience-button--orange:hover {
   background: #df3029;
   box-shadow: 0 14px 28px rgb(241 61 53 / 30%);
