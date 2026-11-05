@@ -2150,32 +2150,95 @@ html,
 }
 
 .methodology-learning {
-  background: #f7f8fa;
-  padding: clamp(2.5rem, 5vw, 4rem) 0;
+  background: #fff;
+  padding: clamp(3.5rem, 7vw, 6rem) 0;
 }
 
 .methodology-learning__container {
   margin: 0 auto;
   max-width: 1440px;
-  padding: 0 6%;
+  padding: 0 7%;
+}
+
+.methodology-learning__header {
+  display: block;
+  margin: 0 auto 2.75rem;
+  max-width: none;
+}
+
+.methodology-learning__eyebrow {
+  color: #e83e33;
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .14em;
+  line-height: 1.4;
+  margin: 0 0 .85rem;
+  text-transform: uppercase;
+}
+
+.methodology-learning__header h2 {
+  color: #101820;
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-style: italic;
+  font-weight: 850;
+  letter-spacing: -.055em;
+  line-height: 1.05;
+  margin: 0;
+  width: 100%;
+}
+
+.methodology-learning__copy {
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.methodology-learning__lead {
+  color: #294d78;
+  font-size: clamp(.95rem, 1.5vw, 1.1rem);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.methodology-learning__description {
+  color: #71809a;
+  font-size: 1rem;
+  line-height: 1.65;
+  margin: .55rem 0 0;
 }
 
 .methodology-learning__grid {
   display: grid;
-  gap: 1.25rem;
+  gap: 1rem;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0 auto;
+  max-width: 1240px;
 }
 
 .methodology-learning__card {
   background: #fff;
-  border: 1px solid #eef0f2;
-  border-radius: 1.25rem;
-  box-shadow: 0 8px 18px rgb(23 35 58 / 8%);
-  min-height: 220px;
+  border: 1px solid #e8ebee;
+  border-radius: 1.15rem;
+  box-shadow: 0 8px 24px rgb(23 35 58 / 5%);
+  min-height: 184px;
   opacity: 0;
-  padding: 1.5rem;
+  overflow: hidden;
+  padding: 1.35rem 1.5rem 1.5rem;
+  position: relative;
   transform: translateY(22px);
-  transition: border-color 250ms ease, box-shadow 250ms ease, translate 250ms ease;
+  transition: border-color 250ms ease, box-shadow 250ms ease, translate 250ms ease, background-color 250ms ease;
+}
+
+.methodology-learning__card::before {
+  background: #f04418;
+  content: '';
+  height: 3px;
+  left: 1.5rem;
+  position: absolute;
+  right: 1.5rem;
+  top: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 300ms ease;
 }
 
 .methodology-learning.scroll-reveal--visible .methodology-learning__card {
@@ -2190,9 +2253,13 @@ html,
 .methodology-learning__card:nth-child(6) { --card-index: 5; }
 
 .methodology-learning__card:hover {
-  border-color: rgb(240 68 24 / 35%);
-  box-shadow: 0 16px 30px rgb(23 35 58 / 13%);
+  border-color: rgb(240 68 24 / 30%);
+  box-shadow: 0 18px 34px rgb(23 35 58 / 10%);
   translate: 0 -5px;
+}
+
+.methodology-learning__card:hover::before {
+  transform: scaleX(1);
 }
 
 .methodology-learning__meta {
@@ -2204,17 +2271,33 @@ html,
 
 .methodology-learning__number {
   color: #a4a9ae;
-  font-size: 1.35rem;
-  font-weight: 750;
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: -.04em;
+}
+
+.methodology-learning__icon-wrap {
+  align-items: center;
+  background: #fff1ed;
+  border-radius: .9rem;
+  display: grid;
+  height: 3.25rem;
+  justify-items: center;
+  transition: background-color 250ms ease, transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
+  width: 3.25rem;
 }
 
 .methodology-learning__icon {
   color: #f04418;
-  transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .methodology-learning__card:hover .methodology-learning__icon {
-  transform: rotate(-8deg) scale(1.12);
+  transform: scale(1.08);
+}
+
+.methodology-learning__card:hover .methodology-learning__icon-wrap {
+  background: #ffe4dc;
+  transform: rotate(-5deg);
 }
 
 .methodology-learning__card h3 {
@@ -2227,7 +2310,7 @@ html,
 
 .methodology-learning__card h3 {
   color: #171c20;
-  font-size: clamp(1.05rem, 1.55vw, 1.35rem);
+  font-size: clamp(1.05rem, 1.65vw, 1.45rem);
   font-weight: 750;
   letter-spacing: -.035em;
   line-height: 1.2;
@@ -2319,6 +2402,7 @@ html,
   .methodology-learning__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
 }
 
 .methodology-section-heading {

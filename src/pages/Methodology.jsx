@@ -1,46 +1,46 @@
 import AnimatedText from '@/components/ui/AnimatedText';
 import {
-  AudioLines,
-  BookOpen,
-  Globe,
+  BriefcaseBusiness,
+  GraduationCap,
+  MapPin,
   MessageCircle,
   Play,
-  Star,
-  StickyNote,
+  Plane,
+  UsersRound,
 } from 'lucide-react'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 
-const learningGoals = [
+const learningContexts = [
   {
-    title: 'Conversación',
-    description: 'Desarrollo progresivo de la capacidad de expresarse y participar en diferentes situaciones.',
+    title: 'Una conversación',
+    description: 'Expresa tus ideas, escucha y responde con naturalidad.',
     icon: MessageCircle,
   },
   {
-    title: 'Comprensión auditiva',
-    description: 'Trabajo orientado a comprender mensajes, conversaciones e información oral.',
-    icon: Star,
+    title: 'Una situación cotidiana',
+    description: 'Usa el idioma en actividades y momentos de todos los días.',
+    icon: MapPin,
   },
   {
-    title: 'Comunicación profesional',
-    description: 'Práctica del idioma aplicada a situaciones relacionadas con contextos laborales.',
-    icon: BookOpen,
+    title: 'Un viaje',
+    description: 'Comunícate al pedir indicaciones, hacer reservas y conocer lugares.',
+    icon: Plane,
   },
   {
-    title: 'Pronunciación',
-    description: 'Acompañamiento para mejorar claridad, comprensión y seguridad al expresarse.',
-    icon: AudioLines,
+    title: 'Un contexto académico',
+    description: 'Comprende instrucciones, participa en clase y comparte tus ideas.',
+    icon: GraduationCap,
   },
   {
-    title: 'Vocabulario en contexto',
-    description: 'Aprender vocabulario relacionado con situaciones y objetivos concretos.',
-    icon: StickyNote,
+    title: 'Un contexto profesional',
+    description: 'Aplica el idioma en reuniones, tareas y conversaciones de trabajo.',
+    icon: BriefcaseBusiness,
   },
   {
-    title: 'Confianza al hablar',
-    description: 'Generar más oportunidades de participación y práctica durante el proceso.',
-    icon: Globe,
+    title: 'Interacción social',
+    description: 'Conecta con otras personas y participa en distintos espacios sociales.',
+    icon: UsersRound,
   },
 ]
 
@@ -120,22 +120,35 @@ function Methodology() {
 
         <section className="methodology-learning" aria-labelledby="methodology-learning-title">
           <div className="methodology-learning__container">
-            <h2 className="sr-only" id="methodology-learning-title">
-              Lo que trabajamos en clase
-            </h2>
+            <header className="methodology-learning__header">
+              <p className="methodology-learning__eyebrow">Contextos reales</p>
+              <h2 id="methodology-learning-title">
+                El idioma cobra sentido cuando aparece fuera del ejercicio.
+              </h2>
+              <div className="methodology-learning__copy">
+                <p className="methodology-learning__lead">
+                  La documentación de TOWERS señala el uso de situaciones de la vida cotidiana como parte de su enfoque.
+                </p>
+                <p className="methodology-learning__description">
+                  El objetivo es que el estudiante pueda relacionar lo aprendido con contextos en los que necesita comprender, responder o comunicarse.
+                </p>
+              </div>
+            </header>
             <div className="methodology-learning__grid">
-              {learningGoals.map(({ title, description, icon: Icon }, index) => (
+              {learningContexts.map(({ title, description, icon: Icon }, index) => (
                 <article className="methodology-learning__card" key={title}>
                   <div className="methodology-learning__meta">
                     <span className="methodology-learning__number">
                       {String(index + 1).padStart(2, '0')}
                     </span>
-                    <Icon
-                      className="methodology-learning__icon"
-                      size={42}
-                      strokeWidth={2.2}
-                      aria-hidden="true"
-                    />
+                    <span className="methodology-learning__icon-wrap">
+                      <Icon
+                        className="methodology-learning__icon"
+                        size={28}
+                        strokeWidth={2.2}
+                        aria-hidden="true"
+                      />
+                    </span>
                   </div>
                   <h3>{title}</h3>
                   <p>{description}</p>
