@@ -1,18 +1,22 @@
 import AnimatedText from "@/components/ui/AnimatedText";
 
 const businessPartners = [
-  { name: "Aliado empresarial 01" },
+  {
+    name: "Convenio empresarial",
+    logo: "/images/convenio-empresarial.png",
+    preserveColor: true,
+  },
   { name: "Aliado empresarial 02" },
   { name: "Aliado empresarial 03" },
-  { name: "Aliado empresarial 04" },
-  { name: "Aliado empresarial 05" },
-  { name: "Aliado empresarial 06" },
+  
 ];
 
 function PartnerMark({ partner }) {
   return partner.logo ? (
     <img
-      className="h-10 w-auto max-w-[170px] object-contain grayscale"
+      className={`h-10 w-auto max-w-[170px] object-contain ${
+        partner.preserveColor ? "" : "grayscale"
+      }`}
       src={partner.logo}
       alt={partner.name}
     />

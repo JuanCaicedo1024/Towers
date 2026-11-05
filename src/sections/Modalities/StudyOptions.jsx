@@ -1,44 +1,75 @@
-import AnimatedText from '@/components/ui/AnimatedText';
-import { Building2, Monitor, UsersRound } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import AnimatedText from "@/components/ui/AnimatedText";
+import { Building2, Monitor, UsersRound } from "lucide-react";
+import { NavLink } from "react-router-dom";
 
-const options = [
-  ['Presencial', '/images/Presencial.jpg', UsersRound],
-  ['Virtual', '/images/Virtual.jpg', Monitor],
-  ['Híbrida', '/images/Hibrida.jpg', Building2],
-]
+const modalities = [
+  [
+    "Presencial",
+    "/images/Presencial.jpg",
+    UsersRound,
+    "Asiste a clases en una sede, practica en persona con tu docente y comparte el proceso con otros estudiantes.",
+  ],
+  [
+    "Virtual",
+    "/images/Virtual.jpg",
+    Monitor,
+    "Conéctate a clases en vivo desde donde estés e interactúa con tu docente y compañeros en línea.",
+  ],
+  [
+    "Híbrida",
+    "/images/Hibrida.jpg",
+    Building2,
+    "Combina clases presenciales y virtuales para adaptar tu aprendizaje a tus horarios y necesidades.",
+  ],
+];
 
 function StudyOptions() {
   return (
-    <section className="bg-white text-[#17233a]">
-      <div className="mx-auto max-w-[1240px] px-[6%] py-16 lg:py-20">
-        
-        <h2 className="mt-8 text-4xl font-extrabold tracking-[-0.045em] text-[#171c20] sm:text-5xl lg:text-6xl"><AnimatedText>Cómo puedes estudiar</AnimatedText></h2>
+    <section className="bg-white px-[6%] py-16 text-[#17233a] lg:px-[12%] lg:py-20">
+      <div className="relative z-10 mx-auto max-w-[1340px]">
+        <h2 className="mt-5 text-4xl font-bold italic leading-[1.05] tracking-[-0.045em] text-[#101820] sm:text-5xl lg:text-6xl">
+          <AnimatedText>Cómo puedes estudiar</AnimatedText>
+        </h2>
+
         <div className="mt-8 grid gap-5 lg:grid-cols-3">
-          {options.map(([title, image, Icon]) => (
-            <article className="group relative overflow-visible rounded-xl border border-[#d9dfe8] bg-white shadow-[0_5px_8px_rgb(0_0_0_/_18%)] transition duration-300 hover:-translate-y-2 hover:shadow-[0_18px_30px_rgb(23_35_58_/_16%)]" key={title}>
-              <div className="relative h-[250px] overflow-hidden rounded-t-xl">
-                <img className="h-full w-full object-cover transition duration-500 group-hover:scale-105" src={image} alt={`Modalidad ${title}`} />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#071026]/30 to-transparent" aria-hidden="true" />
+          {modalities.map(([title, image, Icon, description], index) => (
+            <article
+              className="language-modality-card group overflow-hidden rounded-xl border border-white/40 bg-white/95 shadow-[0_10px_25px_rgb(0_0_0_/_22%)]"
+              style={{ "--card-delay": `${index * 120}ms` }}
+              key={title}
+            >
+              <div className="relative flex h-[180px] items-center justify-center overflow-hidden bg-[#183454]">
+                <img
+                  className="absolute inset-0 z-0 h-full w-full object-cover opacity-75"
+                  src={image}
+                  alt=""
+                />
+                <span className="absolute bottom-0 left-7 z-30 grid h-[82px] w-[102px] translate-y-0 place-items-center rounded-t-2xl bg-white text-[#f13d35] shadow-[0_-5px_15px_rgb(0_0_0_/_12%)]">
+                  <Icon
+                    className="h-11 w-11"
+                    strokeWidth={1.8}
+                    aria-hidden="true"
+                  />
+                </span>
               </div>
-              <span className="absolute left-7 top-[209px] z-50 grid h-[82px] w-[102px] place-items-center rounded-t-2xl bg-white text-[#f13d35] shadow-[0_-5px_15px_rgb(0_0_0_/_12%)] transition duration-300 group-hover:text-[#10254a]">
-                <Icon className="relative z-[60] h-11 w-11 transition-transform duration-300 group-hover:scale-110" strokeWidth={1.8} aria-hidden="true" />
-              </span>
               <div className="px-7 pb-6 pt-12">
                 <h3 className="text-2xl font-bold text-[#071026]">{title}</h3>
                 <p className="mt-4 min-h-[58px] text-base leading-6 text-[#4b5563]">
-                  Salman Amin Khan, fundador y CEO de Khan Academy.
+                  {description}
                 </p>
-                <Link className="mt-5 flex items-center justify-center rounded-xl bg-[#08244a] px-5 py-3 text-lg font-bold text-white transition hover:bg-[#f13d35]" to="/modalidades">
-                  Ver perfil
-                </Link>
+                <NavLink
+                  className="mt-5 flex items-center justify-center rounded-xl bg-[#08244a] px-5 py-3 text-lg font-bold text-white"
+                  to="/modalidades"
+                >
+                  Ver Modalidad
+                </NavLink>
               </div>
             </article>
           ))}
         </div>
       </div>
     </section>
-  )
+  );
 }
 
-export default StudyOptions
+export default StudyOptions;

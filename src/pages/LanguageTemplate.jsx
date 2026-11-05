@@ -213,10 +213,10 @@ function LanguageTemplate() {
               <div className="mt-6 grid gap-2 sm:grid-cols-3">
                 {highlights.map(({ label, icon: Icon }) => (
                   <div
-                    className="flex min-h-[62px] items-center gap-2 rounded-xl bg-white px-3 py-2 shadow-[0_5px_15px_rgb(23_35_58_/_8%)]"
+                    className="group flex min-h-[62px] items-center gap-2 rounded-xl bg-white px-3 py-2 shadow-[0_5px_15px_rgb(23_35_58_/_8%)] transition duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_12px_22px_rgb(23_35_58_/_14%)] motion-reduce:transform-none"
                     key={label}
                   >
-                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-[#fff0eb] text-[#8c281f]">
+                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-[#fff0eb] text-[#8c281f] transition duration-300 group-hover:rotate-6 group-hover:scale-110">
                       <Icon
                         className="h-5 w-5"
                         strokeWidth={1.8}
@@ -350,9 +350,7 @@ function LanguageTemplate() {
         </section>
 
         <div className="relative z-10 mx-auto max-w-[1340px]">
-          <p className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-white/80">
-            MODALIDADES
-          </p>
+          
           <h2 className="mt-5 text-4xl font-bold italic leading-[1.05] tracking-[-0.045em] text-[#101820] sm:text-5xl lg:text-6xl">
             <AnimatedText>Cómo puedes estudiar</AnimatedText>
           </h2>
@@ -387,7 +385,7 @@ function LanguageTemplate() {
                     className="mt-5 flex items-center justify-center rounded-xl bg-[#08244a] px-5 py-3 text-lg font-bold text-white"
                     to="/modalidades"
                   >
-                    Ver perfil
+                    Ver Modalidad 
                   </NavLink>
                 </div>
               </article>

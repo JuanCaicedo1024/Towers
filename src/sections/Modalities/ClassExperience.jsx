@@ -1,5 +1,5 @@
 import AnimatedText from '@/components/ui/AnimatedText';
-import { ArrowRight, BookOpen, ChartNoAxesCombined, MessagesSquare, Mic, Trophy } from 'lucide-react'
+import { ArrowRight, BookOpen, ChartNoAxesCombined, MessagesSquare, Mic, Play, Trophy } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 const steps = [
@@ -34,12 +34,27 @@ function ClassExperience() {
             </article>
           ))}
         </div>
-        <div className="mt-8 overflow-hidden rounded-[1.5rem]">
+        <div
+          className="methodology-intro__video mt-8 h-[360px] sm:h-[480px] lg:h-[560px]"
+          role="img"
+          aria-label="Vista previa de una clase de idiomas en Towers"
+        >
           <img
-            className="h-[320px] w-full object-cover object-center sm:h-[420px] lg:h-[500px]"
+            className="h-full w-full object-cover object-center"
             src="/images/clara.jpg"
-            alt="Clase de idiomas en Towers"
+            alt=""
           />
+          <div className="methodology-intro__video-veil" aria-hidden="true" />
+          <span className="methodology-intro__play" aria-hidden="true">
+            <Play fill="currentColor" size={30} />
+          </span>
+          <div className="methodology-intro__controls" aria-hidden="true">
+            <span className="methodology-intro__progress">
+              <span />
+            </span>
+            <span>5:23</span>
+            <span className="methodology-intro__duration">15:45</span>
+          </div>
         </div>
         <Link
           className="mx-auto mt-8 flex max-w-[480px] items-center justify-center rounded-xl bg-[#f33d34] px-5 py-3.5 text-base font-bold text-white transition hover:bg-[#df3029]"
