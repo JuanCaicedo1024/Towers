@@ -1165,9 +1165,44 @@ html,
 
 @media (prefers-reduced-motion: reduce) {
   .methodology-hero-copy,
-  .methodology-hero-image {
+  .methodology-hero-image,
+  .methodology-intro__copy,
+  .methodology-intro__video,
+  .methodology-intro__play,
+  .methodology-intro__progress span,
+  .methodology-learning__card {
     animation: none;
     transition: none;
+  }
+
+  .methodology-learning__card {
+    opacity: 1;
+    transform: none;
+    translate: none;
+  }
+
+  .methodology-intro__play::after {
+    animation: none;
+  }
+
+  .methodology-learning__card:hover .methodology-learning__icon {
+    transform: none;
+  }
+
+  .methodology-learning__card h3 {
+    transition: none;
+  }
+
+  .methodology-learning__card:hover {
+    transform: none;
+  }
+
+  .methodology-intro__video:hover img {
+    transform: none;
+  }
+
+  .methodology-intro__video:hover .methodology-intro__play {
+    scale: 1;
   }
 
   .scroll-reveal {
@@ -1982,6 +2017,273 @@ html,
   transform: scale(1.025);
 }
 
+.methodology-intro {
+  background: #fff;
+  overflow: hidden;
+}
+
+.methodology-intro__container {
+  margin: 0 auto;
+  max-width: 1440px;
+  padding: clamp(3.5rem, 7vw, 6rem) 6%;
+}
+
+.methodology-intro__copy {
+  animation: methodology-copy-in 750ms 100ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.methodology-intro .methodology-label {
+  color: #e83e33;
+}
+
+.methodology-intro__title {
+  color: #101820;
+  font-size: clamp(2.2rem, 4vw, 3.2rem) !important;
+  font-style: italic;
+  font-weight: 850;
+  letter-spacing: -.055em !important;
+  line-height: 1.05 !important;
+  margin: 0;
+}
+
+.methodology-intro__copy p {
+  color: #294d78;
+  font-size: 1rem;
+  margin: .8rem 0 1.5rem;
+}
+
+.methodology-intro__video {
+  animation: methodology-image-in 900ms 220ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  aspect-ratio: 2.2 / 1;
+  border-radius: 2rem;
+  box-shadow: 0 20px 50px rgb(15 31 51 / 18%);
+  isolation: isolate;
+  margin-top: 2rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.methodology-intro__video img {
+  height: 100%;
+  object-fit: cover;
+  object-position: center 38%;
+  transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+  width: 100%;
+}
+
+.methodology-intro__video:hover img {
+  transform: scale(1.035);
+}
+
+.methodology-intro__video-veil {
+  background: linear-gradient(90deg, rgb(8 24 48 / 52%), rgb(118 34 39 / 38%));
+  inset: 0;
+  position: absolute;
+}
+
+.methodology-intro__play {
+  align-items: center;
+  animation: methodology-play-in 700ms 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  background: #fff;
+  border-radius: 50%;
+  color: #17191c;
+  display: grid;
+  height: 5rem;
+  left: 50%;
+  padding-left: .35rem;
+  place-items: center;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: box-shadow 220ms ease, scale 220ms ease;
+  width: 5rem;
+}
+
+.methodology-intro__play::after {
+  animation: methodology-play-ring 2.2s ease-out infinite;
+  border: 2px solid rgb(255 255 255 / 70%);
+  border-radius: inherit;
+  content: '';
+  inset: -7px;
+  pointer-events: none;
+  position: absolute;
+}
+
+.methodology-intro__video:hover .methodology-intro__play {
+  box-shadow: 0 8px 20px rgb(0 0 0 / 25%);
+  scale: 1.06;
+}
+
+.methodology-intro__controls {
+  align-items: center;
+  bottom: 1.2rem;
+  color: #fff;
+  display: flex;
+  font-size: .85rem;
+  gap: .75rem;
+  left: 1.5rem;
+  position: absolute;
+  right: 1.5rem;
+}
+
+.methodology-intro__progress {
+  background: rgb(255 255 255 / 55%);
+  border-radius: 99px;
+  height: 5px;
+  margin-bottom: .65rem;
+  position: absolute;
+  top: -1rem;
+  width: 100%;
+}
+
+.methodology-intro__progress span {
+  animation: methodology-progress-in 1.2s 900ms ease-out both;
+  background: #fff;
+  border-radius: inherit;
+  display: block;
+  height: 100%;
+  width: 22%;
+}
+
+.methodology-intro__duration {
+  margin-left: auto;
+}
+
+.methodology-learning {
+  background: #f7f8fa;
+  padding: clamp(2.5rem, 5vw, 4rem) 0;
+}
+
+.methodology-learning__container {
+  margin: 0 auto;
+  max-width: 1440px;
+  padding: 0 6%;
+}
+
+.methodology-learning__grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.methodology-learning__card {
+  background: #fff;
+  border: 1px solid #eef0f2;
+  border-radius: 1.25rem;
+  box-shadow: 0 8px 18px rgb(23 35 58 / 8%);
+  min-height: 220px;
+  opacity: 0;
+  padding: 1.5rem;
+  transform: translateY(22px);
+  transition: border-color 250ms ease, box-shadow 250ms ease, translate 250ms ease;
+}
+
+.methodology-learning.scroll-reveal--visible .methodology-learning__card {
+  animation: methodology-card-in 650ms calc(var(--card-index) * 90ms) cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.methodology-learning__card:nth-child(1) { --card-index: 0; }
+.methodology-learning__card:nth-child(2) { --card-index: 1; }
+.methodology-learning__card:nth-child(3) { --card-index: 2; }
+.methodology-learning__card:nth-child(4) { --card-index: 3; }
+.methodology-learning__card:nth-child(5) { --card-index: 4; }
+.methodology-learning__card:nth-child(6) { --card-index: 5; }
+
+.methodology-learning__card:hover {
+  border-color: rgb(240 68 24 / 35%);
+  box-shadow: 0 16px 30px rgb(23 35 58 / 13%);
+  translate: 0 -5px;
+}
+
+.methodology-learning__meta {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.2rem;
+}
+
+.methodology-learning__number {
+  color: #a4a9ae;
+  font-size: 1.35rem;
+  font-weight: 750;
+}
+
+.methodology-learning__icon {
+  color: #f04418;
+  transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.methodology-learning__card:hover .methodology-learning__icon {
+  transform: rotate(-8deg) scale(1.12);
+}
+
+.methodology-learning__card h3 {
+  transition: color 220ms ease;
+}
+
+.methodology-learning__card:hover h3 {
+  color: #e83e33;
+}
+
+.methodology-learning__card h3 {
+  color: #171c20;
+  font-size: clamp(1.05rem, 1.55vw, 1.35rem);
+  font-weight: 750;
+  letter-spacing: -.035em;
+  line-height: 1.2;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.methodology-learning__card p {
+  color: #65707b;
+  font-size: 1rem;
+  line-height: 1.45;
+  margin: .75rem 0 0;
+}
+
+@keyframes methodology-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes methodology-play-ring {
+  0% {
+    opacity: .8;
+    transform: scale(.92);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.28);
+  }
+}
+
+@keyframes methodology-play-in {
+  from {
+    opacity: 0;
+    scale: .8;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+@keyframes methodology-progress-in {
+  from {
+    width: 0;
+  }
+  to {
+    width: 22%;
+  }
+}
+
 @keyframes methodology-copy-in {
   from {
     opacity: 0;
@@ -2001,6 +2303,21 @@ html,
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 900px) {
+  .methodology-hero .methodology-split {
+    gap: 2rem;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .methodology-hero .methodology-hero-image {
+    height: clamp(280px, 48vw, 400px);
+  }
+
+  .methodology-learning__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -2028,7 +2345,7 @@ html,
 }
 
 .methodology-hero .methodology-label {
-  color: #91a2bb;
+  color: #e83e33;
 }
 
 .methodology-hero p {
@@ -3732,6 +4049,10 @@ html,
     padding-top: 60px;
   }
 
+  .methodology-learning__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .methodology-split,
   .methodology-split--media {
     gap: 36px;
@@ -3778,6 +4099,38 @@ html,
   .experience-final .experience-container {
     padding-bottom: 70px;
     padding-top: 42px;
+  }
+}
+
+@media (max-width: 520px) {
+  .methodology-learning__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .methodology-learning__card {
+    min-height: 0;
+    padding: 1.25rem;
+  }
+
+  .methodology-learning__meta {
+    margin-bottom: .9rem;
+  }
+
+  .methodology-intro__video {
+    aspect-ratio: 1.45 / 1;
+    border-radius: 1.25rem;
+    margin-top: 1.5rem;
+  }
+
+  .methodology-intro__controls {
+    bottom: .85rem;
+    left: 1rem;
+    right: 1rem;
+  }
+
+  .methodology-intro__play {
+    height: 4rem;
+    width: 4rem;
   }
 
   .experience-split {

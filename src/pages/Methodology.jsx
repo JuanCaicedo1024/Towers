@@ -1,42 +1,48 @@
 import AnimatedText from '@/components/ui/AnimatedText';
-import { Link } from 'react-router-dom'
+import {
+  AudioLines,
+  BookOpen,
+  Globe,
+  MessageCircle,
+  Play,
+  Star,
+  StickyNote,
+} from 'lucide-react'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 
-const skills = [
-  ['01', 'Escucha', 'Comprender lo que escuchas en diferentes contextos, ritmos y situaciones de comunicación.'],
-  ['02', 'Habla', 'Expresarte con claridad, fluidez y seguridad para participar e interactuar con otras personas.'],
-  ['03', 'Lectura', 'Comprender información escrita y aplicar cada palabra en el proceso de aprendizaje.'],
-  ['04', 'Escritura', 'Organizar y expresar ideas por escrito de acuerdo con el nivel y el objetivo del estudiante.'],
+const learningGoals = [
+  {
+    title: 'Conversación',
+    description: 'Desarrollo progresivo de la capacidad de expresarse y participar en diferentes situaciones.',
+    icon: MessageCircle,
+  },
+  {
+    title: 'Comprensión auditiva',
+    description: 'Trabajo orientado a comprender mensajes, conversaciones e información oral.',
+    icon: Star,
+  },
+  {
+    title: 'Comunicación profesional',
+    description: 'Práctica del idioma aplicada a situaciones relacionadas con contextos laborales.',
+    icon: BookOpen,
+  },
+  {
+    title: 'Pronunciación',
+    description: 'Acompañamiento para mejorar claridad, comprensión y seguridad al expresarse.',
+    icon: AudioLines,
+  },
+  {
+    title: 'Vocabulario en contexto',
+    description: 'Aprender vocabulario relacionado con situaciones y objetivos concretos.',
+    icon: StickyNote,
+  },
+  {
+    title: 'Confianza al hablar',
+    description: 'Generar más oportunidades de participación y práctica durante el proceso.',
+    icon: Globe,
+  },
 ]
-
-const process = [
-  ['01', 'Comprender', 'Primero nos acercamos al idioma y reconocemos sus sonidos, palabras y estructuras.'],
-  ['02', 'Practicar', 'Después ponemos en práctica lo aprendido en actividades significativas y guiadas.'],
-  ['03', 'Aplicar', 'Usamos el idioma en situaciones reales para convertir el conocimiento en una habilidad.'],
-  ['04', 'Consolidar', 'Reforzamos cada avance con nuevos retos, retroalimentación y acompañamiento.'],
-  ['05', 'Avanzar', 'Medimos tu progreso y trazamos el siguiente paso para que sigas creciendo.'],
-]
-
-const teachers = [
-  ['Docente independiente', 'Formación y experiencia', 'Clases personalizadas y acompañamiento cercano.'],
-  ['Docente Towers', 'Formación Towers', 'Una experiencia alineada con nuestra metodología.'],
-  ['Docente especialista', 'Experiencia profesional', 'Conocimiento específico para tus objetivos.'],
-]
-
-const modalities = [
-  ['Presencial', 'Experiencia en sede con interacción directa y acompañamiento.'],
-  ['Online', 'Clases desde cualquier lugar manteniendo el enfoque de interacción.'],
-  ['Híbrida', 'La flexibilidad perfecta para combinar ambos formatos.'],
-]
-
-function Placeholder({ className = '' }) {
-  return (
-    <div className={`methodology-placeholder ${className}`} aria-label="Espacio reservado para material audiovisual">
-      <span>Fotografía / video de aprendizaje</span>
-    </div>
-  )
-}
 
 function SectionLabel({ children, dark = false }) {
   return <span className={`methodology-label ${dark ? 'text-[#71809a]' : ''}`}>{children}</span>
@@ -53,9 +59,9 @@ function Methodology() {
             <div className="methodology-split">
               <div className="methodology-hero-copy">
                 <SectionLabel dark="true">Metodología Towers</SectionLabel>
-                <h1 className="m-0 max-w-[680px] text-[clamp(2.6rem,5.5vw,5.3rem)] leading-[1.02] tracking-[-0.045em] text-[#101820]">
+                <h1 className="m-0 max-w-[680px] text-[clamp(2.6rem,5.5vw,5.3rem)] font-semibold leading-[1.02] tracking-[-0.045em] text-[#101820]">
                   <AnimatedText per="line">Aprender un idioma</AnimatedText>
-                  <span className="text-[#f13d35]">
+                  <span>
                     <AnimatedText per="line">significa usarlo.</AnimatedText>
                   </span>
                 </h1>
@@ -76,7 +82,68 @@ function Methodology() {
           </div>
         </section>
 
-        
+        <section className="methodology-intro">
+          <div className="methodology-intro__container">
+            <div className="methodology-intro__copy">
+              <SectionLabel>Modalidades</SectionLabel>
+              <h2 className="methodology-intro__title">
+                <AnimatedText>Clase introductoria</AnimatedText>
+              </h2>
+              <p>
+                <AnimatedText>
+                  Conoce una experiencia de aprendizaje basada en práctica e interacción.
+                </AnimatedText>
+              </p>
+            </div>
+
+            <div
+              className="methodology-intro__video"
+              role="img"
+              aria-label="Vista previa de una clase de idiomas de Towers"
+            >
+              <img
+                src="/images/TOWERS/TOWERS/fotos/DSC06726.jpg.jpeg"
+                alt=""
+              />
+              <div className="methodology-intro__video-veil" aria-hidden="true" />
+              <span className="methodology-intro__play" aria-hidden="true">
+                <Play fill="currentColor" size={30} />
+              </span>
+              <div className="methodology-intro__controls" aria-hidden="true">
+                <span className="methodology-intro__progress"><span /></span>
+                <span>5:23</span>
+                <span className="methodology-intro__duration">15:45</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="methodology-learning" aria-labelledby="methodology-learning-title">
+          <div className="methodology-learning__container">
+            <h2 className="sr-only" id="methodology-learning-title">
+              Lo que trabajamos en clase
+            </h2>
+            <div className="methodology-learning__grid">
+              {learningGoals.map(({ title, description, icon: Icon }, index) => (
+                <article className="methodology-learning__card" key={title}>
+                  <div className="methodology-learning__meta">
+                    <span className="methodology-learning__number">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <Icon
+                      className="methodology-learning__icon"
+                      size={42}
+                      strokeWidth={2.2}
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <h3>{title}</h3>
+                  <p>{description}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
       </main>
       <Footer />
     </>
