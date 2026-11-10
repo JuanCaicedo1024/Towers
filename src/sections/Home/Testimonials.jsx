@@ -87,7 +87,7 @@ function Testimonials() {
           </div>
         </div>
 
-        <div className="relative mt-10 flex translate-y-1/2 flex-col justify-between gap-4 rounded-[1.3rem] bg-white p-5 text-[#071026] shadow-[0_16px_35px_rgb(0_0_0_/_25%)] sm:flex-row sm:items-center sm:p-6 lg:mt-12">
+        <div className="group relative mt-10 flex translate-y-1/2 flex-col justify-between gap-4 rounded-[1.3rem] bg-white p-5 text-[#071026] shadow-[0_16px_35px_rgb(0_0_0_/_25%)] transition-shadow duration-300 hover:shadow-[0_22px_45px_rgb(0_0_0_/_30%)] sm:flex-row sm:items-center sm:p-6 lg:mt-12">
           <div>
             <h3 className="m-0 text-2xl font-bold italic tracking-[-0.04em] sm:text-3xl">
               ¿Buscas formación para tu equipo?
@@ -96,12 +96,18 @@ function Testimonials() {
               Proceso y propuesta diferenciados para empresas.
             </p>
           </div>
-          <NavLink
-            className="inline-flex items-center justify-center rounded-lg bg-[#f33d35] px-6 py-2.5 text-sm font-bold text-white transition hover:bg-[#df3029] sm:min-w-[320px]"
-            to="/contacto"
-          >
-            Towers para empresas
-          </NavLink>
+          <div className="flex flex-col items-center gap-2 sm:min-w-[320px]">
+            <NavLink
+              className="group/button inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#f33d35] px-6 py-3 text-sm font-bold text-white shadow-[0_8px_18px_rgb(243_61_53_/_20%)] transition duration-200 hover:-translate-y-0.5 hover:bg-[#df3029] hover:shadow-[0_12px_24px_rgb(243_61_53_/_30%)] active:translate-y-0 active:scale-[0.98]"
+              to="/empresas"
+            >
+              Towers para empresas
+              <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover/button:translate-x-1" aria-hidden="true" />
+            </NavLink>
+            <span className="text-center text-xs text-[#526174]">
+              Para más información, entra a Towers para empresas
+            </span>
+          </div>
         </div>
       </div>
     </section>

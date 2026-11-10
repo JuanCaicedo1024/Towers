@@ -2,6 +2,7 @@ import AnimatedText from '@/components/ui/AnimatedText';
 import { TextEffect } from '../../../components/motion-primitives/text-effect';
 import { ScrollVelocityRow } from '@/components/ui/scroll-based-velocity';
 import { Link } from 'react-router-dom';
+import { ArrowRight, Gauge } from 'lucide-react';
 
 function Hero() {
   return (
@@ -27,17 +28,25 @@ function Hero() {
             situaciones reales.</AnimatedText>
           </p>
           <div className="mt-6 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
-            <button className="inline-flex min-w-[250px] items-center justify-between gap-6 rounded-xl bg-[#E83E33] px-7 py-4 text-sm font-semibold text-white shadow-[0_8px_18px_rgb(232_62_51_/_22%)] transition hover:-translate-y-0.5 hover:bg-[#cf3028] hover:shadow-[0_10px_22px_rgb(232_62_51_/_32%)]" type="button">
+            <Link className="inline-flex min-w-[250px] items-center justify-between gap-6 rounded-xl bg-[#E83E33] px-7 py-4 text-sm font-bold text-white shadow-[0_8px_18px_rgb(232_62_51_/_22%)] transition hover:-translate-y-0.5 hover:bg-[#cf3028] hover:shadow-[0_10px_22px_rgb(232_62_51_/_32%)]" to="/idiomas">
               Encuentra tu programa
-              <span aria-hidden="true" className="text-xl leading-none">→</span>
-            </button>
-            <Link className="inline-flex min-w-[250px] items-center justify-center gap-3 rounded-xl border border-[#9eabb9] bg-[#edf1f5] px-7 py-4 text-sm font-semibold text-[#183454] shadow-sm transition hover:-translate-y-0.5 hover:bg-white hover:shadow-md" to="/clase-introductoria">
+              <ArrowRight className="h-5 w-5" aria-hidden="true" />
+            </Link>
+            <Link className="inline-flex min-w-[250px] items-center justify-center gap-3 rounded-xl border border-[#9eabb9] bg-[#edf1f5] px-7 py-4 text-sm font-bold text-[#183454] shadow-sm transition hover:-translate-y-0.5 hover:bg-white hover:shadow-md" to="/clase-introductoria">
               Regístrate para tu clase gratuita
               <span aria-hidden="true" className="grid h-5 w-5 place-items-center rounded-full bg-[#183454] text-sm text-white">+</span>
             </Link>
           </div>
+          <Link
+            className="mt-4 inline-flex items-center gap-2 rounded-xl border border-[#f2d5d0] bg-white/80 px-4 py-3 text-sm font-bold text-[#183454] shadow-sm transition hover:-translate-y-0.5 hover:border-[#E83E33] hover:shadow-md"
+            to="/prueba-de-nivel"
+          >
+            <Gauge className="h-5 w-5 text-[#E83E33]" aria-hidden="true" />
+            Descubre tu nivel gratis
+            <ArrowRight className="h-4 w-4 text-[#E83E33]" aria-hidden="true" />
+          </Link>
           <ScrollVelocityRow
-            className="mt-5 w-[390px] max-w-full font-mono text-[10px] font-bold uppercase tracking-[0.08em] text-[#C83A2F]"
+            className="mt-5 w-[390px] max-w-full font-mono text-sm font-bold uppercase tracking-[0.08em] text-[#C83A2F]"
             baseVelocity={2}
           >
             <div className="inline-flex items-center gap-x-5 pr-5">
@@ -54,9 +63,9 @@ function Hero() {
 
         <div className="relative flex min-h-[430px] items-end justify-center self-stretch xl:min-h-[720px]">
           <img
-            className="relative z-10 h-auto w-[76%] max-w-[500px] object-contain object-bottom [mask-image:radial-gradient(ellipse_at_center,black_64%,transparent_100%)] xl:absolute xl:bottom-0 xl:right-0 xl:w-full xl:max-w-none"
-            src="/images/hero.png"
-            alt="Mujer aprendiendo idiomas con un globo terráqueo frente a la Estatua de la Libertad"
+            className="relative z-10 h-auto w-[90%] max-w-[500px] object-contain object-bottom xl:absolute xl:bottom-0 xl:right-0 xl:h-[92%] xl:w-auto xl:max-w-full"
+            src="/images/Hero_Towers.png"
+            alt="El mejor lugar para aprender y crecer, con una estudiante y el Big Ben"
           />
         </div>
       </div>

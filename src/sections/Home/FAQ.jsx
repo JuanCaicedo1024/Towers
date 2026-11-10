@@ -11,7 +11,7 @@ const questions = [
     icon: '♡',
     question: '¿Qué idiomas puedo estudiar en TOWERS?',
     answer:
-      'Actualmente puedes encontrar programas de inglés, francés, portugués y alemán. Italiano aparece en la información interna, pero su disponibilidad debe confirmarse antes de elegirlo como parte de la oferta.',
+      'En TOWERS puedes estudiar inglés, francés, portugués y alemán. También puedes consultar con un asesor la disponibilidad del programa de italiano.',
   },
   {
     icon: '☷',

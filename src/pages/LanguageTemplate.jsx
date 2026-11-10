@@ -231,11 +231,11 @@ function LanguageTemplate() {
               </div>
             </div>
 
-            <div className="relative min-h-[360px] overflow-hidden rounded-[2rem] sm:min-h-[470px] lg:min-h-[560px]">
+            <div className="relative min-h-[360px] overflow-hidden rounded-[2rem] bg-[#e8e4e2] sm:min-h-[470px] lg:min-h-[560px]">
               <img
                 src={program.image}
                 alt={`Programa de ${program.name}`}
-                className="absolute inset-0 h-full w-full rounded-[2rem] object-cover"
+                className="absolute inset-0 h-full w-full rounded-[2rem] object-contain object-center"
               />
               <div className="absolute bottom-6 right-5 flex flex-row items-center gap-3 rounded-[8px] bg-white px-4 py-3 text-[#101820] shadow-[0_6px_16px_rgb(0_0_0_/_16%)] sm:bottom-8 sm:right-8">
                 <span

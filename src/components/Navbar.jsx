@@ -39,14 +39,15 @@ const navigationItems = [
     ],
   },
   { label: 'Nosotros', path: '/nosotros' },
-  { label: 'Prueba de nivel', path: '/prueba-de-nivel', href: 'https://towers.edu.co/test' },
+
+  { label: 'Prueba de nivel', path: '/prueba-de-nivel' },
 ]
 
 function Logo() {
   return (
     <NavLink className="relative z-20 shrink-0 px-2 py-1" to="/" aria-label="Towers, inicio">
       <img
-        className="h-[46px] w-[112px] object-contain sm:w-[140px]"
+        className="h-[64px] w-[157px] object-contain sm:w-[196px]"
         src="/images/Towers_logo.png"
         alt="Towers Centro activo de idiomas"
       />
@@ -59,7 +60,7 @@ function NavigationLink({ item, mobile = false, openMenu, onToggle, onNavigate }
     if (item.href) {
       return (
         <a
-          className="relative z-20 whitespace-nowrap rounded-full px-1.5 py-2 text-[13px] font-medium text-[#111827] transition-colors hover:text-[#E83E33] xl:px-2 xl:text-sm"
+          className="relative z-20 whitespace-nowrap rounded-full px-1.5 py-2 text-sm font-semibold text-[#111827] transition-colors hover:text-[#E83E33] xl:px-2 xl:text-[15px]"
           href={item.href}
           onClick={onNavigate}
         >
@@ -71,7 +72,7 @@ function NavigationLink({ item, mobile = false, openMenu, onToggle, onNavigate }
     return (
       <NavLink
         className={({ isActive }) =>
-          `relative z-20 whitespace-nowrap rounded-full px-1.5 py-2 text-[13px] font-medium text-[#111827] transition-colors hover:text-[#E83E33] xl:px-2 xl:text-sm${isActive ? ' text-[#E83E33]' : ''}`
+          `relative z-20 whitespace-nowrap rounded-full px-1.5 py-2 text-sm font-semibold text-[#111827] transition-colors hover:text-[#E83E33] xl:px-2 xl:text-[15px]${isActive ? ' text-[#E83E33]' : ''}`
         }
         to={item.path}
         onClick={onNavigate}
@@ -85,7 +86,7 @@ function NavigationLink({ item, mobile = false, openMenu, onToggle, onNavigate }
     <div className="navbar__item navbar__item--menu relative z-20">
       <button
         aria-expanded={openMenu === item.path}
-        className="inline-flex items-center gap-1 whitespace-nowrap rounded-full border-0 bg-transparent px-1.5 py-2 text-[13px] font-medium text-[#111827] transition-colors hover:text-[#E83E33] xl:px-2 xl:text-sm"
+        className="inline-flex items-center gap-1 whitespace-nowrap rounded-full border-0 bg-transparent px-1.5 py-2 text-sm font-semibold text-[#111827] transition-colors hover:text-[#E83E33] xl:px-2 xl:text-[15px]"
         type="button"
         onClick={() => onToggle(item.path)}
       >
@@ -143,7 +144,7 @@ function Navbar() {
         </nav>
         <NavbarButton
           as={NavLink}
-          className="mr-1 inline-flex h-10 min-w-[132px] shrink-0 items-center justify-center gap-2 rounded-xl bg-[#E83E33] px-4 text-sm font-semibold text-white shadow-[0_6px_14px_rgb(232_62_51_/_22%)] transition hover:-translate-y-0.5 hover:bg-[#cf3028] hover:shadow-[0_8px_18px_rgb(232_62_51_/_30%)] xl:mr-2 xl:min-w-[140px] xl:px-5"
+          className="mr-1 inline-flex h-10 min-w-[132px] shrink-0 items-center justify-center gap-2 rounded-xl bg-[#E83E33] px-4 text-sm font-bold text-white shadow-[0_6px_14px_rgb(232_62_51_/_22%)] transition hover:-translate-y-0.5 hover:bg-[#cf3028] hover:shadow-[0_8px_18px_rgb(232_62_51_/_30%)] xl:mr-2 xl:min-w-[140px] xl:px-5"
           to="/contacto"
         >
           Contactar
@@ -178,7 +179,7 @@ function Navbar() {
                 <div className="ml-4 flex flex-col gap-2 border-l border-[#dce2eb] pl-4">
                   {item.submenu.map((submenuItem) => (
                     <NavLink
-                      className="text-sm text-[#627493]"
+                      className="text-base font-medium text-[#111827]"
                       key={submenuItem.path}
                       to={submenuItem.path}
                       onClick={closeMenus}
@@ -192,7 +193,7 @@ function Navbar() {
           ))}
           <NavbarButton
             as={NavLink}
-            className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-[#E83E33] text-white shadow-[0_6px_14px_rgb(232_62_51_/_22%)] transition hover:bg-[#cf3028]"
+            className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-[#E83E33] text-sm font-bold text-white shadow-[0_6px_14px_rgb(232_62_51_/_22%)] transition hover:bg-[#cf3028]"
             to="/contacto"
             onClick={closeMenus}
           >

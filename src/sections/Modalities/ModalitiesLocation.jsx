@@ -52,15 +52,15 @@ function LocationCard({ address, images, city, name, phones }) {
   return (
     <article className="modalities-location-card group flex min-w-0 flex-col text-center transition-transform duration-300 ease-out hover:-translate-y-1 motion-reduce:transform-none">
       <div className="flex-1 text-center">
-        <p className="mt-0.5 text-sm font-bold text-[#294d78]">
+        <p className="mt-0.5 text-base font-bold text-black">
           {name}
         </p>
-        <p className="mt-0.5 text-xs leading-5 text-[#294d78]">{address}</p>
+        <p className="mt-0.5 text-sm leading-5 text-black">{address}</p>
         {phones.length > 0 && (
           <div className="mt-2 grid gap-1">
             {phones.map(({ label, number }) => (
               <a
-                className="text-xs leading-5 text-[#294d78] hover:text-[#f13d35]"
+                className="text-sm leading-5 text-black hover:text-[#f13d35]"
                 href={`tel:${number.replace(/[^\d+]/g, '')}`}
                 key={label}
               >
@@ -100,14 +100,14 @@ function ModalitiesLocation() {
   return (
     <section className="modalities-location bg-white text-black">
       <div className="mx-auto max-w-[1240px] px-[6%] py-16 lg:py-20">
-        <h2 className="mx-auto max-w-[600px] text-center text-3xl font-extrabold italic leading-[1.05] tracking-[-0.045em] text-[#171c20] sm:text-4xl">
-          <AnimatedText>El idioma no termina cuando termina la clase.</AnimatedText>
+        <h2 className="mx-auto flex w-full max-w-[600px] justify-center text-center text-3xl font-extrabold italic leading-[1.05] tracking-[-0.045em] text-[#171c20] sm:text-4xl">
+          <AnimatedText per="line">El idioma no termina cuando termina la clase.</AnimatedText>
         </h2>
 
         <div className="mt-10 grid gap-14 sm:mt-12 sm:gap-20">
           {cities.map(({ city, sedes }) => (
             <div key={city}>
-              <h3 className="text-center text-2xl font-extrabold tracking-[-0.04em] text-[#294d78]">
+              <h3 className="text-center text-[1.75rem] font-extrabold tracking-[-0.04em] text-black">
                 {city}
               </h3>
 

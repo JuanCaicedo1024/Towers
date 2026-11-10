@@ -59,7 +59,7 @@ function Methodology() {
             <div className="methodology-split">
               <div className="methodology-hero-copy">
                 <SectionLabel dark="true">Metodología Towers</SectionLabel>
-                <h1 className="m-0 max-w-[680px] text-[clamp(2.6rem,5.5vw,5.3rem)] font-semibold leading-[1.02] tracking-[-0.045em] text-[#101820]">
+                <h1 className="m-0 max-w-[680px] text-[clamp(2.6rem,5.5vw,5.3rem)] font-extrabold leading-[1.02] tracking-[-0.045em] text-[#101820]">
                   <AnimatedText per="line">Aprender un idioma</AnimatedText>
                   <span>
                     <AnimatedText per="line">significa usarlo.</AnimatedText>
@@ -75,8 +75,8 @@ function Methodology() {
               </div>
               <img
                 className="methodology-hero-image"
-                src="/images/Presencial.jpg"
-                alt="Docente impartiendo una clase presencial a sus estudiantes"
+                src="/images/TOWERS/TOWERS/fotos/DSC06743.jpg.jpeg"
+                alt="Docente y estudiantes interactuando durante una clase de idiomas"
               />
             </div>
           </div>
@@ -85,13 +85,13 @@ function Methodology() {
         <section className="methodology-intro">
           <div className="methodology-intro__container">
             <div className="methodology-intro__copy">
-              <SectionLabel>Modalidades</SectionLabel>
+              <SectionLabel>Experiencia en clase</SectionLabel>
               <h2 className="methodology-intro__title">
-                <AnimatedText>Clase introductoria</AnimatedText>
+                <AnimatedText>Así se vive una clase</AnimatedText>
               </h2>
               <p>
                 <AnimatedText>
-                  Conoce una experiencia de aprendizaje basada en práctica e interacción.
+                  Una experiencia para practicar, interactuar y usar el idioma en situaciones reales.
                 </AnimatedText>
               </p>
             </div>
@@ -127,10 +127,10 @@ function Methodology() {
               </h2>
               <div className="methodology-learning__copy">
                 <p className="methodology-learning__lead">
-                  La documentación de TOWERS señala el uso de situaciones de la vida cotidiana como parte de su enfoque.
+                  En TOWERS, el aprendizaje se conecta con situaciones de la vida cotidiana.
                 </p>
                 <p className="methodology-learning__description">
-                  El objetivo es que el estudiante pueda relacionar lo aprendido con contextos en los que necesita comprender, responder o comunicarse.
+                  Así relacionas lo aprendido con momentos en los que necesitas comprender, responder y comunicarte.
                 </p>
               </div>
             </header>

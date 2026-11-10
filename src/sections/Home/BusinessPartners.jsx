@@ -4,18 +4,19 @@ const businessPartners = [
   {
     name: "Convenio empresarial",
     logo: "/images/convenio-empresarial.png",
-    preserveColor: true,
   },
-  { name: "Aliado empresarial 02" },
-  { name: "Aliado empresarial 03" },
-  
+  { name: "Addi", logo: "/images/Addi.png" },
+  { name: "Sistecrédito", logo: "/images/Sistecredito.png", crop: true },
+  { name: "Universidad del Sinú", logo: "/images/Universidad.png", crop: true },
+  { name: "CENS", logo: "/images/Cens.jpg", logoClassName: "h-[72px] w-[72px] object-contain" },
+  { name: "Clínica Machicado" },
 ];
 
 function PartnerMark({ partner }) {
   return partner.logo ? (
     <img
-      className={`h-10 w-auto max-w-[170px] object-contain ${
-        partner.preserveColor ? "" : "grayscale"
+      className={partner.logoClassName || `h-12 w-[180px] ${
+        partner.crop ? "object-cover" : "object-contain"
       }`}
       src={partner.logo}
       alt={partner.name}
@@ -31,7 +32,7 @@ function BusinessPartners() {
   const carouselItems = [...businessPartners, ...businessPartners];
 
   return (
-    <section className="overflow-hidden bg-white px-[6%] py-14 text-[#071026] lg:px-[10%] lg:py-20">
+    <section id="towers-empresas" className="scroll-mt-24 overflow-hidden bg-white px-[6%] py-14 text-[#071026] lg:px-[10%] lg:py-20">
       <div className="mx-auto max-w-[1280px]">
         <div className="mx-auto max-w-[720px] text-center">
           <p className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-[#e83e33]">

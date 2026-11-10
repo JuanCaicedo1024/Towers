@@ -64,7 +64,7 @@ function LanguagesHero() {
 
         <div className="relative min-h-[360px] overflow-hidden rounded-[2rem] bg-[#d8c9c6] sm:min-h-[470px] lg:min-h-[560px]">
           <img
-            className="absolute inset-0 h-full w-full object-cover object-center"
+            className="absolute inset-0 h-full w-full object-contain object-center"
             src="/images/Idiomas_pg.jpg"
             alt="Estudiante de Towers aprendiendo idiomas"
           />

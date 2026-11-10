@@ -8,6 +8,7 @@ import Methodology from "../sections/Home/Methodology";
 import Modalities from "../sections/Home/Modalities";
 import BusinessPartners from "../sections/Home/BusinessPartners";
 import Testimonials from "../sections/Home/Testimonials";
+import HomeLocation from "../sections/Home/HomeLocation";
 
 function Home() {
   return (
@@ -22,6 +23,7 @@ function Home() {
         <Experience />
         <BusinessPartners />
         <FAQ />
+        <HomeLocation />
       </main>
       <Footer />
     </>

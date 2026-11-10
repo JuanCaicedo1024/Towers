@@ -4,6 +4,7 @@ import Contact from './pages/Contact'
 import Community from './pages/Community'
 import Dashboard from './pages/Dashboard'
 import Experience from './pages/Experience'
+import Enterprise from './pages/Enterprise'
 import Home from './pages/Home'
 import Languages from './pages/Languages'
 import LanguageTemplate from './pages/LanguageTemplate'
@@ -34,6 +35,7 @@ function App() {
         <Route path="/modalidades" element={<Modalities />} />
         <Route path="/metodologia" element={<Methodology />} />
         <Route path="/experiencia-towers" element={<Experience />} />
+        <Route path="/empresas" element={<Enterprise />} />
         <Route path="/experiencia-towers/comunidad" element={<Community />} />
         <Route path="/experiencia-towers/membresia" element={<Membership />} />
         <Route path="/nosotros" element={<About />} />
