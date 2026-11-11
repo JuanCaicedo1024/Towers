@@ -19,6 +19,7 @@ import {
 } from 'lucide-react'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
+import { submitEnterpriseLead } from '../lib/enterpriseLead'
 
 const solutions = [
   {
@@ -136,6 +137,7 @@ const initialForm = {
 function Enterprise() {
   const [form, setForm] = useState(initialForm)
   const [whatsAppUrl, setWhatsAppUrl] = useState('')
+  const [status, setStatus] = useState({ type: 'idle', message: '' })
 
   function updateField(event) {
     const { name, value, type, checked } = event.target
@@ -144,10 +146,14 @@ function Enterprise() {
       [name]: type === 'checkbox' ? checked : value,
     }))
     setWhatsAppUrl('')
+    if (status.type !== 'loading') setStatus({ type: 'idle', message: '' })
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault()
+    if (status.type === 'loading') return
+
+    setStatus({ type: 'loading', message: 'Enviando tu solicitud…' })
     const message = [
       'Hola, quiero solicitar una propuesta de formación empresarial.',
       `Empresa: ${form.company}`,
@@ -160,7 +166,13 @@ function Enterprise() {
       `Modalidad preferida: ${form.modality}`,
       `Objetivo o necesidad: ${form.objective}`,
     ].join('\n')
-    setWhatsAppUrl(`https://wa.me/573013490020?text=${encodeURIComponent(message)}`)
+    try {
+      await submitEnterpriseLead(form)
+      setWhatsAppUrl(`https://wa.me/573013490020?text=${encodeURIComponent(message)}`)
+      setStatus({ type: 'success', message: 'Registramos tu solicitud. También puedes enviarla por WhatsApp para conversar con nuestro equipo.' })
+    } catch (error) {
+      setStatus({ type: 'error', message: error.message || 'No pudimos registrar la solicitud. Inténtalo de nuevo.' })
+    }
   }
 
   return (
@@ -340,15 +352,16 @@ function Enterprise() {
                   <span>Acepto que Towers me contacte para atender esta solicitud y el tratamiento de mis datos personales.</span>
                 </label>
               </div>
-              <button className="mt-5 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-[#e83e33] px-5 py-3 text-sm font-bold text-white shadow-[0_8px_18px_rgb(232_62_51_/_18%)] transition hover:-translate-y-0.5 hover:bg-[#cf3028] hover:shadow-[0_12px_24px_rgb(232_62_51_/_25%)]" type="submit">
-                Quiero una propuesta
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              <button className="mt-5 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-[#e83e33] px-5 py-3 text-sm font-bold text-white shadow-[0_8px_18px_rgb(232_62_51_/_18%)] transition hover:-translate-y-0.5 hover:bg-[#cf3028] hover:shadow-[0_12px_24px_rgb(232_62_51_/_25%)] disabled:cursor-wait disabled:opacity-70" type="submit" disabled={status.type === 'loading'}>
+                {status.type === 'loading' ? 'Enviando…' : 'Quiero una propuesta'}
+                {status.type === 'loading' ? <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white" aria-hidden="true" /> : <ArrowRight className="h-4 w-4" aria-hidden="true" />}
               </button>
+              {status.message && <p className={`mt-4 rounded-lg p-3 text-sm ${status.type === 'error' ? 'bg-[#fff0ef] text-[#9b2c24]' : status.type === 'success' ? 'bg-[#f0f9f2] text-[#235b34]' : 'bg-[#f4f6f8] text-[#4b5563]'}`} role={status.type === 'error' ? 'alert' : 'status'}>{status.message}</p>}
               {whatsAppUrl && (
-                <p className="mt-4 rounded-lg bg-[#f0f9f2] p-3 text-sm text-[#235b34]" role="status">
-                  <span className="mb-2 flex items-center gap-2 font-semibold"><Check className="h-4 w-4" aria-hidden="true" />Solicitud lista. Envíala por WhatsApp para que nuestro equipo la reciba.</span>
-                  <a className="font-bold underline underline-offset-2" href={whatsAppUrl} target="_blank" rel="noopener noreferrer">Continuar por WhatsApp</a>
-                </p>
+                <a className="mt-2 inline-flex items-center gap-2 rounded-lg bg-[#e8f7ed] px-3 py-2 text-sm font-bold text-[#235b34] underline underline-offset-2" href={whatsAppUrl} target="_blank" rel="noopener noreferrer">
+                  <Check className="h-4 w-4" aria-hidden="true" />
+                  Continuar por WhatsApp
+                </a>
               )}
             </form>
           </div>

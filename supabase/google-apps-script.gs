@@ -8,6 +8,7 @@ function doPost(e) {
     const properties = PropertiesService.getScriptProperties();
     const expectedSecret = properties.getProperty('SHARED_SECRET');
     if (!expectedSecret || payload.secret !== expectedSecret) return output({ ok: false, error: 'unauthorized' });
+    if (payload.action === 'enterprise') return saveEnterpriseLead(payload, properties);
     if (!validPayload(payload)) return output({ ok: false, error: 'invalid_data' });
 
     const spreadsheetId = properties.getProperty('SPREADSHEET_ID');
@@ -36,6 +37,69 @@ function doPost(e) {
     console.error(error);
     return output({ ok: false, error: 'sheet_write_failed' });
   }
+}
+
+function saveEnterpriseLead(payload, properties) {
+  if (!validEnterprisePayload(payload)) return output({ ok: false, error: 'invalid_data' });
+
+  const spreadsheetId = properties.getProperty('SPREADSHEET_ID');
+  if (!spreadsheetId) throw new Error('Falta SPREADSHEET_ID');
+  const sheet = SpreadsheetApp.openById(spreadsheetId).getSheetByName('Solicitudes empresariales');
+  if (!sheet) throw new Error('Crea la pestaña Solicitudes empresariales antes de desplegar');
+
+  const lock = LockService.getScriptLock();
+  lock.waitLock(10000);
+  try {
+    const lastRow = sheet.getLastRow();
+    if (lastRow > 1) {
+      const knownIds = sheet.getRange(2, 1, lastRow - 1, 1).getDisplayValues().flat();
+      if (knownIds.includes(payload.lead_id)) return output({ ok: true, duplicate: true });
+    }
+
+    sheet.appendRow(enterpriseRowValues(payload));
+  } finally {
+    lock.releaseLock();
+  }
+  return output({ ok: true });
+}
+
+function enterpriseRowValues(payload) {
+  return [
+    payload.lead_id,
+    new Date(payload.registered_at),
+    safeCell(payload.source),
+    safeCell(payload.company),
+    safeCell(payload.name),
+    safeCell(payload.role),
+    safeCell(payload.email),
+    safeCell(payload.phone),
+    safeCell(payload.team_size),
+    safeCell(payload.language),
+    safeCell(payload.modality),
+    safeCell(payload.objective),
+    'Sí',
+  ];
+}
+
+function validEnterprisePayload(data) {
+  const choices = {
+    team_size: ['1–10', '11–25', '26–50', '51–100', 'Más de 100'],
+    language: ['Inglés', 'Francés', 'Alemán', 'Portugués', 'Italiano'],
+    modality: ['In-company', 'Online', 'Híbrida', 'Por definir'],
+  };
+  return typeof data.lead_id === 'string' && /^[0-9a-f-]{36}$/i.test(data.lead_id)
+    && typeof data.registered_at === 'string' && !Number.isNaN(Date.parse(data.registered_at))
+    && typeof data.source === 'string' && data.source === '/empresas'
+    && typeof data.company === 'string' && data.company.trim().length >= 2 && data.company.length <= 150
+    && typeof data.name === 'string' && data.name.trim().length >= 2 && data.name.length <= 150
+    && typeof data.role === 'string' && data.role.trim().length >= 2 && data.role.length <= 150
+    && typeof data.email === 'string' && data.email.length <= 254 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)
+    && typeof data.phone === 'string' && data.phone.length <= 30
+    && choices.team_size.includes(data.team_size)
+    && choices.language.includes(data.language)
+    && choices.modality.includes(data.modality)
+    && typeof data.objective === 'string' && data.objective.trim().length >= 2 && data.objective.length <= 1200
+    && data.consent === true;
 }
 
 function rowValues(payload) {
