@@ -7,19 +7,19 @@ import { ArrowRight, Gauge } from 'lucide-react';
 function Hero() {
   return (
     <section id="home-hero" className="relative overflow-hidden bg-[#fff8f6] text-[#17233a]">
-      <Link
-        className="absolute left-[8%] top-4 z-20 hidden rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E83E33] lg:block"
-        to="/"
-        aria-label="Towers, inicio"
-      >
-        <img
-          className="h-[72px] w-[176px] object-contain xl:h-[80px] xl:w-[230px]"
-          src="/images/Towers_logo.png"
-          alt="Towers Centro activo de idiomas"
-        />
-      </Link>
       <div className="mx-auto grid min-h-[620px] w-[88%] max-w-[1440px] grid-cols-1 items-center gap-8 pb-16 pt-14 lg:w-[84%] lg:pt-28 xl:grid-cols-[1.1fr_0.9fr] xl:gap-4 xl:pb-0 xl:pt-24">
         <div className="relative z-10 max-w-[780px]">
+          <Link
+            className="mb-4 hidden w-fit rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E83E33] lg:block"
+            to="/"
+            aria-label="Towers, inicio"
+          >
+            <img
+              className="h-[100px] w-[260px] object-contain xl:h-[112px] xl:w-[300px]"
+              src="/images/Towers_logo.png"
+              alt="Towers Centro activo de idiomas"
+            />
+          </Link>
           <h1 className="m-0 max-w-[780px] text-[clamp(2.8rem,4.5vw,5.8rem)] font-extrabold leading-[0.98] tracking-[-0.055em] text-[#101820]">
             <TextEffect as="span" per="word" preset="fade-in-blur" className="inline">
               Aprende un idioma

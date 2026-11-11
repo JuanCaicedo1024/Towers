@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import { NavLink, useLocation } from 'react-router-dom'
+import { useState } from 'react'
+import { NavLink } from 'react-router-dom'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 import {
   MobileNav,
@@ -44,15 +44,9 @@ const navigationItems = [
   { label: 'Prueba de nivel', path: '/prueba-de-nivel' },
 ]
 
-function Logo({ hidden = false }) {
+function Logo() {
   return (
-    <NavLink
-      aria-hidden={hidden}
-      className={`relative z-20 shrink-0 px-1 py-1 transition-opacity duration-300 ${hidden ? 'pointer-events-none opacity-0' : 'opacity-100'}`}
-      tabIndex={hidden ? -1 : undefined}
-      to="/"
-      aria-label="Towers, inicio"
-    >
+    <NavLink className="relative z-20 shrink-0 px-1 py-1" to="/" aria-label="Towers, inicio">
       <img
         className="h-[72px] w-[176px] object-contain sm:w-[220px]"
         src="/images/Towers_logo.png"
@@ -132,22 +126,6 @@ function NavigationLink({ item, mobile = false, openMenu, onToggle, onNavigate }
 function Navbar() {
   const [openMenu, setOpenMenu] = useState(null)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [isHomeHeroVisible, setIsHomeHeroVisible] = useState(true)
-  const { pathname } = useLocation()
-  const isHome = pathname === '/'
-
-  useEffect(() => {
-    if (!isHome) return undefined
-
-    const hero = document.getElementById('home-hero')
-    if (!hero) return undefined
-
-    const observer = new IntersectionObserver(([entry]) => {
-      setIsHomeHeroVisible(entry.isIntersecting)
-    })
-    observer.observe(hero)
-    return () => observer.disconnect()
-  }, [isHome])
 
   const closeMenus = () => {
     setOpenMenu(null)
@@ -157,7 +135,7 @@ function Navbar() {
   return (
     <ResizableNavbar className="top-0 px-[5%] lg:px-[8%]">
       <NavBody className="max-w-[1440px] gap-0 px-3 sm:px-4 xl:gap-1">
-        <Logo hidden={isHome && isHomeHeroVisible} />
+        <Logo />
         <nav className="flex min-w-0 flex-1 items-center justify-center gap-0 xl:gap-1" aria-label="Navegación principal">
           {navigationItems.map((item) => (
             <NavigationLink
