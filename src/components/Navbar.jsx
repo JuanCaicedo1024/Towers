@@ -26,6 +26,7 @@ const navigationItems = [
   },
   { label: 'Modalidades', path: '/modalidades' },
   { label: 'Metodología', path: '/metodologia' },
+  { label: 'Empresas', path: '/empresas' },
   {
     label: 'Experiencia Towers',
     path: '/experiencia-towers',
@@ -72,12 +73,16 @@ function NavigationLink({ item, mobile = false, openMenu, onToggle, onNavigate }
     return (
       <NavLink
         className={({ isActive }) =>
-          `relative z-20 whitespace-nowrap rounded-full px-1.5 py-2 text-sm font-semibold text-[#111827] transition-colors hover:text-[#E83E33] xl:px-2 xl:text-[15px]${isActive ? ' text-[#E83E33]' : ''}`
+          `group relative z-20 whitespace-nowrap rounded-full px-1.5 py-2 text-sm font-semibold text-[#111827] transition-colors duration-200 hover:text-[#E83E33] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E83E33] xl:px-2 xl:text-[15px]${isActive ? ' text-[#E83E33]' : ''}`
         }
         to={item.path}
         onClick={onNavigate}
       >
         {item.label}
+        <span
+          className="absolute inset-x-2 bottom-0 h-0.5 origin-left scale-x-0 rounded-full bg-[#E83E33] transition-transform duration-200 group-hover:scale-x-100 group-focus-visible:scale-x-100 motion-reduce:transition-none"
+          aria-hidden="true"
+        />
       </NavLink>
     )
   }

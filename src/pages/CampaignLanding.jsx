@@ -25,7 +25,7 @@ function CampaignLanding() {
   const content = campaign.content || {}
   const contactUrl = content.destination === 'URL externa' && content.destinationUrl
     ? content.destinationUrl
-    : `https://wa.me/?text=${encodeURIComponent(content.whatsappMessage || `Hola, quiero información sobre ${campaign.name}.`)}`
+    : `https://wa.me/${(content.whatsappNumber || '').replace(/\D/g, '')}?text=${encodeURIComponent(content.whatsappMessage || `Hola, quiero información sobre ${campaign.name}.`)}`
   const external = contactUrl.startsWith('http')
   const benefits = content.benefits || []
   const outcomes = content.outcomes || []

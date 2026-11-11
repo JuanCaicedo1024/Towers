@@ -1,4 +1,5 @@
 import AnimatedText from '@/components/ui/AnimatedText';
+import { MapPin } from 'lucide-react';
 
 // Cambia las rutas de images para actualizar las fotos de cada sede.
 const cities = [
@@ -52,15 +53,15 @@ function LocationCard({ address, images, city, name, phones }) {
   return (
     <article className="modalities-location-card group flex min-w-0 flex-col text-center transition-transform duration-300 ease-out hover:-translate-y-1 motion-reduce:transform-none">
       <div className="flex-1 text-center">
-        <p className="mt-0.5 text-base font-bold text-black">
+        <p className="mt-0.5 text-lg font-bold text-black">
           {name}
         </p>
-        <p className="mt-0.5 text-sm leading-5 text-black">{address}</p>
+        <p className="mt-0.5 text-base leading-6 text-black">{address}</p>
         {phones.length > 0 && (
           <div className="mt-2 grid gap-1">
             {phones.map(({ label, number }) => (
               <a
-                className="text-sm leading-5 text-black hover:text-[#f13d35]"
+                className="text-base leading-6 text-black hover:text-[#f13d35]"
                 href={`tel:${number.replace(/[^\d+]/g, '')}`}
                 key={label}
               >
@@ -82,12 +83,13 @@ function LocationCard({ address, images, city, name, phones }) {
               />
             </div>
             <a
-              className="mt-2 flex min-h-10 items-center justify-center rounded-xl bg-[#f13d35] px-3 py-2 text-center text-xs font-bold text-white transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-[#d92f29] active:translate-y-0 active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#294d78] sm:text-sm"
+              className="mt-2 flex min-h-10 items-center justify-center gap-2 rounded-xl bg-[#f13d35] px-3 py-2 text-center text-xs font-bold text-white transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-[#d92f29] active:translate-y-0 active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#294d78] sm:text-sm"
               href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`}
               target="_blank"
               rel="noopener noreferrer"
             >
-              Conocer la experiencia Towers
+              <MapPin className="h-4 w-4" aria-hidden="true" />
+              Conocer ubicación
             </a>
           </div>
         ))}

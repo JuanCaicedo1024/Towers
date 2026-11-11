@@ -26,7 +26,7 @@ const questions = [
       'El enfoque se basa en la interacción y en el desarrollo de las cuatro habilidades: escucha, habla, lectura y escritura. Practicarás el idioma en diferentes situaciones, no solo teoría.',
   },
   {
-    icon: '□',
+    icon: '✎',
     question: '¿Cómo puedo matricularme?',
     answer:
       'Puedes iniciar el proceso hablando con un asesor por WhatsApp. El equipo te orientará sobre el programa, modalidad, disponibilidad y proceso de matrícula. El pago se gestiona posteriormente según las opciones disponibles.',

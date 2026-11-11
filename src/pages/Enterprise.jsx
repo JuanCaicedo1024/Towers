@@ -186,16 +186,16 @@ function Enterprise() {
               </p>
               <div className="mt-5 flex flex-wrap gap-2">
                 {['In-company', 'Online / híbrido', 'Evaluación inicial', 'Horarios flexibles', 'Reportes de avance'].map((feature) => (
-                  <span className="inline-flex items-center gap-1.5 rounded-lg border border-[#e4e6eb] bg-white/90 px-2.5 py-1.5 text-xs font-medium text-[#4b5563]" key={feature}>
-                    <CheckSquare className="h-3.5 w-3.5 text-[#e83e33]" aria-hidden="true" />
+                  <span className="group inline-flex items-center gap-1.5 rounded-lg border border-[#e4e6eb] bg-white/90 px-2.5 py-1.5 text-xs font-medium text-[#4b5563] transition duration-200 hover:-translate-y-0.5 hover:border-[#f2b6af] motion-reduce:transform-none motion-reduce:transition-none" key={feature}>
+                    <CheckSquare className="h-3.5 w-3.5 text-[#e83e33] transition-transform duration-200 group-hover:scale-110 motion-reduce:transition-none" aria-hidden="true" />
                     {feature}
                   </span>
                 ))}
               </div>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                <a className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-[#e83e33] px-5 py-3 text-sm font-bold text-white shadow-[0_8px_18px_rgb(232_62_51_/_20%)] transition hover:-translate-y-0.5 hover:bg-[#cf3028]" href="#propuesta">
+                <a className="group inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-[#e83e33] px-5 py-3 text-sm font-bold text-white shadow-[0_8px_18px_rgb(232_62_51_/_20%)] transition duration-200 hover:-translate-y-0.5 hover:bg-[#cf3028] hover:shadow-[0_12px_24px_rgb(232_62_51_/_28%)] motion-reduce:transform-none motion-reduce:transition-none" href="#propuesta">
                   Solicitar propuesta
-                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transition-none" aria-hidden="true" />
                 </a>
                 <a className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border-2 border-[#8493a8] bg-white px-5 py-3 text-sm font-semibold text-[#111827] transition hover:-translate-y-0.5 hover:border-[#111827]" href="https://wa.me/573013490020?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20formaci%C3%B3n%20de%20idiomas%20para%20mi%20empresa." target="_blank" rel="noopener noreferrer">
                   Hablar con un asesor
@@ -206,8 +206,8 @@ function Enterprise() {
 
             <div className="relative mx-auto w-full max-w-[590px] lg:justify-self-end">
               <div className="absolute -inset-4 rotate-[-3deg] rounded-[2rem] bg-[#f7d8d4]" aria-hidden="true" />
-              <img className="relative aspect-[1.25/1] w-full rounded-[1.6rem] border-[6px] border-white object-cover object-center shadow-[0_18px_40px_rgb(23_35_58_/_18%)]" src="/images/TOWERS/TOWERS/fotos/DSC06743.jpg.jpeg" alt="Docente y estudiantes participando en una formación de idiomas" />
-              <div className="absolute -bottom-5 left-[8%] right-[8%] flex items-center gap-3 rounded-xl bg-white p-3 shadow-[0_12px_28px_rgb(23_35_58_/_15%)] sm:p-4">
+              <img className="relative aspect-[1.25/1] w-full rounded-[1.6rem] border-[6px] border-white object-cover object-center shadow-[0_18px_40px_rgb(23_35_58_/_18%)] transition-transform duration-500 hover:scale-[1.02] motion-reduce:transform-none motion-reduce:transition-none" src="/images/TOWERS/TOWERS/fotos/DSC06743.jpg.jpeg" alt="Docente y estudiantes participando en una formación de idiomas" />
+              <div className="absolute -bottom-5 left-[8%] right-[8%] flex items-center gap-3 rounded-xl bg-white p-3 shadow-[0_12px_28px_rgb(23_35_58_/_15%)] transition-transform duration-300 hover:-translate-y-1 motion-reduce:transform-none motion-reduce:transition-none sm:p-4">
                 <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-[#fff0eb] text-[#e83e33]">
                   <UsersRound className="h-6 w-6" aria-hidden="true" />
                 </span>
@@ -239,8 +239,8 @@ function Enterprise() {
             <h2 className="mt-2 text-3xl font-bold tracking-[-0.045em] sm:text-4xl">Beneficios para tu organización y tus colaboradores</h2>
             <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {benefits.map(({ title, description, Icon }) => (
-                <article className="flex gap-4 rounded-xl border border-[#f0e9e7] bg-white p-4 shadow-[0_6px_18px_rgb(23_35_58_/_6%)] transition hover:-translate-y-1 hover:shadow-[0_12px_24px_rgb(23_35_58_/_10%)]" key={title}>
-                  <Icon className="h-7 w-7 shrink-0 text-[#e83e33]" strokeWidth={1.8} aria-hidden="true" />
+                <article className="group flex gap-4 rounded-xl border border-[#f0e9e7] bg-white p-4 shadow-[0_6px_18px_rgb(23_35_58_/_6%)] transition duration-300 hover:-translate-y-1 hover:border-[#f2b6af] hover:shadow-[0_12px_24px_rgb(23_35_58_/_10%)] motion-reduce:transform-none motion-reduce:transition-none" key={title}>
+                  <Icon className="h-7 w-7 shrink-0 text-[#e83e33] transition-transform duration-300 group-hover:scale-110 motion-reduce:transition-none" strokeWidth={1.8} aria-hidden="true" />
                   <span>
                     <strong className="block text-base font-semibold leading-5">{title}</strong>
                     <span className="mt-1 block text-sm leading-5 text-[#4b5563]">{description}</span>
@@ -257,14 +257,14 @@ function Enterprise() {
             <h2 className="mt-2 text-3xl font-bold tracking-[-0.045em] sm:text-4xl">Modalidades que se adaptan a tu operación</h2>
             <div className="mt-6 grid gap-5 lg:grid-cols-3">
               {modalities.map(({ title, description, image, alt }) => (
-                <article className="group overflow-hidden rounded-2xl border border-[#e7e9ed] bg-white shadow-[0_8px_22px_rgb(23_35_58_/_6%)] transition hover:-translate-y-1 hover:shadow-[0_16px_30px_rgb(23_35_58_/_12%)]" key={title}>
+                <article className="group overflow-hidden rounded-2xl border border-[#e7e9ed] bg-white shadow-[0_8px_22px_rgb(23_35_58_/_6%)] transition duration-300 hover:-translate-y-1 hover:border-[#f2b6af] hover:shadow-[0_16px_30px_rgb(23_35_58_/_12%)] motion-reduce:transform-none motion-reduce:transition-none" key={title}>
                   <div className="h-40 overflow-hidden sm:h-48">
                     <img className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" src={image} alt={alt} loading="lazy" />
                   </div>
                   <div className="p-5">
                     <h3 className="text-lg font-semibold">{title}</h3>
                     <p className="mt-2 text-sm leading-5 text-[#4b5563]">{description}</p>
-                    <span className="mt-3 block h-1 w-9 rounded-full bg-[#e83e33]" aria-hidden="true" />
+                    <span className="mt-3 block h-1 w-9 rounded-full bg-[#e83e33] transition-all duration-300 group-hover:w-16 motion-reduce:transition-none" aria-hidden="true" />
                   </div>
                 </article>
               ))}
@@ -278,8 +278,8 @@ function Enterprise() {
             <h2 className="mt-2 text-3xl font-bold tracking-[-0.045em] sm:text-4xl">Así funciona un convenio empresarial con Towers</h2>
             <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {process.map(({ title, description, Icon }, index) => (
-                <article className="relative rounded-xl border border-[#e7e9ed] bg-white p-5 shadow-[0_6px_18px_rgb(23_35_58_/_6%)]" key={title}>
-                  <Icon className="h-7 w-7 text-[#e83e33]" aria-hidden="true" />
+                <article className="group relative rounded-xl border border-[#e7e9ed] bg-white p-5 shadow-[0_6px_18px_rgb(23_35_58_/_6%)] transition duration-300 hover:-translate-y-1 hover:border-[#f2b6af] hover:shadow-[0_12px_24px_rgb(23_35_58_/_10%)] motion-reduce:transform-none motion-reduce:transition-none" key={title}>
+                  <Icon className="h-7 w-7 text-[#e83e33] transition-transform duration-300 group-hover:rotate-6 group-hover:scale-110 motion-reduce:transition-none" aria-hidden="true" />
                   <h3 className="mt-4 text-base font-semibold">{title}</h3>
                   <p className="mt-2 text-sm leading-5 text-[#4b5563]">{description}</p>
                   {index < process.length - 1 && <ArrowRight className="absolute -right-3 top-1/2 z-10 hidden h-6 w-6 -translate-y-1/2 bg-[#fff8f6] p-1 text-[#e83e33] lg:block" aria-hidden="true" />}
@@ -369,11 +369,11 @@ function Eyebrow({ children, light = false }) {
 
 function InfoCard({ title, description, Icon }) {
   return (
-    <article className="group rounded-xl border border-[#e7e9ed] bg-white p-5 shadow-[0_6px_18px_rgb(23_35_58_/_6%)] transition hover:-translate-y-1 hover:shadow-[0_12px_24px_rgb(23_35_58_/_10%)]">
-      <Icon className="h-7 w-7 text-[#e83e33] transition-transform group-hover:scale-110" aria-hidden="true" />
+    <article className="group rounded-xl border border-[#e7e9ed] bg-white p-5 shadow-[0_6px_18px_rgb(23_35_58_/_6%)] transition duration-300 hover:-translate-y-1 hover:border-[#f2b6af] hover:shadow-[0_12px_24px_rgb(23_35_58_/_10%)] motion-reduce:transform-none motion-reduce:transition-none">
+      <Icon className="h-7 w-7 text-[#e83e33] transition-transform duration-300 group-hover:rotate-6 group-hover:scale-110 motion-reduce:transition-none" aria-hidden="true" />
       <h3 className="mt-4 text-base font-semibold">{title}</h3>
       <p className="mt-2 text-sm leading-5 text-[#4b5563]">{description}</p>
-      <span className="mt-3 block h-1 w-8 rounded-full bg-[#e83e33]" aria-hidden="true" />
+      <span className="mt-3 block h-1 w-8 rounded-full bg-[#e83e33] transition-all duration-300 group-hover:w-14 motion-reduce:transition-none" aria-hidden="true" />
     </article>
   )
 }

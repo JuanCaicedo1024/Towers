@@ -131,8 +131,8 @@ const modalities = [
 const communityVideos = [
   {
     title: "Comunidad que te impulsa",
-    url: "https://www.instagram.com/reel/DOMrOXNAlQF/",
-    embedUrl: "https://www.instagram.com/reel/DOMrOXNAlQF/embed",
+    url: "https://www.instagram.com/reel/C9Qq_FTJ8rK/",
+    embedUrl: "https://www.instagram.com/reel/C9Qq_FTJ8rK/embed",
   },
   {
     title: "Actividades en la vida real",

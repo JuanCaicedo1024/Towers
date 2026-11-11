@@ -12,8 +12,10 @@ import {
   Link2,
   LayoutTemplate,
   MessageCircle,
+  Monitor,
   Save,
   Sparkles,
+  Smartphone,
   Upload,
 } from "lucide-react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
@@ -50,6 +52,7 @@ const initialForm = {
   cta: "Hablar con un asesor",
   destination: "WhatsApp",
   destinationUrl: "",
+  whatsappNumber: "",
   whatsappMessage: "",
   ctaHeadline: "",
 };
@@ -113,6 +116,7 @@ function CampaignBuilder() {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
+  const [previewDevice, setPreviewDevice] = useState("desktop");
 
   useEffect(() => {
     if (!campaignId) return;
@@ -249,6 +253,7 @@ function CampaignBuilder() {
       destination: form.destination,
       destinationUrl:
         form.destination === "URL externa" ? form.destinationUrl.trim() : "",
+      whatsappNumber: form.whatsappNumber.replace(/\D/g, ""),
       whatsappMessage: form.whatsappMessage.trim(),
       ctaHeadline: form.ctaHeadline.trim(),
     };
@@ -390,6 +395,9 @@ function CampaignBuilder() {
         )}
         <div className="mt-7 grid items-start gap-7 xl:grid-cols-[minmax(0,1fr)_420px]">
           <section className="grid gap-5">
+            <div className="rounded-2xl border border-[#f1c9c4] bg-[#fff8f6] px-5 py-4 text-sm leading-6 text-[#6f5260]">
+              <strong className="text-[#08244a]">Empieza por lo esencial:</strong> completa el nombre, el titular, la descripción, la imagen y el botón. La vista previa se actualiza mientras escribes. Los demás pasos son opcionales.
+            </div>
             <SectionCard
               number="01"
               icon={LayoutTemplate}
@@ -397,10 +405,10 @@ function CampaignBuilder() {
               description="La primera impresión de tu curso."
             >
               <div className="grid gap-5 sm:grid-cols-2">
-                <Field label="Nombre de campaña">
+                <Field label="Nombre de campaña" hint="Nombre interno para reconocerla en tu panel. También completa el texto superior por defecto.">
                   {input("name", { maxLength: 100, required: true })}
                 </Field>
-                <Field label="Slug de la URL">
+                <Field label="Enlace corto" hint="Se genera desde el nombre y puedes editarlo. Usa letras, números y guiones.">
                   <div className="flex overflow-hidden rounded-lg border border-[#dbe4ef]">
                     <span className="bg-[#f4f7fb] px-3 py-3 text-xs text-[#9aabc0]">
                       /campaigns/
@@ -418,12 +426,12 @@ function CampaignBuilder() {
                 <Field label="Canal de campaña">
                   {select("channel", channels)}
                 </Field>
-                <Field label="Texto superior">
+                <Field label="Frase breve sobre el titular" hint="Una etiqueta corta que aparecerá encima del titular.">
                   {input("eyebrow", {
                     placeholder: "Inglés para tu próximo paso",
                   })}
                 </Field>
-                <Field className="sm:col-span-2" label="Titular principal">
+                <Field className="sm:col-span-2" label="Titular principal" hint="La promesa principal del curso. Intenta que sea claro y breve.">
                   {input("headline", {
                     maxLength: 140,
                     required: true,
@@ -431,7 +439,7 @@ function CampaignBuilder() {
                       "Aprende inglés para abrir nuevas oportunidades",
                   })}
                 </Field>
-                <Field className="sm:col-span-2" label="Descripción">
+                <Field className="sm:col-span-2" label="Descripción" hint="Explica en una o dos frases a quién ayuda el curso y qué lo hace especial.">
                   {textarea("supporting", 3, {
                     placeholder: "Cuenta qué hace especial este programa.",
                   })}
@@ -595,6 +603,10 @@ function CampaignBuilder() {
                     })}
                   </Field>
                 ) : (
+                  <>
+                  <Field className="sm:col-span-2" label="Número de WhatsApp" hint="Incluye el código del país, sin el signo +. Ejemplo para Colombia: 573001234567.">
+                    {input("whatsappNumber", { type: "tel", inputMode: "numeric", placeholder: "573001234567" })}
+                  </Field>
                   <Field
                     className="sm:col-span-2"
                     label="Mensaje de WhatsApp"
@@ -604,6 +616,7 @@ function CampaignBuilder() {
                       placeholder: "Hola, quiero información sobre el curso…",
                     })}
                   </Field>
+                  </>
                 )}
                 <Field
                   className="sm:col-span-2"
@@ -653,6 +666,10 @@ function CampaignBuilder() {
                   </h2>
                 </div>
               </div>
+              <div className="flex rounded-lg bg-[#f4f7fb] p-1" aria-label="Tamaño de vista previa">
+                <button type="button" onClick={() => setPreviewDevice("desktop")} aria-pressed={previewDevice === "desktop"} className={`rounded-md p-2 ${previewDevice === "desktop" ? "bg-white text-[#08244a] shadow-sm" : "text-[#7187a4]"}`} title="Vista escritorio"><Monitor size={15} /></button>
+                <button type="button" onClick={() => setPreviewDevice("mobile")} aria-pressed={previewDevice === "mobile"} className={`rounded-md p-2 ${previewDevice === "mobile" ? "bg-white text-[#08244a] shadow-sm" : "text-[#7187a4]"}`} title="Vista móvil"><Smartphone size={15} /></button>
+              </div>
               {campaignId && (
                 <a
                   className="inline-flex items-center gap-1 text-xs font-bold text-[#e83e33]"
@@ -664,8 +681,8 @@ function CampaignBuilder() {
                 </a>
               )}
             </div>
-            <div className="campaign-preview-background bg-[#eef2f6] p-4 sm:p-5">
-              <div className="overflow-hidden rounded-[1.25rem] border-[5px] border-[#08244a] bg-white shadow-[0_24px_40px_rgb(8_36_74_/_18%)]">
+            <div className="campaign-preview-background max-h-[calc(100vh-150px)] overflow-y-auto overscroll-contain bg-[#eef2f6] p-3 sm:p-4">
+              <div className={`mx-auto overflow-hidden rounded-[1.25rem] border-[5px] border-[#08244a] bg-white shadow-[0_24px_40px_rgb(8_36_74_/_18%)] transition-all duration-300 ${previewDevice === "mobile" ? "max-w-[270px]" : "w-full"}`}>
                 <div className="flex h-7 items-center gap-1.5 bg-[#08244a] px-3">
                   <span className="h-1.5 w-1.5 rounded-full bg-[#ff716b]" />
                   <span className="h-1.5 w-1.5 rounded-full bg-[#ffc857]" />
@@ -710,6 +727,7 @@ function CampaignBuilder() {
                     src={form.image}
                     alt=""
                   />
+                  {form.imageCaption && <p className="bg-white px-4 py-2 text-[10px] font-semibold text-[#183454]">{form.imageCaption}</p>}
                   {form.benefits
                     .split("\n")
                     .map((benefit) => benefit.trim())
@@ -729,6 +747,11 @@ function CampaignBuilder() {
                         ))}
                     </div>
                   )}
+                  {form.outcomes.split("\n").map((item) => item.trim()).filter(Boolean).length > 0 && <section className="bg-[#08244a] p-5 text-white"><p className="text-[9px] font-bold uppercase tracking-wide text-[#ffaaa4]">Al terminar</p><h4 className="mt-2 text-lg font-extrabold">Lo que podrás hacer</h4><div className="mt-3 grid gap-2">{form.outcomes.split("\n").map((item) => item.trim()).filter(Boolean).map((item) => <p key={item} className="rounded-lg border border-white/10 bg-white/[.06] p-3 text-[10px] leading-4">✓ {item}</p>)}</div></section>}
+                  {form.methodology && <section className="bg-[#f5f7fb] p-5"><p className="text-[9px] font-bold uppercase tracking-wide text-[#e83e33]">Metodología Towers</p><h4 className="mt-2 text-lg font-extrabold text-[#101820]">Aprende haciendo</h4><p className="mt-3 text-[10px] leading-5 text-[#294d78]">{form.methodology}</p></section>}
+                  {form.curriculum.split("\n").map((line) => line.split("|").map((part) => part.trim())).filter(([title]) => title).length > 0 && <section className="p-5"><p className="text-[9px] font-bold uppercase tracking-wide text-[#e83e33]">Contenido del curso</p><h4 className="mt-2 text-lg font-extrabold text-[#101820]">Un camino claro, paso a paso</h4><div className="mt-3 grid gap-2">{form.curriculum.split("\n").map((line) => line.split("|").map((part) => part.trim())).filter(([title]) => title).map(([title, description], index) => <article key={`${title}-${index}`} className="flex gap-3 rounded-xl border border-[#e3e9ef] p-3"><span className="font-mono text-[10px] font-bold text-[#e83e33]">0{index + 1}</span><div><p className="text-[10px] font-bold text-[#08244a]">{title}</p>{description && <p className="mt-1 text-[9px] leading-4 text-[#627493]">{description}</p>}</div></article>)}</div></section>}
+                  {form.faqs.split("\n").map((line) => line.split("|").map((part) => part.trim())).filter(([question]) => question).length > 0 && <section className="bg-[#f5f7fb] p-5"><p className="text-[9px] font-bold uppercase tracking-wide text-[#e83e33]">Preguntas frecuentes</p><h4 className="mt-2 text-lg font-extrabold text-[#101820]">Resolvemos tus dudas</h4><div className="mt-3 grid gap-3">{form.faqs.split("\n").map((line) => line.split("|").map((part) => part.trim())).filter(([question]) => question).map(([question, answer], index) => <article key={`${question}-${index}`} className="rounded-xl border border-[#e3e9ef] bg-white p-3"><p className="text-[10px] font-bold text-[#08244a]">{question}</p>{answer && <p className="mt-1 text-[9px] leading-4 text-[#627493]">{answer}</p>}</article>)}</div></section>}
+                  <section className="bg-[#e83e33] p-5 text-white"><p className="text-[9px] font-bold uppercase tracking-wide text-white/75">Da el siguiente paso</p><h4 className="mt-2 text-lg font-extrabold">{form.ctaHeadline || "¿Listo para el siguiente paso?"}</h4><span className="mt-4 inline-flex rounded-lg bg-white px-4 py-2.5 text-[10px] font-bold text-[#c83a2f]">{form.cta || "Hablar con un asesor"} →</span></section>
                   {(form.curriculum.trim() ||
                     form.faqs.trim() ||
                     form.outcomes.trim()) && (
