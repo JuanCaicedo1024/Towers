@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { NavLink, useLocation } from 'react-router-dom'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 import {
   MobileNav,
@@ -44,11 +44,17 @@ const navigationItems = [
   { label: 'Prueba de nivel', path: '/prueba-de-nivel' },
 ]
 
-function Logo() {
+function Logo({ hidden = false }) {
   return (
-    <NavLink className="relative z-20 shrink-0 px-2 py-1" to="/" aria-label="Towers, inicio">
+    <NavLink
+      aria-hidden={hidden}
+      className={`relative z-20 shrink-0 px-1 py-1 transition-opacity duration-300 ${hidden ? 'pointer-events-none opacity-0' : 'opacity-100'}`}
+      tabIndex={hidden ? -1 : undefined}
+      to="/"
+      aria-label="Towers, inicio"
+    >
       <img
-        className="h-[64px] w-[157px] object-contain sm:w-[196px]"
+        className="h-[72px] w-[176px] object-contain sm:w-[220px]"
         src="/images/Towers_logo.png"
         alt="Towers Centro activo de idiomas"
       />
@@ -61,7 +67,7 @@ function NavigationLink({ item, mobile = false, openMenu, onToggle, onNavigate }
     if (item.href) {
       return (
         <a
-          className="relative z-20 whitespace-nowrap rounded-full px-1.5 py-2 text-sm font-semibold text-[#111827] transition-colors hover:text-[#E83E33] xl:px-2 xl:text-[15px]"
+          className="relative z-20 whitespace-nowrap rounded-full px-1.5 py-2 text-[15px] font-bold text-[#111827] transition-colors hover:text-[#E83E33] xl:px-2 xl:text-base"
           href={item.href}
           onClick={onNavigate}
         >
@@ -73,7 +79,7 @@ function NavigationLink({ item, mobile = false, openMenu, onToggle, onNavigate }
     return (
       <NavLink
         className={({ isActive }) =>
-          `group relative z-20 whitespace-nowrap rounded-full px-1.5 py-2 text-sm font-semibold text-[#111827] transition-colors duration-200 hover:text-[#E83E33] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E83E33] xl:px-2 xl:text-[15px]${isActive ? ' text-[#E83E33]' : ''}`
+          `group relative z-20 whitespace-nowrap rounded-full px-1.5 py-2 text-[15px] font-bold text-[#111827] transition-colors duration-200 hover:text-[#E83E33] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E83E33] xl:px-2 xl:text-base${isActive ? ' text-[#E83E33]' : ''}`
         }
         to={item.path}
         onClick={onNavigate}
@@ -91,7 +97,7 @@ function NavigationLink({ item, mobile = false, openMenu, onToggle, onNavigate }
     <div className="navbar__item navbar__item--menu relative z-20">
       <button
         aria-expanded={openMenu === item.path}
-        className="inline-flex items-center gap-1 whitespace-nowrap rounded-full border-0 bg-transparent px-1.5 py-2 text-sm font-semibold text-[#111827] transition-colors hover:text-[#E83E33] xl:px-2 xl:text-[15px]"
+        className="inline-flex items-center gap-1 whitespace-nowrap rounded-full border-0 bg-transparent px-1.5 py-2 text-[15px] font-bold text-[#111827] transition-colors hover:text-[#E83E33] xl:px-2 xl:text-base"
         type="button"
         onClick={() => onToggle(item.path)}
       >
@@ -126,6 +132,22 @@ function NavigationLink({ item, mobile = false, openMenu, onToggle, onNavigate }
 function Navbar() {
   const [openMenu, setOpenMenu] = useState(null)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isHomeHeroVisible, setIsHomeHeroVisible] = useState(true)
+  const { pathname } = useLocation()
+  const isHome = pathname === '/'
+
+  useEffect(() => {
+    if (!isHome) return undefined
+
+    const hero = document.getElementById('home-hero')
+    if (!hero) return undefined
+
+    const observer = new IntersectionObserver(([entry]) => {
+      setIsHomeHeroVisible(entry.isIntersecting)
+    })
+    observer.observe(hero)
+    return () => observer.disconnect()
+  }, [isHome])
 
   const closeMenus = () => {
     setOpenMenu(null)
@@ -135,7 +157,7 @@ function Navbar() {
   return (
     <ResizableNavbar className="top-0 px-[5%] lg:px-[8%]">
       <NavBody className="max-w-[1440px] gap-0 px-3 sm:px-4 xl:gap-1">
-        <Logo />
+        <Logo hidden={isHome && isHomeHeroVisible} />
         <nav className="flex min-w-0 flex-1 items-center justify-center gap-0 xl:gap-1" aria-label="Navegación principal">
           {navigationItems.map((item) => (
             <NavigationLink
@@ -149,7 +171,7 @@ function Navbar() {
         </nav>
         <NavbarButton
           as={NavLink}
-          className="mr-1 inline-flex h-10 min-w-[132px] shrink-0 items-center justify-center gap-2 rounded-xl bg-[#E83E33] px-4 text-sm font-bold text-white shadow-[0_6px_14px_rgb(232_62_51_/_22%)] transition hover:-translate-y-0.5 hover:bg-[#cf3028] hover:shadow-[0_8px_18px_rgb(232_62_51_/_30%)] xl:mr-2 xl:min-w-[140px] xl:px-5"
+          className="mr-1 inline-flex h-11 min-w-[132px] shrink-0 items-center justify-center gap-2 rounded-xl bg-[#E83E33] px-4 text-base font-bold text-white shadow-[0_6px_14px_rgb(232_62_51_/_22%)] transition hover:-translate-y-0.5 hover:bg-[#cf3028] hover:shadow-[0_8px_18px_rgb(232_62_51_/_30%)] xl:mr-2 xl:min-w-[140px] xl:px-5"
           to="/contacto"
         >
           Contactar
@@ -184,7 +206,7 @@ function Navbar() {
                 <div className="ml-4 flex flex-col gap-2 border-l border-[#dce2eb] pl-4">
                   {item.submenu.map((submenuItem) => (
                     <NavLink
-                      className="text-base font-medium text-[#111827]"
+                      className="text-lg font-bold text-[#111827]"
                       key={submenuItem.path}
                       to={submenuItem.path}
                       onClick={closeMenus}
@@ -198,7 +220,7 @@ function Navbar() {
           ))}
           <NavbarButton
             as={NavLink}
-            className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-[#E83E33] text-sm font-bold text-white shadow-[0_6px_14px_rgb(232_62_51_/_22%)] transition hover:bg-[#cf3028]"
+            className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#E83E33] text-base font-bold text-white shadow-[0_6px_14px_rgb(232_62_51_/_22%)] transition hover:bg-[#cf3028]"
             to="/contacto"
             onClick={closeMenus}
           >
