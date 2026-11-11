@@ -26,7 +26,7 @@ const navigationItems = [
   },
   { label: 'Modalidades', path: '/modalidades' },
   { label: 'Metodología', path: '/metodologia' },
-  { label: 'Empresas', path: '/empresas' },
+  
   {
     label: 'Experiencia Towers',
     path: '/experiencia-towers',
