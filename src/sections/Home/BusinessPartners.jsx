@@ -9,7 +9,7 @@ const businessPartners = [
   { name: "Sistecrédito", logo: "/images/Sistecredito.png", crop: true },
   { name: "Universidad del Sinú", logo: "/images/Universidad.png", crop: true },
   { name: "CENS", logo: "/images/Cens.jpg", logoClassName: "h-[72px] w-[72px] object-contain" },
-  { name: "Clínica Machicado" },
+  { name: "Clínica Machicado", logo: "/images/Clinica.svg" },
 ];
 
 function PartnerMark({ partner }) {
