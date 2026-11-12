@@ -31,8 +31,8 @@ const languagePrograms = {
     intro:
       "Programa de Inglés con enfoque de interacción: práctica guiada con profesores y aplicación del idioma en situaciones reales.",
     levels: "Inicial · Básico · Intermedio · Avanzado",
-    image: "/images/PAGINA-WEB-ig.jpg.jpeg",
-    flagImage: "/images/Ingles.png",
+    image: "/images/languages/programs/english.jpeg",
+    flagImage: "/images/languages/flags/english.png",
   },
   frances: {
     name: "francés",
@@ -40,8 +40,8 @@ const languagePrograms = {
     intro:
       "Aprende francés con práctica guiada, interacción y aplicación en situaciones cotidianas.",
     levels: "Inicial · Básico · Intermedio",
-    image: "/images/PAGINA-WEB-fr.jpg.jpeg",
-    flagImage: "/images/frances.png",
+    image: "/images/languages/programs/french.jpeg",
+    flagImage: "/images/languages/flags/french.png",
   },
   portugues: {
     name: "portugués",
@@ -49,8 +49,8 @@ const languagePrograms = {
     intro:
       "Comunícate en portugués con confianza a través de práctica guiada y situaciones de la vida real.",
     levels: "Inicial · Básico · Intermedio",
-    image: "/images/PAGINA-WEB-prt.jpg.jpeg",
-    flagImage: "/images/brazil.png",
+    image: "/images/languages/programs/portuguese.jpeg",
+    flagImage: "/images/languages/flags/portuguese.png",
   },
   aleman: {
     name: "alemán",
@@ -58,8 +58,8 @@ const languagePrograms = {
     intro:
       "Construye una base sólida en alemán con estructura, práctica guiada e interacción.",
     levels: "Inicial · Básico · Intermedio",
-    image: "/images/PAGINA-WEB-al.jpg.jpeg",
-    flagImage: "/images/alemania.png",
+    image: "/images/languages/programs/german.jpeg",
+    flagImage: "/images/languages/flags/german.png",
   },
   italiano: {
     name: "italiano",
@@ -67,8 +67,8 @@ const languagePrograms = {
     intro:
       "Acércate al italiano a través de la práctica, la interacción y su cultura.",
     levels: "Inicial · Básico",
-    image: "/images/PAGINA-WEB-it.jpg.jpeg",
-    flagImage: "/images/italia.png",
+    image: "/images/languages/programs/italian.jpeg",
+    flagImage: "/images/languages/flags/italian.png",
   },
 };
 
@@ -111,19 +111,19 @@ const methodologySteps = [
 const modalities = [
   [
     "Presencial",
-    "/images/modalidad-presencial.png",
+    "/images/modalities/in-person.png",
     UsersRound,
     "Asiste a clases en una sede, practica en persona con tu docente y comparte el proceso con otros estudiantes.",
   ],
   [
     "Virtual",
-    "/images/modalidad-virtual.png",
+    "/images/modalities/online.png",
     Monitor,
     "Conéctate a clases en vivo desde donde estés e interactúa con tu docente y compañeros en línea.",
   ],
   [
     "Híbrida",
-    "/images/modalidad-hibrida.png",
+    "/images/modalities/hybrid.png",
     Building2,
     "Combina clases presenciales y virtuales para adaptar tu aprendizaje a tus horarios y necesidades.",
   ],
@@ -231,11 +231,11 @@ function LanguageTemplate() {
               </div>
             </div>
 
-            <div className="relative min-h-[360px] overflow-hidden rounded-[2rem] bg-[#e8e4e2] sm:min-h-[470px] lg:min-h-[560px]">
+            <div className="relative overflow-hidden rounded-[2rem] bg-[#e8e4e2]">
               <img
                 src={program.image}
                 alt={`Programa de ${program.name}`}
-                className="absolute inset-0 h-full w-full rounded-[2rem] object-cover object-center"
+                className="block h-auto w-full rounded-[2rem]"
               />
               <div className="absolute bottom-6 right-5 flex flex-row items-center gap-3 rounded-[8px] bg-white px-4 py-3 text-[#101820] shadow-[0_6px_16px_rgb(0_0_0_/_16%)] sm:bottom-8 sm:right-8">
                 <span

@@ -6,7 +6,7 @@ const teachers = [
     languageName: 'Inglés',
     role: 'Docente de Inglés',
     specialty: 'Enseñanza de inglés',
-    photo: '/images/Sinfoto.png',
+    photo: '/images/teachers/no-photo.png',
     shortDescription: 'Psicóloga y docente de inglés, con experiencia en estudiantes de distintas edades y necesidades de aprendizaje.',
     biography: 'Soy Lizeth Bridgette Ospina Rojas, psicóloga y docente de inglés en formación continua. Estudié inglés como segunda lengua entre 2020 y 2022, periodo en el que presenté el examen IELTS. Actualmente me preparo para actualizar esta certificación. Durante dos años he impartido clases de inglés en una Fundación de Derechos Humanos, acompañando a estudiantes de 5 a 46 años. Mi enfoque parte de identificar las necesidades de aprendizaje de cada estudiante para diseñar planes que fortalezcan speaking, reading, writing y listening. Integro juegos de rol, simulacros de pruebas y quizzes de vocabulario para promover confianza, participación y seguridad al comunicarse. Me caracterizan la perseverancia, la adaptación y el profesionalismo.',
     extendedBiography: [
@@ -53,7 +53,7 @@ const teachers = [
     languageName: 'Inglés',
     role: 'Docente de Inglés',
     specialty: 'Writing & Speaking',
-    photo: '/images/Sinfoto.png',
+    photo: '/images/teachers/no-photo.png',
     shortDescription: 'Docente de lenguas extranjeras con nivel C1 de inglés y francés y experiencia en clases presenciales y virtuales.',
     biography: 'Soy docente de lenguas extranjeras y estudiante de la Licenciatura en Lenguas Extranjeras de la Universidad de Pamplona. Cuento con nivel C1 de inglés y francés, y experiencia enseñando inglés a estudiantes de diferentes edades y niveles, en contextos presenciales y virtuales. He planificado clases, diseñado materiales y desarrollado actividades para fortalecer speaking, listening, reading, writing y pronunciation. Me gusta crear clases dinámicas y cercanas, con recursos que ayuden a relacionar el idioma con situaciones reales. Me considero una persona responsable, creativa y comunicativa, con interés constante por seguir aprendiendo y creciendo profesionalmente como docente.',
     extendedBiography: [
@@ -97,7 +97,7 @@ const teachers = [
     languageName: 'Inglés',
     role: 'Docente de Inglés',
     specialty: 'Enseñanza comunicativa del inglés',
-    photo: '/images/Sinfoto.png',
+    photo: '/images/teachers/no-photo.png',
     shortDescription: 'Docente de inglés y estudiante de décimo semestre de Lenguas Extranjeras, con enfoque comunicativo, dinámico y centrado en el estudiante.',
     biography: 'Soy docente de inglés y estudiante de décimo semestre de la Licenciatura en Lenguas Extranjeras con énfasis en Inglés. Cuento con formación como Técnico Académico en Adquisición de Habilidades Comunicativas B1/B2 y un curso TESOL acreditado de 120 horas. Desde 2023 enseño inglés en TOWERS S.A.S. y, desde 2021, soy tutora privada para adolescentes y adultos. Desarrollo una enseñanza comunicativa, dinámica y creativa, promoviendo la participación, la confianza y el aprendizaje significativo. Me caracterizan la responsabilidad, la alegría, la ética y el compromiso, junto con habilidades de liderazgo, pensamiento crítico, comunicación asertiva y trabajo en equipo.',
     extendedBiography: [
@@ -134,7 +134,7 @@ const teachers = [
     languageName: 'Inglés',
     role: 'Docente',
     specialty: 'KIDS',
-    photo: '/images/Sinfoto.png',
+    photo: '/images/teachers/no-photo.png',
     shortDescription: 'Docente de inglés enfocada en niños, primera infancia, actividades lúdicas y acompañamiento personalizado.',
     biography: 'Hello! Soy miss Sharito, es un gusto compartirte algo sobre mí. Soy fan de los libros, la música, la serie Friends, los gatos y Michael Jackson. Me asustan los perros y me intriga pensar que no he aprendido todo lo que quisiera hacer, saber y ser. Soy una joven emprendedora, exigente, disciplinada, apasionada y dispuesta a aprender y educar con todo mi empeño y habilidades. Mi vocación son los idiomas y la enseñanza. Me encanta brindar un espacio cómodo, abierto al diálogo y al compañerismo para resolver dudas, con el propósito de ver en otros el gesto de “Ah, ya entendí”; es ahí donde me siento realizada y feliz.',
     extendedBiography: [
@@ -189,7 +189,7 @@ const teachers = [
     languageName: 'Portugués',
     role: 'Profesor de Portugués',
     specialty: 'Portugués brasileño; hablante nativo',
-    photo: '/images/Sinfoto.png',
+    photo: '/images/teachers/no-photo.png',
     shortDescription: 'Docente brasileño y hablante nativo de portugués, con metodología práctica, cercana y enfocada en la comunicación.',
     biography: 'Soy docente de portugués y hablante nativo del idioma. Desde hace seis años vivo en Colombia, experiencia que me ha permitido conocer y disfrutar su cultura y comprender mejor las dificultades que enfrentan los hispanohablantes al aprender portugués. Desde 2022 enseño portugués a estudiantes de diferentes niveles. Mi metodología combina conversación, vocabulario, gramática y situaciones cotidianas en espacios dinámicos y prácticos. Me caracterizan la cercanía, la paciencia y el compromiso con el progreso de cada estudiante.',
     extendedBiography: [
@@ -230,7 +230,7 @@ const teachers = [
     languageName: 'Inglés',
     role: 'Docente de Inglés',
     specialty: 'Inglés comunicativo para niños, adolescentes y adultos',
-    photo: '/images/Sinfoto.png',
+    photo: '/images/teachers/no-photo.png',
     shortDescription: 'Docente de inglés con año y medio de experiencia y clases dinámicas para estudiantes de diferentes edades y niveles.',
     biography: 'Soy docente de inglés con año y medio de experiencia enseñando a niños, adolescentes y adultos en modalidad de academia. Mi metodología se centra en desarrollar habilidades comunicativas en lugar de memorizar reglas gramaticales aisladas. Trabajo con grupos de diferentes edades y niveles, adaptando las clases a sus necesidades. Busco crear un ambiente ameno en el que los estudiantes se sientan cómodos practicando desde las primeras sesiones. La cercanía generacional con gran parte del alumnado facilita una conexión natural en el aula y promueve clases participativas y accesibles para quienes comienzan a aprender inglés.',
     extendedBiography: [
@@ -265,7 +265,7 @@ const teachers = [
     languageName: 'Inglés',
     role: 'Docente de Inglés',
     specialty: 'EFL, comunicación y expresión oral; inglés conversacional y psicología educativa',
-    photo: '/images/Sinfoto.png',
+    photo: '/images/teachers/no-photo.png',
     shortDescription: 'Psicólogo y docente de idiomas; combina la enseñanza del inglés con una perspectiva centrada en la motivación y las necesidades de cada estudiante.',
     biography: 'Soy psicólogo y docente de idiomas, con experiencia en la enseñanza del español y el inglés. Desde 2022 soy tutor de español en Preply y he acompañado a estudiantes de diferentes contextos y niveles en el desarrollo de sus habilidades comunicativas. Entre 2024 y 2025 trabajé como docente de inglés en un contexto educativo formal. Actualmente enseño inglés en Tower Idiomas y Cultura. Mi formación en Psicología complementa mi labor al ayudarme a comprender la comunicación, la motivación y los procesos de aprendizaje desde una perspectiva humana y centrada en cada estudiante.',
     extendedBiography: [

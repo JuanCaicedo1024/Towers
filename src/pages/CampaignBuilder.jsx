@@ -26,15 +26,11 @@ import {
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../auth/useAuth";
 import { getCampaignById, listCampaigns, saveCampaign } from "../lib/supabase";
+import { campaignImageOptions } from "../lib/imagePaths";
 
 const MAX_CAMPAIGNS = 3;
 
-const images = [
-  "/images/hero.png",
-  "/images/Lenguajes.png",
-  "/images/Modalities.png",
-  "/images/Sinfoto.png",
-];
+const images = campaignImageOptions;
 const initialForm = {
   name: "",
   slug: "",
@@ -345,7 +341,7 @@ function CampaignBuilder() {
           </Link>
           <img
             className="h-8 w-auto object-contain"
-            src="/images/Towers_logo.png"
+            src="/images/brand/towers.png"
             alt="Towers"
           />
           <span className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1.5 text-xs font-bold text-[#7187a4] shadow-sm">
@@ -667,7 +663,7 @@ function CampaignBuilder() {
                     <span className="pointer-events-none absolute -right-10 -top-14 h-36 w-36 rounded-full border-[18px] border-[#e83e33]/[.07]" />
                     <img
                       className="relative mb-7 h-8 w-auto object-contain"
-                      src="/images/Towers_logo_recortado.png"
+                      src="/images/brand/towers-cropped.png"
                       alt="Towers"
                     />
                     <p className="text-[10px] font-bold uppercase tracking-wide text-[#c83a2f]">

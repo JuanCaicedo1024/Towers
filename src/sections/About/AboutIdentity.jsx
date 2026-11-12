@@ -16,7 +16,7 @@ function AboutIdentity() {
           </div>
         </div>
         <div className="about-identity-image">
-          <img src="/images/TOWERS/TOWERS/fotos/DSC06704.jpg.jpeg" alt="Estudiantes de Towers trabajando en clase" />
+          <img src="/images/classroom/DSC06704.jpg.jpeg" alt="Estudiantes de Towers trabajando en clase" />
         </div>
       </div>
     </section>

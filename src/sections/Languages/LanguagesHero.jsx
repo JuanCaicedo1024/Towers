@@ -62,10 +62,10 @@ function LanguagesHero() {
           </div>
         </div>
 
-        <div className="relative min-h-[360px] overflow-hidden rounded-[2rem] bg-[#d8c9c6] sm:min-h-[470px] lg:min-h-[560px]">
+        <div className="relative overflow-hidden rounded-[2rem] bg-[#d8c9c6]">
           <img
-            className="absolute inset-0 h-full w-full object-contain object-center"
-            src="/images/Idiomas_pg.jpg"
+            className="block h-auto w-full"
+            src="/images/languages/hero.jpg"
             alt="Estudiante de Towers aprendiendo idiomas"
           />
           <div

@@ -5,7 +5,6 @@ import {
   FileText,
   Globe,
   MessageCircle,
-  Play,
   Star,
 } from 'lucide-react'
 import Footer from '../components/Footer'
@@ -65,7 +64,7 @@ function Experience() {
               </div>
               <div className="experience-feature__visual experience-feature__visual--hero">
                 <img
-                  src="/images/TOWERS/TOWERS/fotos/DSC06700.jpg.jpeg"
+                  src="/images/classroom/DSC06700.jpg.jpeg"
                   alt="Estudiantes de Towers practicando inglés en clase"
                   fetchPriority="high"
                 />
@@ -79,7 +78,7 @@ function Experience() {
           <div className="experience-container experience-split experience-feature experience-feature--community">
             <div className="experience-feature__visual experience-feature__visual--community">
               <img
-                src="/images/TOWERS/TOWERS/fotos/DSC06683.jpg.jpeg"
+                src="/images/classroom/DSC06683.jpg.jpeg"
                 alt="Estudiantes compartiendo y practicando en comunidad"
                 loading="lazy"
               />
@@ -112,21 +111,17 @@ function Experience() {
                 <AnimatedText>Conoce una experiencia de aprendizaje basada en práctica e interacción.</AnimatedText>
               </p>
             </div>
-            <div
-              className="methodology-intro__video"
-              role="img"
-              aria-label="Vista previa de una clase de idiomas de Towers"
-            >
-              <img src="/images/TOWERS/TOWERS/fotos/DSC06726.jpg.jpeg" alt="" loading="lazy" />
-              <div className="methodology-intro__video-veil" aria-hidden="true" />
-              <span className="methodology-intro__play" aria-hidden="true">
-                <Play fill="currentColor" size={30} />
-              </span>
-              <div className="methodology-intro__controls" aria-hidden="true">
-                <span className="methodology-intro__progress"><span /></span>
-                <span>5:23</span>
-                <span className="methodology-intro__duration">15:45</span>
-              </div>
+            <div className="methodology-intro__video">
+              <video
+                className="methodology-intro__video-player"
+                src="https://pmffhsiptlgaubiytdnn.supabase.co/storage/v1/object/public/Videos/experiencia.mp4"
+                controls
+                playsInline
+                preload="metadata"
+                aria-label="Video de la experiencia de aprendizaje en Towers"
+              >
+                Tu navegador no permite reproducir videos.
+              </video>
             </div>
           </div>
         </section>

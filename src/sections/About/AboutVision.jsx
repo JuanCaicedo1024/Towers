@@ -15,7 +15,7 @@ function AboutVision() {
           </div>
         </div>
         <div className="about-vision-image">
-          <img src="/images/TOWERS/TOWERS/fotos/DSC06711.jpg.jpeg" alt="Estudiantes de Towers aprendiendo con acompañamiento docente" />
+          <img src="/images/classroom/DSC06711.jpg.jpeg" alt="Estudiantes de Towers aprendiendo con acompañamiento docente" />
         </div>
       </div>
     </section>

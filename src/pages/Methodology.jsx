@@ -75,7 +75,7 @@ function Methodology() {
               </div>
               <img
                 className="methodology-hero-image"
-                src="/images/TOWERS/TOWERS/fotos/DSC06743.jpg.jpeg"
+                src="/images/classroom/DSC06743.jpg.jpeg"
                 alt="Docente y estudiantes interactuando durante una clase de idiomas"
               />
             </div>
@@ -102,7 +102,7 @@ function Methodology() {
               aria-label="Vista previa de una clase de idiomas de Towers"
             >
               <img
-                src="/images/TOWERS/TOWERS/fotos/DSC06726.jpg.jpeg"
+                src="/images/classroom/DSC06726.jpg.jpeg"
                 alt=""
               />
               <div className="methodology-intro__video-veil" aria-hidden="true" />

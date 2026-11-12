@@ -26,12 +26,12 @@ function Footer() {
             <div className="flex flex-nowrap items-center gap-4">
               <img
                 className="h-auto w-[170px] shrink-0 object-contain"
-                src="/images/Towers_logo.png"
+                src="/images/brand/towers.png"
                 alt="Towers Centro activo de idiomas"
               />
               <img
                 className="h-auto w-[190px] shrink-0 object-contain"
-                src="/images/minEducacion.png"
+                src="/images/brand/mineducacion.png"
                 alt="Ministerio de Educación Nacional"
               />
             </div>

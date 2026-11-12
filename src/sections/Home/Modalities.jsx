@@ -54,7 +54,7 @@ function Modalities() {
             <div className="modalities-collage__main">
               <img
                 className="modalities-collage__image"
-                src="/images/TOWERS/TOWERS/MATERIAL ENTREGA/CLASES/eIMG_0307.jpg"
+                src="/images/classroom/eIMG_0307.jpg"
                 alt="Estudiantes de Towers aprendiendo idiomas"
               />
              
@@ -63,7 +63,7 @@ function Modalities() {
             <div className="modalities-collage__card modalities-collage__card--language">
               <img
                 className="modalities-collage__image"
-                src="/images/TOWERS/TOWERS/fotos/DSC06730.jpg.jpeg"
+                src="/images/classroom/DSC06730.jpg.jpeg"
                 alt="Estudiantes de Towers aprendiendo idiomas"
               />
               
@@ -72,7 +72,7 @@ function Modalities() {
             <div className="modalities-collage__card modalities-collage__card--club">
               <img
                 className="modalities-collage__image"
-                src="/images/TOWERS/TOWERS/MATERIAL ENTREGA/CLASES/eIMG_0325.jpg"
+                src="/images/classroom/eIMG_0325.jpg"
                 alt="Estudiantes participando en una actividad de comunidad"
               />
               

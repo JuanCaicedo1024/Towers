@@ -6,7 +6,7 @@ function AboutPurpose() {
     <section className="experience-light">
       <div className="experience-container experience-split about-purpose-split">
         <div className="about-purpose-image">
-          <img src="/images/TOWERS/TOWERS/fotos/DSC06675.jpg.jpeg" alt="Docente acompañando a una estudiante durante su aprendizaje" />
+          <img src="/images/classroom/DSC06675.jpg.jpeg" alt="Docente acompañando a una estudiante durante su aprendizaje" />
         </div>
         <div className="about-purpose-copy">
      

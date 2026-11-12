@@ -3,19 +3,19 @@ import { useEffect, useState } from 'react'
 
 const slides = [
   {
-    image: '/images/TOWERS/TOWERS/fotos/DSC06683.jpg.jpeg',
+    image: '/images/classroom/DSC06683.jpg.jpeg',
     title: 'Aprendizaje acompañado',
     description:
       'Cada estudiante cuenta con orientación durante su proceso y oportunidades para practicar lo aprendido. Así, cada clase se convierte en un espacio para participar, resolver dudas y ganar confianza.',
   },
   {
-    image: '/images/TOWERS/TOWERS/fotos/DSC06700.jpg.jpeg',
+    image: '/images/classroom/DSC06700.jpg.jpeg',
     title: 'Práctica en el aula',
     description:
       'Las actividades guiadas conectan los temas de clase con situaciones cotidianas. Escuchar, conversar y trabajar con el idioma ayuda a construir el aprendizaje con práctica constante.',
   },
   {
-    image: '/images/TOWERS/TOWERS/fotos/DSC06667.jpg.jpeg',
+    image: '/images/classroom/DSC06667.jpg.jpeg',
     title: 'Una comunidad que aprende',
     description:
       'En Towers, aprender también significa compartir el aula con otras personas, participar y descubrir nuevas formas de comunicarse. Cada encuentro suma experiencias al camino de aprender un idioma.',

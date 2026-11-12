@@ -58,7 +58,7 @@ function FreeClass() {
             <p className="free-class-lead">Conoce una experiencia de aprendizaje basada en práctica e interacción.</p>
 
             <div className="free-class-video" role="img" aria-label="Vista previa de la clase introductoria">
-              <img src="/images/Sinfoto.png" alt="" />
+              <img src="/images/teachers/no-photo.png" alt="" />
               <div className="free-class-video__veil" aria-hidden="true" />
               <button className="free-class-video__play" type="button" aria-label="Reproducir vista previa">
                 <Play fill="currentColor" size={30} aria-hidden="true" />

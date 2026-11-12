@@ -84,7 +84,7 @@ function TeacherTemplate() {
             <div className="teacher-profile-story__image group relative min-h-[320px] overflow-hidden rounded-[2rem] bg-[#17233a] sm:min-h-[440px] lg:min-h-[560px]">
               <img
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                src="/images/Sinfoto.png"
+                src="/images/teachers/no-photo.png"
                 alt="Imagen de perfil docente pendiente"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/10" aria-hidden="true" />

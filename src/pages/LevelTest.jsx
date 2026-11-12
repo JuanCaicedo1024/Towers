@@ -17,27 +17,27 @@ import Navbar from '../components/Navbar'
 const languages = [
   {
     name: 'Inglés',
-    image: '/images/Ingles_bg.jpg',
+    image: '/images/languages/backgrounds/english.jpg',
     testUrl: 'https://admin.towers.com.co/quiz/link/placement_test',
   },
   {
     name: 'Francés',
-    image: '/images/Frances_bg.jpg',
+    image: '/images/languages/backgrounds/french.jpg',
     testUrl: 'https://admin.towers.com.co/quiz/link/test_de_niveau',
   },
   {
     name: 'Alemán',
-    image: '/images/Alemania_bg.jpg',
+    image: '/images/languages/backgrounds/german.jpg',
     testUrl: 'https://admin.towers.com.co/quiz/link/einstufungstest',
   },
   {
     name: 'Portugués',
-    image: '/images/Brazil_bg.jpg',
+    image: '/images/languages/backgrounds/portuguese.jpg',
     testUrl: 'https://admin.towers.com.co/quiz/link/teste_de_nivelamento',
   },
   {
     name: 'Italiano',
-    image: '/images/Italia_bg.jpg',
+    image: '/images/languages/backgrounds/italian.jpg',
     testUrl: 'https://admin.towers.com.co/quiz/link/test_di_collocamento',
   },
 ]
@@ -115,7 +115,7 @@ function LevelTest() {
               <div className="absolute -inset-4 rotate-[-4deg] rounded-[2.5rem] bg-[#f7d8d4]" aria-hidden="true" />
               <img
                 className="relative aspect-[1.2/1] w-full rounded-[2rem] border-[6px] border-white object-cover object-center shadow-[0_18px_40px_rgb(23_35_58_/_18%)]"
-                src="/images/TOWERS/TOWERS/fotos/DSC06726.jpg.jpeg"
+                src="/images/classroom/DSC06726.jpg.jpeg"
                 alt="Estudiantes aprendiendo idiomas durante una clase en Towers"
                 fetchPriority="high"
               />

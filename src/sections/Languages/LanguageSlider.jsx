@@ -7,36 +7,36 @@ const languageCards = [
   {
     name: 'Inglés',
     slug: 'ingles',
-    backgroundImage: '/images/Ingles_bg.jpg',
-    flag: '/images/Ingles.png',
+    backgroundImage: '/images/languages/backgrounds/english.jpg',
+    flag: '/images/languages/flags/english.png',
     description: 'Aprende a comunicarte con seguridad en situaciones reales.',
   },
   {
     name: 'Francés',
     slug: 'frances',
-    backgroundImage: '/images/Frances_bg.jpg',
-    flag: '/images/frances.png',
+    backgroundImage: '/images/languages/backgrounds/french.jpg',
+    flag: '/images/languages/flags/french.png',
     description: 'Descubre el francés desde la conversación y el uso cotidiano.',
   },
   {
     name: 'Portugués',
     slug: 'portugues',
-    backgroundImage: '/images/Brazil_bg.jpg',
-    flag: '/images/brazil.png',
+    backgroundImage: '/images/languages/backgrounds/portuguese.jpg',
+    flag: '/images/languages/flags/portuguese.png',
     description: 'Fortalece tu comprensión y conversación de forma práctica.',
   },
   {
     name: 'Alemán',
     slug: 'aleman',
-    backgroundImage: '/images/Alemania_bg.jpg',
-    flag: '/images/alemania.png',
+    backgroundImage: '/images/languages/backgrounds/german.jpg',
+    flag: '/images/languages/flags/german.png',
     description: 'Construye una base sólida con práctica guiada.',
   },
   {
     name: 'Italiano',
     slug: 'italiano',
-    backgroundImage: '/images/Italia_bg.jpg',
-    flag: '/images/italia.png',
+    backgroundImage: '/images/languages/backgrounds/italian.jpg',
+    flag: '/images/languages/flags/italian.png',
     description: 'Aprende italiano conectando idioma, cultura y práctica.',
   },
 ]
@@ -120,9 +120,9 @@ function LanguageSlider() {
               data-language-card
               key={language.slug}
             >
-              <div className="relative h-[235px] overflow-visible rounded-t-2xl bg-[#eef2f5]">
+              <div className="relative overflow-hidden rounded-t-2xl bg-[#eef2f5]">
                 <img
-                  className="absolute inset-0 h-full w-full rounded-t-2xl object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="block h-auto w-full rounded-t-2xl"
                   src={language.backgroundImage}
                   alt=""
                   aria-hidden="true"

@@ -3,13 +3,13 @@ import AnimatedText from "@/components/ui/AnimatedText";
 const businessPartners = [
   {
     name: "Convenio empresarial",
-    logo: "/images/convenio-empresarial.png",
+    logo: "/images/partners/enterprise-convenio.png",
   },
-  { name: "Addi", logo: "/images/Addi.png" },
-  { name: "Sistecrédito", logo: "/images/Sistecredito.png", crop: true },
-  { name: "Universidad del Sinú", logo: "/images/Universidad.png", crop: true },
-  { name: "CENS", logo: "/images/Cens.jpg", logoClassName: "h-[72px] w-[72px] object-contain" },
-  { name: "Clínica Machicado", logo: "/images/Clinica.svg" },
+  { name: "Addi", logo: "/images/partners/addi.png" },
+  { name: "Sistecrédito", logo: "/images/partners/sistecredito.png", crop: true },
+  { name: "Universidad del Sinú", logo: "/images/partners/universidad.png", crop: true },
+  { name: "CENS", logo: "/images/partners/cens.jpg", logoClassName: "h-[72px] w-[72px] object-contain" },
+  { name: "Clínica Machicado", logo: "/images/partners/clinica.svg" },
 ];
 
 function PartnerMark({ partner }) {

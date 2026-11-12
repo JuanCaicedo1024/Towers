@@ -33,7 +33,7 @@ function Community() {
               </div>
               <div className="community-hero__image">
                 <img
-                  src="/images/TOWERS/TOWERS/fotos/DSC06803.jpg.jpeg"
+                  src="/images/classroom/DSC06803.jpg.jpeg"
                   alt="Docente y estudiantes participando en una clase de Towers"
                   fetchPriority="high"
                 />
@@ -56,7 +56,7 @@ function Community() {
               {communityPhotos.map(([image, alt], index) => (
                 <div className="community-photo-grid__item" key={image} style={{ '--photo-index': index }}>
                   <img
-                    src={`/images/TOWERS/TOWERS/fotos/${image}`}
+                    src={`/images/classroom/${image}`}
                     alt={alt}
                     loading="lazy"
                   />
@@ -75,7 +75,7 @@ function Community() {
             </h2>
             <div className="community-moments__featured">
               <img
-                src="/images/TOWERS/TOWERS/fotos/DSC06700.jpg.jpeg"
+                src="/images/classroom/DSC06700.jpg.jpeg"
                 alt="Docente y estudiantes compartiendo una clase de inglés"
                 loading="lazy"
               />
@@ -84,7 +84,7 @@ function Community() {
             <div className="community-moments__grid" aria-label="Más momentos de la comunidad Towers">
               {communityMoments.map(([image, alt], index) => (
                 <div className="community-moments__photo" key={image} style={{ '--moment-index': index }}>
-                  <img src={`/images/TOWERS/TOWERS/fotos/${image}`} alt={alt} loading="lazy" />
+                  <img src={`/images/classroom/${image}`} alt={alt} loading="lazy" />
                 </div>
               ))}
             </div>

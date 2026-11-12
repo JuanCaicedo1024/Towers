@@ -17,7 +17,7 @@ function AboutHero() {
             </div>
           </div>
           <div className="about-hero-image">
-            <img src="/images/TOWERS/TOWERS/fotos/DSC06670.jpg.jpeg" alt="Estudiante de Towers practicando en clase" />
+            <img src="/images/classroom/DSC06670.jpg.jpeg" alt="Estudiante de Towers practicando en clase" />
           </div>
         </div>
       </div>

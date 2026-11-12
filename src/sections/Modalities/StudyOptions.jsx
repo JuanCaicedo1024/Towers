@@ -5,19 +5,19 @@ import { NavLink } from "react-router-dom";
 const modalities = [
   [
     "Presencial",
-    "/images/modalidad-presencial.png",
+    "/images/modalities/in-person.png",
     UsersRound,
     "Asiste a clases en una sede, practica en persona con tu docente y comparte el proceso con otros estudiantes.",
   ],
   [
     "Virtual",
-    "/images/modalidad-virtual.png",
+    "/images/modalities/online.png",
     Monitor,
     "Conéctate a clases en vivo desde donde estés e interactúa con tu docente y compañeros en línea.",
   ],
   [
     "Híbrida",
-    "/images/modalidad-hibrida.png",
+    "/images/modalities/hybrid.png",
     Building2,
     "Combina clases presenciales y virtuales para adaptar tu aprendizaje a tus horarios y necesidades.",
   ],
