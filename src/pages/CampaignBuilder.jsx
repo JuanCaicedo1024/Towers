@@ -201,7 +201,7 @@ function CampaignBuilder() {
       try {
         const campaigns = await listCampaigns(session.access_token);
         if (campaigns.length >= MAX_CAMPAIGNS) {
-          setError("Ya alcanzaste el límite de 3 micro-landings. Borra una antes de crear otra.");
+          setError("El equipo ya alcanzó el límite de 3 micro-landings compartidas. Borra una antes de crear otra.");
           return;
         }
       } catch (loadError) {
@@ -251,7 +251,7 @@ function CampaignBuilder() {
       const campaign = await saveCampaign(
         {
           ...(campaignId ? { id: campaignId } : {}),
-          owner_id: session.user.id,
+          ...(!campaignId ? { owner_id: session.user.id } : {}),
           name: form.name.trim(),
           slug: form.slug,
           channel: form.channel,

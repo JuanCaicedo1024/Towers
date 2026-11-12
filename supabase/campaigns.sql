@@ -1,4 +1,5 @@
 -- MicroLandings Towers. Pegar y ejecutar completo en Supabase > SQL Editor > New query.
+-- Las campañas son compartidas entre administradores; el límite de 3 es global.
 -- El contenido editorial vive en campaigns.content (JSONB), por lo que nuevos campos
 -- visuales no requieren agregar columnas ni alterar la API actual.
 -- Claves usadas por el editor: eyebrow, headline, supporting, image, imageAlt,
@@ -46,8 +47,9 @@ alter table public.campaigns
   alter column content set default '{}'::jsonb,
   alter column content set not null;
 
-create index if not exists campaigns_owner_created_idx
-  on public.campaigns (owner_id, created_at desc);
+drop index if exists public.campaigns_owner_created_idx;
+create index if not exists campaigns_created_idx
+  on public.campaigns (created_at desc);
 
 alter table public.campaigns enable row level security;
 
@@ -57,9 +59,10 @@ grant select (id, slug, name, channel, status, content, created_at, updated_at)
   on public.campaigns to anon;
 
 drop policy if exists "Campaign owners can read their campaigns" on public.campaigns;
-create policy "Campaign owners can read their campaigns"
+drop policy if exists "Campaign admins can read shared campaigns" on public.campaigns;
+create policy "Campaign admins can read shared campaigns"
   on public.campaigns for select to authenticated
-  using ((select public.is_campaign_admin()) and owner_id = (select auth.uid()));
+  using ((select public.is_campaign_admin()));
 
 drop policy if exists "Campaign owners can create campaigns" on public.campaigns;
 create policy "Campaign owners can create campaigns"
@@ -67,20 +70,47 @@ create policy "Campaign owners can create campaigns"
   with check ((select public.is_campaign_admin()) and owner_id = (select auth.uid()));
 
 drop policy if exists "Campaign owners can update their campaigns" on public.campaigns;
-create policy "Campaign owners can update their campaigns"
+drop policy if exists "Campaign admins can update shared campaigns" on public.campaigns;
+create policy "Campaign admins can update shared campaigns"
   on public.campaigns for update to authenticated
-  using ((select public.is_campaign_admin()) and owner_id = (select auth.uid()))
-  with check ((select public.is_campaign_admin()) and owner_id = (select auth.uid()));
+  using ((select public.is_campaign_admin()))
+  with check ((select public.is_campaign_admin()));
 
 drop policy if exists "Campaign owners can delete their campaigns" on public.campaigns;
-create policy "Campaign owners can delete their campaigns"
+drop policy if exists "Campaign admins can delete shared campaigns" on public.campaigns;
+create policy "Campaign admins can delete shared campaigns"
   on public.campaigns for delete to authenticated
-  using ((select public.is_campaign_admin()) and owner_id = (select auth.uid()));
+  using ((select public.is_campaign_admin()));
 
 drop policy if exists "Public can view published campaigns" on public.campaigns;
 create policy "Public can view published campaigns"
   on public.campaigns for select to anon, authenticated
   using (status = 'published');
+
+create or replace function public.enforce_campaign_limit()
+returns trigger
+language plpgsql
+security definer
+set search_path = pg_catalog, public
+as $$
+begin
+  perform pg_catalog.pg_advisory_xact_lock(7249, 3);
+
+  if (select count(*) from public.campaigns) >= 3 then
+    raise exception 'El equipo ya alcanzó el límite de 3 micro-landings compartidas. Borra una antes de crear otra.'
+      using errcode = '23514';
+  end if;
+
+  return new;
+end;
+$$;
+
+revoke all on function public.enforce_campaign_limit() from public, anon, authenticated;
+
+drop trigger if exists campaigns_enforce_limit on public.campaigns;
+create trigger campaigns_enforce_limit
+  before insert on public.campaigns
+  for each row execute function public.enforce_campaign_limit();
 
 create or replace function public.set_campaign_updated_at()
 returns trigger language plpgsql as $$
