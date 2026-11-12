@@ -29,7 +29,7 @@ function ModalitiesHeader() {
           {/* Fotografía de la sede */}
           <div className="relative min-h-[280px] overflow-hidden rounded-[1.7rem] lg:h-[440px] lg:min-h-0 lg:rounded-[1.7rem]">
             <img
-              src="/images/modalities/hero.png"
+              src="/images/modalities/hero.webp"
               alt="Integrante del equipo Towers en la sede de idiomas"
               className="absolute inset-0 h-full w-full object-cover object-center"
             />

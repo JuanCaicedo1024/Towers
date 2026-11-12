@@ -50,7 +50,7 @@ function Login() {
 
           <section className="login-card">
             <a className="login-brand" href="/" aria-label="Towers, ir al inicio">
-              <img src="/images/brand/towers.png" alt="Towers Centro activo de idiomas" />
+              <img src="/images/brand/towers.webp" alt="Towers Centro activo de idiomas" />
             </a>
             <span className="login-card__eyebrow">ACCESO PARA ADMINISTRATIVOS</span>
             <h2><AnimatedText>Inicia sesión</AnimatedText></h2>

@@ -82,7 +82,7 @@ function Dashboard() {
     <div className="min-h-screen bg-[#f4f7fb] text-[#102d55]">
       <header className="border-b border-[#e0e7f0] bg-white">
         <div className="mx-auto flex min-h-[76px] max-w-[1440px] items-center justify-between gap-4 px-[5%]">
-          <Link to="/" aria-label="Towers, ir al inicio"><img className="h-auto w-[112px] object-contain" src="/images/brand/towers.png" alt="Towers" /></Link>
+          <Link to="/" aria-label="Towers, ir al inicio"><img className="h-auto w-[112px] object-contain" src="/images/brand/towers.webp" alt="Towers" /></Link>
           <div className="flex items-center gap-3"><span className="hidden text-sm text-[#7187a4] sm:inline">{session.user?.email}</span><button className="inline-flex items-center gap-2 rounded-lg border border-[#d3deeb] px-4 py-2.5 text-sm font-bold hover:border-[#ff443d] hover:text-[#e83e33]" type="button" onClick={handleSignOut}><LogOut size={16} /> Cerrar sesión</button></div>
         </div>
       </header>

@@ -81,19 +81,19 @@ const modalities = [
   {
     title: 'Programas in-company',
     description: 'Clases en tus instalaciones, con contenidos y dinámicas alineadas a la cultura y objetivos de tu empresa.',
-    image: '/images/enterprise/in-company.png',
+    image: '/images/enterprise/in-company.webp',
     alt: 'Docente facilitando una clase presencial',
   },
   {
     title: 'Corporate online',
     description: 'Formación virtual con la misma calidad de aprendizaje y la flexibilidad que tu equipo necesita.',
-    image: '/images/enterprise/online.png',
+    image: '/images/enterprise/online.webp',
     alt: 'Estudiante participando en una clase online',
   },
   {
     title: 'Planes híbridos',
     description: 'Una combinación estratégica de clases presenciales y online para equipos con diferentes dinámicas y ubicaciones.',
-    image: '/images/enterprise/hybrid.png',
+    image: '/images/enterprise/hybrid.webp',
     alt: 'Modalidad híbrida de aprendizaje',
   },
 ]
@@ -218,7 +218,7 @@ function Enterprise() {
 
             <div className="relative mx-auto w-full max-w-[590px] lg:justify-self-end">
               <div className="absolute -inset-4 rotate-[-3deg] rounded-[2rem] bg-[#f7d8d4]" aria-hidden="true" />
-              <img className="relative aspect-[1.25/1] w-full rounded-[1.6rem] border-[6px] border-white object-cover object-center shadow-[0_18px_40px_rgb(23_35_58_/_18%)] transition-transform duration-500 hover:scale-[1.02] motion-reduce:transform-none motion-reduce:transition-none" src="/images/enterprise/hero.png" alt="Equipo reunido en una sala de formación empresarial de Towers" />
+              <img className="relative aspect-[1.25/1] w-full rounded-[1.6rem] border-[6px] border-white object-cover object-center shadow-[0_18px_40px_rgb(23_35_58_/_18%)] transition-transform duration-500 hover:scale-[1.02] motion-reduce:transform-none motion-reduce:transition-none" src="/images/enterprise/hero.webp" alt="Equipo reunido en una sala de formación empresarial de Towers" />
               <div className="absolute -bottom-5 left-[8%] right-[8%] flex items-center gap-3 rounded-xl bg-white p-3 shadow-[0_12px_28px_rgb(23_35_58_/_15%)] transition-transform duration-300 hover:-translate-y-1 motion-reduce:transform-none motion-reduce:transition-none sm:p-4">
                 <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-[#fff0eb] text-[#e83e33]">
                   <UsersRound className="h-6 w-6" aria-hidden="true" />

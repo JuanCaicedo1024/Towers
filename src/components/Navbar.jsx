@@ -49,7 +49,7 @@ function Logo() {
     <NavLink className="relative z-20 shrink-0 px-1 py-1" to="/" aria-label="Towers, inicio">
       <img
         className="h-[72px] w-[176px] object-contain sm:w-[220px]"
-        src="/images/brand/towers.png"
+        src="/images/brand/towers.webp"
         alt="Towers Centro activo de idiomas"
       />
     </NavLink>

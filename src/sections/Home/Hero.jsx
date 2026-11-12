@@ -16,7 +16,7 @@ function Hero() {
           >
             <img
               className="h-[100px] w-[260px] object-contain xl:h-[112px] xl:w-[300px]"
-              src="/images/brand/towers.png"
+              src="/images/brand/towers.webp"
               alt="Towers Centro activo de idiomas"
             />
           </Link>
@@ -75,7 +75,7 @@ function Hero() {
         <div className="home-hero__visual relative flex min-h-[430px] items-end justify-center self-stretch xl:min-h-[720px]">
           <img
             className="home-hero__image relative z-10 h-auto w-[90%] max-w-[500px] object-contain object-bottom xl:absolute xl:bottom-0 xl:right-0 xl:h-[92%] xl:w-auto xl:max-w-full"
-            src="/images/home/hero.png"
+            src="/images/home/hero.webp"
             alt="El mejor lugar para aprender y crecer, con una estudiante y el Big Ben"
           />
           <span className="home-hero__image-blend" aria-hidden="true" />

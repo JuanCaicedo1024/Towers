@@ -64,7 +64,7 @@ function Experience() {
               </div>
               <div className="experience-feature__visual experience-feature__visual--hero">
                 <img
-                  src="/images/classroom/DSC06700.jpg.jpeg"
+                  src="/images/classroom/DSC06700.webp"
                   alt="Estudiantes de Towers practicando inglés en clase"
                   fetchPriority="high"
                 />
@@ -78,7 +78,7 @@ function Experience() {
           <div className="experience-container experience-split experience-feature experience-feature--community">
             <div className="experience-feature__visual experience-feature__visual--community">
               <img
-                src="/images/classroom/DSC06683.jpg.jpeg"
+                src="/images/classroom/DSC06683.webp"
                 alt="Estudiantes compartiendo y practicando en comunidad"
                 loading="lazy"
               />

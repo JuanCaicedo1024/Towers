@@ -65,7 +65,7 @@ function LanguagesHero() {
         <div className="relative overflow-hidden rounded-[2rem] bg-[#d8c9c6]">
           <img
             className="block h-auto w-full"
-            src="/images/languages/hero.jpg"
+            src="/images/languages/hero.webp"
             alt="Estudiante de Towers aprendiendo idiomas"
           />
           <div

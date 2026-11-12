@@ -3,17 +3,17 @@ import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 
 const communityPhotos = [
-  ['DSC06718.jpg.jpeg', 'Estudiantes participando en una clase de inglés'],
-  ['DSC06720.jpg.jpeg', 'Estudiantes compartiendo una actividad de aprendizaje'],
-  ['DSC06733.jpg.jpeg', 'Grupo practicando inglés en el aula'],
-  ['DSC06802.jpg.jpeg', 'Estudiantes conversando durante la clase'],
+  ['DSC06718.webp', 'Estudiantes participando en una clase de inglés'],
+  ['DSC06720.webp', 'Estudiantes compartiendo una actividad de aprendizaje'],
+  ['DSC06733.webp', 'Grupo practicando inglés en el aula'],
+  ['DSC06802.webp', 'Estudiantes conversando durante la clase'],
 ]
 
 const communityMoments = [
-  ['DSC06667.jpg.jpeg', 'Estudiantes practicando juntos en el aula'],
-  ['DSC06683.jpg.jpeg', 'Grupo de estudiantes compartiendo una clase'],
-  ['DSC06726.jpg.jpeg', 'Estudiantes participando en una actividad'],
-  ['DSC06730.jpg.jpeg', 'Estudiante compartiendo un momento de aprendizaje'],
+  ['DSC06667.webp', 'Estudiantes practicando juntos en el aula'],
+  ['DSC06683.webp', 'Grupo de estudiantes compartiendo una clase'],
+  ['DSC06726.webp', 'Estudiantes participando en una actividad'],
+  ['DSC06730.webp', 'Estudiante compartiendo un momento de aprendizaje'],
 ]
 
 function Community() {
@@ -33,7 +33,7 @@ function Community() {
               </div>
               <div className="community-hero__image">
                 <img
-                  src="/images/classroom/DSC06803.jpg.jpeg"
+                  src="/images/classroom/DSC06803.webp"
                   alt="Docente y estudiantes participando en una clase de Towers"
                   fetchPriority="high"
                 />
@@ -75,7 +75,7 @@ function Community() {
             </h2>
             <div className="community-moments__featured">
               <img
-                src="/images/classroom/DSC06700.jpg.jpeg"
+                src="/images/classroom/DSC06700.webp"
                 alt="Docente y estudiantes compartiendo una clase de inglés"
                 loading="lazy"
               />

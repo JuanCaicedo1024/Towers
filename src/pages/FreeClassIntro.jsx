@@ -25,7 +25,7 @@ function FreeClassIntro() {
               <small>Completa tu registro breve para obtener acceso.</small>
             </div>
             <div className="free-class-intro__video" role="img" aria-label="Vista previa de una clase en Towers">
-              <img src="/images/free-class/introductory-class.png" alt="" />
+              <img src="/images/free-class/introductory-class.webp" alt="" />
             </div>
           </div>
         </section>

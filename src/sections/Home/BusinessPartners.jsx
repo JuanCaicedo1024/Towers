@@ -3,12 +3,12 @@ import AnimatedText from "@/components/ui/AnimatedText";
 const businessPartners = [
   {
     name: "Convenio empresarial",
-    logo: "/images/partners/enterprise-convenio.png",
+    logo: "/images/partners/enterprise-convenio.webp",
   },
-  { name: "Addi", logo: "/images/partners/addi.png" },
-  { name: "Sistecrédito", logo: "/images/partners/sistecredito.png", crop: true },
-  { name: "Universidad del Sinú", logo: "/images/partners/universidad.png", crop: true },
-  { name: "CENS", logo: "/images/partners/cens.jpg", logoClassName: "h-[72px] w-[72px] object-contain" },
+  { name: "Addi", logo: "/images/partners/addi.webp" },
+  { name: "Sistecrédito", logo: "/images/partners/sistecredito.webp", crop: true },
+  { name: "Universidad del Sinú", logo: "/images/partners/universidad.webp", crop: true },
+  { name: "CENS", logo: "/images/partners/cens.webp", logoClassName: "h-[72px] w-[72px] object-contain" },
   { name: "Clínica Machicado", logo: "/images/partners/clinica.svg" },
 ];
 

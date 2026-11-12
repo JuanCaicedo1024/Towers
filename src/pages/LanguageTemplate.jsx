@@ -31,8 +31,8 @@ const languagePrograms = {
     intro:
       "Programa de Inglés con enfoque de interacción: práctica guiada con profesores y aplicación del idioma en situaciones reales.",
     levels: "Inicial · Básico · Intermedio · Avanzado",
-    image: "/images/languages/programs/english.jpeg",
-    flagImage: "/images/languages/flags/english.png",
+    image: "/images/languages/programs/english.webp",
+    flagImage: "/images/languages/flags/english.webp",
   },
   frances: {
     name: "francés",
@@ -40,8 +40,8 @@ const languagePrograms = {
     intro:
       "Aprende francés con práctica guiada, interacción y aplicación en situaciones cotidianas.",
     levels: "Inicial · Básico · Intermedio",
-    image: "/images/languages/programs/french.jpeg",
-    flagImage: "/images/languages/flags/french.png",
+    image: "/images/languages/programs/french.webp",
+    flagImage: "/images/languages/flags/french.webp",
   },
   portugues: {
     name: "portugués",
@@ -49,8 +49,8 @@ const languagePrograms = {
     intro:
       "Comunícate en portugués con confianza a través de práctica guiada y situaciones de la vida real.",
     levels: "Inicial · Básico · Intermedio",
-    image: "/images/languages/programs/portuguese.jpeg",
-    flagImage: "/images/languages/flags/portuguese.png",
+    image: "/images/languages/programs/portuguese.webp",
+    flagImage: "/images/languages/flags/portuguese.webp",
   },
   aleman: {
     name: "alemán",
@@ -58,8 +58,8 @@ const languagePrograms = {
     intro:
       "Construye una base sólida en alemán con estructura, práctica guiada e interacción.",
     levels: "Inicial · Básico · Intermedio",
-    image: "/images/languages/programs/german.jpeg",
-    flagImage: "/images/languages/flags/german.png",
+    image: "/images/languages/programs/german.webp",
+    flagImage: "/images/languages/flags/german.webp",
   },
   italiano: {
     name: "italiano",
@@ -67,8 +67,8 @@ const languagePrograms = {
     intro:
       "Acércate al italiano a través de la práctica, la interacción y su cultura.",
     levels: "Inicial · Básico",
-    image: "/images/languages/programs/italian.jpeg",
-    flagImage: "/images/languages/flags/italian.png",
+    image: "/images/languages/programs/italian.webp",
+    flagImage: "/images/languages/flags/italian.webp",
   },
 };
 
@@ -111,19 +111,19 @@ const methodologySteps = [
 const modalities = [
   [
     "Presencial",
-    "/images/modalities/in-person.png",
+    "/images/modalities/in-person.webp",
     UsersRound,
     "Asiste a clases en una sede, practica en persona con tu docente y comparte el proceso con otros estudiantes.",
   ],
   [
     "Virtual",
-    "/images/modalities/online.png",
+    "/images/modalities/online.webp",
     Monitor,
     "Conéctate a clases en vivo desde donde estés e interactúa con tu docente y compañeros en línea.",
   ],
   [
     "Híbrida",
-    "/images/modalities/hybrid.png",
+    "/images/modalities/hybrid.webp",
     Building2,
     "Combina clases presenciales y virtuales para adaptar tu aprendizaje a tus horarios y necesidades.",
   ],

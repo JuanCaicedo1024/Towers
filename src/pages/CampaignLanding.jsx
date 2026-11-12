@@ -37,13 +37,13 @@ function CampaignLanding() {
 
   return <main className="campaign-landing min-h-screen overflow-hidden bg-white text-[#101820]">
     <header className="campaign-landing-header relative z-10 mx-auto flex max-w-[1440px] items-center justify-between px-[6%] py-4 lg:px-[8%]">
-      <Link className="campaign-brand-link" to="/" aria-label="Towers, inicio"><img className="h-12 w-auto object-contain sm:h-16" src="/images/brand/towers.png" alt="Towers" /></Link>
+      <Link className="campaign-brand-link" to="/" aria-label="Towers, inicio"><img className="h-12 w-auto object-contain sm:h-16" src="/images/brand/towers.webp" alt="Towers" /></Link>
       <a className="inline-flex items-center gap-2 rounded-xl bg-[#E83E33] px-4 py-3 text-sm font-bold text-white shadow-[0_8px_18px_rgb(232_62_51_/_22%)] transition hover:-translate-y-0.5 hover:bg-[#cf3028] sm:px-6" href={contactUrl} target={external ? '_blank' : undefined} rel={external ? 'noreferrer' : undefined}>{content.cta || 'Hablar con un asesor'} <ArrowRight size={17} /></a>
     </header>
 
     <section className="campaign-landing-hero relative isolate overflow-hidden bg-[#fff8f6]">
       <div className="pointer-events-none absolute -right-28 -top-40 h-[34rem] w-[34rem] rounded-full border border-[#e83e33]/10" />
-      <img className="campaign-hero-brand-mark pointer-events-none absolute -bottom-28 -left-20 hidden w-[25rem] opacity-[.045] lg:block" src="/images/brand/towers.png" alt="" aria-hidden="true" />
+      <img className="campaign-hero-brand-mark pointer-events-none absolute -bottom-28 -left-20 hidden w-[25rem] opacity-[.045] lg:block" src="/images/brand/towers.webp" alt="" aria-hidden="true" />
       <div className="mx-auto grid min-h-[560px] max-w-[1440px] items-center gap-8 px-[6%] py-12 lg:grid-cols-[1.05fr_.95fr] lg:px-[8%] lg:py-16">
         <div className="relative z-10 max-w-[740px]">
           <p className="inline-flex items-center gap-2 rounded-full border border-[#f1c9c4] bg-white/80 px-4 py-2 font-mono text-[10px] font-bold uppercase tracking-[.14em] text-[#c83a2f]"><Sparkles size={14} />{content.eyebrow || campaign.name}</p>
@@ -76,7 +76,7 @@ function CampaignLanding() {
     {faqs.length > 0 && <FAQ items={faqs} variant="campaign" eyebrow="Preguntas frecuentes" title="Resolvemos tus dudas" />}
 
     <section id="contacto" className="campaign-landing-section scroll-mt-14 px-[6%] py-14 lg:px-8 lg:py-20"><div className="mx-auto max-w-[1200px]"><div className="campaign-final-cta relative overflow-hidden rounded-[1.7rem] bg-[#E83E33] px-6 py-10 text-white shadow-[0_24px_50px_rgb(232_62_51_/_22%)] sm:px-10 sm:py-12 lg:px-14 lg:py-14"><div className="absolute -right-10 -top-32 h-72 w-72 rounded-full border border-white/20" /><div className="absolute -bottom-28 left-1/3 h-56 w-56 rounded-full bg-white/10 blur-2xl" /><div className="relative flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center sm:gap-8"><div className="max-w-2xl"><p className="font-mono text-[10px] font-bold uppercase tracking-[.15em] text-white/75">Da el siguiente paso</p><h2 className="mt-3 text-3xl font-extrabold tracking-[-.045em] sm:text-4xl">{content.ctaHeadline || '¿Listo para el siguiente paso?'}</h2></div><a className="campaign-final-cta-button inline-flex shrink-0 items-center gap-3 rounded-xl bg-white px-6 py-4 text-sm font-bold text-[#c83a2f] shadow-lg transition hover:-translate-y-1" href={contactUrl} target={external ? '_blank' : undefined} rel={external ? 'noreferrer' : undefined}>{content.cta || 'Hablar con un asesor'} <ArrowRight size={18} /></a></div></div></div></section>
-    <footer className="flex flex-col items-center justify-between gap-4 border-t border-[#edf0f4] px-[6%] py-6 sm:flex-row lg:px-[8%]"><Link to="/" aria-label="Towers, inicio"><img className="h-9 w-auto object-contain" src="/images/brand/towers-cropped.png" alt="Towers" /></Link><p className="text-xs text-[#71809a]">© {new Date().getFullYear()} Towers. Aprende para usarlo donde importa.</p></footer>
+    <footer className="flex flex-col items-center justify-between gap-4 border-t border-[#edf0f4] px-[6%] py-6 sm:flex-row lg:px-[8%]"><Link to="/" aria-label="Towers, inicio"><img className="h-9 w-auto object-contain" src="/images/brand/towers-cropped.webp" alt="Towers" /></Link><p className="text-xs text-[#71809a]">© {new Date().getFullYear()} Towers. Aprende para usarlo donde importa.</p></footer>
   </main>
 }
 

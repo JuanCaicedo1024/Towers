@@ -2,11 +2,11 @@ import { ArrowRight } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
 
 const languageFlags = {
-  ingles: '/images/languages/flags/english.png',
-  frances: '/images/languages/flags/french.png',
-  portugues: '/images/languages/flags/portuguese.png',
-  aleman: '/images/languages/flags/german.png',
-  italiano: '/images/languages/flags/italian.png',
+  ingles: '/images/languages/flags/english.webp',
+  frances: '/images/languages/flags/french.webp',
+  portugues: '/images/languages/flags/portuguese.webp',
+  aleman: '/images/languages/flags/german.webp',
+  italiano: '/images/languages/flags/italian.webp',
 }
 
 function TeacherCard({ teacher }) {

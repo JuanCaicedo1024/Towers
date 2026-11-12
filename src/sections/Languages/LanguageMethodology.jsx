@@ -56,7 +56,7 @@ function LanguageMethodology() {
       <div
         className="absolute inset-0 opacity-400"
         style={{
-          backgroundImage: "url('/images/languages/methodology-background.jpg')",
+          backgroundImage: "url('/images/languages/methodology-background.webp')",
           backgroundPosition: 'center',
           backgroundSize: 'cover',
           mixBlendMode: 'screen',

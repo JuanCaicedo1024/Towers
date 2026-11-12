@@ -78,7 +78,7 @@ function Methodology() {
     <section
       className="relative overflow-hidden bg-white bg-no-repeat px-5 py-24 text-white sm:px-8 sm:py-28 lg:aspect-[2048/1080] lg:px-[3.55%] lg:py-0"
       style={{
-        backgroundImage: "url('/images/methodology/background.png')",
+        backgroundImage: "url('/images/methodology/background.webp')",
         backgroundPosition: 'center',
         backgroundSize: '100% 100%',
       }}

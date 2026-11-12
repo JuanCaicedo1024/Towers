@@ -21,7 +21,7 @@ function Membership() {
               </div>
               <div className="membership-feature__visual membership-feature__visual--hero">
                 <img
-                  src="/images/classroom/DSC06700.jpg.jpeg"
+                  src="/images/classroom/DSC06700.webp"
                   alt="Docente y estudiantes participando en una clase de Towers"
                   fetchPriority="high"
                 />
@@ -36,7 +36,7 @@ function Membership() {
             <div className="membership-feature membership-feature--student">
               <div className="membership-feature__visual membership-feature__visual--student">
                 <img
-                  src="/images/classroom/DSC06726.jpg.jpeg"
+                  src="/images/classroom/DSC06726.webp"
                   alt="Estudiantes aprendiendo y compartiendo en un espacio de Towers"
                   loading="lazy"
                 />

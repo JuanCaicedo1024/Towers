@@ -1,8 +1,8 @@
 export const campaignImageOptions = [
-  "/images/campaigns/hero.png",
-  "/images/campaigns/languages.png",
-  "/images/modalities/hero.png",
-  "/images/teachers/no-photo.png",
+  "/images/campaigns/hero.webp",
+  "/images/campaigns/languages.webp",
+  "/images/modalities/hero.webp",
+  "/images/teachers/no-photo.webp",
 ];
 
 const legacyCampaignImagePaths = {
@@ -13,5 +13,10 @@ const legacyCampaignImagePaths = {
 };
 
 export function resolveCampaignImage(image) {
-  return legacyCampaignImagePaths[image] || image || campaignImageOptions[0];
+  if (!image) return campaignImageOptions[0];
+  if (legacyCampaignImagePaths[image]) return legacyCampaignImagePaths[image];
+  if (image.startsWith("/images/") && /\.(png|jpe?g)$/i.test(image)) {
+    return image.replace(/\.(png|jpe?g)$/i, ".webp");
+  }
+  return image;
 }
