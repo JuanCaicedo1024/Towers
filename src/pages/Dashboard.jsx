@@ -16,21 +16,41 @@ function Dashboard() {
   const [error, setError] = useState('')
   const [deletingId, setDeletingId] = useState('')
 
+  const fetchCampaigns = useCallback(
+    () => listCampaigns(session.access_token),
+    [session.access_token],
+  )
+
   const loadCampaigns = useCallback(async () => {
     setLoading(true)
     setError('')
     try {
-      setCampaigns(await listCampaigns(session.access_token))
+      setCampaigns(await fetchCampaigns())
     } catch (loadError) {
       setError(loadError.message || 'No se pudieron cargar las campañas.')
     } finally {
       setLoading(false)
     }
-  }, [session.access_token])
+  }, [fetchCampaigns])
 
   useEffect(() => {
-    loadCampaigns()
-  }, [loadCampaigns])
+    let active = true
+
+    fetchCampaigns()
+      .then((result) => {
+        if (active) setCampaigns(result)
+      })
+      .catch((loadError) => {
+        if (active) setError(loadError.message || 'No se pudieron cargar las campañas.')
+      })
+      .finally(() => {
+        if (active) setLoading(false)
+      })
+
+    return () => {
+      active = false
+    }
+  }, [fetchCampaigns])
 
   async function handleSignOut() {
     await signOut()

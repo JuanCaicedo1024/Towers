@@ -72,12 +72,16 @@ function Experience() {
           >
             <div className="h-[260px] overflow-hidden md:h-[350px]">
               <img
-                className="h-full w-full object-cover object-center transition duration-700 group-hover:scale-105"
+                key={currentSlide.image}
+                className="home-experience-slide-image h-full w-full object-cover object-center transition duration-700 group-hover:scale-105"
                 src={currentSlide.image}
                 alt={currentSlide.title}
               />
             </div>
-            <div className="relative flex flex-col justify-center overflow-hidden p-7 sm:p-12">
+            <div
+              key={currentSlide.title}
+              className="home-experience-slide-copy relative flex flex-col justify-center overflow-hidden p-7 sm:p-12"
+            >
               <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-[#f13d35] via-[#e9a614] to-[#f13d35]" />
               <h3 className="max-w-[600px] text-xl font-semibold leading-[1.2] text-[#8f301d] sm:text-2xl">
                 <AnimatedText>{currentSlide.title}</AnimatedText>

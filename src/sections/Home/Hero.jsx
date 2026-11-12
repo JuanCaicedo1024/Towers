@@ -72,16 +72,13 @@ function Hero() {
           </ScrollVelocityRow>
         </div>
 
-        <div className="relative flex min-h-[430px] items-end justify-center self-stretch xl:min-h-[720px]">
+        <div className="home-hero__visual relative flex min-h-[430px] items-end justify-center self-stretch xl:min-h-[720px]">
           <img
-            className="relative z-10 h-auto w-[90%] max-w-[500px] object-contain object-bottom xl:absolute xl:bottom-0 xl:right-0 xl:h-[92%] xl:w-auto xl:max-w-full"
+            className="home-hero__image relative z-10 h-auto w-[90%] max-w-[500px] object-contain object-bottom xl:absolute xl:bottom-0 xl:right-0 xl:h-[92%] xl:w-auto xl:max-w-full"
             src="/images/Hero_Towers.png"
             alt="El mejor lugar para aprender y crecer, con una estudiante y el Big Ben"
-            style={{
-              WebkitMaskImage: 'radial-gradient(ellipse 85% 94% at 55% 48%, #000 58%, transparent 100%)',
-              maskImage: 'radial-gradient(ellipse 85% 94% at 55% 48%, #000 58%, transparent 100%)',
-            }}
           />
+          <span className="home-hero__image-blend" aria-hidden="true" />
         </div>
       </div>
     </section>

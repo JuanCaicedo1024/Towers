@@ -111,19 +111,19 @@ const methodologySteps = [
 const modalities = [
   [
     "Presencial",
-    "/images/Presencial.jpg",
+    "/images/modalidad-presencial.png",
     UsersRound,
     "Asiste a clases en una sede, practica en persona con tu docente y comparte el proceso con otros estudiantes.",
   ],
   [
     "Virtual",
-    "/images/Virtual.jpg",
+    "/images/modalidad-virtual.png",
     Monitor,
     "Conéctate a clases en vivo desde donde estés e interactúa con tu docente y compañeros en línea.",
   ],
   [
     "Híbrida",
-    "/images/Hibrida.jpg",
+    "/images/modalidad-hibrida.png",
     Building2,
     "Combina clases presenciales y virtuales para adaptar tu aprendizaje a tus horarios y necesidades.",
   ],
@@ -170,7 +170,7 @@ function LanguageTemplate() {
     );
 
   const whatsappMessage = `Hola, quiero información sobre el curso de ${program.name}.`;
-  const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(whatsappMessage)}`;
+  const whatsappUrl = `https://wa.me/573013490020?text=${encodeURIComponent(whatsappMessage)}`;
   const languageTeachers = getTeachersByLanguage(language?.toLowerCase());
 
   return (
@@ -235,7 +235,7 @@ function LanguageTemplate() {
               <img
                 src={program.image}
                 alt={`Programa de ${program.name}`}
-                className="absolute inset-0 h-full w-full rounded-[2rem] object-contain object-center"
+                className="absolute inset-0 h-full w-full rounded-[2rem] object-cover object-center"
               />
               <div className="absolute bottom-6 right-5 flex flex-row items-center gap-3 rounded-[8px] bg-white px-4 py-3 text-[#101820] shadow-[0_6px_16px_rgb(0_0_0_/_16%)] sm:bottom-8 sm:right-8">
                 <span

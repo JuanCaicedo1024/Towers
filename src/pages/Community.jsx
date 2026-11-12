@@ -2,13 +2,6 @@ import AnimatedText from '@/components/ui/AnimatedText';
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 
-const opportunities = [
-  ['01', 'Conversar', 'Participar en espacios donde el idioma puede utilizarse con otras personas.'],
-  ['02', 'Practicar', 'Reforzar lo aprendido mediante nuevas situaciones de interacción.'],
-  ['03', 'Conectar', 'Encontrarte con otros estudiantes que también están atravesando su proceso de aprendizaje.'],
-  ['04', 'Ganar confianza', 'Tener más palabras para expresarte y participar fuera del contexto tradicional de clase.'],
-]
-
 const communityPhotos = [
   ['DSC06718.jpg.jpeg', 'Estudiantes participando en una clase de inglés'],
   ['DSC06720.jpg.jpeg', 'Estudiantes compartiendo una actividad de aprendizaje'],
@@ -23,17 +16,6 @@ const communityMoments = [
   ['DSC06730.jpg.jpeg', 'Estudiante compartiendo un momento de aprendizaje'],
 ]
 
-function Heading({ number, label, description }) {
-  return (
-    <div className="experience-section-heading">
-      <span className="experience-section-number">{number}</span>
-      <span>{label}</span>
-      <span aria-hidden="true">—</span>
-      <span>{description}</span>
-    </div>
-  )
-}
-
 function Community() {
   return (
     <>
@@ -43,7 +25,7 @@ function Community() {
           <div className="community-container">
             <div className="experience-split community-hero__split">
               <div className="community-hero__copy">
-                <span className="experience-eyebrow">Modalidades</span>
+                <span className="experience-eyebrow">Comunidad</span>
                 <h1><AnimatedText>Aprender un idioma significa usarlo.</AnimatedText></h1>
                 <p>
                   <AnimatedText>En TOWERS, el aprendizaje parte de la interacción. No se trata únicamente de estudiar estructuras o memorizar contenidos, sino de desarrollar la capacidad de comprender, comunicarte y utilizar el idioma en diferentes situaciones.</AnimatedText>
@@ -64,7 +46,7 @@ function Community() {
         <section className="community-dark community-gallery">
           <div className="community-container community-split">
             <div className="community-gallery__copy">
-              <span className="experience-eyebrow">Modalidades</span>
+              <span className="experience-eyebrow">Comunidad</span>
               <h2><AnimatedText>La comunidad se construye participando.</AnimatedText></h2>
               <p>
                 <AnimatedText>Los espacios de comunidad pueden incluir encuentros, conversaciones, actividades y experiencias que permitan a los estudiantes relacionarse con el idioma de una manera más orgánica y cotidiana.</AnimatedText>

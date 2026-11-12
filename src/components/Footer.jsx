@@ -80,7 +80,10 @@ function Footer() {
               <ContactDetail
                 icon={Phone}
                 title="Teléfono"
-                lines={[{ value: '+57 301 349 0020', href: 'tel:+573013490020' }]}
+                lines={[
+                  { value: '+57 301 349 0020', href: 'tel:+573013490020' },
+                  { value: '+57 324 275 5119', href: 'tel:+573242755119' },
+                ]}
               />
               <ContactDetail
                 icon={Mail}

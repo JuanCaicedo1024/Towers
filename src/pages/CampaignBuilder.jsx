@@ -4,6 +4,7 @@ import {
   ArrowLeft,
   ArrowRight,
   BookOpen,
+  Check,
   CheckCircle2,
   ExternalLink,
   Eye,
@@ -12,11 +13,15 @@ import {
   Link2,
   LayoutTemplate,
   MessageCircle,
+  Minus,
   Monitor,
   Save,
   Sparkles,
   Smartphone,
+  Star,
   Upload,
+  ChevronUp,
+  ChevronDown,
 } from "lucide-react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../auth/useAuth";
@@ -44,11 +49,11 @@ const initialForm = {
   duration: "",
   modality: "Online",
   schedule: "",
-  benefits: "",
-  outcomes: "",
+  benefits: [],
+  outcomes: [],
   methodology: "",
-  curriculum: "",
-  faqs: "",
+  curriculum: [],
+  faqs: [],
   cta: "Hablar con un asesor",
   destination: "WhatsApp",
   destinationUrl: "",
@@ -66,7 +71,15 @@ function slugify(value) {
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
 }
-const asLines = (items = []) => items.join("\n");
+const asItems = (items) => Array.isArray(items)
+  ? items.map((item) => typeof item === "string" ? { text: item, icon: "check" } : item)
+  : typeof items === "string" ? items.split("\n").filter(Boolean).map((text) => ({ text, icon: "check" })) : [];
+const parseLegacyPairs = (items, first, second) => Array.isArray(items)
+  ? items
+  : typeof items === "string" ? items.split("\n").map((line) => {
+      const [a = "", b = ""] = line.split("|").map((part) => part.trim());
+      return { [first]: a, [second]: b };
+    }).filter((item) => item[first]) : [];
 
 function Field({ label, hint, className = "", children }) {
   return (
@@ -135,14 +148,10 @@ function CampaignBuilder() {
           slug: campaign.slug,
           channel: campaign.channel,
           ...content,
-          benefits: asLines(content.benefits),
-          outcomes: asLines(content.outcomes),
-          curriculum: (content.curriculum || [])
-            .map(({ title, description }) => `${title} | ${description || ""}`)
-            .join("\n"),
-          faqs: (content.faqs || [])
-            .map(({ question, answer }) => `${question} | ${answer || ""}`)
-            .join("\n"),
+          benefits: asItems(content.benefits),
+          outcomes: asItems(content.outcomes),
+          curriculum: parseLegacyPairs(content.curriculum, "title", "description"),
+          faqs: parseLegacyPairs(content.faqs, "question", "answer"),
         });
       })
       .catch((loadError) => {
@@ -218,15 +227,6 @@ function CampaignBuilder() {
     )
       return setError("El enlace de destino debe comenzar por https://.");
     setSaving(true);
-    const parsePairs = (value, firstKey, secondKey) =>
-      value
-        .split("\n")
-        .map((line) => line.split("|").map((part) => part.trim()))
-        .filter((parts) => parts[0])
-        .map(([first, second = ""]) => ({
-          [firstKey]: first,
-          [secondKey]: second,
-        }));
     const content = {
       eyebrow: form.eyebrow.trim(),
       headline: form.headline.trim(),
@@ -238,17 +238,11 @@ function CampaignBuilder() {
       duration: form.duration.trim(),
       modality: form.modality.trim(),
       schedule: form.schedule.trim(),
-      benefits: form.benefits
-        .split("\n")
-        .map((item) => item.trim())
-        .filter(Boolean),
-      outcomes: form.outcomes
-        .split("\n")
-        .map((item) => item.trim())
-        .filter(Boolean),
+      benefits: form.benefits.map(({ text }) => text.trim()).filter(Boolean),
+      outcomes: form.outcomes.map(({ text, icon }) => ({ text: text.trim(), icon })).filter(({ text }) => text),
       methodology: form.methodology.trim(),
-      curriculum: parsePairs(form.curriculum, "title", "description"),
-      faqs: parsePairs(form.faqs, "question", "answer"),
+      curriculum: form.curriculum.map(({ title, description }) => ({ title: title.trim(), description: description.trim() })).filter(({ title }) => title),
+      faqs: form.faqs.map(({ question, answer }) => ({ question: question.trim(), answer: answer.trim() })).filter(({ question }) => question),
       cta: form.cta.trim() || "Hablar con un asesor",
       destination: form.destination,
       destinationUrl:
@@ -323,6 +317,20 @@ function CampaignBuilder() {
       ))}
     </select>
   );
+  const updateItem = (key, index, field, value) => update(key, form[key].map((item, itemIndex) => itemIndex === index ? { ...item, [field]: value } : item));
+  const moveItem = (key, index, offset) => {
+    const nextIndex = index + offset;
+    if (nextIndex < 0 || nextIndex >= form[key].length) return;
+    const items = [...form[key]];
+    [items[index], items[nextIndex]] = [items[nextIndex], items[index]];
+    update(key, items);
+  };
+  const itemControls = (key, index) => <div className="flex shrink-0 items-center gap-1">
+    <button type="button" onClick={() => moveItem(key, index, -1)} disabled={index === 0} aria-label="Mover arriba" className="rounded p-1.5 text-[#7187a4] hover:bg-[#f4f7fb] disabled:opacity-30"><ChevronUp size={15} /></button>
+    <button type="button" onClick={() => moveItem(key, index, 1)} disabled={index === form[key].length - 1} aria-label="Mover abajo" className="rounded p-1.5 text-[#7187a4] hover:bg-[#f4f7fb] disabled:opacity-30"><ChevronDown size={15} /></button>
+    <button type="button" onClick={() => update(key, form[key].filter((_, itemIndex) => itemIndex !== index))} aria-label="Eliminar elemento" className="rounded p-1.5 text-[#e83e33] hover:bg-[#fff1ef]"><Minus size={15} /></button>
+  </div>;
+  const addItem = (key, item) => update(key, [...form[key], item]);
 
   return (
     <main className="campaign-builder min-h-screen bg-[radial-gradient(circle_at_top_left,_#fff8f6_0,_#f5f7fb_34rem)] px-4 pb-10 text-[#102d55] sm:px-8 lg:px-10">
@@ -522,26 +530,8 @@ function CampaignBuilder() {
                 <Field label="Horario o disponibilidad">
                   {input("schedule", { placeholder: "Horarios flexibles" })}
                 </Field>
-                <Field
-                  className="sm:col-span-2"
-                  label="Beneficios"
-                  hint="Un beneficio por línea."
-                >
-                  {textarea("benefits", 4, {
-                    placeholder:
-                      "Grupos pequeños\nProfesores preparados\nPráctica desde el primer día",
-                  })}
-                </Field>
-                <Field
-                  className="sm:col-span-2"
-                  label="Resultados de aprendizaje"
-                  hint="Un resultado por línea."
-                >
-                  {textarea("outcomes", 4, {
-                    placeholder:
-                      "Mantener conversaciones cotidianas\nComunicarte con seguridad en el trabajo",
-                  })}
-                </Field>
+                <div className="sm:col-span-2"><p className="mb-2 text-sm font-semibold text-[#173a67]">Beneficios</p><div className="grid gap-2">{form.benefits.map((item, index) => <div key={index} className="flex items-center gap-2 rounded-xl border border-[#dbe4ef] p-2"><span className="w-7 text-center text-xs font-bold text-[#7187a4]">{index + 1}</span><input aria-label={`Beneficio ${index + 1}`} className={inputClass} value={item.text} onChange={(event) => updateItem("benefits", index, "text", event.target.value)} placeholder="Ej. Grupos pequeños y atención cercana" />{itemControls("benefits", index)}</div>)}</div><button type="button" onClick={() => addItem("benefits", { text: "" })} className="mt-2 rounded-lg border border-[#e83e33] px-3 py-2 text-sm font-bold text-[#e83e33] hover:bg-[#fff8f6]">+ Agregar beneficio</button></div>
+                <div className="sm:col-span-2"><p className="mb-2 text-sm font-semibold text-[#173a67]">Resultados de aprendizaje</p><div className="grid gap-2">{form.outcomes.map((item, index) => <div key={index} className="grid gap-2 rounded-xl border border-[#dbe4ef] p-2 sm:grid-cols-[1fr_170px_auto]"><input aria-label={`Resultado ${index + 1}`} className={inputClass} value={item.text} onChange={(event) => updateItem("outcomes", index, "text", event.target.value)} placeholder="Ej. Mantener conversaciones cotidianas" /><select aria-label="Ícono del resultado" className={inputClass} value={item.icon || "check"} onChange={(event) => updateItem("outcomes", index, "icon", event.target.value)}><option value="check">✓ Check</option><option value="star">★ Estrella</option><option value="book">▣ Libro</option><option value="message">◉ Conversación</option><option value="sparkles">✦ Brillo</option></select>{itemControls("outcomes", index)}</div>)}</div><button type="button" onClick={() => addItem("outcomes", { text: "", icon: "check" })} className="mt-2 rounded-lg border border-[#e83e33] px-3 py-2 text-sm font-bold text-[#e83e33] hover:bg-[#fff8f6]">+ Agregar resultado</button></div>
                 <Field
                   className="sm:col-span-2"
                   label="Metodología"
@@ -561,24 +551,8 @@ function CampaignBuilder() {
               description="Las secciones aparecen automáticamente cuando agregas contenido."
             >
               <div className="grid gap-5">
-                <Field
-                  label="Módulos o temas"
-                  hint="Uno por línea con formato: Título | Descripción. La descripción es opcional."
-                >
-                  {textarea("curriculum", 5, {
-                    placeholder:
-                      "Bases para comunicarte | Vocabulario y expresiones cotidianas\nConversación real | Situaciones de viaje y trabajo",
-                  })}
-                </Field>
-                <Field
-                  label="Preguntas frecuentes"
-                  hint="Una por línea con formato: Pregunta | Respuesta."
-                >
-                  {textarea("faqs", 5, {
-                    placeholder:
-                      "¿Necesito experiencia previa? | No, tenemos opciones para todos los niveles.\n¿Cómo puedo empezar? | Escríbenos y te ayudamos a elegir.",
-                  })}
-                </Field>
+                <div><p className="mb-2 text-sm font-semibold text-[#173a67]">Módulos o temas</p><div className="grid gap-2">{form.curriculum.map((item, index) => <div key={index} className="grid gap-2 rounded-xl border border-[#dbe4ef] p-3 sm:grid-cols-[1fr_1fr_auto]"><label className="grid gap-1 text-xs font-semibold text-[#7187a4]">Título<input className={inputClass} value={item.title} onChange={(event) => updateItem("curriculum", index, "title", event.target.value)} /></label><label className="grid gap-1 text-xs font-semibold text-[#7187a4]">Descripción<input className={inputClass} value={item.description} onChange={(event) => updateItem("curriculum", index, "description", event.target.value)} /></label>{itemControls("curriculum", index)}</div>)}</div><button type="button" onClick={() => addItem("curriculum", { title: "", description: "" })} className="mt-2 rounded-lg border border-[#e83e33] px-3 py-2 text-sm font-bold text-[#e83e33] hover:bg-[#fff8f6]">+ Agregar módulo</button></div>
+                <div><p className="mb-2 text-sm font-semibold text-[#173a67]">Preguntas frecuentes</p><div className="grid gap-2">{form.faqs.map((item, index) => <div key={index} className="grid gap-2 rounded-xl border border-[#dbe4ef] p-3 sm:grid-cols-[1fr_1fr_auto]"><label className="grid gap-1 text-xs font-semibold text-[#7187a4]">Pregunta<input className={inputClass} value={item.question} onChange={(event) => updateItem("faqs", index, "question", event.target.value)} /></label><label className="grid gap-1 text-xs font-semibold text-[#7187a4]">Respuesta<input className={inputClass} value={item.answer} onChange={(event) => updateItem("faqs", index, "answer", event.target.value)} /></label>{itemControls("faqs", index)}</div>)}</div><button type="button" onClick={() => addItem("faqs", { question: "", answer: "" })} className="mt-2 rounded-lg border border-[#e83e33] px-3 py-2 text-sm font-bold text-[#e83e33] hover:bg-[#fff8f6]">+ Agregar pregunta</button></div>
               </div>
             </SectionCard>
             <SectionCard
@@ -728,18 +702,13 @@ function CampaignBuilder() {
                     alt=""
                   />
                   {form.imageCaption && <p className="bg-white px-4 py-2 text-[10px] font-semibold text-[#183454]">{form.imageCaption}</p>}
-                  {form.benefits
-                    .split("\n")
-                    .map((benefit) => benefit.trim())
-                    .filter(Boolean).length > 0 && (
+                  {form.benefits.filter((item) => item.text.trim()).length > 0 && (
                     <div className="grid gap-2 p-4 sm:grid-cols-2">
                       {form.benefits
-                        .split("\n")
-                        .map((benefit) => benefit.trim())
-                        .filter(Boolean)
-                        .map((benefit) => (
+                        .filter((item) => item.text.trim())
+                        .map(({ text: benefit }, index) => (
                           <div
-                            key={benefit}
+                            key={`${benefit}-${index}`}
                             className="rounded-lg border border-[#dbe4ef] p-3 text-xs text-[#173a67]"
                           >
                             ✓ {benefit}
@@ -747,14 +716,12 @@ function CampaignBuilder() {
                         ))}
                     </div>
                   )}
-                  {form.outcomes.split("\n").map((item) => item.trim()).filter(Boolean).length > 0 && <section className="bg-[#08244a] p-5 text-white"><p className="text-[9px] font-bold uppercase tracking-wide text-[#ffaaa4]">Al terminar</p><h4 className="mt-2 text-lg font-extrabold">Lo que podrás hacer</h4><div className="mt-3 grid gap-2">{form.outcomes.split("\n").map((item) => item.trim()).filter(Boolean).map((item) => <p key={item} className="rounded-lg border border-white/10 bg-white/[.06] p-3 text-[10px] leading-4">✓ {item}</p>)}</div></section>}
+                  {form.outcomes.some((item) => item.text.trim()) && <section className="bg-[#08244a] p-5 text-white"><p className="text-[9px] font-bold uppercase tracking-wide text-[#ffaaa4]">Al terminar</p><h4 className="mt-2 text-lg font-extrabold">Lo que podrás hacer</h4><div className="mt-3 grid gap-2">{form.outcomes.filter((item) => item.text.trim()).map((item, index) => <p key={`${item.text}-${index}`} className="flex items-center gap-2 rounded-lg border border-white/10 bg-white/[.06] p-3 text-[10px] leading-4">{item.icon === "star" ? <Star size={14} /> : item.icon === "book" ? <BookOpen size={14} /> : item.icon === "message" ? <MessageCircle size={14} /> : item.icon === "sparkles" ? <Sparkles size={14} /> : <Check size={14} />}{item.text}</p>)}</div></section>}
                   {form.methodology && <section className="bg-[#f5f7fb] p-5"><p className="text-[9px] font-bold uppercase tracking-wide text-[#e83e33]">Metodología Towers</p><h4 className="mt-2 text-lg font-extrabold text-[#101820]">Aprende haciendo</h4><p className="mt-3 text-[10px] leading-5 text-[#294d78]">{form.methodology}</p></section>}
-                  {form.curriculum.split("\n").map((line) => line.split("|").map((part) => part.trim())).filter(([title]) => title).length > 0 && <section className="p-5"><p className="text-[9px] font-bold uppercase tracking-wide text-[#e83e33]">Contenido del curso</p><h4 className="mt-2 text-lg font-extrabold text-[#101820]">Un camino claro, paso a paso</h4><div className="mt-3 grid gap-2">{form.curriculum.split("\n").map((line) => line.split("|").map((part) => part.trim())).filter(([title]) => title).map(([title, description], index) => <article key={`${title}-${index}`} className="flex gap-3 rounded-xl border border-[#e3e9ef] p-3"><span className="font-mono text-[10px] font-bold text-[#e83e33]">0{index + 1}</span><div><p className="text-[10px] font-bold text-[#08244a]">{title}</p>{description && <p className="mt-1 text-[9px] leading-4 text-[#627493]">{description}</p>}</div></article>)}</div></section>}
-                  {form.faqs.split("\n").map((line) => line.split("|").map((part) => part.trim())).filter(([question]) => question).length > 0 && <section className="bg-[#f5f7fb] p-5"><p className="text-[9px] font-bold uppercase tracking-wide text-[#e83e33]">Preguntas frecuentes</p><h4 className="mt-2 text-lg font-extrabold text-[#101820]">Resolvemos tus dudas</h4><div className="mt-3 grid gap-3">{form.faqs.split("\n").map((line) => line.split("|").map((part) => part.trim())).filter(([question]) => question).map(([question, answer], index) => <article key={`${question}-${index}`} className="rounded-xl border border-[#e3e9ef] bg-white p-3"><p className="text-[10px] font-bold text-[#08244a]">{question}</p>{answer && <p className="mt-1 text-[9px] leading-4 text-[#627493]">{answer}</p>}</article>)}</div></section>}
+                  {form.curriculum.some(({ title }) => title.trim()) && <section className="p-5"><p className="text-[9px] font-bold uppercase tracking-wide text-[#e83e33]">Contenido del curso</p><h4 className="mt-2 text-lg font-extrabold text-[#101820]">Un camino claro, paso a paso</h4><div className="mt-3 grid gap-2">{form.curriculum.filter(({ title }) => title.trim()).map(({ title, description }, index) => <article key={`${title}-${index}`} className="flex gap-3 rounded-xl border border-[#e3e9ef] p-3"><span className="font-mono text-[10px] font-bold text-[#e83e33]">0{index + 1}</span><div><p className="text-[10px] font-bold text-[#08244a]">{title}</p>{description && <p className="mt-1 text-[9px] leading-4 text-[#627493]">{description}</p>}</div></article>)}</div></section>}
+                  {form.faqs.some(({ question }) => question.trim()) && <section className="bg-[#f5f7fb] p-5"><p className="text-[9px] font-bold uppercase tracking-wide text-[#e83e33]">Preguntas frecuentes</p><h4 className="mt-2 text-lg font-extrabold text-[#101820]">Resolvemos tus dudas</h4><div className="mt-3 grid gap-3">{form.faqs.filter(({ question }) => question.trim()).map(({ question, answer }, index) => <article key={`${question}-${index}`} className="rounded-xl border border-[#e3e9ef] bg-white p-3"><p className="text-[10px] font-bold text-[#08244a]">{question}</p>{answer && <p className="mt-1 text-[9px] leading-4 text-[#627493]">{answer}</p>}</article>)}</div></section>}
                   <section className="bg-[#e83e33] p-5 text-white"><p className="text-[9px] font-bold uppercase tracking-wide text-white/75">Da el siguiente paso</p><h4 className="mt-2 text-lg font-extrabold">{form.ctaHeadline || "¿Listo para el siguiente paso?"}</h4><span className="mt-4 inline-flex rounded-lg bg-white px-4 py-2.5 text-[10px] font-bold text-[#c83a2f]">{form.cta || "Hablar con un asesor"} →</span></section>
-                  {(form.curriculum.trim() ||
-                    form.faqs.trim() ||
-                    form.outcomes.trim()) && (
+                  {(form.curriculum.length || form.faqs.length || form.outcomes.length) > 0 && (
                     <div className="bg-[#08244a] p-4 text-xs font-bold text-white">
                       Tu curso · Resultados · Módulos · Preguntas frecuentes
                     </div>

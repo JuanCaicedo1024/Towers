@@ -26,20 +26,19 @@ function ModalitiesHeader() {
             </p>
           </div>
 
-          {/* Fotografía de la clase */}
+          {/* Fotografía de la sede */}
           <div className="relative min-h-[280px] overflow-hidden rounded-[1.7rem] lg:h-[440px] lg:min-h-0 lg:rounded-[1.7rem]">
             <img
-              src="/images/clara.jpg"
-              alt="Profesora impartiendo una clase de Towers"
+              src="/images/modalidades-hero.png"
+              alt="Integrante del equipo Towers en la sede de idiomas"
               className="absolute inset-0 h-full w-full object-cover object-center"
             />
 
             {/* Degradado oscuro inferior */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent" />
 
-            {/* Nombre de la profesora */}
             <strong className="absolute bottom-8 left-5 right-5 text-center text-[clamp(1.3rem,2.2vw,2rem)] font-bold italic tracking-[-0.04em] text-white sm:bottom-10">
-              <AnimatedText>Clases con Laura Martínez</AnimatedText>
+              <AnimatedText>Aprende en Towers</AnimatedText>
             </strong>
           </div>
         </div>
