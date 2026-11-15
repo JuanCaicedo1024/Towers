@@ -35,8 +35,13 @@ async function submit(body: Record<string, unknown>) {
   const language = cleanText(body.language)
   const modality = cleanText(body.modality)
   const objective = cleanText(body.objective)
+  const termsAccepted = body.termsAccepted === true || body.terms === true
+  const privacyAccepted = body.privacyAccepted === true || body.privacy === true
+  const consentAcceptedAt = typeof body.consentAcceptedAt === 'string' && body.consentAcceptedAt ? body.consentAcceptedAt : new Date().toISOString()
+  const consentMethod = typeof body.consentMethod === 'string' && body.consentMethod ? body.consentMethod : 'checkbox'
+  const consentSource = typeof body.consentSource === 'string' && body.consentSource ? body.consentSource : '/empresas'
 
-  if (body.consent !== true) return json({ error: 'Debes aceptar el tratamiento de tus datos.' }, 400)
+  if (body.consent !== true || !termsAccepted || !privacyAccepted) return json({ error: 'Debes aceptar los términos y la política de privacidad.' }, 400)
   if (company.length < 2 || company.length > 150) return json({ error: 'Revisa el nombre de la empresa.' }, 400)
   if (name.length < 2 || name.length > 150) return json({ error: 'Revisa el nombre ingresado.' }, 400)
   if (role.length < 2 || role.length > 150) return json({ error: 'Revisa el cargo ingresado.' }, 400)
@@ -52,7 +57,7 @@ async function submit(body: Record<string, unknown>) {
     secret: requiredEnv('GOOGLE_APPS_SCRIPT_SECRET'),
     lead_id: crypto.randomUUID(),
     registered_at: new Date().toISOString(),
-    source: '/empresas',
+    source: consentSource,
     company,
     name,
     role,
@@ -63,6 +68,11 @@ async function submit(body: Record<string, unknown>) {
     modality,
     objective,
     consent: true,
+    terms_accepted: true,
+    privacy_accepted: true,
+    consent_accepted_at: consentAcceptedAt,
+    consent_method: consentMethod,
+    consent_source: consentSource,
   }
   const response = await fetch(requiredEnv('GOOGLE_APPS_SCRIPT_URL'), {
     method: 'POST',

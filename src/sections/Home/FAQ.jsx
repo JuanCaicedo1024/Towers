@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useHomeContent } from '../../hooks/useHomeContent.jsx'
 
 const questions = [
   {
@@ -34,12 +35,14 @@ const questions = [
 ]
 
 function FAQ({
-  items = questions,
+  items,
   variant = 'default',
   eyebrow,
   title,
 }) {
   const [openQuestion, setOpenQuestion] = useState(0)
+  const homeContent = useHomeContent()
+  const activeItems = items ?? homeContent.faqs ?? questions
   const isCampaign = variant === 'campaign'
 
   const toggleQuestion = (index) => {
@@ -80,7 +83,7 @@ function FAQ({
               : 'mt-8 overflow-hidden rounded-[1.5rem] border border-[#b9c6d6] bg-white px-6 shadow-[0_8px_20px_rgb(23_35_58_/_8%)] sm:px-10'
           }
         >
-          {items.map((item, index) => {
+          {activeItems.map((item, index) => {
             const isOpen = openQuestion === index
 
             return (

@@ -62,7 +62,7 @@ export async function signIn(email, password, remember = true) {
   storeSession(session, remember)
   let isAdmin
   try {
-    isAdmin = await isCampaignAdmin(session.access_token)
+    isAdmin = await isCampaignAdmin(session.access_token) || await isSiteOwner(session.access_token)
   } catch (error) {
     storeSession(null)
     throw new Error(`No se pudo validar el permiso de administrador. Ejecuta la configuración de Supabase y vuelve a intentar. ${error.message}`, { cause: error })
@@ -90,7 +90,7 @@ export async function getSession() {
   const session = readStoredSession()
   if (!session?.refresh_token) return null
   if (session.expires_at && session.expires_at * 1000 > Date.now() + 60_000) {
-    if (await isCampaignAdmin(session.access_token)) return session
+    if (await isCampaignAdmin(session.access_token) || await isSiteOwner(session.access_token)) return session
     storeSession(null)
     return null
   }
@@ -98,7 +98,7 @@ export async function getSession() {
   try {
     const refreshed = await authRequest('token?grant_type=refresh_token', { refresh_token: session.refresh_token })
     storeSession(refreshed)
-    if (!await isCampaignAdmin(refreshed.access_token)) {
+    if (!await isCampaignAdmin(refreshed.access_token) && !await isSiteOwner(refreshed.access_token)) {
       storeSession(null)
       return null
     }
@@ -109,7 +109,7 @@ export async function getSession() {
   }
 }
 
-async function restRequest(path, { method = 'GET', body, token, prefer } = {}) {
+async function restRequest(path, { method = 'GET', body, token, prefer, cache } = {}) {
   requireConfig()
   let accessToken = token
   const storedSession = readStoredSession()
@@ -118,6 +118,7 @@ async function restRequest(path, { method = 'GET', body, token, prefer } = {}) {
   }
   const response = await fetch(`${supabaseUrl}/rest/v1/${path}`, {
     method,
+    ...(cache ? { cache } : {}),
     headers: {
       apikey: supabaseAnonKey,
       Authorization: `Bearer ${accessToken || supabaseAnonKey}`,
@@ -132,6 +133,70 @@ async function restRequest(path, { method = 'GET', body, token, prefer } = {}) {
 export async function isCampaignAdmin(accessToken) {
   const result = await restRequest('rpc/is_campaign_admin', { method: 'POST', body: {}, token: accessToken })
   return result === true
+}
+
+export async function isSiteOwner(accessToken) {
+  const result = await restRequest('rpc/is_site_owner', { method: 'POST', body: {}, token: accessToken })
+  return result === true
+}
+
+export async function getHomeContent() {
+  const rows = await restRequest('home_content?id=eq.home&select=content', { cache: 'no-store' })
+  if (!rows.length) throw new Error('Supabase no devolvió el registro home. Verifica que home-content-admin.sql se ejecutó y que existe la política de lectura pública.')
+  return rows[0]?.content || {}
+}
+
+export async function saveHomeContent(content, accessToken) {
+  const rows = await restRequest('home_content?id=eq.home', {
+    method: 'PATCH', body: { content }, token: accessToken, prefer: 'return=representation',
+  })
+  if (!rows.length) throw new Error('Supabase no confirmó ningún cambio. Verifica que tu cuenta aparezca en site_owners y que se ejecutó home-content-admin.sql.')
+  return rows[0].content
+}
+
+export async function uploadHomeImage(file, accessToken, onProgress) {
+  requireConfig()
+  const currentSession = await getSession()
+  const token = currentSession?.access_token || accessToken
+  const safeName = file.name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-zA-Z0-9._-]/g, '-')
+  const path = `${Date.now()}-${crypto.randomUUID()}-${safeName}`
+  const url = `${supabaseUrl}/storage/v1/object/site-content/${path.split('/').map(encodeURIComponent).join('/')}`
+  return new Promise((resolve, reject) => {
+    const request = new XMLHttpRequest()
+    request.open('POST', url)
+    request.setRequestHeader('apikey', supabaseAnonKey)
+    request.setRequestHeader('Authorization', `Bearer ${token}`)
+    request.setRequestHeader('Content-Type', file.type)
+    request.upload.onprogress = (event) => {
+      if (event.lengthComputable) onProgress(Math.round((event.loaded / event.total) * 100))
+    }
+    request.onload = () => {
+      if (request.status >= 200 && request.status < 300) {
+        resolve(`${supabaseUrl}/storage/v1/object/public/site-content/${path.split('/').map(encodeURIComponent).join('/')}`)
+      } else {
+        try { reject(new Error(JSON.parse(request.responseText).message || 'No se pudo cargar la imagen.')) }
+        catch { reject(new Error('No se pudo cargar la imagen.')) }
+      }
+    }
+    request.onerror = () => reject(new Error('Error de conexión durante la carga de la imagen.'))
+    request.onabort = () => reject(new Error('La carga de la imagen fue cancelada.'))
+    request.send(file)
+  })
+}
+
+export async function deleteHomeImage(imageUrl, accessToken) {
+  if (!imageUrl) return
+  const marker = '/storage/v1/object/public/site-content/'
+  const index = imageUrl.indexOf(marker)
+  if (index < 0) return
+  const currentSession = await getSession()
+  const token = currentSession?.access_token || accessToken
+  const path = imageUrl.slice(index + marker.length).split('/').map(decodeURIComponent).join('/')
+  await fetch(`${supabaseUrl}/storage/v1/object/site-content`, {
+    method: 'DELETE',
+    headers: { apikey: supabaseAnonKey, Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ prefixes: [path] }),
+  }).then(parseResponse)
 }
 
 export async function listCampaigns(accessToken) {

@@ -1,10 +1,26 @@
 import AnimatedText from '@/components/ui/AnimatedText'
+import AnnouncementBar from '../components/AnnouncementBar'
 import { useEffect, useState } from 'react'
 import { ArrowDown, ArrowRight, Check, Clock3, GraduationCap, MapPin, Sparkles, Star, BookOpen, MessageCircle } from 'lucide-react'
 import { Link, useParams } from 'react-router-dom'
 import FAQ from '../sections/Home/FAQ'
 import { getPublishedCampaign, isSupabaseConfigured } from '../lib/supabase'
 import { resolveCampaignImage } from '../lib/imagePaths'
+
+function getYouTubeEmbedUrl(value) {
+  try {
+    const url = new URL(value)
+    const host = url.hostname.replace(/^www\./, '')
+    let id = ''
+    if (host === 'youtu.be') id = url.pathname.split('/').filter(Boolean)[0] || ''
+    else if (['youtube.com', 'm.youtube.com', 'youtube-nocookie.com'].includes(host)) {
+      id = url.pathname === '/watch'
+        ? url.searchParams.get('v') || ''
+        : url.pathname.match(/^\/(?:embed|shorts)\/([\w-]+)/)?.[1] || ''
+    }
+    return /^[\w-]{11}$/.test(id) ? `https://www.youtube-nocookie.com/embed/${id}` : ''
+  } catch { return '' }
+}
 
 function CampaignLanding() {
   const { slug } = useParams()
@@ -33,6 +49,7 @@ function CampaignLanding() {
   const curriculum = content.curriculum || []
   const faqs = content.faqs || []
   const image = resolveCampaignImage(content.image)
+  const videoEmbedUrl = content.videoUrl ? getYouTubeEmbedUrl(content.videoUrl) : ''
   const hasDetails = content.level || content.duration || content.modality || content.schedule
 
   return <main className="campaign-landing min-h-screen overflow-hidden bg-white text-[#101820]">
@@ -40,6 +57,8 @@ function CampaignLanding() {
       <Link className="campaign-brand-link" to="/" aria-label="Towers, inicio"><img className="h-12 w-auto object-contain sm:h-16" src="/images/brand/towers.webp" alt="Towers" /></Link>
       <a className="inline-flex items-center gap-2 rounded-xl bg-[#E83E33] px-4 py-3 text-sm font-bold text-white shadow-[0_8px_18px_rgb(232_62_51_/_22%)] transition hover:-translate-y-0.5 hover:bg-[#cf3028] sm:px-6" href={contactUrl} target={external ? '_blank' : undefined} rel={external ? 'noreferrer' : undefined}>{content.cta || 'Hablar con un asesor'} <ArrowRight size={17} /></a>
     </header>
+
+    {content.announcementActive && <AnnouncementBar text={content.announcementText} />}
 
     <section className="campaign-landing-hero relative isolate overflow-hidden bg-[#fff8f6]">
       <div className="pointer-events-none absolute -right-28 -top-40 h-[34rem] w-[34rem] rounded-full border border-[#e83e33]/10" />
@@ -57,13 +76,15 @@ function CampaignLanding() {
         </div>
         <div className="relative mx-auto w-full max-w-[590px] lg:ml-auto">
           <div className="absolute -inset-3 rotate-3 rounded-[2rem] bg-[#E83E33]/10" />
-          <div className="relative h-[350px] overflow-hidden rounded-[1.7rem] border-[8px] border-white bg-[#dce8f0] shadow-[0_24px_70px_rgb(8_36_74_/_16%)] sm:h-[490px]"><img className="h-full w-full object-cover" src={image} alt={content.imageAlt || `Estudiantes de ${campaign.name}`} /><div className="absolute inset-0 bg-gradient-to-t from-[#08244a]/45 via-transparent to-transparent" />
+          <div className="relative aspect-[3/2] w-full overflow-hidden rounded-[1.7rem] border-[8px] border-white bg-[#dce8f0] shadow-[0_24px_70px_rgb(8_36_74_/_16%)]"><img className="h-full w-full object-contain" src={image} alt={content.imageAlt || `Estudiantes de ${campaign.name}`} /><div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#08244a]/35 via-transparent to-transparent" />
             {content.imageCaption && <p className="absolute bottom-5 left-5 rounded-lg bg-white/90 px-4 py-2 text-xs font-bold text-[#183454] backdrop-blur">{content.imageCaption}</p>}
           </div>
           <div className="absolute -bottom-5 -left-4 hidden rounded-2xl bg-[#08244a] px-5 py-4 text-white shadow-lg sm:block"><p className="font-mono text-[9px] font-bold uppercase tracking-[.14em] text-[#ffaaa4]">Experiencia Towers</p><p className="mt-1 text-sm font-bold">Aprendizaje para la vida real</p></div>
         </div>
       </div>
     </section>
+
+    {videoEmbedUrl && <section className="campaign-landing-section mx-auto max-w-[1100px] px-[6%] py-14 lg:px-8 lg:py-20"><div className="mb-6"><p className="font-mono text-[10px] font-bold uppercase tracking-[.15em] text-[#e83e33]">Conoce el programa</p><h2 className="mt-2 text-3xl font-extrabold tracking-[-.045em] text-[#101820]">Mira cómo aprendes</h2></div><div className="aspect-video overflow-hidden rounded-[1.5rem] bg-[#08244a] shadow-[0_18px_44px_rgb(8_36_74_/_14%)]"><iframe className="h-full w-full" src={videoEmbedUrl} title={`Video de YouTube: ${campaign.name}`} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen /></div></section>}
 
     {benefits.length > 0 && <section id="experiencia" className="campaign-landing-section mx-auto max-w-[1200px] scroll-mt-14 px-[6%] py-16 lg:px-8 lg:py-24"><div className="mb-10 flex flex-col justify-between gap-5 md:flex-row md:items-end"><div className="max-w-xl"><p className="font-mono text-[10px] font-bold uppercase tracking-[.15em] text-[#e83e33]">Tu experiencia</p><h2 className="mt-3 text-3xl font-extrabold tracking-[-.045em] text-[#101820] sm:text-4xl">Una forma de aprender que sí se siente</h2></div><p className="max-w-xs text-sm leading-6 text-[#7187a4]">Todo lo que necesitas para avanzar con confianza y disfrutar el proceso.</p></div><div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{benefits.map((benefit, index) => <article className="campaign-selling-card group relative overflow-hidden rounded-[1.35rem] border border-[#e3e9ef] bg-white p-6 shadow-[0_8px_24px_rgb(8_36_74_/_4%)] transition duration-300 hover:-translate-y-2 hover:border-[#f1c9c4] hover:shadow-[0_22px_42px_rgb(8_36_74_/_12%)]" key={benefit}><span className="absolute -right-7 -top-8 h-24 w-24 rounded-full bg-[#fff8f6] transition duration-500 group-hover:scale-[2.4]" /><span className="relative grid h-11 w-11 place-items-center rounded-2xl bg-[#fff1ef] text-sm font-extrabold text-[#e83e33]">0{index + 1}</span><p className="relative mt-7 font-semibold leading-6 text-[#183454]">{benefit}</p><span className="relative mt-6 block h-1 w-8 rounded-full bg-[#e83e33] transition-all duration-300 group-hover:w-16" /></article>)}</div></section>}
 

@@ -44,16 +44,34 @@ async function register(body: Record<string, unknown>) {
   const className = String(body.className || '').trim().replace(/\s+/g, ' ')
   const source = String(body.source || '').trim()
   const goal = String(body.goal || '').trim()
-  if (body.consent !== true) return json({ error: 'Debes aceptar el tratamiento de tus datos.' }, 400)
+  const termsAccepted = body.termsAccepted === true || body.terms === true
+  const privacyAccepted = body.privacyAccepted === true || body.privacy === true
+  const consentAcceptedAt = typeof body.consentAcceptedAt === 'string' && body.consentAcceptedAt ? body.consentAcceptedAt : new Date().toISOString()
+  const consentMethod = typeof body.consentMethod === 'string' && body.consentMethod ? body.consentMethod : 'checkbox'
+  const consentSource = typeof body.consentSource === 'string' && body.consentSource ? body.consentSource : source
+
+  if (body.consent !== true || !termsAccepted || !privacyAccepted) return json({ error: 'Debes aceptar los términos y la política de privacidad.' }, 400)
   if (name.length < 2 || name.length > 100) return json({ error: 'Revisa el nombre ingresado.' }, 400)
   if (email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return json({ error: 'Revisa el correo electrónico ingresado.' }, 400)
   if (phone.length > 30 || (phone && !/^[+\d()\s.-]+$/.test(phone))) return json({ error: 'Revisa el teléfono ingresado.' }, 400)
   if (className.length < 2 || className.length > 120 || source.length < 1 || source.length > 200 || goal.length > 100) return json({ error: 'Los datos de la clase o su origen no son válidos.' }, 400)
 
-  const leads = await db('free_class_leads?on_conflict=email,source&select=id,name,email,phone,class_name,source,goal,registered_at', {
+  const leads = await db('free_class_leads?on_conflict=email,source&select=id,name,email,phone,class_name,source,goal,registered_at,terms_accepted,privacy_accepted,consent_accepted_at,consent_method,consent_source', {
     method: 'POST',
     headers: { Prefer: 'resolution=merge-duplicates,return=representation' },
-    body: JSON.stringify({ name, email, phone, class_name: className, source, goal }),
+    body: JSON.stringify({
+      name,
+      email,
+      phone,
+      class_name: className,
+      source,
+      goal,
+      terms_accepted: true,
+      privacy_accepted: true,
+      consent_accepted_at: consentAcceptedAt,
+      consent_method: consentMethod,
+      consent_source: consentSource,
+    }),
   })
   const lead = leads?.[0]
   if (!lead?.id) throw new Error('No se pudo confirmar el registro.')
@@ -71,6 +89,12 @@ async function register(body: Record<string, unknown>) {
       class_name: lead.class_name,
       source: lead.source,
       registered_at: lead.registered_at,
+      consent: true,
+      terms_accepted: true,
+      privacy_accepted: true,
+      consent_accepted_at: consentAcceptedAt,
+      consent_method: consentMethod,
+      consent_source: consentSource,
     }),
   })
   if (!sheetResponse.ok) throw new Error('Google Sheets no confirmó el registro.')

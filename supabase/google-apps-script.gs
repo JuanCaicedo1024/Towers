@@ -20,15 +20,16 @@ function doPost(e) {
     lock.waitLock(10000);
     try {
       const lastRow = sheet.getLastRow();
+      const row = rowValues(payload);
       if (lastRow > 1) {
         const knownIds = sheet.getRange(2, 1, lastRow - 1, 1).getDisplayValues().flat();
         const existingIndex = knownIds.indexOf(payload.lead_id);
         if (existingIndex !== -1) {
-          sheet.getRange(existingIndex + 2, 1, 1, 7).setValues([rowValues(payload)]);
+          sheet.getRange(existingIndex + 2, 1, 1, row.length).setValues([row]);
           return output({ ok: true, duplicate: true });
         }
       }
-      sheet.appendRow(rowValues(payload));
+      sheet.appendRow(row);
     } finally {
       lock.releaseLock();
     }
@@ -78,6 +79,11 @@ function enterpriseRowValues(payload) {
     safeCell(payload.modality),
     safeCell(payload.objective),
     'Sí',
+    payload.terms_accepted === true ? 'Sí' : 'No',
+    payload.privacy_accepted === true ? 'Sí' : 'No',
+    safeCell(payload.consent_accepted_at || payload.registered_at),
+    safeCell(payload.consent_method || 'checkbox'),
+    safeCell(payload.consent_source || payload.source || '/empresas'),
   ];
 }
 
@@ -99,12 +105,17 @@ function validEnterprisePayload(data) {
     && choices.language.includes(data.language)
     && choices.modality.includes(data.modality)
     && typeof data.objective === 'string' && data.objective.trim().length >= 2 && data.objective.length <= 1200
-    && data.consent === true;
+    && data.consent === true
+    && data.terms_accepted === true
+    && data.privacy_accepted === true;
 }
 
 function rowValues(payload) {
   return [payload.lead_id, safeCell(payload.name), safeCell(payload.email), safeCell(payload.phone),
-    safeCell(payload.class_name), safeCell(payload.source), new Date(payload.registered_at)];
+    safeCell(payload.class_name), safeCell(payload.source), new Date(payload.registered_at),
+    payload.consent === true ? 'Sí' : 'No', payload.terms_accepted === true ? 'Sí' : 'No',
+    payload.privacy_accepted === true ? 'Sí' : 'No', safeCell(payload.consent_accepted_at || payload.registered_at),
+    safeCell(payload.consent_method || 'checkbox'), safeCell(payload.consent_source || payload.source || 'web')];
 }
 
 function validPayload(data) {
@@ -114,7 +125,10 @@ function validPayload(data) {
     && typeof data.phone === 'string' && data.phone.length <= 30
     && typeof data.class_name === 'string' && data.class_name.length >= 2 && data.class_name.length <= 120
     && typeof data.source === 'string' && data.source.length >= 1 && data.source.length <= 200
-    && typeof data.registered_at === 'string' && !Number.isNaN(Date.parse(data.registered_at));
+    && typeof data.registered_at === 'string' && !Number.isNaN(Date.parse(data.registered_at))
+    && data.consent === true
+    && data.terms_accepted !== false
+    && data.privacy_accepted !== false;
 }
 
 // Evita que datos enviados por usuarios se interpreten como fórmulas en Sheets.

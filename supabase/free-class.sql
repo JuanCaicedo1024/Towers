@@ -8,8 +8,20 @@ create table if not exists public.free_class_leads (
   source text not null check (char_length(source) between 1 and 200),
   goal text not null default '' check (char_length(goal) <= 100),
   registered_at timestamptz not null default now(),
+  terms_accepted boolean not null default false,
+  privacy_accepted boolean not null default false,
+  consent_accepted_at timestamptz,
+  consent_method text default 'checkbox' check (consent_method in ('checkbox', 'button', 'manual')),
+  consent_source text default '' check (char_length(consent_source) <= 200),
   unique (email, source)
 );
+
+alter table public.free_class_leads
+  add column if not exists terms_accepted boolean not null default false,
+  add column if not exists privacy_accepted boolean not null default false,
+  add column if not exists consent_accepted_at timestamptz,
+  add column if not exists consent_method text default 'checkbox' check (consent_method in ('checkbox', 'button', 'manual')),
+  add column if not exists consent_source text default '' check (char_length(consent_source) <= 200);
 
 create table if not exists public.free_class_tokens (
   token_hash text primary key check (char_length(token_hash) = 64),

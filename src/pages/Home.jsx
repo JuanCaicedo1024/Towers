@@ -9,12 +9,19 @@ import Modalities from "../sections/Home/Modalities";
 import BusinessPartners from "../sections/Home/BusinessPartners";
 import Testimonials from "../sections/Home/Testimonials";
 import HomeLocation from "../sections/Home/HomeLocation";
+import { HomeContentProvider, useHomeContent } from '../hooks/useHomeContent.jsx'
+import AnnouncementBar from '../components/AnnouncementBar'
+
+function HomeAnnouncement() {
+  const { announcementActive, announcementText } = useHomeContent()
+  return announcementActive ? <AnnouncementBar text={announcementText} /> : null
+}
 
 function Home() {
   return (
     <>
       <Navbar />
-      <main className="home-page">
+      <HomeContentProvider><HomeAnnouncement /><main className="home-page">
         <Hero />
         <Languages />
         <Methodology />
@@ -24,7 +31,7 @@ function Home() {
         <BusinessPartners />
         <FAQ />
         <HomeLocation />
-      </main>
+      </main></HomeContentProvider>
       <Footer />
     </>
   );

@@ -11,6 +11,15 @@ const quickLinks = [
   ['Acceso adm', '/login'],
 ]
 
+const legalLinks = [
+  ['Términos y condiciones', '/terminos-y-condiciones'],
+  ['Política de privacidad', '/politica-de-privacidad'],
+  ['Política de cookies', '/politica-de-cookies'],
+  ['Política de reembolsos', '/politica-de-reembolsos'],
+  ['Derechos de imagen', '/derechos-de-imagen'],
+  ['Cumplimiento legal', '/cumplimiento-legal'],
+]
+
 const socialLinks = [
   { label: 'Facebook', href: 'https://www.facebook.com/towersidiomas', Icon: IconBrandFacebook },
   { label: 'Instagram', href: 'https://www.instagram.com/towersidiomas/', Icon: IconBrandInstagram },
@@ -21,7 +30,7 @@ function Footer() {
   return (
     <footer className="site-footer bg-white text-[#747474]">
       <div className="mx-auto max-w-[1440px] px-[6%] pb-16 pt-16 lg:px-[9%] lg:pt-20">
-        <div className="grid gap-12 lg:grid-cols-[1.3fr_0.9fr_1fr] lg:gap-20">
+        <div className="grid gap-12 lg:grid-cols-[1.3fr_0.9fr_0.9fr_1fr] lg:gap-20">
           <div className="site-footer__column">
             <div className="flex flex-nowrap items-center gap-4">
               <img
@@ -73,6 +82,22 @@ function Footer() {
           </div>
 
           <div className="site-footer__column">
+            <h2 className="m-0 text-3xl font-semibold text-[#1d3f29]">Legal</h2>
+            <nav className="mt-8 grid gap-5" aria-label="Información legal">
+              {legalLinks.map(([label, path]) => (
+                <Link
+                  className="flex items-center gap-4 text-lg transition hover:translate-x-1 hover:text-[#E83E33]"
+                  key={label}
+                  to={path}
+                >
+                  <span className="text-2xl font-semibold leading-none text-[#E83E33]">›</span>
+                  {label}
+                </Link>
+              ))}
+            </nav>
+          </div>
+
+          <div className="site-footer__column">
             <h2 className="m-0 text-3xl font-semibold leading-[1.05] text-[#1d3f29]">
               Contáctanos
             </h2>
@@ -81,7 +106,7 @@ function Footer() {
                 icon={Phone}
                 title="Teléfono"
                 lines={[
-                  { value: '+57 301 349 0020', href: 'tel:+573013490020' },
+                  
                   { value: '+57 324 275 5119', href: 'tel:+573242755119' },
                 ]}
               />

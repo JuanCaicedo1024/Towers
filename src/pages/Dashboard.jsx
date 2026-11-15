@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { ArrowRight, ExternalLink, FileText, LogOut, Plus, RefreshCw, Search, Trash2 } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../auth/useAuth'
-import { deleteCampaign, listCampaigns } from '../lib/supabase'
+import { deleteCampaign, isSiteOwner, listCampaigns } from '../lib/supabase'
 import { resolveCampaignImage } from '../lib/imagePaths'
 
 const MAX_CAMPAIGNS = 3
@@ -16,6 +16,7 @@ function Dashboard() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [deletingId, setDeletingId] = useState('')
+  const [siteOwner, setSiteOwner] = useState(false)
 
   const fetchCampaigns = useCallback(
     () => listCampaigns(session.access_token),
@@ -52,6 +53,12 @@ function Dashboard() {
       active = false
     }
   }, [fetchCampaigns])
+
+  useEffect(() => {
+    let active = true
+    isSiteOwner(session.access_token).then((result) => { if (active) setSiteOwner(result) }).catch(() => {})
+    return () => { active = false }
+  }, [session.access_token])
 
   async function handleSignOut() {
     await signOut()
@@ -90,7 +97,7 @@ function Dashboard() {
       <main className="mx-auto max-w-[1440px] px-[5%] py-10 lg:py-11">
         <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
           <div><p className="font-mono text-xs font-bold uppercase tracking-[0.14em] text-[#8ba0bf]">INT · BIBLIOTECA INTERNA — GESTOR DE MICRO-LANDINGS</p><h1 className="mt-3 text-4xl font-extrabold tracking-[-0.045em] text-[#08244a] sm:text-5xl"><AnimatedText>Micro-landings de campaña</AnimatedText></h1><p className="mt-3 max-w-[700px] text-base leading-6 text-[#627b9e]">Campañas compartidas por el equipo de Towers. El espacio permite hasta 3 en total.</p></div>
-          {!loading && campaigns.length < MAX_CAMPAIGNS ? <Link className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#ff443d] px-6 py-3.5 text-sm font-bold text-white shadow-[0_8px_16px_rgb(255_68_61_/_20%)] transition hover:-translate-y-0.5 hover:bg-[#da352f]" to="/campaigns/new"><Plus size={18} aria-hidden="true" /> Crear nueva micro-landing</Link> : <span className="rounded-xl border border-[#d3deeb] bg-white px-5 py-3.5 text-sm font-semibold text-[#627b9e]">{loading ? 'Cargando micro-landings…' : 'Límite alcanzado (3 de 3)'}</span>}
+          <div className="flex flex-wrap gap-3">{siteOwner && <Link className="inline-flex items-center justify-center gap-2 rounded-xl border border-[#d3deeb] bg-white px-5 py-3.5 text-sm font-bold text-[#173a67] hover:border-[#ff443d] hover:text-[#e83e33]" to="/dashboard/portada">Editar portada principal</Link>}{!loading && campaigns.length < MAX_CAMPAIGNS ? <Link className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#ff443d] px-6 py-3.5 text-sm font-bold text-white shadow-[0_8px_16px_rgb(255_68_61_/_20%)] transition hover:-translate-y-0.5 hover:bg-[#da352f]" to="/campaigns/new"><Plus size={18} aria-hidden="true" /> Crear nueva micro-landing</Link> : <span className="rounded-xl border border-[#d3deeb] bg-white px-5 py-3.5 text-sm font-semibold text-[#627b9e]">{loading ? 'Cargando micro-landings…' : 'Límite alcanzado (3 de 3)'}</span>}</div>
         </div>
 
         <section className="mt-8 rounded-xl border border-[#e0e7f0] bg-white p-5 shadow-[0_8px_20px_rgb(18_42_75_/_4%)]">

@@ -1,42 +1,27 @@
 import AnimatedText from '@/components/ui/AnimatedText';
 import { useEffect, useState } from 'react'
-
-const slides = [
-  {
-    image: '/images/classroom/DSC06683.webp',
-    title: 'Aprendizaje acompañado',
-    description:
-      'Cada estudiante cuenta con orientación durante su proceso y oportunidades para practicar lo aprendido. Así, cada clase se convierte en un espacio para participar, resolver dudas y ganar confianza.',
-  },
-  {
-    image: '/images/classroom/DSC06700.webp',
-    title: 'Práctica en el aula',
-    description:
-      'Las actividades guiadas conectan los temas de clase con situaciones cotidianas. Escuchar, conversar y trabajar con el idioma ayuda a construir el aprendizaje con práctica constante.',
-  },
-  {
-    image: '/images/classroom/DSC06667.webp',
-    title: 'Una comunidad que aprende',
-    description:
-      'En Towers, aprender también significa compartir el aula con otras personas, participar y descubrir nuevas formas de comunicarse. Cada encuentro suma experiencias al camino de aprender un idioma.',
-  },
-]
+import { useHomeContent } from '../../hooks/useHomeContent.jsx'
 
 function Experience() {
   const [activeSlide, setActiveSlide] = useState(0)
-  const currentSlide = slides[activeSlide]
+  const { communitySlides: slides } = useHomeContent()
+  const selectedSlide = slides.length ? activeSlide % slides.length : 0
+  const currentSlide = slides[selectedSlide]
 
   useEffect(() => {
+    if (slides.length < 2) return undefined
     const timer = window.setInterval(() => {
       setActiveSlide((current) => (current + 1) % slides.length)
     }, 5000)
 
     return () => window.clearInterval(timer)
-  }, [])
+  }, [slides.length])
 
   const changeSlide = (direction) => {
     setActiveSlide((current) => (current + direction + slides.length) % slides.length)
   }
+
+  if (!slides.length) return null
 
   return (
     <section className="bg-white px-[4%] py-16 text-[#17233a] lg:px-[8%] lg:py-20">
@@ -107,7 +92,7 @@ function Experience() {
             {slides.map((slide, index) => (
               <button
                 className={`h-2.5 w-2.5 rounded-full transition ${
-                  index === activeSlide ? 'bg-[#E83E33]' : 'bg-[#c7ced6]'
+                index === selectedSlide ? 'bg-[#E83E33]' : 'bg-[#c7ced6]'
                 }`}
                 key={slide.image}
                 type="button"
@@ -121,7 +106,7 @@ function Experience() {
             {slides.map((slide, index) => (
               <button
                 className={`h-[125px] overflow-hidden rounded-[1.5rem] border-4 bg-[#f4f7fb] transition duration-500 hover:-translate-y-1 hover:shadow-[0_10px_22px_rgb(232_62_51_/_18%)] sm:h-[190px] ${
-                  index === activeSlide
+                  index === selectedSlide
                     ? 'scale-[1.03] border-[#E83E33] shadow-[0_8px_18px_rgb(232_62_51_/_20%)]'
                     : 'border-white hover:border-[#d5a99d]'
                 }`}

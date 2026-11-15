@@ -131,7 +131,8 @@ const initialForm = {
   language: '',
   modality: '',
   objective: '',
-  consent: false,
+  termsAccepted: false,
+  privacyAccepted: false,
 }
 
 function Enterprise() {
@@ -152,6 +153,10 @@ function Enterprise() {
   async function handleSubmit(event) {
     event.preventDefault()
     if (status.type === 'loading') return
+    if (!form.termsAccepted || !form.privacyAccepted) {
+      setStatus({ type: 'error', message: 'Debes aceptar los términos y la política de privacidad para enviar tu propuesta.' })
+      return
+    }
 
     setStatus({ type: 'loading', message: 'Enviando tu solicitud…' })
     const message = [
@@ -167,7 +172,15 @@ function Enterprise() {
       `Objetivo o necesidad: ${form.objective}`,
     ].join('\n')
     try {
-      await submitEnterpriseLead(form)
+      await submitEnterpriseLead({
+        ...form,
+        consent: true,
+        termsAccepted: form.termsAccepted,
+        privacyAccepted: form.privacyAccepted,
+        consentAcceptedAt: new Date().toISOString(),
+        consentMethod: 'checkbox',
+        consentSource: '/empresas',
+      })
       setWhatsAppUrl(`https://wa.me/573013490020?text=${encodeURIComponent(message)}`)
       setStatus({ type: 'success', message: 'Registramos tu solicitud. También puedes enviarla por WhatsApp para conversar con nuestro equipo.' })
     } catch (error) {
@@ -348,8 +361,12 @@ function Enterprise() {
                   <textarea className="min-h-24 w-full resize-y rounded-lg border border-[#d6dce5] px-3 py-2.5 text-sm text-[#111827] outline-none transition placeholder:text-[#9aa4b2] focus:border-[#e83e33] focus:ring-2 focus:ring-[#e83e33]/15" name="objective" value={form.objective} onChange={updateField} placeholder="Cuéntanos brevemente tus objetivos (ej. mejorar la comunicación con clientes, preparar a tu equipo para reuniones internacionales, etc.)." maxLength={1200} required />
                 </label>
                 <label className="sm:col-span-2 flex items-start gap-2 text-xs leading-5 text-[#4b5563]">
-                  <input className="mt-1 accent-[#e83e33]" type="checkbox" name="consent" checked={form.consent} onChange={updateField} required />
-                  <span>Acepto que Towers me contacte para atender esta solicitud y el tratamiento de mis datos personales.</span>
+                  <input className="mt-1 accent-[#e83e33]" type="checkbox" name="termsAccepted" checked={form.termsAccepted} onChange={updateField} required />
+                  <span>Acepto los <a className="font-semibold text-[#e83e33] underline underline-offset-4" href="/terminos-y-condiciones">términos y condiciones</a>.</span>
+                </label>
+                <label className="sm:col-span-2 flex items-start gap-2 text-xs leading-5 text-[#4b5563]">
+                  <input className="mt-1 accent-[#e83e33]" type="checkbox" name="privacyAccepted" checked={form.privacyAccepted} onChange={updateField} required />
+                  <span>Acepto la <a className="font-semibold text-[#e83e33] underline underline-offset-4" href="/politica-de-privacidad">política de privacidad</a> y el tratamiento de mis datos para gestionar esta solicitud.</span>
                 </label>
               </div>
               <button className="mt-5 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-[#e83e33] px-5 py-3 text-sm font-bold text-white shadow-[0_8px_18px_rgb(232_62_51_/_18%)] transition hover:-translate-y-0.5 hover:bg-[#cf3028] hover:shadow-[0_12px_24px_rgb(232_62_51_/_25%)] disabled:cursor-wait disabled:opacity-70" type="submit" disabled={status.type === 'loading'}>

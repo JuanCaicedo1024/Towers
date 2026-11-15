@@ -5,7 +5,7 @@ import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 import { requestFreeClass } from '../lib/freeClass'
 
-const initialForm = { name: '', whatsapp: '', email: '', language: '', goal: 'Trabajo', consent: false }
+const initialForm = { name: '', whatsapp: '', email: '', language: '', goal: 'Trabajo', termsAccepted: false, privacyAccepted: false }
 
 function Contact() {
   const [form, setForm] = useState(initialForm)
@@ -20,6 +20,10 @@ function Contact() {
   async function handleSubmit(event) {
     event.preventDefault()
     if (status.type === 'loading') return
+    if (!form.termsAccepted || !form.privacyAccepted) {
+      setStatus({ type: 'error', message: 'Debes aceptar los términos y la política de privacidad para continuar.' })
+      return
+    }
     setStatus({ type: 'loading', message: 'Registrando tus datos y preparando el acceso…' })
     try {
       const params = new URLSearchParams(location.search)
@@ -30,7 +34,12 @@ function Contact() {
         className: params.get('class') || `Clase gratuita de ${form.language}`,
         source: params.get('source') || location.pathname,
         goal: form.goal,
-        consent: form.consent,
+        consent: true,
+        termsAccepted: form.termsAccepted,
+        privacyAccepted: form.privacyAccepted,
+        consentAcceptedAt: new Date().toISOString(),
+        consentMethod: 'checkbox',
+        consentSource: location.pathname,
       })
       window.location.assign(result.accessUrl)
     } catch (error) {
@@ -77,8 +86,12 @@ function Contact() {
               </ContactField>
 
               <label className="contact-consent">
-                <input type="checkbox" checked={form.consent} onChange={(event) => update('consent', event.target.checked)} required />
-                <span>Acepto el tratamiento de mis datos. <a href="/contacto#politica">Política de tratamiento de datos</a></span>
+                <input type="checkbox" checked={form.termsAccepted} onChange={(event) => update('termsAccepted', event.target.checked)} required />
+                <span>Acepto los <a href="/terminos-y-condiciones">términos y condiciones</a>.</span>
+              </label>
+              <label className="contact-consent">
+                <input type="checkbox" checked={form.privacyAccepted} onChange={(event) => update('privacyAccepted', event.target.checked)} required />
+                <span>Acepto la <a href="/politica-de-privacidad">política de privacidad</a> y el tratamiento de mis datos.</span>
               </label>
               <button className="contact-submit" type="submit" disabled={status.type === 'loading'}>
                 {status.type === 'loading' ? <><LoaderCircle className="contact-spinner" size={16} aria-hidden="true" /> Registrando…</> : <>Ver mi clase gratis <ArrowRight size={16} aria-hidden="true" /></>}

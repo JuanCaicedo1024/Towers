@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import {
   ArrowLeft,
   ArrowRight,
+  RotateCcw,
   BookOpen,
   Check,
   CheckCircle2,
@@ -41,6 +42,9 @@ const initialForm = {
   image: images[0],
   imageAlt: "",
   imageCaption: "",
+  videoUrl: "",
+  announcementText: "",
+  announcementActive: false,
   level: "",
   duration: "",
   modality: "Online",
@@ -66,6 +70,18 @@ function slugify(value) {
     .trim()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
+}
+function getYouTubeId(value) {
+  try {
+    const url = new URL(value);
+    const host = url.hostname.replace(/^www\./, "");
+    if (host === "youtu.be") return url.pathname.split("/").filter(Boolean)[0] || "";
+    if (["youtube.com", "m.youtube.com", "youtube-nocookie.com"].includes(host)) {
+      if (url.pathname === "/watch") return url.searchParams.get("v") || "";
+      return url.pathname.match(/^\/(?:embed|shorts)\/([\w-]+)/)?.[1] || "";
+    }
+  } catch { return ""; }
+  return "";
 }
 const asItems = (items) => Array.isArray(items)
   ? items.map((item) => typeof item === "string" ? { text: item, icon: "check" } : item)
@@ -172,6 +188,22 @@ function CampaignBuilder() {
     setNotice("");
   }
 
+  function restoreDefaults() {
+    if (!window.confirm("¿Restablecer esta landing a los ajustes originales? Se perderán los cambios sin guardar. Luego tendrás que guardar o publicar para aplicarlo.")) return;
+    setForm({
+      ...initialForm,
+      name: form.name,
+      slug: form.slug,
+      channel: form.channel,
+      benefits: [],
+      outcomes: [],
+      curriculum: [],
+      faqs: [],
+    });
+    setError("");
+    setNotice("Ajustes originales restaurados en el editor. Guarda o publica para aplicarlos.");
+  }
+
   function handleImageUpload(event) {
     const file = event.target.files?.[0];
     if (!file) return;
@@ -223,6 +255,10 @@ function CampaignBuilder() {
       !/^https:\/\//i.test(form.destinationUrl)
     )
       return setError("El enlace de destino debe comenzar por https://.");
+    if (form.videoUrl.trim() && !getYouTubeId(form.videoUrl.trim()))
+      return setError("El video debe tener un enlace válido de YouTube.");
+    if (form.announcementActive && !form.announcementText.trim())
+      return setError("Escribe el anuncio antes de activarlo.");
     setSaving(true);
     const content = {
       eyebrow: form.eyebrow.trim(),
@@ -231,6 +267,9 @@ function CampaignBuilder() {
       image: form.image,
       imageAlt: form.imageAlt.trim(),
       imageCaption: form.imageCaption.trim(),
+      videoUrl: form.videoUrl.trim(),
+      announcementText: form.announcementText.trim(),
+      announcementActive: Boolean(form.announcementActive),
       level: form.level.trim(),
       duration: form.duration.trim(),
       modality: form.modality.trim(),
@@ -365,6 +404,7 @@ function CampaignBuilder() {
               visitantes en estudiantes.
             </p>
           </div>
+          <div className="flex flex-wrap items-center gap-3">
           <div className="campaign-status-card flex items-center gap-3 rounded-2xl border border-[#e1e8f0] bg-white px-4 py-3 shadow-sm">
             <CheckCircle2
               size={18}
@@ -372,7 +412,7 @@ function CampaignBuilder() {
             />
             <div>
               <p className="text-xs font-bold text-[#08244a]">
-                {notice ? "Cambios guardados" : "Listo para empezar"}
+                {notice.startsWith("Ajustes originales") ? "Ajustes restablecidos" : notice ? "Cambios guardados" : "Listo para empezar"}
               </p>
               <p className="text-[11px] text-[#8292a8]">
                 {campaignId
@@ -380,6 +420,8 @@ function CampaignBuilder() {
                   : "Completa los campos principales"}
               </p>
             </div>
+          </div>
+          {campaignId && <button className="inline-flex items-center gap-2 rounded-xl border border-[#d3deeb] bg-white px-4 py-3 text-sm font-bold text-[#173a67] transition hover:border-[#e83e33] hover:text-[#e83e33]" type="button" onClick={restoreDefaults}><RotateCcw size={16} /> Restablecer ajustes originales</button>}
           </div>
         </header>
         {error && (
@@ -452,7 +494,7 @@ function CampaignBuilder() {
                 <Field className="sm:col-span-2" label="Imagen principal" hint="Usa una imagen horizontal y nítida. Puedes cargar hasta 5 MB.">
                   <div className="campaign-image-picker grid gap-4 rounded-2xl border border-[#e1e8f0] bg-[#f8fafc] p-4 sm:grid-cols-[180px_minmax(0,1fr)]">
                     <div className="campaign-image-picker__preview relative h-32 overflow-hidden rounded-xl bg-[#dce8f0] shadow-inner sm:h-full">
-                      <img className="h-full w-full object-cover" src={form.image} alt="" />
+                      <img className="h-full w-full object-contain" src={form.image} alt="" />
                       <span className="absolute bottom-2 left-2 rounded-full bg-[#08244a]/80 px-2.5 py-1 text-[10px] font-bold text-white backdrop-blur">Vista actual</span>
                     </div>
                     <div className="grid gap-3">
@@ -487,6 +529,9 @@ function CampaignBuilder() {
                   {input("imageCaption", {
                     placeholder: "Clases con propósito, desde el primer día",
                   })}
+                </Field>
+                <Field className="sm:col-span-2" label="Video de YouTube (opcional)" hint="Pega un enlace de YouTube. El video se adapta al ancho de la landing.">
+                  {input("videoUrl", { placeholder: "https://www.youtube.com/watch?v=..." })}
                 </Field>
               </div>
             </SectionCard>
@@ -599,6 +644,23 @@ function CampaignBuilder() {
                 </Field>
               </div>
             </SectionCard>
+            <SectionCard
+              number="05"
+              icon={Sparkles}
+              title="Aviso promocional"
+              description="Muestra una franja debajo del navbar para anunciar promociones o novedades."
+            >
+              <div className="grid gap-5 sm:grid-cols-2">
+                <Field className="sm:col-span-2" label="Texto del anuncio" hint="Máximo 160 caracteres. Si está desactivado, no aparecerá en la landing.">
+                  {input("announcementText", { maxLength: 160, placeholder: "¡Inscripciones abiertas! Aprovecha la promoción de este mes." })}
+                </Field>
+                <label className="flex items-center gap-3 text-sm font-semibold text-[#173a67]">
+                  <input className="h-5 w-5 accent-[#e83e33]" type="checkbox" checked={Boolean(form.announcementActive)} onChange={(event) => update("announcementActive", event.target.checked)} />
+                  Activar aviso promocional
+                </label>
+                <p className="text-xs leading-5 text-[#8292a8]">Puedes apagarlo cuando termine la promoción. El texto queda guardado para volver a activarlo.</p>
+              </div>
+            </SectionCard>
             <div className="flex flex-col-reverse gap-3 rounded-[1.35rem] border border-[#dfe6ef] bg-white p-5 shadow-[0_12px_30px_rgb(8_36_74_/_4%)] sm:flex-row sm:justify-end">
               <button
                 className="campaign-action-button inline-flex items-center justify-center gap-2 rounded-xl border border-[#d3deeb] px-5 py-3 text-sm font-bold text-[#173a67] transition hover:border-[#08244a] disabled:opacity-60"
@@ -659,6 +721,7 @@ function CampaignBuilder() {
                   <span className="h-1.5 w-1.5 rounded-full bg-[#ffc857]" />
                   <span className="h-1.5 w-1.5 rounded-full bg-[#29b67a]" />
                 </div>
+                {form.announcementActive && form.announcementText.trim() && <div className="bg-[#08244a] px-3 py-2 text-center text-[9px] font-bold text-white">{form.announcementText}</div>}
                 <div className="overflow-hidden">
                   <div className="relative overflow-hidden bg-[linear-gradient(145deg,_#fff8f6_0%,_#fff_72%)] p-5">
                     <span className="pointer-events-none absolute -right-10 -top-14 h-36 w-36 rounded-full border-[18px] border-[#e83e33]/[.07]" />
@@ -694,7 +757,7 @@ function CampaignBuilder() {
                     </span>
                   </div>
                   <img
-                    className="h-44 w-full object-cover"
+                    className="aspect-[3/2] w-full bg-[#dce8f0] object-contain"
                     src={form.image}
                     alt=""
                   />

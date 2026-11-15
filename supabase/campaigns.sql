@@ -3,7 +3,7 @@
 -- El contenido editorial vive en campaigns.content (JSONB), por lo que nuevos campos
 -- visuales no requieren agregar columnas ni alterar la API actual.
 -- Claves usadas por el editor: eyebrow, headline, supporting, image, imageAlt,
--- imageCaption, level, duration, modality, schedule, benefits[], outcomes[],
+-- imageCaption, videoUrl (enlace de YouTube), level, duration, modality, schedule, benefits[], outcomes[],
 -- methodology, curriculum[{title,description}], faqs[{question,answer}], cta,
 -- destination, destinationUrl, whatsappMessage y ctaHeadline.
 create table if not exists public.campaign_admins (
