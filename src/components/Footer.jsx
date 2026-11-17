@@ -136,7 +136,7 @@ function Footer() {
         </div>
       </div>
 
-      <div className="site-footer__bottom bg-[linear-gradient(110deg,#08274f,#3e203d_48%,#b52322)] px-[6%] py-6 text-white lg:px-[6.5%]">
+      <div className="site-footer__bottom border-t border-[#e5e5e5] px-[6%] py-6 text-[#747474] lg:px-[6.5%]">
         <div className="mx-auto flex max-w-[1440px] flex-col justify-between gap-5 sm:flex-row sm:items-center">
           <p className="m-0 text-lg">Copyright 2026&nbsp; . Appendix All Rights Reserved.</p>
           <span className="text-lg">Aceptamos</span>

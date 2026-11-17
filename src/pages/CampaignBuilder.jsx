@@ -1,7 +1,6 @@
 import AnimatedText from "@/components/ui/AnimatedText";
 import { useEffect, useState } from "react";
 import {
-  ArrowLeft,
   ArrowRight,
   RotateCcw,
   BookOpen,
@@ -24,10 +23,13 @@ import {
   ChevronUp,
   ChevronDown,
 } from "lucide-react";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../auth/useAuth";
 import { getCampaignById, listCampaigns, saveCampaign } from "../lib/supabase";
 import { campaignImageOptions, resolveCampaignImage } from "../lib/imagePaths";
+
+import { getYouTubeEmbedUrl } from "../lib/campaignVideo";
+import CampaignVideo from "../components/CampaignVideo";
 
 const MAX_CAMPAIGNS = 3;
 
@@ -43,6 +45,7 @@ const initialForm = {
   imageAlt: "",
   imageCaption: "",
   videoUrl: "",
+  videoPlacement: "section",
   announcementText: "",
   announcementActive: false,
   level: "",
@@ -70,18 +73,6 @@ function slugify(value) {
     .trim()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
-}
-function getYouTubeId(value) {
-  try {
-    const url = new URL(value);
-    const host = url.hostname.replace(/^www\./, "");
-    if (host === "youtu.be") return url.pathname.split("/").filter(Boolean)[0] || "";
-    if (["youtube.com", "m.youtube.com", "youtube-nocookie.com"].includes(host)) {
-      if (url.pathname === "/watch") return url.searchParams.get("v") || "";
-      return url.pathname.match(/^\/(?:embed|shorts)\/([\w-]+)/)?.[1] || "";
-    }
-  } catch { return ""; }
-  return "";
 }
 const asItems = (items) => Array.isArray(items)
   ? items.map((item) => typeof item === "string" ? { text: item, icon: "check" } : item)
@@ -161,6 +152,8 @@ function CampaignBuilder() {
           channel: campaign.channel,
           ...content,
           image: resolveCampaignImage(content.image),
+          videoUrl: typeof content.videoUrl === "string" ? content.videoUrl : "",
+          videoPlacement: content.videoPlacement === "hero" ? "hero" : "section",
           benefits: asItems(content.benefits),
           outcomes: asItems(content.outcomes),
           curriculum: parseLegacyPairs(content.curriculum, "title", "description"),
@@ -255,7 +248,7 @@ function CampaignBuilder() {
       !/^https:\/\//i.test(form.destinationUrl)
     )
       return setError("El enlace de destino debe comenzar por https://.");
-    if (form.videoUrl.trim() && !getYouTubeId(form.videoUrl.trim()))
+    if ((form.videoPlacement === "hero" || form.videoUrl.trim()) && !videoEmbedUrl)
       return setError("El video debe tener un enlace válido de YouTube.");
     if (form.announcementActive && !form.announcementText.trim())
       return setError("Escribe el anuncio antes de activarlo.");
@@ -268,6 +261,7 @@ function CampaignBuilder() {
       imageAlt: form.imageAlt.trim(),
       imageCaption: form.imageCaption.trim(),
       videoUrl: form.videoUrl.trim(),
+      videoPlacement: form.videoPlacement,
       announcementText: form.announcementText.trim(),
       announcementActive: Boolean(form.announcementActive),
       level: form.level.trim(),
@@ -316,6 +310,9 @@ function CampaignBuilder() {
       setSaving(false);
     }
   }
+
+  const videoEmbedUrl = getYouTubeEmbedUrl(form.videoUrl);
+  const videoInHero = form.videoPlacement === "hero" && Boolean(videoEmbedUrl);
 
   if (loading)
     return (
@@ -371,24 +368,6 @@ function CampaignBuilder() {
   return (
     <main className="campaign-builder min-h-screen bg-[radial-gradient(circle_at_top_left,_#fff8f6_0,_#f5f7fb_34rem)] px-4 pb-10 text-[#102d55] sm:px-8 lg:px-10">
       <div className="mx-auto max-w-[1320px]">
-        <nav className="flex min-h-[72px] items-center justify-between border-b border-[#e7edf4]">
-          <Link
-            className="inline-flex items-center gap-2 text-sm font-bold text-[#08244a] transition hover:text-[#e83e33]"
-            to="/dashboard"
-          >
-            <ArrowLeft size={17} />{" "}
-            <span className="hidden sm:inline">Volver al dashboard</span>
-          </Link>
-          <img
-            className="h-8 w-auto object-contain"
-            src="/images/brand/towers.webp"
-            alt="Towers"
-          />
-          <span className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1.5 text-xs font-bold text-[#7187a4] shadow-sm">
-            <span className="h-2 w-2 rounded-full bg-[#29b67a]" /> Editor
-            interno
-          </span>
-        </nav>
         <header className="campaign-builder-hero flex flex-col justify-between gap-6 py-9 lg:flex-row lg:items-end">
           <div className="campaign-hero-copy">
             <p className="inline-flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-[.15em] text-[#e83e33]">
@@ -530,8 +509,14 @@ function CampaignBuilder() {
                     placeholder: "Clases con propósito, desde el primer día",
                   })}
                 </Field>
-                <Field className="sm:col-span-2" label="Video de YouTube (opcional)" hint="Pega un enlace de YouTube. El video se adapta al ancho de la landing.">
+                <Field className="sm:col-span-2" label="Video de YouTube" hint="Pega el enlace de un video que permita la reproducci?n en otros sitios.">
                   {input("videoUrl", { placeholder: "https://www.youtube.com/watch?v=..." })}
+                </Field>
+                <Field className="sm:col-span-2" label="Ubicaci?n del video">
+                  <select className={inputClass} value={form.videoPlacement} onChange={(event) => update("videoPlacement", event.target.value)}>
+                    <option value="section">Debajo de la portada (opcional)</option>
+                    <option value="hero">En lugar de la imagen principal</option>
+                  </select>
                 </Field>
               </div>
             </SectionCard>
@@ -756,12 +741,14 @@ function CampaignBuilder() {
                       {form.cta || "Llamada a la acción"}
                     </span>
                   </div>
-                  <img
-                    className="aspect-[3/2] w-full bg-[#dce8f0] object-contain"
-                    src={form.image}
-                    alt=""
-                  />
-                  {form.imageCaption && <p className="bg-white px-4 py-2 text-[10px] font-semibold text-[#183454]">{form.imageCaption}</p>}
+                  {videoInHero ? (
+                    <div className="aspect-video bg-[#08244a]">
+                      <CampaignVideo src={videoEmbedUrl} name={form.name} />
+                    </div>
+                  ) : <>
+                    <img className="aspect-[3/2] w-full bg-[#dce8f0] object-contain" src={form.image} alt="" />
+                    {form.imageCaption && <p className="bg-white px-4 py-2 text-[10px] font-semibold text-[#183454]">{form.imageCaption}</p>}
+                  </>}
                   {form.benefits.filter((item) => item.text.trim()).length > 0 && (
                     <div className="grid gap-2 p-4 sm:grid-cols-2">
                       {form.benefits

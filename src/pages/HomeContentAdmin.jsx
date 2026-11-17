@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { ArrowDown, ArrowLeft, ArrowUp, ImagePlus, LoaderCircle, Plus, Save, Trash2 } from 'lucide-react'
+import { ArrowDown, ArrowUp, ImagePlus, LoaderCircle, Plus, Save, Trash2 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../auth/useAuth'
 import { defaultHomeContent } from '../data/homeContent'
@@ -121,11 +121,7 @@ function HomeContentAdmin() {
   const progressPercent = upload?.progress || 0
 
   return <div className="min-h-screen bg-[#f4f7fb] text-[#102d55]">
-    <header className="border-b border-[#e0e7f0] bg-white"><div className="mx-auto flex min-h-[76px] max-w-[1180px] items-center justify-between gap-4 px-5 sm:px-8">
-      <Link to="/dashboard" className="inline-flex items-center gap-2 text-sm font-bold text-[#173a67] hover:text-[#e83e33]"><ArrowLeft size={17} /> Panel de administración</Link>
-      <img className="h-9 w-auto" src="/images/brand/towers-cropped.webp" alt="Towers" />
-    </div></header>
-    <main className="mx-auto max-w-[1180px] px-5 py-8 sm:px-8 lg:py-12">
+    <main className="mx-auto max-w-[1180px] px-3 py-8 sm:px-8 lg:py-12">
       <div className="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-end"><div><p className="font-mono text-xs font-bold uppercase tracking-[.14em] text-[#e83e33]">Solo propietario</p><h1 className="mt-2 text-3xl font-extrabold tracking-[-.04em] text-[#08244a] sm:text-4xl">Contenido de la portada</h1><p className="mt-3 max-w-2xl text-sm leading-6 text-[#627b9e]">Edita el Hero, organiza las preguntas frecuentes y las tarjetas del carrusel de comunidad. Los cambios se publican al guardar.</p></div><div className="flex flex-wrap gap-3"><button type="button" onClick={restoreHomeDefaults} className="rounded-xl border border-[#d3deeb] bg-white px-4 py-3 text-sm font-bold text-[#173a67] hover:border-[#e83e33] hover:text-[#e83e33]">Restablecer portada original</button><Link className="self-center text-sm font-bold text-[#e83e33] underline underline-offset-4" to="/" target="_blank">Ver portada pública</Link></div></div>
       {error && <div role="alert" className="mb-5 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-800">{error}</div>}
       {notice && <div role="status" className="mb-5 rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-800">{notice}</div>}

@@ -5,6 +5,8 @@ const businessPartners = [
     name: "Convenio empresarial",
     logo: "/images/partners/enterprise-convenio.webp",
   },
+  { name: "Oxford University Press", logo: "/images/Logo-empresarial.png" },
+  { name: "Oxford Placement Test", logo: "/images/Logo-empresarial2.png" },
   { name: "Addi", logo: "/images/partners/addi.webp" },
   { name: "Sistecrédito", logo: "/images/partners/sistecredito.webp", crop: true },
   { name: "Universidad del Sinú", logo: "/images/partners/universidad.webp", crop: true },

@@ -56,7 +56,7 @@ function Languages() {
               >
                 <div className="grid h-[185px] place-items-center overflow-hidden rounded-[1.25rem] bg-[#fff9f7] transition-transform duration-300 group-hover:scale-[1.02]">
                   <img
-                    className="h-full w-full object-contain"
+                    className="h-auto w-full max-w-[160px] object-contain"
                     src={language.image}
                     alt={`Bandera de ${language.name}`}
                   />

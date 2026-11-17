@@ -24,6 +24,7 @@ import HomeContentAdmin from './pages/HomeContentAdmin'
 import { AuthProvider } from './auth/AuthProvider'
 import RequireAuth from './components/RequireAuth'
 import RequireSiteOwner from './components/RequireSiteOwner'
+import DashboardLayout from './components/DashboardLayout'
 import ScrollReveal from './components/ScrollReveal'
 
 const COOKIE_CONSENT_KEY = 'towers-cookie-consent'
@@ -101,9 +102,11 @@ function App() {
         <Route path="/politica-de-reembolsos" element={<Legal />} />
         <Route path="/derechos-de-imagen" element={<Legal />} />
         <Route path="/cumplimiento-legal" element={<Legal />} />
-        <Route path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>} />
-        <Route path="/dashboard/portada" element={<RequireSiteOwner><HomeContentAdmin /></RequireSiteOwner>} />
-        <Route path="/campaigns/new" element={<RequireAuth><CampaignBuilder /></RequireAuth>} />
+        <Route element={<RequireAuth><DashboardLayout /></RequireAuth>}>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard/portada" element={<RequireSiteOwner><HomeContentAdmin /></RequireSiteOwner>} />
+          <Route path="/campaigns/new" element={<CampaignBuilder />} />
+        </Route>
         <Route path="/campaigns/:slug" element={<CampaignLanding />} />
       </Routes>
     </BrowserRouter>

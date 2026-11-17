@@ -4934,11 +4934,6 @@ main:is(.experience-page, .methodology-page, .community-page, .membership-page, 
     width: 84%;
   }
 }
-@keyframes announcement-marquee-scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
 @keyframes announcement-glow-sweep {
   0% { transform: translateX(-150%); }
   100% { transform: translateX(450%); }
@@ -4948,22 +4943,6 @@ main:is(.experience-page, .methodology-page, .community-page, .membership-page, 
   animation: announcement-glow-sweep 7s ease-in-out infinite;
 }
 
-.announcement-marquee-track {
-  animation: announcement-marquee-scroll 24s linear infinite;
-}
-
-.announcement-marquee-track > span {
-  flex: 0 0 100vw;
-  text-align: center;
-}
-
-.campaign-announcement-bar:hover .announcement-marquee-track {
-  animation-play-state: paused;
-}
-
 @media (prefers-reduced-motion: reduce) {
   .campaign-announcement-glow { animation: none; }
-  .announcement-marquee-track { animation: none; width: 100%; justify-content: center; margin-inline: auto; }
-  .announcement-marquee-track > span { flex: 0 1 auto; }
-  .announcement-marquee-track span + span { display: none; }
 }
