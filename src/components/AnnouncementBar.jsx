@@ -12,9 +12,13 @@ function AnnouncementBar({ text, className = '' }) {
           <Megaphone size={16} strokeWidth={2.5} aria-hidden="true" />
           Promoción
         </span>
-        <p className="m-0 max-w-[1100px] text-base font-extrabold leading-snug sm:text-lg">
-          {message}
-        </p>
+        <span className="sr-only">{message}</span>
+        <div className="min-w-0 w-full overflow-hidden sm:flex-1">
+          <div className="announcement-marquee-track flex w-max whitespace-nowrap text-base font-extrabold leading-snug sm:text-lg" aria-hidden="true">
+            <span className="px-10">{message}</span>
+            <span className="px-10">{message}</span>
+          </div>
+        </div>
       </div>
     </div>
   )

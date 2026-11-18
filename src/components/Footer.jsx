@@ -8,7 +8,7 @@ const quickLinks = [
   ['Cursos', '/idiomas'],
   ['Quienes Somos', '/nosotros'],
   ['Contacto', '/contacto'],
-  ['Acceso adm', '/login'],
+  
 ]
 
 const legalLinks = [
@@ -32,15 +32,15 @@ function Footer() {
       <div className="mx-auto max-w-[1440px] px-[6%] pb-16 pt-16 lg:px-[9%] lg:pt-20">
         <div className="grid gap-12 lg:grid-cols-[1.3fr_0.9fr_0.9fr_1fr] lg:gap-20">
           <div className="site-footer__column">
-            <div className="flex flex-nowrap items-center gap-4">
+            <div className="flex flex-wrap items-center gap-4 sm:flex-nowrap">
               <img
-                className="h-auto w-[170px] shrink-0 object-contain"
+                className="h-auto w-[150px] shrink-0 object-contain sm:w-[170px]"
                 src="/images/brand/towers.webp"
                 alt="Towers Centro activo de idiomas"
               />
               <img
-                className="h-auto w-[190px] shrink-0 object-contain"
-                src="/images/brand/mineducacion.webp"
+                className="h-auto w-[210px] shrink-0 object-contain sm:w-[190px]"
+                src="/images/brand/mineducacion-logo.png"
                 alt="Ministerio de Educación Nacional"
               />
             </div>
@@ -136,12 +136,12 @@ function Footer() {
         </div>
       </div>
 
-      <div className="site-footer__bottom border-t border-[#e5e5e5] px-[6%] py-6 text-[#747474] lg:px-[6.5%]">
+      {/* <div className="site-footer__bottom border-t border-[#e5e5e5] px-[6%] py-6 text-[#747474] lg:px-[6.5%]">
         <div className="mx-auto flex max-w-[1440px] flex-col justify-between gap-5 sm:flex-row sm:items-center">
           <p className="m-0 text-lg">Copyright 2026&nbsp; . Appendix All Rights Reserved.</p>
           <span className="text-lg">Aceptamos</span>
         </div>
-      </div>
+      </div> */}
     </footer>
   )
 }

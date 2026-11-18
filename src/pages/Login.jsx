@@ -39,15 +39,6 @@ function Login() {
       <Navbar />
       <main className="login-page">
         <div className="login-shell">
-          <section className="login-welcome" aria-label="Acceso administrativo de Towers">
-            
-            <h1><AnimatedText>Gestiona el aprendizaje desde un solo lugar.</AnimatedText></h1>
-            <p>Ingresa al portal de administración de Towers para continuar.</p>
-            
-            <div className="login-decoration login-decoration--one" />
-            <div className="login-decoration login-decoration--two" />
-          </section>
-
           <section className="login-card">
             <a className="login-brand" href="/" aria-label="Towers, ir al inicio">
               <img src="/images/brand/towers.webp" alt="Towers Centro activo de idiomas" />
