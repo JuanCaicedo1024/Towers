@@ -10,6 +10,7 @@ import { deleteHomeImage, getHomeContent, saveHomeContent, uploadHomeImage } fro
 const clone = (value) => JSON.parse(JSON.stringify(value))
 const fieldClass = 'w-full rounded-xl border border-[#dbe4ef] bg-white px-4 py-3 text-sm text-[#173a67] outline-none transition focus:border-[#e83e33] focus:ring-2 focus:ring-[#e83e33]/10'
 const imageMarker = '/storage/v1/object/public/site-content/'
+const homeImageDimensions = { width: 1200, height: 800 }
 function collectImages(content) {
   return [content.hero?.image, ...(content.communitySlides || []).map((item) => item.image), ...(content.testimonials || []).map((item) => item.photo || item.image)].filter((url) => typeof url === 'string' && url.includes(imageMarker))
 }
@@ -23,6 +24,7 @@ function HomeContentAdmin() {
   const [error, setError] = useState('')
   const [notice, setNotice] = useState('')
   const [upload, setUpload] = useState(null)
+  const busy = saving || Boolean(upload)
 
   useEffect(() => {
     let active = true
@@ -71,28 +73,37 @@ function HomeContentAdmin() {
     setNotice('')
   }
 
-  async function handleImage(event, setUrl) {
+  async function handleImage(event, setUrl, { requireCommunityDimensions = true } = {}) {
     const file = event.target.files?.[0]
     event.target.value = ''
     if (!file) return
-    if (upload && upload.progress < 100 && !upload.status.startsWith('Error')) return setError('Espera a que termine la carga actual antes de elegir otra imagen.')
+    if (busy) return
     if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) return setError('Elige una imagen JPG, PNG o WebP.')
     if (file.size > 5 * 1024 * 1024) return setError('La imagen debe pesar 5 MB o menos.')
-    setUpload({ name: file.name, progress: 0, status: 'Cargando imagen…' })
+    setUpload({ name: file.name, progress: undefined })
     setError(''); setNotice('')
     try {
-      const url = await uploadHomeImage(file, session.access_token, (progress) => setUpload({ name: file.name, progress, status: 'Cargando imagen…' }))
+      const bitmap = await createImageBitmap(file).catch(() => {
+        throw new Error('No se pudo leer la imagen seleccionada.')
+      })
+      const { width, height } = bitmap
+      bitmap.close()
+      if (requireCommunityDimensions && (width !== homeImageDimensions.width || height !== homeImageDimensions.height)) {
+        throw new Error(`La imagen debe medir 1200 × 800 px. El archivo seleccionado mide ${width} × ${height} px.`)
+      }
+      const url = await uploadHomeImage(file, session.access_token, (progress) => setUpload({ name: file.name, progress }))
       setUrl(url)
-      setUpload({ name: file.name, progress: 100, status: 'Imagen cargada correctamente.' })
-      window.setTimeout(() => setUpload((current) => current?.progress === 100 ? null : current), 2500)
+      setNotice('Imagen cargada. Guarda los cambios para publicarla.')
     } catch (uploadError) {
-      setUpload({ name: file.name, progress: 0, status: `Error: ${uploadError.message}` })
       setError(uploadError.message)
+    } finally {
+      setUpload(null)
     }
   }
 
   async function handleSave(event) {
     event.preventDefault()
+    if (busy) return
     setError(''); setNotice('')
     if (!form.hero.titleLine1.trim() || !form.hero.titleLine2.trim() || !form.hero.titleLine3.trim() || !form.hero.description.trim() || !form.hero.primaryCta.trim() || !form.hero.secondaryCta.trim() || !form.hero.levelTestCta.trim()) return setError('Completa los textos principales y los botones del Hero.')
     if (form.hero.mediaType === 'video' && !getYouTubeEmbedUrl(form.hero.videoUrl)) return setError('El video del Hero debe tener un enlace válido de YouTube.')
@@ -121,15 +132,13 @@ function HomeContentAdmin() {
   }
 
   const labelClass = 'grid gap-2 text-sm font-semibold text-[#173a67]'
-  const progressPercent = upload?.progress || 0
+  const busyMessage = saving ? 'Guardando datos de la landing. Por favor, espera.' : 'Subiendo imagen. Por favor, espera.'
 
   return <div className="min-h-screen bg-[#f4f7fb] text-[#102d55]">
     <main className="mx-auto max-w-[1180px] px-3 py-8 sm:px-8 lg:py-12">
-      <div className="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-end"><div><p className="font-mono text-xs font-bold uppercase tracking-[.14em] text-[#e83e33]">Solo propietario</p><h1 className="mt-2 text-3xl font-extrabold tracking-[-.04em] text-[#08244a] sm:text-4xl">Contenido de la portada</h1><p className="mt-3 max-w-2xl text-sm leading-6 text-[#627b9e]">Edita el Hero, organiza las preguntas frecuentes y las tarjetas del carrusel de comunidad. Los cambios se publican al guardar.</p></div><div className="flex flex-wrap gap-3"><button type="button" onClick={restoreHomeDefaults} className="rounded-xl border border-[#d3deeb] bg-white px-4 py-3 text-sm font-bold text-[#173a67] hover:border-[#e83e33] hover:text-[#e83e33]">Restablecer portada original</button><Link className="self-center text-sm font-bold text-[#e83e33] underline underline-offset-4" to="/" target="_blank">Ver portada pública</Link></div></div>
-      {error && <div role="alert" className="mb-5 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-800">{error}</div>}
-      {notice && <div role="status" className="mb-5 rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-800">{notice}</div>}
-      {upload && <div className="mb-5 rounded-xl border border-[#dbe4ef] bg-white p-4" role="status" aria-live="polite"><div className="mb-2 flex items-center justify-between gap-3 text-sm"><span className="flex min-w-0 items-center gap-2 font-semibold text-[#173a67]">{upload.progress < 100 && !upload.status.startsWith('Error') ? <LoaderCircle className="animate-spin" size={16} /> : <ImagePlus size={16} />}<span className="truncate">{upload.name}: {upload.status}</span></span><span className="font-mono text-xs">{upload.progress}%</span></div><div className="h-2 overflow-hidden rounded-full bg-[#eaf0f7]"><div className={`h-full rounded-full transition-[width] ${upload.status.startsWith('Error') ? 'bg-red-500' : 'bg-[#e83e33]'}`} style={{ width: `${progressPercent}%` }} /></div></div>}
+      <div className="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-end"><div><p className="font-mono text-xs font-bold uppercase tracking-[.14em] text-[#e83e33]">Solo propietario</p><h1 className="mt-2 text-3xl font-extrabold tracking-[-.04em] text-[#08244a] sm:text-4xl">Contenido de la portada</h1><p className="mt-3 max-w-2xl text-sm leading-6 text-[#627b9e]">Edita el Hero, organiza las preguntas frecuentes y las tarjetas del carrusel de comunidad. Los cambios se publican al guardar.</p></div><div className="flex flex-wrap gap-3"><button type="button" onClick={restoreHomeDefaults} disabled={busy} className="rounded-xl border border-[#d3deeb] bg-white px-4 py-3 text-sm font-bold text-[#173a67] hover:border-[#e83e33] hover:text-[#e83e33]">Restablecer portada original</button><Link className="self-center text-sm font-bold text-[#e83e33] underline underline-offset-4" to="/" target="_blank">Ver portada pública</Link></div></div>
       {loading ? <div className="rounded-2xl bg-white p-12 text-center text-sm text-[#627b9e]">Cargando contenido guardado…</div> : <form className="grid gap-6" onSubmit={handleSave}>
+        <fieldset disabled={busy} className="grid min-w-0 gap-6">
         <section className="rounded-2xl border border-[#e0e7f0] bg-white p-5 shadow-sm sm:p-8"><p className="font-mono text-[10px] font-bold uppercase tracking-[.14em] text-[#e83e33]">Promociones</p><h2 className="mt-1 text-xl font-extrabold text-[#08244a]">Aviso de la portada principal</h2><p className="mt-2 text-sm text-[#627b9e]">El anuncio aparecerá en una franja animada debajo del navbar.</p><div className="mt-5 grid gap-4 sm:grid-cols-2"><label className={labelClass}>Texto promocional<input className={fieldClass} maxLength={160} placeholder="¡Inscripciones abiertas! Aprovecha la promoción de este mes." value={form.announcementText} onChange={(event) => { setForm((current) => ({ ...current, announcementText: event.target.value })); setNotice(''); setError('') }} /></label><label className="flex items-center gap-3 self-end pb-3 text-sm font-semibold text-[#173a67]"><input className="h-5 w-5 accent-[#e83e33]" type="checkbox" checked={Boolean(form.announcementActive)} onChange={(event) => setForm((current) => ({ ...current, announcementActive: event.target.checked }))} />Activar aviso promocional</label></div></section>
         <section className="rounded-2xl border border-[#e0e7f0] bg-white p-5 shadow-sm sm:p-8"><div className="mb-6"><p className="font-mono text-[10px] font-bold uppercase tracking-[.14em] text-[#e83e33]">Sección principal</p><h2 className="mt-1 text-xl font-extrabold text-[#08244a]">Hero y banner</h2></div>
           <div className="grid gap-5 md:grid-cols-2">
@@ -149,8 +158,8 @@ function HomeContentAdmin() {
               {getYouTubeEmbedUrl(form.hero.videoUrl) && <div className="md:col-span-2"><div className="aspect-video w-full overflow-hidden rounded-xl bg-[#08244a]"><CampaignVideo src={getYouTubeEmbedUrl(form.hero.videoUrl)} name="la portada de Towers" /></div></div>}
             </> : <>
               <label className={labelClass}>Texto alternativo de imagen<input className={fieldClass} maxLength={180} value={form.hero.imageAlt} onChange={(event) => updateHero('imageAlt', event.target.value)} /></label>
-              <div className={labelClass}>Fotografía del Hero<div className="flex flex-wrap items-center gap-3"><label className="inline-flex cursor-pointer items-center gap-2 rounded-lg bg-[#08244a] px-4 py-3 text-xs font-bold text-white"><ImagePlus size={15} /> Cargar imagen<input className="sr-only" type="file" accept="image/jpeg,image/png,image/webp" onChange={(event) => handleImage(event, (url) => updateHero('image', url))} /></label>{form.hero.image && <button type="button" className="rounded-lg border border-red-200 px-3 py-2 text-xs font-bold text-red-700" onClick={() => { if (window.confirm('¿Quitar la imagen del Hero? Se eliminará de Supabase al guardar.')) updateHero('image', '') }}>Quitar imagen</button>}</div></div>
-              {form.hero.image && <div className="md:col-span-2"><img className="max-h-[330px] w-full rounded-xl bg-[#f4f7fb] object-contain" src={form.hero.image} alt="Vista previa de imagen del Hero" /></div>}
+              <div className={labelClass}>Fotografía del Hero<div className="flex flex-wrap items-center gap-3"><label className="inline-flex cursor-pointer items-center gap-2 rounded-lg bg-[#08244a] px-4 py-3 text-xs font-bold text-white"><ImagePlus size={15} /> Cargar imagen<input className="sr-only" type="file" accept="image/jpeg,image/png,image/webp" onChange={(event) => handleImage(event, (url) => updateHero('image', url), { requireCommunityDimensions: false })} /></label>{form.hero.image && <button type="button" className="rounded-lg border border-red-200 px-3 py-2 text-xs font-bold text-red-700" onClick={() => { if (window.confirm('¿Quitar la imagen del Hero? Se eliminará de Supabase al guardar.')) updateHero('image', '') }}>Quitar imagen</button>}</div><span className="text-xs font-normal text-[#7187a4]">Recomendado: 768 × 935 px (ancho × alto), en formato vertical. La foto llena el recuadro manteniendo sus proporciones. Si tiene otro formato, se recorta desde el centro.</span></div>
+              {form.hero.image && <div className="md:col-span-2"><img className="aspect-[768/935] w-full max-w-[271px] rounded-xl bg-[#fff8f6] object-cover" src={form.hero.image} alt="Vista previa de imagen del Hero" /></div>}
             </>}
           </div>
         </section>
@@ -160,11 +169,27 @@ function HomeContentAdmin() {
         </section>
 
         <section className="rounded-2xl border border-[#e0e7f0] bg-white p-5 shadow-sm sm:p-8">
-          <div className="mb-5 flex items-center justify-between gap-3"><div><p className="font-mono text-[10px] font-bold uppercase tracking-[.14em] text-[#e83e33]">Fotos de nuestra comunidad</p><h2 className="mt-1 text-xl font-extrabold text-[#08244a]">Reseñas y testimonios</h2><p className="mt-2 text-sm text-[#627b9e]">Administra las tarjetas del carrusel “Así se vive aprender en Towers”.</p></div><button type="button" className="inline-flex items-center gap-2 rounded-lg bg-[#08244a] px-3 py-2.5 text-xs font-bold text-white" onClick={() => setForm((current) => ({ ...current, communitySlides: [...current.communitySlides, { id: crypto.randomUUID(), image: '', title: '', description: '' }] }))}><Plus size={15} /> Agregar tarjeta</button></div>
+          <div className="mb-5 flex items-center justify-between gap-3"><div><p className="font-mono text-[10px] font-bold uppercase tracking-[.14em] text-[#e83e33]">Fotos de nuestra comunidad</p><h2 className="mt-1 text-xl font-extrabold text-[#08244a]">Reseñas y testimonios</h2><p className="mt-2 text-sm text-[#627b9e]">Administra las tarjetas del carrusel “Así se vive aprender en Towers”. Usa imágenes de 1200 × 800 px; se validan antes de subirlas.</p></div><button type="button" className="inline-flex items-center gap-2 rounded-lg bg-[#08244a] px-3 py-2.5 text-xs font-bold text-white" onClick={() => setForm((current) => ({ ...current, communitySlides: [...current.communitySlides, { id: crypto.randomUUID(), image: '', title: '', description: '' }] }))}><Plus size={15} /> Agregar tarjeta</button></div>
           {!form.communitySlides.length && <p className="mb-4 rounded-xl bg-[#f4f7fb] p-4 text-sm text-[#627b9e]">El carrusel está vacío. Agrega una tarjeta para que aparezca en la portada.</p>}
           <div className="grid gap-4">{form.communitySlides.map((item, index) => <article className="grid gap-4 rounded-xl border border-[#e3e9ef] bg-[#f9fbfd] p-4 sm:grid-cols-[1fr_auto] sm:p-5" key={item.id || `community-slide-${index}`}><div className="grid gap-3"><p className="text-xs font-bold uppercase tracking-wide text-[#7187a4]">Tarjeta {index + 1}</p><input className={fieldClass} aria-label={`Título de tarjeta ${index + 1}`} placeholder="Título de la experiencia" maxLength={120} value={item.title} onChange={(event) => updateItem('communitySlides', index, 'title', event.target.value)} /><textarea className={fieldClass} aria-label={`Descripción de tarjeta ${index + 1}`} placeholder="Descripción de la experiencia" rows={3} maxLength={900} value={item.description} onChange={(event) => updateItem('communitySlides', index, 'description', event.target.value)} /><div className="flex flex-wrap items-center gap-3"><label className="inline-flex cursor-pointer items-center gap-2 rounded-lg border border-[#dbe4ef] bg-white px-3 py-2 text-xs font-bold text-[#173a67]"><ImagePlus size={14} /> Cargar foto<input className="sr-only" type="file" accept="image/jpeg,image/png,image/webp" onChange={(event) => handleImage(event, (url) => updateItem('communitySlides', index, 'image', url))} /></label>{item.image && <button type="button" className="text-xs font-bold text-red-700 underline" onClick={() => { if (window.confirm(`¿Quitar la foto de la tarjeta ${index + 1}? Se eliminará de Supabase al guardar.`)) updateItem('communitySlides', index, 'image', '') }}>Quitar foto</button>}</div>{item.image && <img className="max-h-[220px] w-full rounded-xl object-contain object-left" src={item.image} alt={`Vista previa: ${item.title}`} />}</div><div className="flex gap-1 sm:flex-col"><button type="button" aria-label={`Mover tarjeta ${index + 1} arriba`} disabled={index === 0} onClick={() => reorder('communitySlides', index, -1)} className="rounded-md p-2 text-[#627b9e] hover:bg-white disabled:opacity-30"><ArrowUp size={16} /></button><button type="button" aria-label={`Mover tarjeta ${index + 1} abajo`} disabled={index === form.communitySlides.length - 1} onClick={() => reorder('communitySlides', index, 1)} className="rounded-md p-2 text-[#627b9e] hover:bg-white disabled:opacity-30"><ArrowDown size={16} /></button><button type="button" className="inline-flex h-fit items-center gap-2 rounded-lg border border-red-200 px-3 py-2 text-xs font-bold text-red-700" onClick={() => removeItem('communitySlides', index, `la tarjeta ${index + 1}`)}><Trash2 size={15} /> Eliminar</button></div></article>)}</div>
         </section>
-        <div className="sticky bottom-3 z-10 flex justify-end rounded-xl border border-[#e0e7f0] bg-white/95 p-3 shadow-lg backdrop-blur"><button disabled={saving || Boolean(upload && upload.progress < 100 && !upload.status.startsWith('Error'))} type="submit" className="inline-flex items-center gap-2 rounded-xl bg-[#e83e33] px-6 py-3.5 text-sm font-bold text-white shadow-md transition hover:bg-[#cf3028] disabled:cursor-wait disabled:opacity-60">{saving ? <LoaderCircle className="animate-spin" size={17} /> : <Save size={17} />}{saving ? 'Guardando…' : 'Guardar y publicar cambios'}</button></div>
+        </fieldset>
+        <div className="sticky bottom-3 z-10 flex flex-wrap items-center justify-end gap-3 rounded-xl border border-[#e0e7f0] bg-white/95 p-3 shadow-lg backdrop-blur">
+          <div className="min-w-0 grow" role="status">
+            {busy ? (
+              <div className="grid gap-1 text-sm text-[#173a67]">
+                <span className="font-semibold">{busyMessage}</span>
+                {upload && <span className="truncate text-xs text-[#627b9e]">{upload.name}{upload.progress != null && ` (${upload.progress}%)`}</span>}
+              </div>
+            ) : notice && <p className="text-sm text-emerald-800">{notice}</p>}
+          </div>
+          {busy && <progress className="order-last h-2 w-full accent-[#e83e33]" max={100} value={upload?.progress} aria-label={busyMessage} />}
+          {!busy && error && <p role="alert" className="mr-auto text-sm text-red-800">{error}</p>}
+          <button disabled={busy} type="submit" className="inline-flex items-center gap-2 rounded-xl bg-[#e83e33] px-6 py-3.5 text-sm font-bold text-white shadow-md transition hover:bg-[#cf3028] disabled:cursor-wait disabled:opacity-60">
+            {busy ? <LoaderCircle className="motion-safe:animate-spin" size={17} /> : <Save size={17} />}
+            {saving ? 'Guardando…' : 'Guardar y publicar cambios'}
+          </button>
+        </div>
       </form>}
     </main>
   </div>

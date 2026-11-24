@@ -75,18 +75,20 @@ function Hero() {
           </ScrollVelocityRow>
         </div>
 
-        <div className="home-hero__visual relative flex min-h-[430px] items-end justify-center self-stretch xl:min-h-[720px]">
+        <div className="home-hero__visual relative flex min-h-[430px] items-end justify-center self-stretch xl:min-h-[720px] xl:[container-type:inline-size]">
           {videoEmbedUrl ? (
             <div className="relative z-10 mb-8 aspect-video w-full max-w-[620px] overflow-hidden rounded-2xl bg-[#08244a] shadow-[0_24px_70px_rgb(8_36_74_/_16%)] xl:mb-20">
               <CampaignVideo src={videoEmbedUrl} name="la portada de Towers" />
             </div>
           ) : (
             <>
-              <img
-                className="home-hero__image relative z-10 h-auto w-[90%] max-w-[500px] object-contain object-bottom xl:absolute xl:bottom-0 xl:right-0 xl:h-[92%] xl:w-auto xl:max-w-full"
-                src={hero.image || '/images/home/hero.webp'}
-                alt={hero.imageAlt || 'Towers, aprende idiomas'}
-              />
+              <div className="relative z-10 aspect-[768/935] w-[90%] max-w-[500px] xl:absolute xl:bottom-0 xl:right-0 xl:h-[min(92%,calc(100cqw*935/768))] xl:w-auto xl:max-w-full">
+                <img
+                  className="absolute inset-0 h-full w-full object-cover"
+                  src={hero.image || '/images/home/hero.webp'}
+                  alt={hero.imageAlt || 'Towers, aprende idiomas'}
+                />
+              </div>
               <span className="home-hero__image-blend" aria-hidden="true" />
             </>
           )}
