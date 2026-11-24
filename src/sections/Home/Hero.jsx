@@ -4,9 +4,12 @@ import { ScrollVelocityRow } from '@/components/ui/scroll-based-velocity';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Gauge } from 'lucide-react';
 import { useHomeContent } from '../../hooks/useHomeContent.jsx';
+import { getYouTubeEmbedUrl } from '../../lib/campaignVideo';
+import CampaignVideo from '../../components/CampaignVideo';
 
 function Hero() {
   const { hero } = useHomeContent();
+  const videoEmbedUrl = hero.mediaType === 'video' ? getYouTubeEmbedUrl(hero.videoUrl) : '';
   return (
     <section id="home-hero" className="relative overflow-hidden bg-[#fff8f6] text-[#17233a]">
       <div className="mx-auto grid min-h-[620px] w-[88%] max-w-[1440px] grid-cols-1 items-center gap-8 pb-16 pt-14 lg:w-[84%] lg:pt-28 xl:grid-cols-[1.1fr_0.9fr] xl:gap-4 xl:pb-0 xl:pt-24">
@@ -73,12 +76,20 @@ function Hero() {
         </div>
 
         <div className="home-hero__visual relative flex min-h-[430px] items-end justify-center self-stretch xl:min-h-[720px]">
-          <img
-            className="home-hero__image relative z-10 h-auto w-[90%] max-w-[500px] object-contain object-bottom xl:absolute xl:bottom-0 xl:right-0 xl:h-[92%] xl:w-auto xl:max-w-full"
-            src={hero.image || '/images/home/hero.webp'}
-            alt={hero.imageAlt || 'Towers, aprende idiomas'}
-          />
-          <span className="home-hero__image-blend" aria-hidden="true" />
+          {videoEmbedUrl ? (
+            <div className="relative z-10 mb-8 aspect-video w-full max-w-[620px] overflow-hidden rounded-2xl bg-[#08244a] shadow-[0_24px_70px_rgb(8_36_74_/_16%)] xl:mb-20">
+              <CampaignVideo src={videoEmbedUrl} name="la portada de Towers" />
+            </div>
+          ) : (
+            <>
+              <img
+                className="home-hero__image relative z-10 h-auto w-[90%] max-w-[500px] object-contain object-bottom xl:absolute xl:bottom-0 xl:right-0 xl:h-[92%] xl:w-auto xl:max-w-full"
+                src={hero.image || '/images/home/hero.webp'}
+                alt={hero.imageAlt || 'Towers, aprende idiomas'}
+              />
+              <span className="home-hero__image-blend" aria-hidden="true" />
+            </>
+          )}
         </div>
       </div>
     </section>

@@ -9,8 +9,10 @@ export const defaultHomeContent = {
     primaryCta: 'Encuentra tu programa',
     secondaryCta: 'Regístrate para tu clase gratuita',
     levelTestCta: 'Descubre tu nivel gratis',
+    mediaType: 'image',
     image: '/images/home/hero.webp',
     imageAlt: 'El mejor lugar para aprender y crecer, con una estudiante y el Big Ben',
+    videoUrl: '',
   },
   faqs: [
     { icon: 'ⓘ', question: '¿Cómo sé qué nivel de idioma tengo?', answer: 'Puedes comenzar con una prueba de nivel para identificar tu punto de partida y orientarte hacia el programa más adecuado. El proceso exacto de evaluación y entrega de resultados debe confirmarse con TOWERS.' },

@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
-import { ArrowDown, ArrowUp, ImagePlus, LoaderCircle, Plus, Save, Trash2 } from 'lucide-react'
+import { ArrowDown, ArrowUp, ImagePlus, LoaderCircle, Plus, Save, Trash2, Video } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../auth/useAuth'
+import CampaignVideo from '../components/CampaignVideo'
 import { defaultHomeContent } from '../data/homeContent'
+import { getYouTubeEmbedUrl } from '../lib/campaignVideo'
 import { deleteHomeImage, getHomeContent, saveHomeContent, uploadHomeImage } from '../lib/supabase'
 
 const clone = (value) => JSON.parse(JSON.stringify(value))
@@ -30,7 +32,7 @@ function HomeContentAdmin() {
         const legacySlides = Array.isArray(saved?.testimonials) && saved.testimonials.length
           ? saved.testimonials.map((item, index) => ({ id: item.id || `legacy-slide-${index}`, image: item.image || item.photo || '', title: item.title || item.name || '', description: item.description || item.comment || '' }))
           : null
-        const merged = { ...clone(defaultHomeContent), ...(saved || {}), hero: { ...clone(defaultHomeContent.hero), ...(saved?.hero || {}) }, faqs: Array.isArray(saved?.faqs) ? saved.faqs : clone(defaultHomeContent.faqs), communitySlides: Array.isArray(saved?.communitySlides) ? saved.communitySlides : legacySlides || clone(defaultHomeContent.communitySlides) }
+        const merged = { ...clone(defaultHomeContent), ...(saved || {}), hero: { ...clone(defaultHomeContent.hero), ...(saved?.hero || {}), mediaType: saved?.hero?.mediaType === 'video' ? 'video' : 'image', videoUrl: typeof saved?.hero?.videoUrl === 'string' ? saved.hero.videoUrl : '' }, faqs: Array.isArray(saved?.faqs) ? saved.faqs : clone(defaultHomeContent.faqs), communitySlides: Array.isArray(saved?.communitySlides) ? saved.communitySlides : legacySlides || clone(defaultHomeContent.communitySlides) }
         delete merged.testimonials
         setForm(merged)
         setOriginal(clone(merged))
@@ -93,6 +95,7 @@ function HomeContentAdmin() {
     event.preventDefault()
     setError(''); setNotice('')
     if (!form.hero.titleLine1.trim() || !form.hero.titleLine2.trim() || !form.hero.titleLine3.trim() || !form.hero.description.trim() || !form.hero.primaryCta.trim() || !form.hero.secondaryCta.trim() || !form.hero.levelTestCta.trim()) return setError('Completa los textos principales y los botones del Hero.')
+    if (form.hero.mediaType === 'video' && !getYouTubeEmbedUrl(form.hero.videoUrl)) return setError('El video del Hero debe tener un enlace válido de YouTube.')
     if (form.faqs.some((item) => !item.question.trim() || !item.answer.trim())) return setError('Completa la pregunta y la respuesta de cada FAQ, o elimina la fila vacía.')
     if (form.communitySlides.some((item) => !item.title.trim() || !item.description.trim() || !item.image.trim())) return setError('Cada reseña necesita foto, título y descripción, o elimina la tarjeta vacía.')
     if (form.announcementActive && !form.announcementText.trim()) return setError('Escribe el aviso de la portada o desactívalo antes de guardar.')
@@ -135,9 +138,20 @@ function HomeContentAdmin() {
             <label className={labelClass}>Botón principal<input className={fieldClass} maxLength={80} value={form.hero.primaryCta} onChange={(event) => updateHero('primaryCta', event.target.value)} /></label>
             <label className={labelClass}>Botón de clase gratuita<input className={fieldClass} maxLength={80} value={form.hero.secondaryCta} onChange={(event) => updateHero('secondaryCta', event.target.value)} /></label>
             <label className={labelClass}>Botón de prueba de nivel<input className={fieldClass} maxLength={80} value={form.hero.levelTestCta} onChange={(event) => updateHero('levelTestCta', event.target.value)} /></label>
-            <label className={labelClass}>Texto alternativo de imagen<input className={fieldClass} maxLength={180} value={form.hero.imageAlt} onChange={(event) => updateHero('imageAlt', event.target.value)} /></label>
-            <div className={labelClass}>Imagen del Hero<div className="flex flex-wrap items-center gap-3"><label className="inline-flex cursor-pointer items-center gap-2 rounded-lg bg-[#08244a] px-4 py-3 text-xs font-bold text-white"><ImagePlus size={15} /> Cargar imagen<input className="sr-only" type="file" accept="image/jpeg,image/png,image/webp" onChange={(event) => handleImage(event, (url) => updateHero('image', url))} /></label>{form.hero.image && <button type="button" className="rounded-lg border border-red-200 px-3 py-2 text-xs font-bold text-red-700" onClick={() => { if (window.confirm('¿Quitar la imagen del Hero? Se eliminará de Supabase al guardar.')) updateHero('image', '') }}>Quitar imagen</button>}</div></div>
-            {form.hero.image && <div className="md:col-span-2"><img className="max-h-[330px] w-full rounded-xl bg-[#f4f7fb] object-contain" src={form.hero.image} alt="Vista previa de imagen del Hero" /></div>}
+            <fieldset className="grid gap-2 md:col-span-2">
+              <legend className="text-sm font-semibold text-[#173a67]">Medio principal del Hero</legend>
+              <div className="inline-flex w-fit rounded-xl bg-[#f4f7fb] p-1" role="group" aria-label="Medio principal del Hero">
+                {[{ value: 'image', label: 'Fotografía', Icon: ImagePlus }, { value: 'video', label: 'Video', Icon: Video }].map(({ value, label, Icon }) => <button key={value} type="button" aria-pressed={form.hero.mediaType === value} onClick={() => updateHero('mediaType', value)} className={`inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-bold transition ${form.hero.mediaType === value ? 'bg-white text-[#e83e33] shadow-sm' : 'text-[#627b9e] hover:text-[#173a67]'}`}><Icon size={16} />{label}</button>)}
+              </div>
+            </fieldset>
+            {form.hero.mediaType === 'video' ? <>
+              <label className={`${labelClass} md:col-span-2`}>Enlace del video de YouTube<input className={fieldClass} type="url" maxLength={500} placeholder="https://www.youtube.com/watch?v=..." value={form.hero.videoUrl} onChange={(event) => updateHero('videoUrl', event.target.value)} /><span className="text-xs font-normal text-[#7187a4]">Pega un enlace de YouTube que permita reproducir el video en otros sitios.</span></label>
+              {getYouTubeEmbedUrl(form.hero.videoUrl) && <div className="md:col-span-2"><div className="aspect-video w-full overflow-hidden rounded-xl bg-[#08244a]"><CampaignVideo src={getYouTubeEmbedUrl(form.hero.videoUrl)} name="la portada de Towers" /></div></div>}
+            </> : <>
+              <label className={labelClass}>Texto alternativo de imagen<input className={fieldClass} maxLength={180} value={form.hero.imageAlt} onChange={(event) => updateHero('imageAlt', event.target.value)} /></label>
+              <div className={labelClass}>Fotografía del Hero<div className="flex flex-wrap items-center gap-3"><label className="inline-flex cursor-pointer items-center gap-2 rounded-lg bg-[#08244a] px-4 py-3 text-xs font-bold text-white"><ImagePlus size={15} /> Cargar imagen<input className="sr-only" type="file" accept="image/jpeg,image/png,image/webp" onChange={(event) => handleImage(event, (url) => updateHero('image', url))} /></label>{form.hero.image && <button type="button" className="rounded-lg border border-red-200 px-3 py-2 text-xs font-bold text-red-700" onClick={() => { if (window.confirm('¿Quitar la imagen del Hero? Se eliminará de Supabase al guardar.')) updateHero('image', '') }}>Quitar imagen</button>}</div></div>
+              {form.hero.image && <div className="md:col-span-2"><img className="max-h-[330px] w-full rounded-xl bg-[#f4f7fb] object-contain" src={form.hero.image} alt="Vista previa de imagen del Hero" /></div>}
+            </>}
           </div>
         </section>
 

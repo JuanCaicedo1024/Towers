@@ -2,8 +2,7 @@
 -- 1. Crea primero la cuenta del propietario en Supabase > Authentication > Users
 --    (o invita al usuario propietario).
 -- 2. Ejecuta este archivo completo.
--- 3. Reemplaza el correo de abajo por el correo exacto de esa cuenta y ejecuta
---    el INSERT de asignación una sola vez.
+-- 3. Ejecuta este archivo completo para asignar al dueño configurado.
 
 create table if not exists public.site_owners (
   user_id uuid primary key references auth.users (id) on delete cascade,
@@ -97,7 +96,24 @@ drop policy if exists "Only site owner can delete site content images" on storag
 create policy "Only site owner can delete site content images" on storage.objects
   for delete to authenticated using (bucket_id = 'site-content' and (select public.is_site_owner()));
 
---Provisiona al dueño: reemplaza el correo por el usado en Authentication > Users.
-INSERT INTO public.site_owners (user_id)
- SELECT id FROM auth.users WHERE email = 'caicedosebas50@gmail.com'
-ON CONFLICT (user_id) DO NOTHING;
+-- Provisiona al nuevo dueño y elimina propietarios anteriores.
+DO $$
+DECLARE
+  owner_id uuid;
+BEGIN
+  SELECT id INTO owner_id
+  FROM auth.users
+  WHERE lower(email) = 'companytowers745@gmail.com';
+
+  IF owner_id IS NULL THEN
+    RAISE EXCEPTION 'No existe en Authentication un usuario con el correo companytowers745@gmail.com';
+  END IF;
+
+  INSERT INTO public.site_owners (user_id)
+  VALUES (owner_id)
+  ON CONFLICT (user_id) DO NOTHING;
+
+  DELETE FROM public.site_owners
+  WHERE user_id <> owner_id;
+END;
+$$;

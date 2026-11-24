@@ -22,6 +22,7 @@ import {
   Upload,
   ChevronUp,
   ChevronDown,
+  Video,
 } from "lucide-react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../auth/useAuth";
@@ -470,7 +471,18 @@ function CampaignBuilder() {
                     placeholder: "Cuenta qué hace especial este programa.",
                   })}
                 </Field>
-                <Field className="sm:col-span-2" label="Imagen principal" hint="Usa una imagen horizontal y nítida. Puedes cargar hasta 5 MB.">
+                <fieldset className="grid gap-2 sm:col-span-2">
+                  <legend className="text-sm font-bold text-[#173a67]">Medio principal de la landing</legend>
+                  <div className="inline-flex w-fit rounded-xl bg-[#f4f7fb] p-1" role="group" aria-label="Medio principal de la landing">
+                    {[{ value: "section", label: "Fotografía", Icon: Image }, { value: "hero", label: "Video", Icon: Video }].map(({ value, label, Icon }) => (
+                      <button key={value} type="button" aria-pressed={form.videoPlacement === value} onClick={() => update("videoPlacement", value)} className={`inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-bold transition ${form.videoPlacement === value ? "bg-white text-[#e83e33] shadow-sm" : "text-[#627b9e] hover:text-[#173a67]"}`}>
+                        <Icon size={16} />{label}
+                      </button>
+                    ))}
+                  </div>
+                </fieldset>
+                {form.videoPlacement !== "hero" && <>
+                <Field className="sm:col-span-2" label="Fotografía principal" hint="Usa una imagen horizontal y nítida. Puedes cargar hasta 5 MB.">
                   <div className="campaign-image-picker grid gap-4 rounded-2xl border border-[#e1e8f0] bg-[#f8fafc] p-4 sm:grid-cols-[180px_minmax(0,1fr)]">
                     <div className="campaign-image-picker__preview relative h-32 overflow-hidden rounded-xl bg-[#dce8f0] shadow-inner sm:h-full">
                       <img className="h-full w-full object-contain" src={form.image} alt="" />
@@ -509,14 +521,9 @@ function CampaignBuilder() {
                     placeholder: "Clases con propósito, desde el primer día",
                   })}
                 </Field>
-                <Field className="sm:col-span-2" label="Video de YouTube" hint="Pega el enlace de un video que permita la reproducci?n en otros sitios.">
+                </>}
+                <Field className="sm:col-span-2" label={form.videoPlacement === "hero" ? "Video principal de YouTube" : "Video adicional debajo de la portada (opcional)"} hint="Pega el enlace de un video de YouTube que permita la reproducción en otros sitios.">
                   {input("videoUrl", { placeholder: "https://www.youtube.com/watch?v=..." })}
-                </Field>
-                <Field className="sm:col-span-2" label="Ubicaci?n del video">
-                  <select className={inputClass} value={form.videoPlacement} onChange={(event) => update("videoPlacement", event.target.value)}>
-                    <option value="section">Debajo de la portada (opcional)</option>
-                    <option value="hero">En lugar de la imagen principal</option>
-                  </select>
                 </Field>
               </div>
             </SectionCard>
